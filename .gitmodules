@@ -1,0 +1,3 @@
+[submodule "syntaxes/koto-sublime"]
+	path = syntaxes/koto-sublime
+	url = git@github.com:koto-lang/koto-sublime.git

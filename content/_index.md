@@ -5,8 +5,50 @@ template = "index.html"
 
 # Welcome to Koto
 
-```rust
-let foo = 42;
-println!("{}", foo);
-```
+```koto
+import io.print, test.assert_eq
 
+# Numbers
+x = 1 + 2.5 + 100.sqrt()
+assert_eq x, 13.5
+
+# Strings
+name = "Koto"
+print "Hello, $name!"
+
+# Functions
+square = |n| n * n
+print "8 squared is ${square 8}"
+
+add_squares = |a, b| (square a) + (square b)
+assert_eq (add_squares 2, 4), 20
+
+# Iterators, ranges, and lists
+fizz_buzz = (1..100)
+  .keep |n| (10..=15).contains n
+  .each |n|
+    match n % 3, n % 5
+      0, 0 then "Fizz Buzz"
+      0, _ then "Fizz"
+      _, 0 then "Buzz"
+      else n
+  .to_list()
+assert_eq
+  fizz_buzz,
+  ["Buzz", 11, "Fizz", 13, 14, "Fizz Buzz"]
+
+# Maps and tuples
+x = {peaches: 42, pears: 99}
+assert_eq
+  x.keys().to_tuple(),
+  ("peaches", "pears")
+
+y = # Maps can also be defined using indented `key: value` pairs
+  apples: 123
+  plums: 99
+
+fruits = x + y # Maps can be combined using the `+` operator
+
+fruit, amount = fruits.max |(_, amount)| amount
+print "The highest amount of fruit is: $amount $fruit"
+```
