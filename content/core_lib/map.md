@@ -280,6 +280,7 @@ x.bar.baz # a deep copy has been made, so x is unaffected by the change to y
 ## get
 
 `|Map, Key| -> Value`
+
 `|Map, Key, Value| -> Value`
 
 Returns the value corresponding to the given key, or the provided default value
@@ -312,6 +313,7 @@ x.get 99
 ## get_index
 
 `|Map, Number| -> Tuple`
+
 `|Map, Number, Value| -> Tuple`
 
 Returns the entry at the given index as a key/value tuple, or the provided

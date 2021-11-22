@@ -8,7 +8,7 @@
 {% block content %}
 
 <div class="content columns">
-  <div class="column is-one-fifth">
+  <aside class="sidebar column is-one-fifth">
 
     {% if page.toc %}
         <ul>
@@ -29,7 +29,7 @@
         </ul>
     {% endif %}
 
-  </div>
+  </aside>
 
   <div class="column is-three-fifths">
     {{ page.content | safe }}
