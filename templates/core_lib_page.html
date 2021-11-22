@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+
+{% block head %}
+<link rel="stylesheet" href="/core_lib.css" />
+{% endblock head %}
+
 {% block content %}
 
 <div class="content columns">
@@ -30,7 +35,7 @@
     {{ page.content | safe }}
   </div>
 
-  <div class="column"></div>
+  <!-- <div class="column"></div> -->
 </div>
 
 
