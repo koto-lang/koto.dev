@@ -1,11 +1,9 @@
 +++
-title = "Front page"
+title = "Home"
 template = "index.html"
 +++
 
 # Welcome to Koto
-
-[Reference](@/core_lib/_index.md)
 
 ```koto
 import io.print, test.assert_eq
@@ -38,19 +36,4 @@ fizz_buzz = (1..100)
 assert_eq
   fizz_buzz,
   ["Buzz", 11, "Fizz", 13, 14, "Fizz Buzz"]
-
-# Maps and tuples
-x = {peaches: 42, pears: 99}
-assert_eq
-  x.keys().to_tuple(),
-  ("peaches", "pears")
-
-y = # Maps can also be defined using indented `key: value` pairs
-  apples: 123
-  plums: 99
-
-fruits = x + y # Maps can be combined using the `+` operator
-
-fruit, amount = fruits.max |(_, amount)| amount
-print "The highest amount of fruit is: $amount $fruit"
 ```

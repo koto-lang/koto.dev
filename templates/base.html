@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="has-navbar-fixed-top" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,7 +10,26 @@
     {% block head %} {% endblock head %}
   </head>
 
-  <body>
+  <body >
+    <nav class="navbar is-fixed-top is-dark" role="navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/logo.png" >
+        </a>
+      </div>
+
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/core_lib">
+            Docs
+          </a>
+
+          <a class="navbar-item" href="https://github.com/koto-lang/koto">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </nav>
     <section class="section">
       <div class="container">{% block content %} {% endblock %}</div>
     </section>

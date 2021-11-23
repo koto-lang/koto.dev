@@ -2,6 +2,10 @@
 
 {% block content %}
 
-{{ section.content | safe }}
+<section class="hero">
+  <div class="hero-body content">
+    {{ section.content | safe }}
+  </div>
+</section>
 
 {% endblock content %}
