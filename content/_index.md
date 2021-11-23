@@ -5,6 +5,8 @@ template = "index.html"
 
 # Welcome to Koto
 
+[Reference](@/core_lib/_index.md)
+
 ```koto
 import io.print, test.assert_eq
 

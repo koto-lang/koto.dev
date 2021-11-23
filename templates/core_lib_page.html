@@ -12,9 +12,12 @@
 
     {% if page.toc %}
         <ul>
-        {% for h1 in page.toc %}
+            {% for h1 in page.toc %}
+
             <li>
-                <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                <a href="{{ h1.permalink | safe }}">
+                  {{ h1.title }}
+                </a>
                 {% if h1.children %}
                     <ul>
                         {% for h2 in h1.children %}
@@ -31,11 +34,9 @@
 
   </aside>
 
-  <div class="column is-three-fifths">
+  <div class="reference column is-three-fifths">
     {{ page.content | safe }}
   </div>
-
-  <!-- <div class="column"></div> -->
 </div>
 
 
