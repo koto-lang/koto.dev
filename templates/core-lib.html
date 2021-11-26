@@ -11,14 +11,14 @@
   <div class="column is-2">
     <nav class="sidebar menu" role="navigation">
       <ul class="menu-list">
-        {% set index = get_section(path="_index.md") %}
+        <p class="menu-label">
+          {{ section.title }}
+        </p>
+
+        {% set index = get_section(path="docs/_index.md") %}
 
         {% for s in index.subsections %}
           {% set subsection = get_section(path=s) %}
-
-          <p class="menu-label">
-            {{ subsection.title }}
-          </p>
 
           {% for page in subsection.pages %}
             <li {% if current_path == page.path %}class="active"{% endif %}>
@@ -45,7 +45,7 @@
 
   <div class="content">
     <div class="column is-10">
-      {{ page.content | safe }}
+      {{ section.content | safe }}
     </div>
   </div>
 </div>
