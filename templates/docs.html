@@ -7,9 +7,9 @@
 
   {% for s in index.subsections %}
     {% set subsection = get_section(path=s) %}
-    <div class="tile is-parent">
+    <div class="tile is-parent link-tile">
       <article class="tile is-child notification is-success">
-        <p class="subtitle">
+        <p class="title">
           <a href="{{ subsection.permalink }}">
             {{ subsection.title }}
           </a>

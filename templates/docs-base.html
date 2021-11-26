@@ -11,14 +11,16 @@
   <div class="column is-2">
     <nav class="sidebar menu" role="navigation">
       <ul class="menu-list">
-        <p class="menu-label">
-          {{ section.title }}
-        </p>
-
         {% set index = get_section(path="docs/_index.md") %}
 
         {% for s in index.subsections %}
           {% set subsection = get_section(path=s) %}
+
+          <a href="{{ subsection.permalink }}">
+            <p class="menu-label">
+              {{ subsection.title }}
+            </p>
+          </a>
 
           {% for page in subsection.pages %}
             <li {% if current_path == page.path %}class="active"{% endif %}>
@@ -45,7 +47,7 @@
 
   <div class="content">
     <div class="column is-10">
-      {{ section.content | safe }}
+      {% block docscontent %} {% endblock %}
     </div>
   </div>
 </div>
