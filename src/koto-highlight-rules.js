@@ -1,4 +1,4 @@
-export function register_koto_mode() {
+export function register_koto_editor_mode() {
   ace.define(
     "ace/mode/koto",
     ["require", "exports", "ace/lib/oop", "ace/mode/text"],

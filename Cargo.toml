@@ -1,5 +1,5 @@
 [package]
-name = "playground2"
+name = "playground"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 console_error_panic_hook = "0.1"
+gloo-utils = "0.1.2"    # Convenience crate for common `web_sys` features
+js-sys = "0.3.56"
 koto = { git = "https://github.com/koto-lang/koto" }
 wasm-bindgen = "0.2.79"
 wee_alloc = "0.4.5"

@@ -1,0 +1,74 @@
+from number import pi, tau
+
+# Fizz buzz in Koto
+fizz_buzz = |n|
+  match n % 3, n % 5
+    0, 0 then "Fizz Buzz"
+    0, _ then "Fizz"
+    _, 0 then "Buzz"
+    else n
+
+for n in 1..200
+  print fizz_buzz n
+
+# Smile!
+canvas.clear()
+canvas.begin_path()
+
+canvas.arc 75, 75, 50, 0, tau
+
+canvas.move_to 110, 75
+canvas.arc 75, 75, 35, 0, pi
+
+canvas.move_to 65, 65
+canvas.arc 60, 65, 5, 0, tau
+
+canvas.move_to 95, 65
+canvas.arc 90, 65, 5, 0, tau
+
+canvas.stroke()
+
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
+# 1
