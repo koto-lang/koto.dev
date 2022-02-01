@@ -219,6 +219,7 @@ version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
  "gloo-utils",
+ "instant",
  "js-sys",
  "koto",
  "wasm-bindgen",

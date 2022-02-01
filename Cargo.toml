@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 console_error_panic_hook = "0.1"
 gloo-utils = "0.1.2"    # Convenience crate for common `web_sys` features
+instant = "0.1.12"           # A partial replacement for std::time::Instant that works on WASM too.
 js-sys = "0.3.56"
 koto = { git = "https://github.com/koto-lang/koto" }
 wasm-bindgen = "0.2.79"

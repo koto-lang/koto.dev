@@ -4,6 +4,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 use {
     console_error_panic_hook::set_once as set_panic_hook,
     gloo_utils::document,
+    instant::Instant,
     js_sys::Function,
     koto::{
         runtime::{KotoFile, KotoRead, KotoWrite, RuntimeError},
@@ -106,10 +107,13 @@ impl App {
 
     fn run_script(&mut self) {
         let input = get_ace().edit("editor").get_session().get_value();
+        let now = Instant::now();
         match self.koto.compile_and_run(&input) {
             Ok(output) => {
+                let elapsed_ms = now.elapsed().as_millis();
+                let success_string = format!("Success ({elapsed_ms}ms)");
+                get_element_by_id("compiler-output").set_inner_html(&success_string);
                 get_element_by_id("script-output").set_inner_html(&output);
-                get_element_by_id("compiler-output").set_inner_html("Success");
             }
             Err(error) => {
                 let error_string = match error {
