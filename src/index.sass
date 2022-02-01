@@ -11,17 +11,35 @@ body
   margin: 0
   background: white
 
-.flex-container
+.playground
   display: flex
+  flex-direction: row
   flex-wrap: wrap
   height: 100%
 
-.flex-left, .flex-right
+.editor-output
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
   flex: 50%
 
 @media (max-width: 800px)
-  .flex-left, .flex-right
-    flex: 100%
+  .playground
+    flex-direction: column
+
+@media (max-width: 800px)
+  .editor-output
+    flex-direction: column
 
 #editor
-  flex-grow: 1
+  flex: 50%
+
+#script-output
+  font-family: monospace
+  flex: 50%
+  resize: none
+
+#compiler-output
+  font-family: monospace
+  flex: 50%
+  resize: none

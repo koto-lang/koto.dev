@@ -108,10 +108,15 @@ impl App {
         let input = get_ace().edit("editor").get_session().get_value();
         match self.koto.compile_and_run(&input) {
             Ok(output) => {
-                get_element_by_id("output").set_inner_html(&output);
+                get_element_by_id("script-output").set_inner_html(&output);
+                get_element_by_id("compiler-output").set_inner_html("Success");
             }
             Err(error) => {
-                get_element_by_id("output").set_inner_html(&format!("Error: {error}"));
+                let error_string = match error {
+                    KotoError::RuntimeError(_) => format!("Runtime error: {error}"),
+                    _ => format!("Error: {error}"),
+                };
+                get_element_by_id("compiler-output").set_inner_html(&error_string);
             }
         }
     }

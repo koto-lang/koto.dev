@@ -7,9 +7,12 @@
   </head>
 
   <body>
-    <div class="flex-container" id="wrapper">
-      <div class="flex-left" id="editor"></div>
-      <pre class="flex-right" id="output"></pre>
+    <div class="playground">
+      <div id="editor"></div>
+      <div class="editor-output">
+        <textarea id="script-output" readonly=true></textarea>
+        <textarea id="compiler-output" readonly=true></textarea>
+      </div>
     </div>
 
     <script
