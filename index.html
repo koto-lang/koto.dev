@@ -3,18 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <title>Koto Playground</title>
+
     <link data-trunk href="src/index.sass" rel="sass" />
   </head>
 
   <body>
-    <div class="playground">
-      <div id="editor"></div>
-      <div class="editor-output">
-        <textarea id="script-output" readonly=true></textarea>
-        <textarea id="compiler-output" readonly=true></textarea>
+    <div class="container">
+      <div class="playground flex-horizontal">
+        <div class="editor-area flex-vertical flex-half">
+          <div class="flex-3" id="editor"></div>
+
+          <div class="flex-1 flex-vertical">
+            <div class="flex-1 flex-vertical">
+              <textarea
+                  id="compiler-output"
+                  class="flex-1 fixed-mono"
+                  readonly="true"
+                  ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-output flex-vertical flex-half">
+          <textarea
+              id="script-output"
+              class="flex-half fixed-mono"
+              readonly="true"
+              ></textarea>
+        </div>
       </div>
     </div>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"
       integrity="sha512-hDyKEpCc9jPn3u2VffFjScCtNqZI+BAbThAhhDYqqqZbxMqmTSNIgdU0OU9BRD/8wFxHIWLAo561hh9fW7j6sA=="

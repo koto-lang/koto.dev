@@ -1,45 +1,50 @@
-html
-  width: 100%
-  height: 100%
-  padding: 0
+body
+  background-color: #cccccc
   margin: 0
 
-body
-  width: 100%
-  height: 100%
-  padding: 0
-  margin: 0
-  background: white
+.container
+  height: 100vh
+  padding: 20px
+  box-sizing: border-box
 
 .playground
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
+  width: 100%
   height: 100%
 
-.editor-output
+.flex-horizontal
   display: flex
   flex-direction: row
   flex-wrap: wrap
-  flex: 50%
 
 @media (max-width: 800px)
-  .playground
+  .flex-horizontal
     flex-direction: column
+
+.flex-vertical
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
 
 @media (max-width: 800px)
-  .editor-output
+  .flex-vertical
     flex-direction: column
 
-#editor
+.flex-1
+  flex-grow: 1
+
+.flex-3
+  flex-grow: 3
+
+.flex-half
   flex: 50%
 
-#script-output
+.fixed-mono
   font-family: monospace
-  flex: 50%
   resize: none
+  margin: 0
+  padding: 0
+  box-sizing: border-box
 
-#compiler-output
-  font-family: monospace
-  flex: 50%
-  resize: none
+.fullsize
+  width: 100%
+  height: 100%
