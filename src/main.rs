@@ -8,11 +8,24 @@ use {
         Koto, KotoSettings,
     },
     std::{cell::RefCell, fmt, rc::Rc},
+    wasm_bindgen::prelude::*,
     web_sys::window,
 };
 
+#[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
+extern "C" {
+    fn register_koto_mode();
+}
+
+#[wasm_bindgen(module = "/src/setup-editor.js")]
+extern "C" {
+    fn setup_editor();
+}
+
 fn main() {
     set_panic_hook();
+    register_koto_mode();
+    setup_editor();
     run_app();
 }
 
@@ -20,13 +33,16 @@ fn run_app() {
     let document = window()
         .and_then(|w| w.document())
         .expect("Failed to access document");
-    let body = document.body().expect("Failed to access document.body");
+    let output = document
+        .get_element_by_id("output")
+        .expect("Failed to get output div");
 
     let text = compile_and_run("print 'Hello from Koto!'");
 
-    let text_node = document.create_text_node(&text);
-    body.append_child(text_node.as_ref())
-        .expect("Failed to append text");
+    output.set_inner_html(&text);
+    // let text_node = document.create_text_node(&text);
+    // body.append_child(text_node.as_ref())
+    //     .expect("Failed to append text");
 }
 
 // Captures output from Koto in a String

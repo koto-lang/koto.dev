@@ -3,7 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <title>Koto Playground</title>
+    <link data-trunk href="src/index.sass" rel="sass" />
   </head>
+
   <body>
+    <div class="flex-container" id="wrapper">
+      <div class="flex-left" id="editor"></div>
+      <pre class="flex-right" id="output"></pre>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"
+      integrity="sha512-hDyKEpCc9jPn3u2VffFjScCtNqZI+BAbThAhhDYqqqZbxMqmTSNIgdU0OU9BRD/8wFxHIWLAo561hh9fW7j6sA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-solarized_dark.min.js"
+      integrity="sha512-tZqenoVZQL39UFpJthlJCgwmVSVY1R8IAJoXQBoaWv3lfJT0rTW5B4At9UZUXEYIbhKEhjm0KOwZJZ1JXJ7nUQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>
