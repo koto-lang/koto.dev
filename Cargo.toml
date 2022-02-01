@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 console_error_panic_hook = "0.1"
+koto = { git = "https://github.com/koto-lang/koto" }
 wee_alloc = "0.4.5"
 
 [dependencies.web-sys]
@@ -19,3 +20,9 @@ features = [
   'Text',
   'Window',
 ]
+
+[profile.release]
+panic = 'abort'
+codegen-units = 1
+opt-level = 'z'
+lto = true
