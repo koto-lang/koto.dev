@@ -10,7 +10,7 @@ use {
         runtime::{KotoFile, KotoRead, KotoWrite, RuntimeError},
         Koto, KotoError, KotoSettings,
     },
-    std::{cell::RefCell, fmt, rc::Rc},
+    std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
     web_sys::Element,
 };
@@ -90,77 +90,85 @@ fn setup_app() {
     APP.with(|app| app.borrow_mut().run_script());
 }
 
+type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMsg>>>;
+
 thread_local! {
     static APP: Box<RefCell<App>> = Box::new(RefCell::new(App::new()));
+    static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
 }
 
 struct App {
-    koto: KotoWrapper,
+    koto: Koto,
+    compiler_output: Element,
+    script_output: Element,
+    output_buffer: String,
+    message_queue: KotoMessageQueue,
 }
 
 impl App {
     fn new() -> Self {
+        let koto = Koto::with_settings(
+            KotoSettings::default()
+                .with_stdout(OutputCapture {})
+                .with_stderr(OutputCapture {}),
+        );
+
         Self {
-            koto: KotoWrapper::new(),
+            koto,
+            compiler_output: get_element_by_id("compiler-output"),
+            script_output: get_element_by_id("script-output"),
+            output_buffer: String::with_capacity(128),
+            message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
         }
     }
 
     fn run_script(&mut self) {
         let input = get_ace().edit("editor").get_session().get_value();
         let now = Instant::now();
-        match self.koto.compile_and_run(&input) {
-            Ok(output) => {
+
+        match self.koto.compile(&input).and_then(|_| self.koto.run()) {
+            Ok(_) => {
                 let elapsed_ms = now.elapsed().as_millis();
                 let success_string = format!("Success ({elapsed_ms}ms)");
-                get_element_by_id("compiler-output").set_inner_html(&success_string);
-                get_element_by_id("script-output").set_inner_html(&output);
+                self.compiler_output.set_inner_html(&success_string);
+                self.script_output.set_inner_html("");
+                self.process_koto_messages();
             }
             Err(error) => {
                 let error_string = match error {
                     KotoError::RuntimeError(_) => format!("Runtime error: {error}"),
                     _ => format!("Error: {error}"),
                 };
-                get_element_by_id("compiler-output").set_inner_html(&error_string);
+                self.compiler_output.set_inner_html(&error_string);
             }
+        }
+    }
+
+    fn process_koto_messages(&mut self) {
+        for message in self.message_queue.borrow_mut().drain(..) {
+            match message {
+                KotoMsg::Print(s) => {
+                    self.output_buffer.push_str(&s);
+                }
+            }
+        }
+
+        if !self.output_buffer.is_empty() {
+            self.script_output
+                .append_with_str_1(&self.output_buffer)
+                .expect("Failed to append to script output");
+            self.output_buffer.clear();
         }
     }
 }
 
-struct KotoWrapper {
-    koto: Koto,
-    output: Rc<RefCell<String>>,
-}
-
-impl KotoWrapper {
-    fn new() -> Self {
-        let output = Rc::new(RefCell::new(String::new()));
-
-        let koto = Koto::with_settings(
-            KotoSettings::default()
-                .with_stdout(OutputCapture {
-                    output: output.clone(),
-                })
-                .with_stderr(OutputCapture {
-                    output: output.clone(),
-                }),
-        );
-
-        Self { koto, output }
-    }
-
-    fn compile_and_run(&mut self, input: &str) -> Result<String, KotoError> {
-        self.koto.compile(input)?;
-        self.koto.run()?;
-        let output = std::mem::take::<String>(&mut self.output.borrow_mut());
-        Ok(output)
-    }
+enum KotoMsg {
+    Print(String),
 }
 
 // Captures output from Koto in a String
 #[derive(Debug)]
-struct OutputCapture {
-    output: Rc<RefCell<String>>,
-}
+struct OutputCapture {}
 
 impl KotoFile for OutputCapture {}
 impl KotoRead for OutputCapture {}
@@ -171,14 +179,18 @@ impl KotoWrite for OutputCapture {
             Ok(s) => s,
             Err(e) => return Err(e.to_string().into()),
         };
-        self.output.borrow_mut().push_str(bytes_str);
+        KOTO_MESSAGE_QUEUE.with(|q| {
+            q.borrow_mut()
+                .push_back(KotoMsg::Print(bytes_str.to_string()))
+        });
         Ok(())
     }
 
     fn write_line(&self, output: &str) -> Result<(), RuntimeError> {
-        let mut unlocked = self.output.borrow_mut();
-        unlocked.push_str(output);
-        unlocked.push('\n');
+        KOTO_MESSAGE_QUEUE.with(|q| {
+            q.borrow_mut()
+                .push_back(KotoMsg::Print(format!("{output}\n")))
+        });
         Ok(())
     }
 
