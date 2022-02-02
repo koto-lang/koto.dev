@@ -3,7 +3,8 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 use {
     console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::document,
+    gloo_events::EventListener,
+    gloo_utils::{document, window},
     instant::Instant,
     js_sys::Function,
     koto::{
@@ -12,7 +13,7 @@ use {
     },
     std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
-    web_sys::Element,
+    web_sys::{CanvasRenderingContext2d, Element, HtmlCanvasElement},
 };
 
 #[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
@@ -93,7 +94,7 @@ fn setup_app() {
 type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMsg>>>;
 
 thread_local! {
-    static APP: Box<RefCell<App>> = Box::new(RefCell::new(App::new()));
+    static APP: RefCell<App> = RefCell::new(App::new());
     static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
 }
 
@@ -101,8 +102,11 @@ struct App {
     koto: Koto,
     compiler_output: Element,
     script_output: Element,
+    canvas: HtmlCanvasElement,
+    canvas_context: CanvasRenderingContext2d,
     output_buffer: String,
     message_queue: KotoMessageQueue,
+    _window_resize_listener: EventListener,
 }
 
 impl App {
@@ -113,12 +117,37 @@ impl App {
                 .with_stderr(OutputCapture {}),
         );
 
+        let canvas = get_element_by_id("koto-canvas");
+        let canvas: HtmlCanvasElement = canvas
+            .dyn_into::<HtmlCanvasElement>()
+            .expect("koto-canvas is the wrong element type");
+
+        canvas.set_width(canvas.client_width() as u32);
+        canvas.set_height(canvas.client_height() as u32);
+
+        let canvas_context = canvas
+            .get_context("2d")
+            .expect("Error while getting canvas context")
+            .expect("Missing canvas context")
+            .dyn_into::<CanvasRenderingContext2d>()
+            .expect("Error while casting canvas context");
+
+        canvas_context.set_fill_style(&JsValue::from("#999999"));
+        canvas_context.fill_rect(0.0, 0.0, canvas.width() as f64, canvas.height() as f64);
+
+        let window_resize_listener = EventListener::new(&window(), "resize", |_| {
+            APP.with(|app| app.borrow_mut().on_window_resize());
+        });
+
         Self {
             koto,
             compiler_output: get_element_by_id("compiler-output"),
             script_output: get_element_by_id("script-output"),
+            canvas,
+            canvas_context,
             output_buffer: String::with_capacity(128),
             message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
+            _window_resize_listener: window_resize_listener,
         }
     }
 
@@ -159,6 +188,32 @@ impl App {
                 .expect("Failed to append to script output");
             self.output_buffer.clear();
         }
+    }
+
+    fn on_window_resize(&mut self) {
+        let context = &mut self.canvas_context;
+        self.canvas.set_width(self.canvas.client_width() as u32);
+        self.canvas.set_height(self.canvas.client_height() as u32);
+
+        context.begin_path();
+
+        use std::f64::consts::PI;
+        // Draw the outer circle.
+        context.arc(75.0, 75.0, 50.0, 0.0, PI * 2.0).unwrap();
+
+        // Draw the mouth.
+        context.move_to(110.0, 75.0);
+        context.arc(75.0, 75.0, 35.0, 0.0, PI).unwrap();
+
+        // Draw the left eye.
+        context.move_to(65.0, 65.0);
+        context.arc(60.0, 65.0, 5.0, 0.0, PI * 2.0).unwrap();
+
+        // Draw the right eye.
+        context.move_to(95.0, 65.0);
+        context.arc(90.0, 65.0, 5.0, 0.0, PI * 2.0).unwrap();
+
+        context.stroke();
     }
 }
 

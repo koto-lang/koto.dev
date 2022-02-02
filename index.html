@@ -16,20 +16,26 @@
           <div class="flex-1 flex-vertical">
             <div class="flex-1 flex-vertical">
               <textarea
-                  id="compiler-output"
-                  class="flex-1 fixed-mono"
-                  readonly="true"
-                  ></textarea>
+                id="script-output"
+                class="flex-3 fixed-mono"
+                readonly="true"
+              ></textarea>
+              <textarea
+                id="compiler-output"
+                class="flex-1 fixed-mono"
+                readonly="true"
+              ></textarea>
             </div>
           </div>
         </div>
 
         <div class="editor-output flex-vertical flex-half">
-          <textarea
-              id="script-output"
-              class="flex-half fixed-mono"
-              readonly="true"
-              ></textarea>
+          <canvas
+            class="fullsize"
+            id="koto-canvas"
+            width="400"
+            height="400"
+          ></canvas>
         </div>
       </div>
     </div>
