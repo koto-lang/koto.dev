@@ -74,6 +74,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "gloo-render"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b4cda6e149df3bb4a3c6a343873903e5bcc2448a9877d61bb8274806ad67f6e"
+dependencies = [
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "gloo-utils"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -124,7 +134,6 @@ dependencies = [
 [[package]]
 name = "koto"
 version = "0.10.0"
-source = "git+https://github.com/koto-lang/koto#dc221f2290f612278ea5b93ff3339c2dca33f8c4"
 dependencies = [
  "dunce",
  "koto_bytecode",
@@ -135,7 +144,6 @@ dependencies = [
 [[package]]
 name = "koto_bytecode"
 version = "0.10.0"
-source = "git+https://github.com/koto-lang/koto#dc221f2290f612278ea5b93ff3339c2dca33f8c4"
 dependencies = [
  "dunce",
  "koto_parser",
@@ -146,7 +154,6 @@ dependencies = [
 [[package]]
 name = "koto_lexer"
 version = "0.10.0"
-source = "git+https://github.com/koto-lang/koto#dc221f2290f612278ea5b93ff3339c2dca33f8c4"
 dependencies = [
  "unicode-width",
  "unicode-xid",
@@ -155,7 +162,6 @@ dependencies = [
 [[package]]
 name = "koto_parser"
 version = "0.10.0"
-source = "git+https://github.com/koto-lang/koto#dc221f2290f612278ea5b93ff3339c2dca33f8c4"
 dependencies = [
  "koto_lexer",
 ]
@@ -163,7 +169,6 @@ dependencies = [
 [[package]]
 name = "koto_runtime"
 version = "0.10.0"
-source = "git+https://github.com/koto-lang/koto#dc221f2290f612278ea5b93ff3339c2dca33f8c4"
 dependencies = [
  "chrono",
  "downcast-rs",
@@ -185,9 +190,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.116"
+version = "0.2.117"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "565dbd88872dbe4cc8a46e527f26483c1d1f7afa6b884a3bd6cd893d4f98da74"
+checksum = "e74d72e0f9b65b5b4ca49a346af3976df0f9c61d550727f349ecd559f251a26c"
 
 [[package]]
 name = "log"
@@ -229,6 +234,7 @@ version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
  "gloo-events",
+ "gloo-render",
  "gloo-utils",
  "instant",
  "js-sys",

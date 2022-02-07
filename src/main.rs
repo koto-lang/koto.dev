@@ -4,11 +4,15 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 use {
     console_error_panic_hook::set_once as set_panic_hook,
     gloo_events::EventListener,
+    gloo_render::{request_animation_frame, AnimationFrame},
     gloo_utils::{document, window},
     instant::Instant,
     js_sys::Function,
     koto::{
-        runtime::{KotoFile, KotoRead, KotoWrite, RuntimeError},
+        runtime::{
+            unexpected_type_error_with_slice, KotoFile, KotoRead, KotoWrite, RuntimeError, Value,
+            ValueMap,
+        },
         Koto, KotoError, KotoSettings,
     },
     std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
@@ -107,6 +111,7 @@ struct App {
     output_buffer: String,
     message_queue: KotoMessageQueue,
     _window_resize_listener: EventListener,
+    animation_frame: AnimationFrame,
 }
 
 impl App {
@@ -116,6 +121,8 @@ impl App {
                 .with_stdout(OutputCapture {})
                 .with_stderr(OutputCapture {}),
         );
+
+        koto.prelude().add_map("canvas", make_canvas_module());
 
         let canvas = get_element_by_id("koto-canvas");
         let canvas: HtmlCanvasElement = canvas
@@ -148,6 +155,7 @@ impl App {
             output_buffer: String::with_capacity(128),
             message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
             _window_resize_listener: window_resize_listener,
+            animation_frame: request_animation_frame(Self::on_animation_frame_handler),
         }
     }
 
@@ -173,11 +181,59 @@ impl App {
         }
     }
 
+    fn on_animation_frame_handler(time_delta: f64) {
+        APP.with(|app| app.borrow_mut().on_animation_frame(time_delta));
+    }
+
+    fn on_animation_frame(&mut self, _time_delta: f64) {
+        self.run_script();
+        self.animation_frame = request_animation_frame(Self::on_animation_frame_handler);
+    }
+
     fn process_koto_messages(&mut self) {
         for message in self.message_queue.borrow_mut().drain(..) {
             match message {
                 KotoMsg::Print(s) => {
                     self.output_buffer.push_str(&s);
+                }
+                KotoMsg::Clear => {
+                    self.canvas_context.clear_rect(
+                        0.0,
+                        0.0,
+                        self.canvas.width() as f64,
+                        self.canvas.height() as f64,
+                    );
+                }
+                KotoMsg::BeginPath => {
+                    self.canvas_context.begin_path();
+                }
+                KotoMsg::MoveTo { x, y } => {
+                    self.canvas_context.move_to(x, y);
+                }
+                KotoMsg::Arc {
+                    x,
+                    y,
+                    radius,
+                    start_angle,
+                    end_angle,
+                    counter_clockwise,
+                } => {
+                    self.canvas_context
+                        .arc_with_anticlockwise(
+                            x,
+                            y,
+                            radius,
+                            start_angle,
+                            end_angle,
+                            counter_clockwise,
+                        )
+                        .expect("Failed to draw arc");
+                }
+                KotoMsg::Fill => {
+                    self.canvas_context.fill();
+                }
+                KotoMsg::Stroke => {
+                    self.canvas_context.stroke();
                 }
             }
         }
@@ -191,34 +247,110 @@ impl App {
     }
 
     fn on_window_resize(&mut self) {
-        let context = &mut self.canvas_context;
         self.canvas.set_width(self.canvas.client_width() as u32);
         self.canvas.set_height(self.canvas.client_height() as u32);
-
-        context.begin_path();
-
-        use std::f64::consts::PI;
-        // Draw the outer circle.
-        context.arc(75.0, 75.0, 50.0, 0.0, PI * 2.0).unwrap();
-
-        // Draw the mouth.
-        context.move_to(110.0, 75.0);
-        context.arc(75.0, 75.0, 35.0, 0.0, PI).unwrap();
-
-        // Draw the left eye.
-        context.move_to(65.0, 65.0);
-        context.arc(60.0, 65.0, 5.0, 0.0, PI * 2.0).unwrap();
-
-        // Draw the right eye.
-        context.move_to(95.0, 65.0);
-        context.arc(90.0, 65.0, 5.0, 0.0, PI * 2.0).unwrap();
-
-        context.stroke();
     }
 }
 
 enum KotoMsg {
     Print(String),
+    Clear,
+    BeginPath,
+    MoveTo {
+        x: f64,
+        y: f64,
+    },
+    Arc {
+        x: f64,
+        y: f64,
+        radius: f64,
+        start_angle: f64,
+        end_angle: f64,
+        counter_clockwise: bool,
+    },
+    Fill,
+    Stroke,
+}
+
+fn send_koto_message(message: KotoMsg) {
+    KOTO_MESSAGE_QUEUE.with(|q| q.borrow_mut().push_back(message));
+}
+
+fn make_canvas_module() -> ValueMap {
+    use Value::*;
+
+    let result = ValueMap::default();
+
+    result.add_fn("begin_path", |_, _| {
+        send_koto_message(KotoMsg::BeginPath);
+        Ok(Empty)
+    });
+
+    result.add_fn("clear", |_, _| {
+        send_koto_message(KotoMsg::Clear);
+        Ok(Empty)
+    });
+
+    result.add_fn("fill", |_, _| {
+        send_koto_message(KotoMsg::Fill);
+        Ok(Empty)
+    });
+
+    result.add_fn("move_to", |vm, args| {
+        let (x, y) = match vm.get_args(args) {
+            [Number(x), Number(y)] => (x.into(), y.into()),
+            [Num2(n)] => (n[0], n[1]),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.move_to",
+                    "two Numbers or a Num2",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMsg::MoveTo { x, y });
+        Ok(Empty)
+    });
+
+    result.add_fn("arc", |vm, args| {
+        let (x, y, radius, start_angle, end_angle, counter_clockwise) = match vm.get_args(args) {
+            [Num2(n), Number(radius), Number(start_angle), Number(end_angle)] => {
+                (n[0], n[1], radius.into(), start_angle.into(), end_angle.into(), false)
+            },
+            [Num2(n), Number(radius), Number(start_angle), Number(end_angle), Bool(counter_clockwise)] => {
+                (n[0], n[1], radius.into(), start_angle.into(), end_angle.into(), *counter_clockwise)
+            }
+            [Number(x), Number(y), Number(radius), Number(start_angle), Number(end_angle)] => {
+                (x.into(), y.into(), radius.into(), start_angle.into(), end_angle.into(), false)
+            }
+            [Number(x), Number(y), Number(radius), Number(start_angle), Number(end_angle), Bool(counter_clockwise)] => {
+                (x.into(), y.into(), radius.into(), start_angle.into(), end_angle.into(), *counter_clockwise)
+            }
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.arc",
+                    "x & y (as Numbers or a Num2), radius, start_angle, end_angle, counter_clockwise (optional)",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMsg::Arc {
+            x,
+            y,
+            radius,
+            start_angle,
+            end_angle,
+            counter_clockwise,
+        });
+        Ok(Empty)
+    });
+
+    result.add_fn("stroke", |_, _| {
+        send_koto_message(KotoMsg::Stroke);
+        Ok(Empty)
+    });
+
+    result
 }
 
 // Captures output from Koto in a String
@@ -242,10 +374,7 @@ impl KotoWrite for OutputCapture {
     }
 
     fn write_line(&self, output: &str) -> Result<(), RuntimeError> {
-        KOTO_MESSAGE_QUEUE.with(|q| {
-            q.borrow_mut()
-                .push_back(KotoMsg::Print(format!("{output}\n")))
-        });
+        send_koto_message(KotoMsg::Print(format!("{output}\n")));
         Ok(())
     }
 
