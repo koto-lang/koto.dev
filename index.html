@@ -9,34 +9,27 @@
 
   <body>
     <div class="container">
-      <div class="playground flex-horizontal">
-        <div class="editor-area flex-vertical flex-half">
-          <div class="flex-3" id="editor"></div>
+      <div class="playground">
+        <div id="editor"></div>
 
-          <div class="flex-1 flex-vertical">
-            <div class="flex-1 flex-vertical">
-              <textarea
-                id="script-output"
-                class="flex-3 fixed-mono"
-                readonly="true"
-              ></textarea>
-              <textarea
-                id="compiler-output"
-                class="flex-1 fixed-mono"
-                readonly="true"
-              ></textarea>
-            </div>
-          </div>
-        </div>
+        <canvas
+          class="fullsize"
+          id="koto-canvas"
+          width="400"
+          height="400"
+        ></canvas>
 
-        <div class="editor-output flex-vertical flex-half">
-          <canvas
-            class="fullsize"
-            id="koto-canvas"
-            width="400"
-            height="400"
-          ></canvas>
-        </div>
+        <textarea
+          id="compiler-output"
+          class="fixed-mono"
+          readonly="true"
+        ></textarea>
+
+        <textarea
+          id="script-output"
+          class="fixed-mono"
+          readonly="true"
+        ></textarea>
       </div>
     </div>
     <script

@@ -10,36 +10,9 @@ body
 .playground
   width: 100%
   height: 100%
-
-.flex-horizontal
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-
-@media (max-width: 800px)
-  .flex-horizontal
-    flex-direction: column
-
-.flex-vertical
-  display: flex
-  flex-direction: column
-  flex-wrap: wrap
-
-@media (max-width: 800px)
-  .flex-vertical
-    flex-direction: column
-
-.flex-1
-  flex-grow: 1
-
-.flex-2
-  flex-grow: 2
-
-.flex-3
-  flex-grow: 3
-
-.flex-half
-  flex: 50%
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-template-rows: 3fr 1fr
 
 .fixed-mono
   font-family: monospace
