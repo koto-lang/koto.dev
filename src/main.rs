@@ -4,14 +4,14 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 use {
     console_error_panic_hook::set_once as set_panic_hook,
     gloo_events::EventListener,
-    gloo_render::{request_animation_frame, AnimationFrame},
+    gloo_render::AnimationFrame,
     gloo_utils::{document, window},
-    instant::Instant,
+    // instant::Instant,
     js_sys::Function,
     koto::{
         runtime::{
-            unexpected_type_error_with_slice, KotoFile, KotoRead, KotoWrite, RuntimeError, Value,
-            ValueMap,
+            unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead, KotoWrite,
+            RuntimeError, Value, ValueMap,
         },
         Koto, KotoError, KotoSettings,
     },
@@ -84,15 +84,16 @@ fn setup_editor() {
     let session = editor.get_session();
     session.set_mode("ace/mode/koto");
 
-    let on_change = Closure::wrap(
-        Box::new(|| APP.with(move |app| app.borrow_mut().run_script())) as Box<dyn Fn()>,
-    );
+    let on_change =
+        Closure::wrap(
+            Box::new(|| APP.with(move |app| app.borrow_mut().on_script_changed())) as Box<dyn Fn()>,
+        );
     session.on("change", on_change.as_ref().unchecked_ref());
     on_change.forget();
 }
 
 fn setup_app() {
-    APP.with(|app| app.borrow_mut().run_script());
+    APP.with(|app| app.borrow_mut().compile_script(true));
 }
 
 type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMsg>>>;
@@ -104,6 +105,10 @@ thread_local! {
 
 struct App {
     koto: Koto,
+    play_module: ValueMap,
+    user_data: Value,
+    is_ready: bool,
+    last_time: Option<f64>,
     compiler_output: Element,
     script_output: Element,
     canvas: HtmlCanvasElement,
@@ -111,7 +116,7 @@ struct App {
     output_buffer: String,
     message_queue: KotoMessageQueue,
     _window_resize_listener: EventListener,
-    animation_frame: AnimationFrame,
+    animation_frame: Option<AnimationFrame>,
 }
 
 impl App {
@@ -122,7 +127,9 @@ impl App {
                 .with_stderr(OutputCapture {}),
         );
 
+        let play_module = ValueMap::default();
         koto.prelude().add_map("canvas", make_canvas_module());
+        koto.prelude().add_map("play", play_module.clone());
 
         let canvas = get_element_by_id("koto-canvas");
         let canvas: HtmlCanvasElement = canvas
@@ -148,6 +155,10 @@ impl App {
 
         Self {
             koto,
+            play_module,
+            user_data: Value::Empty,
+            is_ready: false,
+            last_time: None,
             compiler_output: get_element_by_id("compiler-output"),
             script_output: get_element_by_id("script-output"),
             canvas,
@@ -155,39 +166,123 @@ impl App {
             output_buffer: String::with_capacity(128),
             message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
             _window_resize_listener: window_resize_listener,
-            animation_frame: request_animation_frame(Self::on_animation_frame_handler),
+            animation_frame: None,
         }
     }
 
-    fn run_script(&mut self) {
-        let input = get_ace().edit("editor").get_session().get_value();
-        let now = Instant::now();
+    fn compile_script(&mut self, call_setup: bool) {
+        let script = get_ace().edit("editor").get_session().get_value();
 
-        match self.koto.compile(&input).and_then(|_| self.koto.run()) {
+        self.is_ready = false;
+        self.compiler_output.set_inner_html("");
+        self.script_output.set_inner_html("");
+        self.animation_frame = None;
+        self.last_time = None;
+        self.message_queue.borrow_mut().clear();
+
+        {
+            let mut play_module = self.play_module.data_mut();
+            play_module.remove_with_string("setup");
+            play_module.remove_with_string("on_load");
+            play_module.remove_with_string("update");
+        }
+
+        self.koto.clear_module_cache();
+        if let Err(error) = self.koto.compile(&script) {
+            self.log_error(&format!("Error while compiling script: {error}"));
+            return;
+        }
+
+        if let Err(e) = self.koto.run() {
+            self.log_error(&e.to_string());
+            return;
+        }
+
+        if call_setup {
+            self.user_data = match self.play_module.data().get_with_string("setup") {
+                Some(f) => match self.koto.run_function(f.clone(), CallArgs::None) {
+                    Ok(data) => data,
+                    Err(e) => {
+                        self.log_error(&e.to_string());
+                        return;
+                    }
+                },
+                None => Value::Map(ValueMap::default()),
+            };
+        }
+
+        if let Err(e) = self.run_play_function("on_load", &[self.user_data.clone()]) {
+            self.log_error(&e.to_string());
+            return;
+        }
+
+        self.is_ready = true;
+
+        if self.play_module.data().get_with_string("update").is_some() {
+            self.request_animation_frame();
+        }
+
+        self.process_koto_messages();
+    }
+
+    fn log_error(&self, error: &str) {
+        self.compiler_output.append_with_str_1(error).expect("Failed to log error");
+        self.compiler_output.set_scroll_top(self.compiler_output.scroll_height());
+    }
+
+    fn run_play_function(
+        &mut self,
+        function_name: &str,
+        args: &[Value],
+    ) -> Result<Value, KotoError> {
+        match self.play_module.data().get_with_string(function_name) {
+            Some(f) => self.koto.run_function(f.clone(), CallArgs::Separate(args)),
+            None => Ok(Value::Empty),
+        }
+    }
+
+    fn run_update(&mut self, time_delta: f64) {
+        debug_assert!(self.is_ready);
+
+        match self.run_play_function("update", &[self.user_data.clone(), time_delta.into()]) {
             Ok(_) => {
-                let elapsed_ms = now.elapsed().as_millis();
-                let success_string = format!("Success ({elapsed_ms}ms)");
-                self.compiler_output.set_inner_html(&success_string);
-                self.script_output.set_inner_html("");
                 self.process_koto_messages();
             }
-            Err(error) => {
-                let error_string = match error {
-                    KotoError::RuntimeError(_) => format!("Runtime error: {error}"),
-                    _ => format!("Error: {error}"),
-                };
-                self.compiler_output.set_inner_html(&error_string);
+            Err(e) => {
+                self.is_ready = false;
+                self.log_error(&e.to_string());
             }
         }
     }
 
-    fn on_animation_frame_handler(time_delta: f64) {
-        APP.with(|app| app.borrow_mut().on_animation_frame(time_delta));
+    fn on_script_changed(&mut self) {
+        self.compile_script(false);
     }
 
-    fn on_animation_frame(&mut self, _time_delta: f64) {
-        self.run_script();
-        self.animation_frame = request_animation_frame(Self::on_animation_frame_handler);
+    fn request_animation_frame(&mut self) {
+        self.animation_frame = Some(gloo_render::request_animation_frame(
+            Self::on_animation_frame_handler,
+        ));
+    }
+
+    fn on_animation_frame_handler(time: f64) {
+        APP.with(|app| app.borrow_mut().on_animation_frame(time));
+    }
+
+    fn on_animation_frame(&mut self, time: f64) {
+        let time_delta = if let Some(last_time) = self.last_time {
+            (time - last_time) / 1000.0
+        } else {
+            0.0
+        };
+
+        self.last_time = Some(time);
+
+        self.run_update(time_delta);
+
+        if self.is_ready {
+            self.request_animation_frame();
+        }
     }
 
     fn process_koto_messages(&mut self) {
