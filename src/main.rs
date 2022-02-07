@@ -327,6 +327,11 @@ impl App {
                 KotoMsg::Print(s) => {
                     self.output_buffer.push_str(&s);
                 }
+                KotoMsg::SetFillColor(color) => {
+                    let color_rgb = color.as_css_rgb();
+                    self.canvas_context
+                        .set_fill_style(&JsValue::from(color_rgb))
+                }
                 KotoMsg::SetLineWidth(width) => self.canvas_context.set_line_width(width),
                 KotoMsg::SetStrokeColor(color) => {
                     let color_rgb = color.as_css_rgb();
@@ -343,6 +348,8 @@ impl App {
             self.script_output
                 .append_with_str_1(&self.output_buffer)
                 .expect("Failed to append to script output");
+            self.script_output
+                .set_scroll_top(self.script_output.scroll_height());
             self.output_buffer.clear();
         }
     }
@@ -370,6 +377,7 @@ enum KotoMsg {
         y: f64,
     },
     Print(String),
+    SetFillColor(Color),
     SetLineWidth(f64),
     SetStrokeColor(Color),
     Stroke,
@@ -458,6 +466,30 @@ fn make_canvas_module() -> ValueMap {
             end_angle,
             counter_clockwise,
         });
+        Ok(Empty)
+    });
+
+    result.add_fn("set_fill_color", |vm, args| {
+        let (r, g, b, a) = match vm.get_args(args) {
+            [Number(n1), Number(n2), Number(n3)] => (n1.into(), n2.into(), n3.into(), 1.0),
+            [Number(n1), Number(n2), Number(n3), Number(n4)] => {
+                (n1.into(), n2.into(), n3.into(), n4.into())
+            }
+            [Num4(color)] => (
+                color.0 as f64,
+                color.1 as f64,
+                color.2 as f64,
+                color.3 as f64,
+            ),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.set_fill_color",
+                    "3 or 4 Numbers or a Num4",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMsg::SetFillColor(Color { r, b, g, a }));
         Ok(Empty)
     });
 
