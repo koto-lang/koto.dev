@@ -9,6 +9,7 @@ play.update = |state, time_delta|
   canvas.clear()
   canvas.begin_path()
 
+
   state.time += time_delta
   t = state.time * 1.2
   t2 = state.time * 1.6
@@ -17,6 +18,9 @@ play.update = |state, time_delta|
   x = v * t.sin()
   y = v * t.cos()
   position = state.center + make_num2 x, y
+
+  canvas.set_stroke_color 200, 0, 100
+  canvas.set_line_width 5 + t3.sin() * 3
 
   x, y = position
   radius = state.radius

@@ -288,23 +288,6 @@ impl App {
     fn process_koto_messages(&mut self) {
         for message in self.message_queue.borrow_mut().drain(..) {
             match message {
-                KotoMsg::Print(s) => {
-                    self.output_buffer.push_str(&s);
-                }
-                KotoMsg::Clear => {
-                    self.canvas_context.clear_rect(
-                        0.0,
-                        0.0,
-                        self.canvas.width() as f64,
-                        self.canvas.height() as f64,
-                    );
-                }
-                KotoMsg::BeginPath => {
-                    self.canvas_context.begin_path();
-                }
-                KotoMsg::MoveTo { x, y } => {
-                    self.canvas_context.move_to(x, y);
-                }
                 KotoMsg::Arc {
                     x,
                     y,
@@ -324,8 +307,31 @@ impl App {
                         )
                         .expect("Failed to draw arc");
                 }
+                KotoMsg::BeginPath => {
+                    self.canvas_context.begin_path();
+                }
+                KotoMsg::Clear => {
+                    self.canvas_context.clear_rect(
+                        0.0,
+                        0.0,
+                        self.canvas.width() as f64,
+                        self.canvas.height() as f64,
+                    );
+                }
                 KotoMsg::Fill => {
                     self.canvas_context.fill();
+                }
+                KotoMsg::MoveTo { x, y } => {
+                    self.canvas_context.move_to(x, y);
+                }
+                KotoMsg::Print(s) => {
+                    self.output_buffer.push_str(&s);
+                }
+                KotoMsg::SetLineWidth(width) => self.canvas_context.set_line_width(width),
+                KotoMsg::SetStrokeColor(color) => {
+                    let color_rgb = color.as_css_rgb();
+                    self.canvas_context
+                        .set_stroke_style(&JsValue::from(color_rgb))
                 }
                 KotoMsg::Stroke => {
                     self.canvas_context.stroke();
@@ -348,13 +354,6 @@ impl App {
 }
 
 enum KotoMsg {
-    Print(String),
-    Clear,
-    BeginPath,
-    MoveTo {
-        x: f64,
-        y: f64,
-    },
     Arc {
         x: f64,
         y: f64,
@@ -363,8 +362,30 @@ enum KotoMsg {
         end_angle: f64,
         counter_clockwise: bool,
     },
+    BeginPath,
+    Clear,
     Fill,
+    MoveTo {
+        x: f64,
+        y: f64,
+    },
+    Print(String),
+    SetLineWidth(f64),
+    SetStrokeColor(Color),
     Stroke,
+}
+
+struct Color {
+    r: f64,
+    g: f64,
+    b: f64,
+    a: f64,
+}
+
+impl Color {
+    fn as_css_rgb(&self) -> String {
+        format!("rgba({}, {}, {}, {})", self.r, self.g, self.b, self.a)
+    }
 }
 
 fn send_koto_message(message: KotoMsg) {
@@ -437,6 +458,45 @@ fn make_canvas_module() -> ValueMap {
             end_angle,
             counter_clockwise,
         });
+        Ok(Empty)
+    });
+
+    result.add_fn("set_line_width", |vm, args| {
+        let width = match vm.get_args(args) {
+            [Number(n)] => n,
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.set_line_width",
+                    "a Number",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMsg::SetLineWidth(width.into()));
+        Ok(Empty)
+    });
+
+    result.add_fn("set_stroke_color", |vm, args| {
+        let (r, g, b, a) = match vm.get_args(args) {
+            [Number(n1), Number(n2), Number(n3)] => (n1.into(), n2.into(), n3.into(), 1.0),
+            [Number(n1), Number(n2), Number(n3), Number(n4)] => {
+                (n1.into(), n2.into(), n3.into(), n4.into())
+            }
+            [Num4(color)] => (
+                color.0 as f64,
+                color.1 as f64,
+                color.2 as f64,
+                color.3 as f64,
+            ),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.set_stroke_color",
+                    "3 or 4 Numbers or a Num4",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMsg::SetStrokeColor(Color { r, b, g, a }));
         Ok(Empty)
     });
 
