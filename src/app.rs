@@ -73,7 +73,9 @@ impl App {
 
         self.last_time = Some(time);
 
-        self.koto.run_update(time_delta);
+        if self.koto.is_ready() {
+            self.koto.run_update(time_delta);
+        }
 
         if self.koto.is_ready() {
             self.request_animation_frame();

@@ -12,9 +12,9 @@ use {
     web_sys::{CanvasRenderingContext2d, Element, HtmlCanvasElement},
 };
 
-pub type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMsg>>>;
+pub type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMessage>>>;
 
-pub enum KotoMsg {
+pub enum KotoMessage {
     Arc {
         x: f64,
         y: f64,
@@ -31,6 +31,12 @@ pub enum KotoMsg {
         y: f64,
     },
     Print(String),
+    Rect {
+        x: f64,
+        y: f64,
+        width: f64,
+        height: f64,
+    },
     SetFillColor(Color),
     SetLineWidth(f64),
     SetStrokeColor(Color),
@@ -74,6 +80,7 @@ impl KotoWrapper {
         let play_module = ValueMap::default();
         koto.prelude().add_map("canvas", make_canvas_module());
         koto.prelude().add_map("play", play_module.clone());
+        koto.prelude().add_map("random", koto_random::make_module());
 
         let canvas_context = canvas
             .get_context("2d")
@@ -192,7 +199,7 @@ impl KotoWrapper {
     fn process_koto_messages(&mut self) {
         for message in self.message_queue.borrow_mut().drain(..) {
             match message {
-                KotoMsg::Arc {
+                KotoMessage::Arc {
                     x,
                     y,
                     radius,
@@ -211,10 +218,10 @@ impl KotoWrapper {
                         )
                         .expect("Failed to draw arc");
                 }
-                KotoMsg::BeginPath => {
+                KotoMessage::BeginPath => {
                     self.canvas_context.begin_path();
                 }
-                KotoMsg::Clear => {
+                KotoMessage::Clear => {
                     self.canvas_context.clear_rect(
                         0.0,
                         0.0,
@@ -222,27 +229,33 @@ impl KotoWrapper {
                         self.canvas.height() as f64,
                     );
                 }
-                KotoMsg::Fill => {
+                KotoMessage::Fill => {
                     self.canvas_context.fill();
                 }
-                KotoMsg::MoveTo { x, y } => {
+                KotoMessage::MoveTo { x, y } => {
                     self.canvas_context.move_to(x, y);
                 }
-                KotoMsg::Print(s) => {
+                KotoMessage::Print(s) => {
                     self.output_buffer.push_str(&s);
                 }
-                KotoMsg::SetFillColor(color) => {
+                KotoMessage::Rect {
+                    x,
+                    y,
+                    width,
+                    height,
+                } => self.canvas_context.rect(x, y, width, height),
+                KotoMessage::SetFillColor(color) => {
                     let color_rgb = color.as_css_rgb();
                     self.canvas_context
                         .set_fill_style(&JsValue::from(color_rgb))
                 }
-                KotoMsg::SetLineWidth(width) => self.canvas_context.set_line_width(width),
-                KotoMsg::SetStrokeColor(color) => {
+                KotoMessage::SetLineWidth(width) => self.canvas_context.set_line_width(width),
+                KotoMessage::SetStrokeColor(color) => {
                     let color_rgb = color.as_css_rgb();
                     self.canvas_context
                         .set_stroke_style(&JsValue::from(color_rgb))
                 }
-                KotoMsg::Stroke => {
+                KotoMessage::Stroke => {
                     self.canvas_context.stroke();
                 }
             }
@@ -259,7 +272,7 @@ impl KotoWrapper {
     }
 }
 
-fn send_koto_message(message: KotoMsg) {
+fn send_koto_message(message: KotoMessage) {
     KOTO_MESSAGE_QUEUE.with(|q| q.borrow_mut().push_back(message));
 }
 
@@ -269,17 +282,17 @@ fn make_canvas_module() -> ValueMap {
     let result = ValueMap::default();
 
     result.add_fn("begin_path", |_, _| {
-        send_koto_message(KotoMsg::BeginPath);
+        send_koto_message(KotoMessage::BeginPath);
         Ok(Empty)
     });
 
     result.add_fn("clear", |_, _| {
-        send_koto_message(KotoMsg::Clear);
+        send_koto_message(KotoMessage::Clear);
         Ok(Empty)
     });
 
     result.add_fn("fill", |_, _| {
-        send_koto_message(KotoMsg::Fill);
+        send_koto_message(KotoMessage::Fill);
         Ok(Empty)
     });
 
@@ -295,7 +308,7 @@ fn make_canvas_module() -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMsg::MoveTo { x, y });
+        send_koto_message(KotoMessage::MoveTo { x, y });
         Ok(Empty)
     });
 
@@ -321,13 +334,38 @@ fn make_canvas_module() -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMsg::Arc {
+        send_koto_message(KotoMessage::Arc {
             x,
             y,
             radius,
             start_angle,
             end_angle,
             counter_clockwise,
+        });
+        Ok(Empty)
+    });
+
+    result.add_fn("rect", |vm, args| {
+        let (x, y, width, height) = match vm.get_args(args) {
+            [Num2(pos), Number(width), Number(height)] => {
+                (pos[0], pos[1], width.into(), height.into())
+            }
+            [Number(x), Number(y), Number(width), Number(height)] => {
+                (x.into(), y.into(), width.into(), height.into())
+            }
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.rect",
+                    "x & y (as Numbers or a Num2), width, heigth",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::Rect {
+            x,
+            y,
+            width,
+            height,
         });
         Ok(Empty)
     });
@@ -352,7 +390,7 @@ fn make_canvas_module() -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMsg::SetFillColor(Color { r, b, g, a }));
+        send_koto_message(KotoMessage::SetFillColor(Color { r, b, g, a }));
         Ok(Empty)
     });
 
@@ -367,7 +405,7 @@ fn make_canvas_module() -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMsg::SetLineWidth(width.into()));
+        send_koto_message(KotoMessage::SetLineWidth(width.into()));
         Ok(Empty)
     });
 
@@ -391,12 +429,12 @@ fn make_canvas_module() -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMsg::SetStrokeColor(Color { r, b, g, a }));
+        send_koto_message(KotoMessage::SetStrokeColor(Color { r, b, g, a }));
         Ok(Empty)
     });
 
     result.add_fn("stroke", |_, _| {
-        send_koto_message(KotoMsg::Stroke);
+        send_koto_message(KotoMessage::Stroke);
         Ok(Empty)
     });
 
@@ -418,13 +456,13 @@ impl KotoWrite for OutputCapture {
         };
         KOTO_MESSAGE_QUEUE.with(|q| {
             q.borrow_mut()
-                .push_back(KotoMsg::Print(bytes_str.to_string()))
+                .push_back(KotoMessage::Print(bytes_str.to_string()))
         });
         Ok(())
     }
 
     fn write_line(&self, output: &str) -> Result<(), RuntimeError> {
-        send_koto_message(KotoMsg::Print(format!("{output}\n")));
+        send_koto_message(KotoMessage::Print(format!("{output}\n")));
         Ok(())
     }
 

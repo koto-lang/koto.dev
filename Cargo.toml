@@ -13,6 +13,7 @@ gloo-utils = "0.1.2"    # Convenience crate for common `web_sys` features
 instant = "0.1.12"      # A partial replacement for std::time::Instant that works on WASM too.
 js-sys = "0.3.56"
 koto = { git = "https://github.com/koto-lang/koto" }
+koto_random = { git = "https://github.com/koto-lang/koto" }
 wasm-bindgen = "0.2.79"
 wee_alloc = "0.4.5"
 
@@ -38,3 +39,4 @@ lto = true
 
 [patch."https://github.com/koto-lang/koto"]
 koto = { path = "../koto/src/koto" }
+koto_random = { path = "../koto/libs/random" }

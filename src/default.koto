@@ -1,44 +1,31 @@
 from number import pi, tau
 
+lerp = |min, max, x| min + (max - min) * x
+random_in_range = |min, max| lerp min, max, random.number()
+
+random_color = ||
+  r = random_in_range 0, 255
+  g = random_in_range 0, 255
+  b = random_in_range 0, 255
+  a = random_in_range 0.4, 0.8
+  make_num4 r, g, b, a
+
 play.setup = ||
-  center: make_num2 400, 400
-  radius: 100
   time: 0
+  update_time: 0
 
 play.update = |state, time_delta|
-  canvas.clear()
-  canvas.begin_path()
-
-
   state.time += time_delta
-  t = state.time * 1.2
-  t2 = state.time * 1.6
-  t3 = state.time * 1.8
-  v = 100
-  x = v * t.sin()
-  y = v * t.cos()
-  position = state.center + make_num2 x, y
 
-  canvas.set_stroke_color 200, 0, 100
-  canvas.set_line_width 5 + t3.sin() * 3
+  if state.time > state.update_time
+    x = random_in_range 0, 400
+    y = random_in_range 0, 400
+    width = random_in_range 20, 400
+    height = random_in_range 20, 400
 
-  x, y = position
-  radius = state.radius
-  canvas.arc x, y, radius, 0, tau
+    canvas.begin_path()
+    canvas.set_fill_color random_color()
+    canvas.rect x, y, width, height
+    canvas.fill()
 
-  mouth_radius = radius - 35
-  canvas.move_to x + mouth_radius, y
-  canvas.arc x, y, mouth_radius, 0, pi
-
-  eye_radius = 15 + t2.sin() * 5
-  eye_offset = 20 + t3.cos() * 5
-  eye_x_1 = x - eye_offset
-  eye_y = y - eye_offset
-  canvas.move_to eye_x_1, eye_y
-  canvas.arc eye_x_1 - eye_radius, eye_y, eye_radius, 0, tau
-
-  eye_x_2 = x + eye_offset + eye_radius
-  canvas.move_to eye_x_2 + eye_radius, eye_y
-  canvas.arc eye_x_2, eye_y, eye_radius, 0, tau
-
-  canvas.stroke()
+    state.update_time += 0.1
