@@ -10,7 +10,27 @@
   <body>
     <div class="container">
       <div class="playground">
-        <div id="editor"></div>
+        <div class="editor-area flex-column">
+          <div class="editor-toolbar">
+            <div class="horizontal-spacer"></div>
+
+            <label for="select-script">Scripts:</label>
+            <select id="select-script">
+              <optgroup label="Theropods">
+                <option>Tyrannosaurus</option>
+                <option>Velociraptor</option>
+                <option>Deinonychus</option>
+              </optgroup>
+              <optgroup label="Sauropods">
+                <option>Diplodocus</option>
+                <option>Saltasaurus</option>
+                <option>Apatosaurus</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="flex-grow" id="editor"></div>
+        </div>
 
         <canvas
           class="fullsize"
@@ -32,6 +52,7 @@
         ></textarea>
       </div>
     </div>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"
       integrity="sha512-hDyKEpCc9jPn3u2VffFjScCtNqZI+BAbThAhhDYqqqZbxMqmTSNIgdU0OU9BRD/8wFxHIWLAo561hh9fW7j6sA=="

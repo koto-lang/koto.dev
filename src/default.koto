@@ -1,4 +1,4 @@
-from number import pi, tau
+# Draw random rectangles on the canvas
 
 lerp = |min, max, x| min + (max - min) * x
 random_in_range = |min, max| lerp min, max, random.number()
@@ -28,4 +28,4 @@ play.update = |state, time_delta|
     canvas.rect x, y, width, height
     canvas.fill()
 
-    state.update_time += 0.1
+    state.update_time = state.time + 0.1
