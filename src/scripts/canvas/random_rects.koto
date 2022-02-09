@@ -7,7 +7,7 @@ random_color = ||
   r = random_in_range 0, 255
   g = random_in_range 0, 255
   b = random_in_range 0, 255
-  a = random_in_range 0.4, 0.8
+  a = random_in_range 0.4, 0.6
   make_num4 r, g, b, a
 
 play.setup = ||
@@ -24,13 +24,11 @@ play.update = |time_delta|
     side_max = 400
     margin = side_min / 2
     x = random_in_range -margin, canvas.width() - margin
-    y = random_in_range margin, canvas.height() - margin
+    y = random_in_range -margin, canvas.height() - margin
     width = random_in_range side_min, side_max
     height = random_in_range side_min, side_max
 
-    canvas.begin_path()
     canvas.set_fill_color random_color()
-    canvas.rect x, y, width, height
-    canvas.fill()
+    canvas.fill_rect x, y, width, height
 
     state.next_rect_time = state.time + 0.1

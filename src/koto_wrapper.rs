@@ -26,21 +26,25 @@ pub enum KotoMessage {
     BeginPath,
     Clear,
     Fill,
+    FillRect(Rect),
     MoveTo {
         x: f64,
         y: f64,
     },
     Print(String),
-    Rect {
-        x: f64,
-        y: f64,
-        width: f64,
-        height: f64,
-    },
+    Rect(Rect),
     SetFillColor(Color),
     SetLineWidth(f64),
     SetStrokeColor(Color),
     Stroke,
+    StrokeRect(Rect),
+}
+
+pub struct Rect {
+    x: f64,
+    y: f64,
+    width: f64,
+    height: f64,
 }
 
 pub struct Color {
@@ -232,9 +236,7 @@ impl KotoWrapper {
                         )
                         .expect("Failed to draw arc");
                 }
-                KotoMessage::BeginPath => {
-                    self.canvas_context.begin_path();
-                }
+                KotoMessage::BeginPath => self.canvas_context.begin_path(),
                 KotoMessage::Clear => {
                     self.canvas_context.clear_rect(
                         0.0,
@@ -243,21 +245,13 @@ impl KotoWrapper {
                         self.canvas.height() as f64,
                     );
                 }
-                KotoMessage::Fill => {
-                    self.canvas_context.fill();
+                KotoMessage::Fill => self.canvas_context.fill(),
+                KotoMessage::FillRect(r) => {
+                    self.canvas_context.fill_rect(r.x, r.y, r.width, r.height)
                 }
-                KotoMessage::MoveTo { x, y } => {
-                    self.canvas_context.move_to(x, y);
-                }
-                KotoMessage::Print(s) => {
-                    self.output_buffer.push_str(&s);
-                }
-                KotoMessage::Rect {
-                    x,
-                    y,
-                    width,
-                    height,
-                } => self.canvas_context.rect(x, y, width, height),
+                KotoMessage::MoveTo { x, y } => self.canvas_context.move_to(x, y),
+                KotoMessage::Print(s) => self.output_buffer.push_str(&s),
+                KotoMessage::Rect(r) => self.canvas_context.rect(r.x, r.y, r.width, r.height),
                 KotoMessage::SetFillColor(color) => {
                     let color_rgb = color.as_css_rgb();
                     self.canvas_context
@@ -269,8 +263,9 @@ impl KotoWrapper {
                     self.canvas_context
                         .set_stroke_style(&JsValue::from(color_rgb))
                 }
-                KotoMessage::Stroke => {
-                    self.canvas_context.stroke();
+                KotoMessage::Stroke => self.canvas_context.stroke(),
+                KotoMessage::StrokeRect(r) => {
+                    self.canvas_context.stroke_rect(r.x, r.y, r.width, r.height)
                 }
             }
         }
@@ -343,6 +338,31 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
         Ok(Empty)
     });
 
+    result.add_fn("fill_rect", |vm, args| {
+        let (x, y, width, height) = match vm.get_args(args) {
+            [Num2(pos), Number(width), Number(height)] => {
+                (pos[0], pos[1], width.into(), height.into())
+            }
+            [Number(x), Number(y), Number(width), Number(height)] => {
+                (x.into(), y.into(), width.into(), height.into())
+            }
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.fill_rect",
+                    "x & y (as Numbers or a Num2), width, heigth",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::FillRect(Rect {
+            x,
+            y,
+            width,
+            height,
+        }));
+        Ok(Empty)
+    });
+
     result.add_fn("height", {
         let canvas = canvas.clone();
         move |_, _| Ok(Number(canvas.width().into()))
@@ -380,12 +400,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMessage::Rect {
+        send_koto_message(KotoMessage::Rect(Rect {
             x,
             y,
             width,
             height,
-        });
+        }));
         Ok(Empty)
     });
 
@@ -454,6 +474,31 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
 
     result.add_fn("stroke", |_, _| {
         send_koto_message(KotoMessage::Stroke);
+        Ok(Empty)
+    });
+
+    result.add_fn("stroke_rect", |vm, args| {
+        let (x, y, width, height) = match vm.get_args(args) {
+            [Num2(pos), Number(width), Number(height)] => {
+                (pos[0], pos[1], width.into(), height.into())
+            }
+            [Number(x), Number(y), Number(width), Number(height)] => {
+                (x.into(), y.into(), width.into(), height.into())
+            }
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.stroke_rect",
+                    "x & y (as Numbers or a Num2), width, heigth",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::StrokeRect(Rect {
+            x,
+            y,
+            width,
+            height,
+        }));
         Ok(Empty)
     });
 
