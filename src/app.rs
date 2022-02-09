@@ -1,5 +1,5 @@
 use {
-    crate::{get_element_by_id, koto_wrapper::KotoWrapper, APP},
+    crate::{get_ace, get_element_by_id, koto_wrapper::KotoWrapper, APP},
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
     gloo_utils::window,
@@ -11,7 +11,6 @@ pub struct App {
     koto: KotoWrapper,
     canvas: HtmlCanvasElement,
     last_time: Option<f64>,
-    _window_resize_listener: EventListener,
     animation_frame: Option<AnimationFrame>,
 }
 
@@ -25,32 +24,33 @@ impl App {
         canvas.set_width(canvas.client_width() as u32);
         canvas.set_height(canvas.client_height() as u32);
 
-        let window_resize_listener = EventListener::new(&window(), "resize", |_| {
+        EventListener::new(&window(), "resize", |_| {
             APP.with(|app| app.borrow_mut().on_window_resize());
-        });
+        })
+        .forget();
 
         Self {
             koto: KotoWrapper::new(canvas.clone()),
             canvas,
             last_time: None,
-            _window_resize_listener: window_resize_listener,
             animation_frame: None,
         }
     }
 
-    pub fn compile_script_and_call_setup(&mut self) {
-        self.koto.compile_script(true);
-
-        if self.koto.update_should_be_called() {
-            self.request_animation_frame();
-        }
+    pub fn reset(&mut self) {
+        self.koto.reset();
+        self.animation_frame = None;
+        self.last_time = None;
     }
 
-    pub fn on_script_changed(&mut self) {
-        self.koto.compile_script(false);
+    pub fn on_script_edited(&mut self) {
+        let script = get_ace().edit("editor").get_session().get_value();
+        if !script.is_empty() {
+            self.koto.compile_script(&script);
 
-        if self.koto.update_should_be_called() {
-            self.request_animation_frame();
+            if self.koto.update_should_be_called() {
+                self.request_animation_frame();
+            }
         }
     }
 
@@ -82,7 +82,7 @@ impl App {
         }
     }
 
-    fn on_window_resize(&mut self) {
+    pub fn on_window_resize(&mut self) {
         self.canvas.set_width(self.canvas.client_width() as u32);
         self.canvas.set_height(self.canvas.client_height() as u32);
     }

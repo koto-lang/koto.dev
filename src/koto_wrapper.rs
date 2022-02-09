@@ -1,5 +1,5 @@
 use {
-    crate::{get_ace, get_element_by_id, KOTO_MESSAGE_QUEUE},
+    crate::{get_element_by_id, KOTO_MESSAGE_QUEUE},
     koto::{
         runtime::{
             unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead, KotoWrite,
@@ -59,7 +59,7 @@ impl Color {
 pub struct KotoWrapper {
     koto: Koto,
     play_module: ValueMap,
-    user_data: Value,
+    call_setup: bool,
     is_ready: bool,
     compiler_output: Element,
     script_output: Element,
@@ -102,13 +102,13 @@ impl KotoWrapper {
             canvas_context,
             output_buffer: String::with_capacity(128),
             message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
-            user_data: Value::Empty,
+            call_setup: true,
             is_ready: false,
         }
     }
 
-    pub fn compile_script(&mut self, call_setup: bool) {
-        let script = get_ace().edit("editor").get_session().get_value();
+    pub fn compile_script(&mut self, script: &str) {
+        debug_assert!(!script.is_empty());
 
         self.is_ready = false;
         self.compiler_output.set_inner_html("");
@@ -133,9 +133,10 @@ impl KotoWrapper {
             return;
         }
 
-        if call_setup {
-            self.user_data = match self.play_module.data().get_with_string("setup") {
-                Some(f) => match self.koto.run_function(f.clone(), CallArgs::None) {
+        if self.call_setup {
+            let maybe_setup = self.play_module.data().get_with_string("setup").cloned();
+            match maybe_setup {
+                Some(f) => match self.koto.run_function(f, CallArgs::None) {
                     Ok(data) => data,
                     Err(e) => {
                         self.log_error(&e.to_string());
@@ -144,9 +145,10 @@ impl KotoWrapper {
                 },
                 None => Value::Map(ValueMap::default()),
             };
+            self.call_setup = false;
         }
 
-        if let Err(e) = self.run_play_function("on_load", &[self.user_data.clone()]) {
+        if let Err(e) = self.run_play_function("on_load", &[]) {
             self.log_error(&e.to_string());
             return;
         }
@@ -154,6 +156,17 @@ impl KotoWrapper {
         self.is_ready = true;
 
         self.process_koto_messages();
+    }
+
+    pub fn reset(&mut self) {
+        self.call_setup = true;
+        self.is_ready = false;
+        self.canvas_context.clear_rect(
+            0.0,
+            0.0,
+            self.canvas.width() as f64,
+            self.canvas.height() as f64,
+        );
     }
 
     pub fn is_ready(&self) -> bool {
@@ -186,7 +199,7 @@ impl KotoWrapper {
     pub fn run_update(&mut self, time_delta: f64) {
         debug_assert!(self.is_ready);
 
-        match self.run_play_function("update", &[self.user_data.clone(), time_delta.into()]) {
+        match self.run_play_function("update", &[time_delta.into()]) {
             Ok(_) => {
                 self.process_koto_messages();
             }

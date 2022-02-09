@@ -1,0 +1,11 @@
+# Fizz buzz in Koto
+
+fizz_buzz = |n|
+  match n % 3, n % 5
+    0, 0 then "Fizz Buzz"
+    0, _ then "Fizz"
+    _, 0 then "Buzz"
+    else n
+
+for n in 1..100
+  print fizz_buzz n

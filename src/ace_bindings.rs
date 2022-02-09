@@ -24,6 +24,9 @@ extern "C" {
     #[wasm_bindgen(method, js_name = getValue)]
     pub fn get_value(this: &AceSession) -> String;
 
+    #[wasm_bindgen(method, js_name = setValue)]
+    pub fn set_value(this: &AceSession, value: &str);
+
     #[wasm_bindgen(method)]
     pub fn on(this: &AceSession, event_name: &str, callback: &Function);
 }
