@@ -17,9 +17,7 @@ pub struct App {
 impl App {
     pub fn new() -> Self {
         let canvas = get_element_by_id("koto-canvas");
-        let canvas: HtmlCanvasElement = canvas
-            .dyn_into::<HtmlCanvasElement>()
-            .expect("koto-canvas is the wrong element type");
+        let canvas: HtmlCanvasElement = canvas.dyn_into::<HtmlCanvasElement>().unwrap();
 
         canvas.set_width(canvas.client_width() as u32);
         canvas.set_height(canvas.client_height() as u32);

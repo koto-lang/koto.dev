@@ -89,10 +89,10 @@ impl KotoWrapper {
 
         let canvas_context = canvas
             .get_context("2d")
-            .expect("Error while getting canvas context")
-            .expect("Missing canvas context")
+            .unwrap()
+            .unwrap()
             .dyn_into::<CanvasRenderingContext2d>()
-            .expect("Error while casting canvas context");
+            .unwrap();
 
         canvas_context.set_fill_style(&JsValue::from("#999999"));
         canvas_context.fill_rect(0.0, 0.0, canvas.width() as f64, canvas.height() as f64);
@@ -182,9 +182,7 @@ impl KotoWrapper {
     }
 
     fn log_error(&self, error: &str) {
-        self.compiler_output
-            .append_with_str_1(error)
-            .expect("Failed to log error");
+        self.compiler_output.append_with_str_1(error).unwrap();
         self.compiler_output
             .set_scroll_top(self.compiler_output.scroll_height());
     }
@@ -234,7 +232,7 @@ impl KotoWrapper {
                             end_angle,
                             counter_clockwise,
                         )
-                        .expect("Failed to draw arc");
+                        .unwrap();
                 }
                 KotoMessage::BeginPath => self.canvas_context.begin_path(),
                 KotoMessage::Clear => {
@@ -273,7 +271,7 @@ impl KotoWrapper {
         if !self.output_buffer.is_empty() {
             self.script_output
                 .append_with_str_1(&self.output_buffer)
-                .expect("Failed to append to script output");
+                .unwrap();
             self.script_output
                 .set_scroll_top(self.script_output.scroll_height());
             self.output_buffer.clear();
