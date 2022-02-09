@@ -11,12 +11,11 @@ random_color = ||
   a = random_float 0.4, 0.6
   make_num4 r, g, b, a
 
-play.setup = ||
-  play.state =
-    next_rect_time: 0
+play.initial_state = ||
+  update_time: 0
 
-play.update = |time|
-  if time >= play.state.next_rect_time
+play.update = |state, time|
+  if time >= state.update_time
     side_min = 20
     side_max = 400
     margin = side_min / 2
@@ -29,4 +28,4 @@ play.update = |time|
     canvas.set_fill_color random_color()
     canvas.fill_rect x, y, width, height
 
-    play.state.next_rect_time = time + 0.1
+    state.update_time = time + 0.1

@@ -64,7 +64,8 @@ impl Color {
 pub struct KotoWrapper {
     koto: Koto,
     play_module: ValueMap,
-    call_setup: bool,
+    call_initial_state: bool,
+    user_state: Value,
     is_ready: bool,
     compiler_output: Element,
     script_output: Element,
@@ -108,8 +109,9 @@ impl KotoWrapper {
             canvas_context,
             output_buffer: String::with_capacity(128),
             message_queue: KOTO_MESSAGE_QUEUE.with(|q| q.clone()),
-            call_setup: true,
+            call_initial_state: true,
             is_ready: false,
+            user_state: Value::Map(ValueMap::default()),
         }
     }
 
@@ -138,11 +140,15 @@ impl KotoWrapper {
             return;
         }
 
-        if self.call_setup {
-            let maybe_setup = self.play_module.data().get_with_string("setup").cloned();
-            match maybe_setup {
+        if self.call_initial_state {
+            let maybe_fn = self
+                .play_module
+                .data()
+                .get_with_string("initial_state")
+                .cloned();
+            self.user_state = match maybe_fn {
                 Some(f) => match self.koto.run_function(f, CallArgs::None) {
-                    Ok(data) => data,
+                    Ok(state) => state,
                     Err(e) => {
                         self.log_error(&e.to_string());
                         return;
@@ -150,10 +156,10 @@ impl KotoWrapper {
                 },
                 None => Value::Map(ValueMap::default()),
             };
-            self.call_setup = false;
+            self.call_initial_state = false;
         }
 
-        if let Err(e) = self.run_play_function("on_load", &[]) {
+        if let Err(e) = self.run_play_function("on_load", &[self.user_state.clone()]) {
             self.log_error(&e.to_string());
             return;
         }
@@ -164,7 +170,7 @@ impl KotoWrapper {
     }
 
     pub fn reset(&mut self) {
-        self.call_setup = true;
+        self.call_initial_state = true;
         self.is_ready = false;
         self.canvas_context.clear_rect(
             0.0,
@@ -199,10 +205,10 @@ impl KotoWrapper {
         }
     }
 
-    pub fn run_update(&mut self, time_delta: f64) {
+    pub fn run_update(&mut self, time: f64) {
         debug_assert!(self.is_ready);
 
-        match self.run_play_function("update", &[time_delta.into()]) {
+        match self.run_play_function("update", &[self.user_state.clone(), time.into()]) {
             Ok(_) => {
                 self.process_koto_messages();
             }
