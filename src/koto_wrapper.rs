@@ -25,6 +25,7 @@ pub enum KotoMessage {
     },
     BeginPath,
     Clear,
+    ClearOutput,
     Fill,
     FillRect(Rect),
     MoveTo {
@@ -81,7 +82,8 @@ impl KotoWrapper {
                 .with_stderr(OutputCapture {}),
         );
 
-        let play_module = ValueMap::default();
+        let play_module = make_play_module();
+
         koto.prelude()
             .add_map("canvas", make_canvas_module(canvas.clone()));
         koto.prelude().add_map("play", play_module.clone());
@@ -116,7 +118,6 @@ impl KotoWrapper {
 
         self.is_ready = false;
         self.compiler_output.set_inner_html("");
-        self.script_output.set_inner_html("");
         self.message_queue.borrow_mut().clear();
 
         {
@@ -243,6 +244,7 @@ impl KotoWrapper {
                         self.canvas.height() as f64,
                     );
                 }
+                KotoMessage::ClearOutput => self.script_output.set_inner_html(""),
                 KotoMessage::Fill => self.canvas_context.fill(),
                 KotoMessage::FillRect(r) => {
                     self.canvas_context.fill_rect(r.x, r.y, r.width, r.height)
@@ -281,6 +283,19 @@ impl KotoWrapper {
 
 fn send_koto_message(message: KotoMessage) {
     KOTO_MESSAGE_QUEUE.with(|q| q.borrow_mut().push_back(message));
+}
+
+fn make_play_module() -> ValueMap {
+    use Value::*;
+
+    let result = ValueMap::default();
+
+    result.add_fn("clear_output", |_, _| {
+        send_koto_message(KotoMessage::ClearOutput);
+        Ok(Empty)
+    });
+
+    result
 }
 
 fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {

@@ -1,13 +1,14 @@
 # Draw random rectangles on the canvas
 
 lerp = |min, max, x| min + (max - min) * x
-random_in_range = |min, max| lerp min, max, random.number()
+random_float = |min, max| lerp min, max, random.number()
+random_int = |min, max| random_float(min, max).round()
 
 random_color = ||
-  r = random_in_range 0, 255
-  g = random_in_range 0, 255
-  b = random_in_range 0, 255
-  a = random_in_range 0.4, 0.6
+  r = random_int 0, 255
+  g = random_int 0, 255
+  b = random_int 0, 255
+  a = random_float 0.4, 0.6
   make_num4 r, g, b, a
 
 play.setup = ||
@@ -23,10 +24,11 @@ play.update = |time_delta|
     side_min = 20
     side_max = 400
     margin = side_min / 2
-    x = random_in_range -margin, canvas.width() - margin
-    y = random_in_range -margin, canvas.height() - margin
-    width = random_in_range side_min, side_max
-    height = random_in_range side_min, side_max
+
+    x = random_int -margin, canvas.width() - margin
+    y = random_int -margin, canvas.height() - margin
+    width = random_int side_min, side_max
+    height = random_int side_min, side_max
 
     canvas.set_fill_color random_color()
     canvas.fill_rect x, y, width, height
