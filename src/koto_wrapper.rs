@@ -78,7 +78,8 @@ impl KotoWrapper {
         );
 
         let play_module = ValueMap::default();
-        koto.prelude().add_map("canvas", make_canvas_module());
+        koto.prelude()
+            .add_map("canvas", make_canvas_module(canvas.clone()));
         koto.prelude().add_map("play", play_module.clone());
         koto.prelude().add_map("random", koto_random::make_module());
 
@@ -276,41 +277,10 @@ fn send_koto_message(message: KotoMessage) {
     KOTO_MESSAGE_QUEUE.with(|q| q.borrow_mut().push_back(message));
 }
 
-fn make_canvas_module() -> ValueMap {
+fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
     use Value::*;
 
     let result = ValueMap::default();
-
-    result.add_fn("begin_path", |_, _| {
-        send_koto_message(KotoMessage::BeginPath);
-        Ok(Empty)
-    });
-
-    result.add_fn("clear", |_, _| {
-        send_koto_message(KotoMessage::Clear);
-        Ok(Empty)
-    });
-
-    result.add_fn("fill", |_, _| {
-        send_koto_message(KotoMessage::Fill);
-        Ok(Empty)
-    });
-
-    result.add_fn("move_to", |vm, args| {
-        let (x, y) = match vm.get_args(args) {
-            [Number(x), Number(y)] => (x.into(), y.into()),
-            [Num2(n)] => (n[0], n[1]),
-            unexpected => {
-                return unexpected_type_error_with_slice(
-                    "canvas.move_to",
-                    "two Numbers or a Num2",
-                    unexpected,
-                )
-            }
-        };
-        send_koto_message(KotoMessage::MoveTo { x, y });
-        Ok(Empty)
-    });
 
     result.add_fn("arc", |vm, args| {
         let (x, y, radius, start_angle, end_angle, counter_clockwise) = match vm.get_args(args) {
@@ -342,6 +312,42 @@ fn make_canvas_module() -> ValueMap {
             end_angle,
             counter_clockwise,
         });
+        Ok(Empty)
+    });
+
+    result.add_fn("begin_path", |_, _| {
+        send_koto_message(KotoMessage::BeginPath);
+        Ok(Empty)
+    });
+
+    result.add_fn("clear", |_, _| {
+        send_koto_message(KotoMessage::Clear);
+        Ok(Empty)
+    });
+
+    result.add_fn("fill", |_, _| {
+        send_koto_message(KotoMessage::Fill);
+        Ok(Empty)
+    });
+
+    result.add_fn("height", {
+        let canvas = canvas.clone();
+        move |_, _| Ok(Number(canvas.width().into()))
+    });
+
+    result.add_fn("move_to", |vm, args| {
+        let (x, y) = match vm.get_args(args) {
+            [Number(x), Number(y)] => (x.into(), y.into()),
+            [Num2(n)] => (n[0], n[1]),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.move_to",
+                    "two Numbers or a Num2",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::MoveTo { x, y });
         Ok(Empty)
     });
 
@@ -436,6 +442,11 @@ fn make_canvas_module() -> ValueMap {
     result.add_fn("stroke", |_, _| {
         send_koto_message(KotoMessage::Stroke);
         Ok(Empty)
+    });
+
+    result.add_fn("width", {
+        let canvas = canvas.clone();
+        move |_, _| Ok(Number(canvas.width().into()))
     });
 
     result
