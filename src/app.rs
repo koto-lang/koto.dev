@@ -11,6 +11,7 @@ pub struct App {
     koto: KotoWrapper,
     canvas: HtmlCanvasElement,
     last_time: Option<f64>,
+    current_time: f64,
     animation_frame: Option<AnimationFrame>,
 }
 
@@ -31,6 +32,7 @@ impl App {
             koto: KotoWrapper::new(canvas.clone()),
             canvas,
             last_time: None,
+            current_time: 0.0,
             animation_frame: None,
         }
     }
@@ -63,16 +65,12 @@ impl App {
     }
 
     fn on_animation_frame(&mut self, time: f64) {
-        let time_delta = if let Some(last_time) = self.last_time {
-            (time - last_time) / 1000.0
-        } else {
-            0.0
-        };
-
+        let time_delta = (time - self.last_time.unwrap_or(time)) / 1000.0;
+        self.current_time += time_delta;
         self.last_time = Some(time);
 
         if self.koto.is_ready() {
-            self.koto.run_update(time_delta);
+            self.koto.run_update(self.current_time);
         }
 
         if self.koto.is_ready() {

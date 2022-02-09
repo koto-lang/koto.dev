@@ -7,5 +7,13 @@ fizz_buzz = |n|
     _, 0 then "Buzz"
     else n
 
-for n in 1..100
-  print fizz_buzz n
+play.setup = ||
+  play.state =
+    update_time: 0
+    n: 0
+
+play.update = |time|
+  state = play.state
+  if time >= state.update_time
+    print fizz_buzz (state.n += 1)
+    state.update_time = time + 0.2
