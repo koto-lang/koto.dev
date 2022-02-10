@@ -117,6 +117,8 @@ fn setup_editor() {
 
     let session = editor.get_session();
     session.set_mode("ace/mode/koto");
+    session.set_use_soft_tabs(true);
+    session.set_tab_size(2);
     session.set_value(include_str!("scripts/canvas/random_rects.koto"));
 
     let on_change =

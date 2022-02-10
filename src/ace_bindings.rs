@@ -27,6 +27,12 @@ extern "C" {
     #[wasm_bindgen(method, js_name = setValue)]
     pub fn set_value(this: &AceSession, value: &str);
 
+    #[wasm_bindgen(method, js_name = setTabSize)]
+    pub fn set_tab_size(this: &AceSession, size: u8);
+
+    #[wasm_bindgen(method, js_name = setUseSoftTabs)]
+    pub fn set_use_soft_tabs(this: &AceSession, value: bool);
+
     #[wasm_bindgen(method)]
     pub fn on(this: &AceSession, event_name: &str, callback: &Function);
 }
