@@ -119,7 +119,6 @@ impl KotoWrapper {
         debug_assert!(!script.is_empty());
 
         self.is_ready = false;
-        self.compiler_output.set_inner_html("");
         self.message_queue.borrow_mut().clear();
 
         {
@@ -164,6 +163,8 @@ impl KotoWrapper {
             return;
         }
 
+        self.compiler_output.set_inner_html("Success");
+
         self.is_ready = true;
 
         self.process_koto_messages();
@@ -189,7 +190,7 @@ impl KotoWrapper {
     }
 
     fn log_error(&self, error: &str) {
-        self.compiler_output.append_with_str_1(error).unwrap();
+        self.compiler_output.set_inner_html(error);
         self.compiler_output
             .set_scroll_top(self.compiler_output.scroll_height());
     }
