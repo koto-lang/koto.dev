@@ -3,29 +3,25 @@ mod app;
 mod koto_wrapper;
 
 use {
-    crate::{ace_bindings::get_ace, app::App, koto_wrapper::KotoMessageQueue},
+    crate::{app::App, koto_wrapper::KotoMessageQueue},
     console_error_panic_hook::set_once as set_panic_hook,
-    gloo_events::EventListener,
     gloo_utils::document,
     std::{cell::RefCell, collections::VecDeque, rc::Rc},
-    wasm_bindgen::{prelude::*, JsCast},
-    web_sys::{Element, HtmlOptGroupElement, HtmlOptionElement, HtmlSelectElement},
+    wasm_bindgen::prelude::*,
+    web_sys::Element,
 };
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 thread_local! {
-    static APP: RefCell<App> = RefCell::new(App::new());
     static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
 }
 
 fn main() {
     set_panic_hook();
     register_koto_editor_mode();
-    setup_script_menu();
-    setup_editor();
-    setup_app();
+    App::setup();
 }
 
 #[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
@@ -59,79 +55,6 @@ const SCRIPTS: &[ScriptGroup] = &[
         }],
     },
 ];
-
-fn setup_script_menu() {
-    let document = gloo_utils::document();
-    let menu = get_element_by_id("select-script")
-        .dyn_into::<HtmlSelectElement>()
-        .unwrap();
-
-    let mut scripts = Vec::new();
-
-    for group in SCRIPTS {
-        let group_element = document
-            .create_element("optgroup")
-            .unwrap()
-            .dyn_into::<HtmlOptGroupElement>()
-            .unwrap();
-        group_element.set_label(group.name);
-
-        for script in group.scripts {
-            let option = document
-                .create_element("option")
-                .unwrap()
-                .dyn_into::<HtmlOptionElement>()
-                .unwrap();
-            option.set_text(script.name);
-            option.set_default_selected(false);
-            group_element.append_child(&option).unwrap();
-            scripts.push(script.script);
-        }
-
-        menu.append_child(&group_element)
-            .expect("Failed to append script group");
-    }
-
-    EventListener::new(&menu.clone(), "change", {
-        move |_| {
-            console_log!("<<<Script menu changed>>>");
-            let script_index = menu.selected_index();
-            if script_index > 0 {
-                APP.with(|app| app.borrow_mut().reset());
-
-                let ace = get_ace();
-                let editor = ace.edit("editor");
-                let session = editor.get_session();
-                session.set_value(scripts[script_index as usize - 1]);
-            }
-        }
-    })
-    .forget();
-}
-
-fn setup_editor() {
-    let ace = get_ace();
-    let editor = ace.edit("editor");
-    editor.set_theme("ace/theme/solarized_dark");
-    editor.set_show_print_margin(false);
-
-    let session = editor.get_session();
-    session.set_mode("ace/mode/koto");
-    session.set_use_soft_tabs(true);
-    session.set_tab_size(2);
-    session.set_value(include_str!("scripts/canvas/random_rects.koto"));
-
-    let on_change =
-        Closure::wrap(
-            Box::new(|| APP.with(move |app| app.borrow_mut().on_script_edited())) as Box<dyn Fn()>,
-        );
-    session.on("change", on_change.as_ref().unchecked_ref());
-    on_change.forget();
-}
-
-fn setup_app() {
-    APP.with(|app| app.borrow_mut().on_script_edited());
-}
 
 fn get_element_by_id(id: &str) -> Element {
     document()
