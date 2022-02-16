@@ -110,7 +110,7 @@ fn setup_editor() -> AceEditor {
     session.set_mode("ace/mode/koto");
     session.set_use_soft_tabs(true);
     session.set_tab_size(2);
-    session.set_value(include_str!("scripts/canvas/random_rects.koto"));
+    session.set_value(include_str!("scripts/canvas/boids.koto"));
 
     editor
 }

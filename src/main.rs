@@ -49,10 +49,16 @@ const SCRIPTS: &[ScriptGroup] = &[
     },
     ScriptGroup {
         name: "Canvas",
-        scripts: &[Script {
-            name: "Random Rects",
-            script: include_str!("scripts/canvas/random_rects.koto"),
-        }],
+        scripts: &[
+            Script {
+                name: "Boids",
+                script: include_str!("scripts/canvas/boids.koto"),
+            },
+            Script {
+                name: "Random Rects",
+                script: include_str!("scripts/canvas/random_rects.koto"),
+            },
+        ],
     },
 ];
 

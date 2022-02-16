@@ -1,0 +1,125 @@
+import iterator.generate
+from number import pi, pi_2, tau
+
+boid_count = 50
+
+boid_width = 12
+boid_height = 14
+visual_range = 80
+boundary = 20
+
+show_ranges = false
+visual_range_color = make_num4 230, 230, 230, 1
+
+attraction_factor = 0.5
+matching_factor = 0.5
+avoidance_factor = 3
+boundary_turn_rate = 8
+minimum_distance = boid_width * 1.5
+
+initial_speed = 6
+speed_limit = 8
+
+make_boid = ||
+  x = random.number() * canvas.width()
+  y = random.number() * canvas.height()
+  direction = random.number() * tau
+  return
+    position: make_num2 x, y
+    velocity: make_num2 direction.cos() * initial_speed, direction.sin() * initial_speed
+
+update_boid = |boid, state, time_delta|
+  boids_in_range = 1
+  position = boid.position
+  other_positions_sum = position
+  other_velocities_sum = boid.velocity
+  avoid_close_boids = make_num2 0, 0
+
+  for other_boid in state.boids
+    if boid != other_boid
+      other_position = other_boid.position
+      distance = (position - other_position).length()
+      if distance < visual_range
+        boids_in_range += 1
+        other_positions_sum += other_position
+        other_velocities_sum += other_boid.velocity
+        if distance < minimum_distance
+          avoid_close_boids += position - other_position
+
+  if boids_in_range > 1
+    center = other_positions_sum / boids_in_range
+    mean_velocity = other_velocities_sum / boids_in_range
+    boid.velocity +=
+      ((center - position) * attraction_factor
+        + (mean_velocity - boid.velocity) * matching_factor
+        + avoid_close_boids * avoidance_factor)
+      * time_delta
+
+    # Apply speed limit
+    speed = boid.velocity.length()
+    if speed > speed_limit
+      boid.velocity *= speed_limit / speed
+
+  boid.position += boid.velocity
+
+  # Keep in bounds
+  x, y = boid.position
+  dx, dy = 0, 0
+  switch
+    x < boundary then dx = initial_speed
+    x > canvas.width() - boundary then dx = -initial_speed
+  switch
+    y < boundary then dy = initial_speed
+    y > canvas.height() - boundary then dy = -initial_speed
+  boid.velocity += make_num2(dx, dy) * boundary_turn_rate * time_delta
+
+draw_boid = |boid|
+  x, y = boid.position
+
+  canvas.translate x, y
+  canvas.rotate boid.velocity.angle() + pi_2 # Adjust rotation to match canvas orientation
+  canvas.translate -x, -y
+
+  w2 = boid_width / 2
+  bottom = y + boid_height / 3
+  top = bottom - boid_height
+  bump = bottom - boid_height / 5
+
+  canvas.begin_path()
+  canvas.move_to x - w2, bottom
+  canvas.line_to x, top
+  canvas.line_to x + w2, bottom
+  canvas.line_to x, bump
+  canvas.line_to x - w2, bottom
+
+  canvas.set_fill_color 180, 180, 180
+  canvas.fill()
+
+  canvas.set_transform 1, 0, 0, 1, 0, 0
+
+  if show_ranges
+    canvas.begin_path()
+    canvas.arc x, y, visual_range, 0, tau
+    canvas.move_to x + minimum_distance, y
+    canvas.arc x, y, minimum_distance, 0, tau
+    canvas.set_stroke_color visual_range_color
+    canvas.stroke()
+
+play.initial_state = ||
+  last_time: 0
+  boids: generate(boid_count, make_boid).to_list()
+
+play.on_load = |state|
+  state.boids.resize_with boid_count, make_boid
+
+play.update = |state, time|
+  time_delta = time - state.last_time
+  state.last_time = time
+
+  canvas.set_fill_color 100, 100, 100
+  canvas.fill_rect 0, 0, canvas.width(), canvas.height()
+
+  for boid in state.boids
+    update_boid boid, state, time_delta
+  for boid in state.boids
+    draw_boid boid

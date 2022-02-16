@@ -28,17 +28,30 @@ pub enum KotoMessage {
     ClearOutput,
     Fill,
     FillRect(Rect),
-    MoveTo {
-        x: f64,
-        y: f64,
-    },
+    LineTo(Point),
+    MoveTo(Point),
     Print(String),
     Rect(Rect),
+    Rotate(f64),
     SetFillColor(Color),
     SetLineWidth(f64),
     SetStrokeColor(Color),
+    SetTransform {
+        a: f64,
+        b: f64,
+        c: f64,
+        d: f64,
+        e: f64,
+        f: f64,
+    },
     Stroke,
     StrokeRect(Rect),
+    Translate(Point),
+}
+
+pub struct Point {
+    x: f64,
+    y: f64,
 }
 
 pub struct Rect {
@@ -256,9 +269,11 @@ impl KotoWrapper {
                 KotoMessage::FillRect(r) => {
                     self.canvas_context.fill_rect(r.x, r.y, r.width, r.height)
                 }
-                KotoMessage::MoveTo { x, y } => self.canvas_context.move_to(x, y),
+                KotoMessage::LineTo(p) => self.canvas_context.line_to(p.x, p.y),
+                KotoMessage::MoveTo(p) => self.canvas_context.move_to(p.x, p.y),
                 KotoMessage::Print(s) => self.output_buffer.push_str(&s),
                 KotoMessage::Rect(r) => self.canvas_context.rect(r.x, r.y, r.width, r.height),
+                KotoMessage::Rotate(radians) => self.canvas_context.rotate(radians).unwrap(),
                 KotoMessage::SetFillColor(color) => {
                     let color_rgb = color.as_css_rgb();
                     self.canvas_context
@@ -270,10 +285,14 @@ impl KotoWrapper {
                     self.canvas_context
                         .set_stroke_style(&JsValue::from(color_rgb))
                 }
+                KotoMessage::SetTransform { a, b, c, d, e, f } => {
+                    self.canvas_context.set_transform(a, b, c, d, e, f).unwrap()
+                }
                 KotoMessage::Stroke => self.canvas_context.stroke(),
                 KotoMessage::StrokeRect(r) => {
                     self.canvas_context.stroke_rect(r.x, r.y, r.width, r.height)
                 }
+                KotoMessage::Translate(p) => self.canvas_context.translate(p.x, p.y).unwrap(),
             }
         }
 
@@ -388,6 +407,22 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
         move |_, _| Ok(Number(canvas.width().into()))
     });
 
+    result.add_fn("line_to", |vm, args| {
+        let (x, y) = match vm.get_args(args) {
+            [Number(x), Number(y)] => (x.into(), y.into()),
+            [Num2(n)] => (n[0], n[1]),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.line_to",
+                    "two Numbers or a Num2",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::LineTo(Point { x, y }));
+        Ok(Empty)
+    });
+
     result.add_fn("move_to", |vm, args| {
         let (x, y) = match vm.get_args(args) {
             [Number(x), Number(y)] => (x.into(), y.into()),
@@ -400,7 +435,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
                 )
             }
         };
-        send_koto_message(KotoMessage::MoveTo { x, y });
+        send_koto_message(KotoMessage::MoveTo(Point { x, y }));
         Ok(Empty)
     });
 
@@ -426,6 +461,21 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
             width,
             height,
         }));
+        Ok(Empty)
+    });
+
+    result.add_fn("rotate", |vm, args| {
+        let n = match vm.get_args(args) {
+            [Number(n)] => n.into(),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.rotate",
+                    "a Number in radians",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::Rotate(n));
         Ok(Empty)
     });
 
@@ -492,6 +542,23 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
         Ok(Empty)
     });
 
+    result.add_fn("set_transform", |vm, args| {
+        let (a, b, c, d, e, f) = match vm.get_args(args) {
+            [Number(a), Number(b), Number(c), Number(d), Number(e), Number(f)] => {
+                (a.into(), b.into(), c.into(), d.into(), e.into(), f.into())
+            }
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.set_transform",
+                    "6 Numbers",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::SetTransform { a, b, c, d, e, f });
+        Ok(Empty)
+    });
+
     result.add_fn("stroke", |_, _| {
         send_koto_message(KotoMessage::Stroke);
         Ok(Empty)
@@ -519,6 +586,22 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
             width,
             height,
         }));
+        Ok(Empty)
+    });
+
+    result.add_fn("translate", |vm, args| {
+        let (x, y) = match vm.get_args(args) {
+            [Number(x), Number(y)] => (x.into(), y.into()),
+            [Num2(n)] => (n[0], n[1]),
+            unexpected => {
+                return unexpected_type_error_with_slice(
+                    "canvas.translate",
+                    "two Numbers or a Num2",
+                    unexpected,
+                )
+            }
+        };
+        send_koto_message(KotoMessage::Translate(Point { x, y }));
         Ok(Empty)
     });
 
