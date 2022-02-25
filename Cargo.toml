@@ -44,3 +44,6 @@ lto = true
 [patch."https://github.com/koto-lang/koto"]
 koto = { path = "../koto/src/koto" }
 koto_random = { path = "../koto/libs/random" }
+
+[dev-dependencies]
+glob = "0.3.0"
