@@ -110,7 +110,22 @@ fn setup_editor() -> AceEditor {
     session.set_mode("ace/mode/koto");
     session.set_use_soft_tabs(true);
     session.set_tab_size(2);
-    session.set_value(include_str!("scripts/canvas/boids.koto"));
+
+    let script = match window()
+        .local_storage()
+        .expect("Couldn't access local storage")
+    {
+        Some(storage) => storage
+            .get("script")
+            .expect("Couldn't get item from local storage"),
+        None => None,
+    };
+    session.set_value(
+        script
+            .as_ref()
+            .map(|s| s.as_str())
+            .unwrap_or(include_str!("scripts/canvas/random_rects.koto")),
+    );
 
     editor
 }
@@ -168,6 +183,19 @@ fn setup_listeners(
     }
 
     vec![
+        EventListener::new(&window(), "beforeunload", {
+            let app = app.clone();
+            move |_| {
+                if let Some(storage) = window()
+                    .local_storage()
+                    .expect("Couldn't access local storage")
+                {
+                    storage
+                        .set("script", &app.borrow().editor.get_session().get_value())
+                        .expect("Couldn't save script to local storage");
+                }
+            }
+        }),
         EventListener::new(&window(), "resize", {
             let app = app.clone();
             move |_| app.borrow_mut().on_window_resize()

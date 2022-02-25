@@ -30,6 +30,7 @@ features = [
   'HtmlOptGroupElement',
   'HtmlSelectElement',
   'Node',
+  'Storage',
   'Text',
   'Window',
 ]
