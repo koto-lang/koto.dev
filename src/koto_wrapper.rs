@@ -192,6 +192,8 @@ impl KotoWrapper {
             self.canvas.width() as f64,
             self.canvas.height() as f64,
         );
+        self.compiler_output.set_inner_html("");
+        self.script_output.set_inner_html("");
     }
 
     pub fn is_ready(&self) -> bool {
