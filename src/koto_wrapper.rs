@@ -416,7 +416,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement) -> ValueMap {
 
     result.add_fn("height", {
         let canvas = canvas.clone();
-        move |_, _| Ok(Number(canvas.width().into()))
+        move |_, _| Ok(Number(canvas.height().into()))
     });
 
     result.add_fn("line_to", |vm, args| {
