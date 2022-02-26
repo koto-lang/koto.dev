@@ -1,0 +1,39 @@
+import number.tau
+
+w, h = canvas.width(), canvas.height()
+w2, h2 = w/2, h/2
+
+canvas.set_fill_color 50, 50, 80
+canvas.fill_rect 0, 0, w, h
+
+canvas.begin_path()
+canvas.rect 0, 0, w, h
+canvas.set_stroke_color 0, 0, 0
+canvas.stroke()
+
+canvas.begin_path()
+canvas.move_to w2, 0
+canvas.line_to w2, h
+canvas.move_to 0, h2
+canvas.line_to w, h2
+
+canvas.move_to w2, 0
+canvas.line_to w, h2
+canvas.line_to w2, h
+canvas.line_to 0, h2
+canvas.line_to w2, 0
+
+canvas.set_stroke_color 180, 180, 180
+canvas.stroke()
+
+canvas.begin_path()
+canvas.move_to 0, 0
+canvas.line_to w, h
+canvas.move_to w, 0
+canvas.line_to 0, h
+
+canvas.move_to w, h2
+canvas.arc w2, h2, w2, 0, tau
+
+canvas.set_stroke_color 100, 100, 100
+canvas.stroke()

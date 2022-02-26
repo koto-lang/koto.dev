@@ -58,6 +58,10 @@ const SCRIPTS: &[ScriptGroup] = &[
                 name: "Random Rects",
                 script: include_str!("scripts/canvas/random_rects.koto"),
             },
+            Script {
+                name: "Alignment",
+                script: include_str!("scripts/canvas/alignment.koto"),
+            },
         ],
     },
 ];
