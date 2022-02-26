@@ -87,6 +87,7 @@ impl App {
     pub fn on_window_resize(&mut self) {
         self.canvas.set_width(self.canvas.client_width() as u32);
         self.canvas.set_height(self.canvas.client_height() as u32);
+        self.koto.on_resize();
     }
 
     pub fn reset(&mut self) {

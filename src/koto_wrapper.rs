@@ -219,6 +219,18 @@ impl KotoWrapper {
         }
     }
 
+    pub fn on_resize(&mut self) {
+        if self.is_ready {
+            if let Err(e) = self.koto.run() {
+                self.log_error(&e.to_string());
+                self.is_ready = false;
+                return;
+            }
+
+            self.process_koto_messages();
+        }
+    }
+
     pub fn run_update(&mut self, time: f64) {
         debug_assert!(self.is_ready);
 
