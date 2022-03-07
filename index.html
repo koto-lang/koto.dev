@@ -14,6 +14,10 @@
           <div class="editor-toolbar">
             <div class="horizontal-spacer"></div>
 
+            <button id="vim-bindings" class="uk-button-default">
+              <span uk-icon="icon: vimeo"></span>
+            </button>
+
             <label for="select-script"></label>
             <select id="select-script">
               <option>...</option>
@@ -24,8 +28,8 @@
         </div>
 
         <canvas
-          class="fullsize"
           id="koto-canvas"
+          class="fullsize"
           width="400"
           height="400"
         ></canvas>
@@ -44,6 +48,14 @@
       </div>
     </div>
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/css/uikit.min.css"
+      integrity="sha512-4zIHwpUAq+H1BmiVSX3pdrIewjWaffQzXtAjo5ElVcQ1B6GlElz3yeSoWqeoDRrmaSvimMF//JxOO95u8Dx05w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"
       integrity="sha512-hDyKEpCc9jPn3u2VffFjScCtNqZI+BAbThAhhDYqqqZbxMqmTSNIgdU0OU9BRD/8wFxHIWLAo561hh9fW7j6sA=="
@@ -52,8 +64,29 @@
     ></script>
 
     <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/keybinding-vim.min.js"
+      integrity="sha512-7JlAafN4sFcuR/R3DALWvJC2ZzFOqqgqgAJ49dWXJivSpMy9NqE9dBiRz/KAkZcoC2lkzoqsmziMBn2FD1bL1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-solarized_dark.min.js"
       integrity="sha512-tZqenoVZQL39UFpJthlJCgwmVSVY1R8IAJoXQBoaWv3lfJT0rTW5B4At9UZUXEYIbhKEhjm0KOwZJZ1JXJ7nUQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/js/uikit.min.js"
+      integrity="sha512-42Kij6/EpjfBkAc5AujbI2/VO4XtSVoTi+ZsAqHIJGOqzpSpnL+ggD/NoQHx6nKPfCPLK4Qv8HsqvDA9eYGY9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/js/uikit-icons.min.js"
+      integrity="sha512-QEkhj2pEhUoAgTxhqMKlul2ECwyzh7xUPYykhhfp38nIB02x7gG06aQHP6Oh5StJVfUeo9Hkl/4JTC5umnNKug=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>

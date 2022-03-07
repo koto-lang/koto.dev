@@ -1,9 +1,9 @@
 use {
     crate::{
         ace_bindings::{get_ace, AceEditor, AceSession},
-        get_element_by_id,
+        get_element_by_id, get_local_storage_value,
         koto_wrapper::KotoWrapper,
-        SCRIPTS,
+        set_local_storage_value, SCRIPTS,
     },
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
@@ -20,8 +20,9 @@ pub struct App {
     last_time: Option<f64>,
     current_time: f64,
     animation_frame: Option<AnimationFrame>,
-    listeners: Vec<EventListener>,
+    event_listeners: Vec<EventListener>,
     self_rc: Option<Rc<RefCell<App>>>,
+    vim_bindings_enabled: bool,
 }
 
 impl App {
@@ -33,23 +34,34 @@ impl App {
         canvas.set_height(canvas.client_height() as u32);
 
         let editor = setup_editor();
+        let editor_session = editor.get_session();
         let (menu, scripts) = setup_script_menu();
 
-        let app = Rc::new(RefCell::new(Self {
+        let mut app = Self {
             koto: KotoWrapper::new(canvas.clone()),
             editor,
             canvas,
             last_time: None,
             current_time: 0.0,
             animation_frame: None,
-            listeners: Vec::new(),
+            event_listeners: Vec::new(),
             self_rc: None,
-        }));
+            vim_bindings_enabled: false,
+        };
 
-        let app_clone = app.clone();
-        app.borrow_mut().self_rc = Some(app_clone.clone());
-        app.borrow_mut().listeners = setup_listeners(app_clone.clone(), menu, scripts);
-        app.borrow_mut().on_script_edited();
+        app.set_vim_bindings_enabled(
+            get_local_storage_value("vim-bindings-enabled")
+                .map_or(false, |enabled| enabled == "true"),
+        );
+
+        let app_rc = Rc::new(RefCell::new(app));
+
+        let app_clone = app_rc.clone();
+        app_rc.borrow_mut().self_rc = Some(app_clone.clone());
+        app_rc
+            .borrow_mut()
+            .setup_listeners(editor_session, menu, scripts);
+        app_rc.borrow_mut().on_script_edited();
     }
 
     pub fn on_script_edited(&mut self) {
@@ -99,6 +111,77 @@ impl App {
     pub fn editor_session(&self) -> AceSession {
         self.editor.get_session()
     }
+
+    fn on_vim_bindings_clicked(&mut self) {
+        self.set_vim_bindings_enabled(!self.vim_bindings_enabled);
+    }
+
+    fn set_vim_bindings_enabled(&mut self, enabled: bool) {
+        self.vim_bindings_enabled = enabled;
+        if self.vim_bindings_enabled {
+            get_element_by_id("vim-bindings").set_class_name("uk-button-primary");
+            self.editor.set_keyboard_handler("ace/keyboard/vim");
+        } else {
+            get_element_by_id("vim-bindings").set_class_name("uk-button-default");
+            self.editor.set_keyboard_handler("");
+        }
+    }
+
+    fn setup_listeners(
+        &mut self,
+        editor_session: AceSession,
+        script_menu: HtmlSelectElement,
+        scripts: Vec<&'static str>,
+    ) {
+        let app = self.self_rc.as_ref().unwrap().clone();
+
+        {
+            let on_change = Closure::wrap({
+                let app = app.clone();
+                Box::new(move || app.borrow_mut().on_script_edited())
+            } as Box<dyn FnMut()>);
+            editor_session.on("change", on_change.as_ref().unchecked_ref());
+            on_change.forget();
+        }
+
+        self.event_listeners = vec![
+            EventListener::new(&window(), "beforeunload", {
+                let app = app.clone();
+                move |_| {
+                    let app = app.borrow();
+                    set_local_storage_value("script", &app.editor.get_session().get_value());
+                    set_local_storage_value(
+                        "vim-bindings-enabled",
+                        if app.vim_bindings_enabled {
+                            "true"
+                        } else {
+                            "false"
+                        },
+                    );
+                }
+            }),
+            EventListener::new(&window(), "resize", {
+                let app = app.clone();
+                move |_| app.borrow_mut().on_window_resize()
+            }),
+            EventListener::new(&script_menu.clone(), "change", {
+                let app = app.clone();
+                move |_| {
+                    let script_index = script_menu.selected_index();
+                    if script_index > 0 {
+                        let script = scripts[script_index as usize - 1];
+                        app.borrow_mut().reset();
+                        let editor_session = app.borrow().editor_session();
+                        editor_session.set_value(script);
+                    }
+                }
+            }),
+            EventListener::new(&get_element_by_id("vim-bindings"), "click", {
+                let app = app.clone();
+                move |_| app.borrow_mut().on_vim_bindings_clicked()
+            }),
+        ];
+    }
 }
 
 fn setup_editor() -> AceEditor {
@@ -112,17 +195,8 @@ fn setup_editor() -> AceEditor {
     session.set_use_soft_tabs(true);
     session.set_tab_size(2);
 
-    let script = match window()
-        .local_storage()
-        .expect("Couldn't access local storage")
-    {
-        Some(storage) => storage
-            .get("script")
-            .expect("Couldn't get item from local storage"),
-        None => None,
-    };
     session.set_value(
-        script
+        get_local_storage_value("script")
             .as_ref()
             .map(|s| s.as_str())
             .unwrap_or(include_str!("scripts/canvas/random_rects.koto")),
@@ -164,54 +238,4 @@ fn setup_script_menu() -> (HtmlSelectElement, Vec<&'static str>) {
     }
 
     (menu, scripts)
-}
-
-fn setup_listeners(
-    app: Rc<RefCell<App>>,
-    script_menu: HtmlSelectElement,
-    scripts: Vec<&'static str>,
-) -> Vec<EventListener> {
-    {
-        let on_change = Closure::wrap({
-            let app = app.clone();
-            Box::new(move || app.borrow_mut().on_script_edited())
-        } as Box<dyn FnMut()>);
-        app.borrow()
-            .editor
-            .get_session()
-            .on("change", on_change.as_ref().unchecked_ref());
-        on_change.forget();
-    }
-
-    vec![
-        EventListener::new(&window(), "beforeunload", {
-            let app = app.clone();
-            move |_| {
-                if let Some(storage) = window()
-                    .local_storage()
-                    .expect("Couldn't access local storage")
-                {
-                    storage
-                        .set("script", &app.borrow().editor.get_session().get_value())
-                        .expect("Couldn't save script to local storage");
-                }
-            }
-        }),
-        EventListener::new(&window(), "resize", {
-            let app = app.clone();
-            move |_| app.borrow_mut().on_window_resize()
-        }),
-        EventListener::new(&script_menu.clone(), "change", {
-            let app = app.clone();
-            move |_| {
-                let script_index = script_menu.selected_index();
-                if script_index > 0 {
-                    let script = scripts[script_index as usize - 1];
-                    app.borrow_mut().reset();
-                    let editor_session = app.borrow().editor_session();
-                    editor_session.set_value(script);
-                }
-            }
-        }),
-    ]
 }

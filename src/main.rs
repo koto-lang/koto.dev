@@ -5,7 +5,7 @@ mod koto_wrapper;
 use {
     crate::{app::App, koto_wrapper::KotoMessageQueue},
     console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::document,
+    gloo_utils::{document, window},
     std::{cell::RefCell, collections::VecDeque, rc::Rc},
     wasm_bindgen::prelude::*,
     web_sys::Element,
@@ -70,6 +70,26 @@ fn get_element_by_id(id: &str) -> Element {
     document()
         .get_element_by_id(id)
         .unwrap_or_else(|| panic!("Failed to get div with id '{id}'"))
+}
+
+fn get_local_storage_value(id: &str) -> Option<String> {
+    window()
+        .local_storage()
+        .expect("Couldn't access local storage")
+        .map_or(None, |storage| {
+            storage
+                .get(id)
+                .expect("Couldn't get item from local storage")
+        })
+}
+
+fn set_local_storage_value(id: &str, value: &str) {
+    window()
+        .local_storage()
+        .expect("Couldn't access local storage")
+        .expect("Missing local storage")
+        .set(id, &value)
+        .ok();
 }
 
 #[macro_export]

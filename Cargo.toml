@@ -24,6 +24,7 @@ features = [
   'console',
   'Document',
   'Element',
+  'HtmlButtonElement',
   'HtmlCanvasElement',
   'HtmlElement',
   'HtmlOptionElement',

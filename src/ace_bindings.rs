@@ -18,6 +18,9 @@ extern "C" {
     #[wasm_bindgen(method, js_name = setShowPrintMargin)]
     pub fn set_show_print_margin(this: &AceEditor, value: bool);
 
+    #[wasm_bindgen(method, js_name = setKeyboardHandler)]
+    pub fn set_keyboard_handler(this: &AceEditor, value: &str);
+
     #[wasm_bindgen(method, js_name = setMode)]
     pub fn set_mode(this: &AceSession, mode: &str);
 
