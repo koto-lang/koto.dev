@@ -1,0 +1,2 @@
+- [ ] de-global KOTO_MESSAGE_QUEUE
+- [ ] Use a cloned! macro

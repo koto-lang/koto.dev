@@ -1,5 +1,5 @@
 use {
-    crate::{get_element_by_id, KOTO_MESSAGE_QUEUE},
+    crate::{get_element_by_id},
     koto::{
         runtime::{
             unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead, KotoWrite,
@@ -13,6 +13,10 @@ use {
 };
 
 pub type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMessage>>>;
+
+thread_local! {
+    static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
+}
 
 pub enum KotoMessage {
     Arc {

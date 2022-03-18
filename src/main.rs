@@ -1,27 +1,93 @@
 mod ace_bindings;
-mod app;
+mod components;
 mod koto_wrapper;
 
 use {
-    crate::{app::App, koto_wrapper::KotoMessageQueue},
+    crate::koto_wrapper::KotoMessageQueue,
+    components::playground::Playground,
     console_error_panic_hook::set_once as set_panic_hook,
+    gloo_console::log,
+    gloo_events::EventListener,
     gloo_utils::{document, window},
     std::{cell::RefCell, collections::VecDeque, rc::Rc},
     wasm_bindgen::prelude::*,
     web_sys::Element,
+    yew::prelude::*,
 };
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-thread_local! {
-    static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
-}
-
 fn main() {
     set_panic_hook();
     register_koto_editor_mode();
-    App::setup();
+    yew::start_app::<App>();
+}
+
+struct App {
+    context: AppContext,
+}
+
+impl Component for App {
+    type Message = ();
+    type Properties = ();
+
+    fn create(ctx: &Context<Self>) -> Self {
+        Self {
+            context: AppContext {
+                scripts: vec![
+                    ScriptGroup {
+                        name: "Examples",
+                        scripts: &[Script {
+                            name: "Fizz Buzz",
+                            script: include_str!("scripts/examples/fizz_buzz.koto"),
+                        }],
+                    },
+                    ScriptGroup {
+                        name: "Canvas",
+                        scripts: &[
+                            Script {
+                                name: "Boids",
+                                script: include_str!("scripts/canvas/boids.koto"),
+                            },
+                            Script {
+                                name: "Random Rects",
+                                script: include_str!("scripts/canvas/random_rects.koto"),
+                            },
+                            Script {
+                                name: "Alignment",
+                                script: include_str!("scripts/canvas/alignment.koto"),
+                            },
+                        ],
+                    },
+                ]
+                .into(),
+            },
+        }
+    }
+
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        html! {
+            <ContextProvider<AppContext> context={self.context.clone()}>
+                <div class="container">
+                    <h1>{"Playground"}</h1>
+
+                    <Playground />
+                </div>
+            </ContextProvider<AppContext>>
+        }
+    }
+}
+
+#[derive(Clone)]
+struct AppContext {
+    scripts: Rc<[ScriptGroup]>,
+}
+
+impl PartialEq for AppContext {
+    fn eq(&self, other: &Self) -> bool {
+        Rc::ptr_eq(&self.scripts, &other.scripts)
+    }
 }
 
 #[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
@@ -38,33 +104,6 @@ struct ScriptGroup {
     name: &'static str,
     scripts: &'static [Script],
 }
-
-const SCRIPTS: &[ScriptGroup] = &[
-    ScriptGroup {
-        name: "Examples",
-        scripts: &[Script {
-            name: "Fizz Buzz",
-            script: include_str!("scripts/examples/fizz_buzz.koto"),
-        }],
-    },
-    ScriptGroup {
-        name: "Canvas",
-        scripts: &[
-            Script {
-                name: "Boids",
-                script: include_str!("scripts/canvas/boids.koto"),
-            },
-            Script {
-                name: "Random Rects",
-                script: include_str!("scripts/canvas/random_rects.koto"),
-            },
-            Script {
-                name: "Alignment",
-                script: include_str!("scripts/canvas/alignment.koto"),
-            },
-        ],
-    },
-];
 
 fn get_element_by_id(id: &str) -> Element {
     document()
