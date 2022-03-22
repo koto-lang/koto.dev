@@ -1,8 +1,5 @@
 use {
-    crate::{
-        ace_bindings::{get_ace, AceEditor, AceSession},
-        get_local_storage_value,
-    },
+    crate::ace_bindings::{get_ace, AceEditor},
     wasm_bindgen::{prelude::*, JsCast},
     yew::prelude::*,
 };
@@ -14,10 +11,10 @@ pub enum Msg {
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct Props {
     pub on_changed: Callback<Box<str>>,
+    pub on_initialized: Callback<AceEditor>,
 }
 
 pub struct Editor {
-    editor_ref: NodeRef,
     editor_id: String,
     editor: Option<AceEditor>,
     #[allow(dyn_drop)]
@@ -40,7 +37,6 @@ impl Component for Editor {
 
     fn create(_ctx: &Context<Self>) -> Self {
         Self {
-            editor_ref: NodeRef::default(),
             editor_id: "editor".into(),
             editor: None,
             editor_changed_callback: None,
@@ -50,7 +46,9 @@ impl Component for Editor {
     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::EditorChanged => {
-                ctx.props().on_changed.emit(self.get_editor_value().into_boxed_str());
+                ctx.props()
+                    .on_changed
+                    .emit(self.get_editor_value().into_boxed_str());
                 false
             }
         }
@@ -59,10 +57,10 @@ impl Component for Editor {
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
             <div
-              ref={self.editor_ref.clone()}
               id={self.editor_id.clone()}
               class="flex-grow"
-            ></div>
+            >
+            </div>
         }
     }
 
@@ -84,15 +82,10 @@ impl Component for Editor {
             } as Box<dyn FnMut()>);
             session.on("change", editor_changed_callback.as_ref().unchecked_ref());
 
-            session.set_value(
-                get_local_storage_value("script")
-                    .as_ref()
-                    .map(|s| s.as_str())
-                    .unwrap_or(include_str!("../scripts/examples/fizz_buzz.koto")),
-            );
-
             self.editor_changed_callback = Some(Box::new(editor_changed_callback));
             self.editor = Some(editor);
+
+            ctx.props().on_initialized.emit(ace.edit(&self.editor_id));
         }
     }
 }

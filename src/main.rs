@@ -3,13 +3,10 @@ mod components;
 mod koto_wrapper;
 
 use {
-    crate::koto_wrapper::KotoMessageQueue,
     components::playground::Playground,
     console_error_panic_hook::set_once as set_panic_hook,
-    gloo_console::log,
-    gloo_events::EventListener,
     gloo_utils::{document, window},
-    std::{cell::RefCell, collections::VecDeque, rc::Rc},
+    std::rc::Rc,
     wasm_bindgen::prelude::*,
     web_sys::Element,
     yew::prelude::*,
@@ -32,7 +29,7 @@ impl Component for App {
     type Message = ();
     type Properties = ();
 
-    fn create(ctx: &Context<Self>) -> Self {
+    fn create(_ctx: &Context<Self>) -> Self {
         Self {
             context: AppContext {
                 scripts: vec![
@@ -66,11 +63,10 @@ impl Component for App {
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
             <ContextProvider<AppContext> context={self.context.clone()}>
                 <div class="container">
-                    <h1>{"Playground"}</h1>
 
                     <Playground />
                 </div>

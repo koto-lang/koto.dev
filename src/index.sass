@@ -1,11 +1,13 @@
 body
   background-color: #cccccc
   margin: 0
+  height: 100vh
 
 .container
-  height: 100vh
   padding: 20px
-  box-sizing: border-box
+  height: calc(100% - 40px)
+  display: flex
+  flex: 100%
 
 .playground
   width: 100%
@@ -24,6 +26,10 @@ body
 
 .horizontal-spacer
   margin-left: auto
+
+.editor-area
+  display: flex
+  flex-direction: column
 
 .editor-toolbar
   width: 100%

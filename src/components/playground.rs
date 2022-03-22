@@ -1,7 +1,9 @@
 use {
-    super::editor::Editor,
-    crate::{koto_wrapper::KotoWrapper, set_local_storage_value},
-    gloo_console::log,
+    super::{editor::Editor, script_menu::ScriptMenu},
+    crate::{
+        ace_bindings::AceEditor, get_local_storage_value, koto_wrapper::KotoWrapper,
+        set_local_storage_value,
+    },
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
     gloo_utils::window,
@@ -10,7 +12,10 @@ use {
 };
 
 pub enum Msg {
+    EditorInitialized { editor: AceEditor },
     EditorChanged { script: Box<str> },
+    ScriptMenuChanged { script: &'static str },
+    ToggleVimBindings,
     AnimationFrame { time: f64 },
     WindowResized,
     BeforeUnload,
@@ -19,15 +24,17 @@ pub enum Msg {
 pub struct Playground {
     self_ref: NodeRef,
     canvas_ref: NodeRef,
+    editor: Option<AceEditor>,
     koto: Option<KotoWrapper>,
     animation_frame: Option<AnimationFrame>,
 
     last_time: Option<f64>,
     current_time: f64,
 
-    window_resized_listener: EventListener,
-    before_unload_listener: EventListener,
+    _window_resized_listener: EventListener,
+    _before_unload_listener: EventListener,
     script: Box<str>,
+    vim_bindings_enabled: bool,
 }
 
 impl Playground {
@@ -47,6 +54,26 @@ impl Playground {
     fn get_koto(&mut self) -> &mut KotoWrapper {
         self.koto.as_mut().expect("Missing koto wrapper")
     }
+
+    fn get_editor(&mut self) -> &AceEditor {
+        self.editor.as_ref().expect("Missing editor")
+    }
+
+    fn set_editor_contents(&mut self, contents: &str) {
+        self.get_editor().get_session().set_value(contents);
+    }
+
+    fn reset(&mut self) {
+        self.get_koto().reset();
+        self.animation_frame = None;
+        self.last_time = None;
+    }
+
+    fn set_vim_bindings_enabled(&mut self, enabled: bool) {
+        self.vim_bindings_enabled = enabled;
+        self.get_editor()
+            .set_keyboard_handler(if enabled { "ace/keyboard/vim" } else { "" });
+    }
 }
 
 impl Component for Playground {
@@ -57,24 +84,38 @@ impl Component for Playground {
         Self {
             self_ref: NodeRef::default(),
             canvas_ref: NodeRef::default(),
+            editor: None,
             koto: None,
             animation_frame: None,
             last_time: None,
             current_time: 0.0,
-            window_resized_listener: EventListener::new(&window(), "resize", {
+            _window_resized_listener: EventListener::new(&window(), "resize", {
                 let link = ctx.link().clone();
                 move |_| link.send_message(Msg::WindowResized)
             }),
-            before_unload_listener: EventListener::new(&window(), "beforeunload", {
+            _before_unload_listener: EventListener::new(&window(), "beforeunload", {
                 let link = ctx.link().clone();
                 move |_| link.send_message(Msg::BeforeUnload)
             }),
             script: "".into(),
+            vim_bindings_enabled: get_local_storage_value("vim-bindings-enabled")
+                .map_or(false, |enabled| enabled == "true"),
         }
     }
 
     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
+            Msg::EditorInitialized { editor } => {
+                self.editor = Some(editor);
+                self.set_editor_contents(
+                    get_local_storage_value("script")
+                        .as_ref()
+                        .map(|s| s.as_str())
+                        .unwrap_or(include_str!("../scripts/canvas/random_rects.koto")),
+                );
+                self.set_vim_bindings_enabled(self.vim_bindings_enabled);
+                false
+            }
             Msg::EditorChanged { script } => {
                 self.animation_frame = None;
 
@@ -90,6 +131,15 @@ impl Component for Playground {
                 self.script = script;
 
                 false
+            }
+            Msg::ScriptMenuChanged { script } => {
+                self.reset();
+                self.set_editor_contents(script);
+                false
+            }
+            Msg::ToggleVimBindings => {
+                self.set_vim_bindings_enabled(!self.vim_bindings_enabled);
+                true
             }
             Msg::AnimationFrame { time } => {
                 self.animation_frame = None;
@@ -116,18 +166,20 @@ impl Component for Playground {
                 canvas.set_width(canvas.client_width() as u32);
                 canvas.set_height(canvas.client_height() as u32);
 
+                self.get_koto().on_resize();
+
                 false
             }
             Msg::BeforeUnload => {
                 set_local_storage_value("script", &self.script);
-                // set_local_storage_value(
-                //     "vim-bindings-enabled",
-                //     if app.vim_bindings_enabled {
-                //         "true"
-                //     } else {
-                //         "false"
-                //     },
-                // );
+                set_local_storage_value(
+                    "vim-bindings-enabled",
+                    if self.vim_bindings_enabled {
+                        "true"
+                    } else {
+                        "false"
+                    },
+                );
 
                 false
             }
@@ -135,14 +187,46 @@ impl Component for Playground {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
+        let vim_bindings_toggle = html! {
+            <button
+                class={
+                    if self.vim_bindings_enabled {
+                        "uk-button-primary"
+                    } else {
+                        "uk-button-default"
+                    }
+                }
+                onclick={ctx.link().callback(|_| Msg::ToggleVimBindings)}
+            >
+                <span uk-icon="icon: vimeo"></span>
+            </button>
+        };
+
+        let editor_area = html! {
+            <div class="editor-area">
+               <div class="editor-toolbar">
+                 <div class="horizontal-spacer"></div>
+
+                 { vim_bindings_toggle }
+
+                 <ScriptMenu
+                    on_script_selected={ctx.link().callback(|script| Msg::ScriptMenuChanged {script})}
+                 />
+               </div>
+
+                <Editor
+                    on_changed={ctx.link().callback(|script| Msg::EditorChanged {script})}
+                    on_initialized={ctx.link().callback(|editor| Msg::EditorInitialized {editor})}
+                />
+            </div>
+        };
+
         html! {
             <div
               ref={self.self_ref.clone()}
               class="playground"
             >
-                <Editor
-                  on_changed={ctx.link().callback(|script| Msg::EditorChanged {script})}
-                />
+                { editor_area }
 
                 <canvas
                   ref={self.canvas_ref.clone()}
@@ -167,7 +251,7 @@ impl Component for Playground {
         }
     }
 
-    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {
+    fn rendered(&mut self, _ctx: &Context<Self>, first_render: bool) {
         if first_render {
             let canvas = self.get_canvas();
 
