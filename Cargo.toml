@@ -10,6 +10,7 @@ koto = { git = "https://github.com/koto-lang/koto" }
 koto_random = { git = "https://github.com/koto-lang/koto" }
 
 console_error_panic_hook = "0.1" # A panic hook for `wasm32-unknown-unknown` that logs panics to `console.error`
+fb_cloned = "0.1.2"              # Provides a clone macro
 gloo-console = "0.2.1"           # Convenience crate for working with browser's console
 gloo-events = "0.1.1"            # Convenience crate for working with DOM event listeners
 gloo-render = "0.1.0"            # Convenience crate for working with browser's requestAnimationFrame

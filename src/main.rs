@@ -3,13 +3,8 @@ mod components;
 mod koto_wrapper;
 
 use {
-    components::playground::Playground,
-    console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::{document, window},
-    std::rc::Rc,
-    wasm_bindgen::prelude::*,
-    web_sys::Element,
-    yew::prelude::*,
+    components::playground::Playground, console_error_panic_hook::set_once as set_panic_hook,
+    gloo_utils::window, std::rc::Rc, wasm_bindgen::prelude::*, yew::prelude::*,
 };
 
 #[global_allocator]
@@ -21,57 +16,49 @@ fn main() {
     yew::start_app::<App>();
 }
 
-struct App {
-    context: AppContext,
+#[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
+extern "C" {
+    fn register_koto_editor_mode();
 }
 
-impl Component for App {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self {
-            context: AppContext {
-                scripts: vec![
-                    ScriptGroup {
-                        name: "Examples",
-                        scripts: &[Script {
-                            name: "Fizz Buzz",
-                            script: include_str!("scripts/examples/fizz_buzz.koto"),
-                        }],
-                    },
-                    ScriptGroup {
-                        name: "Canvas",
-                        scripts: &[
-                            Script {
-                                name: "Boids",
-                                script: include_str!("scripts/canvas/boids.koto"),
-                            },
-                            Script {
-                                name: "Random Rects",
-                                script: include_str!("scripts/canvas/random_rects.koto"),
-                            },
-                            Script {
-                                name: "Alignment",
-                                script: include_str!("scripts/canvas/alignment.koto"),
-                            },
-                        ],
-                    },
-                ]
-                .into(),
+#[function_component(App)]
+fn app() -> Html {
+    let context = use_ref(|| AppContext {
+        scripts: vec![
+            ScriptGroup {
+                name: "Examples",
+                scripts: &[Script {
+                    name: "Fizz Buzz",
+                    script: include_str!("scripts/examples/fizz_buzz.koto"),
+                }],
             },
-        }
-    }
+            ScriptGroup {
+                name: "Canvas",
+                scripts: &[
+                    Script {
+                        name: "Boids",
+                        script: include_str!("scripts/canvas/boids.koto"),
+                    },
+                    Script {
+                        name: "Random Rects",
+                        script: include_str!("scripts/canvas/random_rects.koto"),
+                    },
+                    Script {
+                        name: "Alignment",
+                        script: include_str!("scripts/canvas/alignment.koto"),
+                    },
+                ],
+            },
+        ]
+        .into(),
+    });
 
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            <ContextProvider<AppContext> context={self.context.clone()}>
-                <div class="container">
-
-                    <Playground />
-                </div>
-            </ContextProvider<AppContext>>
-        }
+    html! {
+        <ContextProvider<AppContext> context={(*context).clone()}>
+            <div class="container">
+                <Playground />
+            </div>
+        </ContextProvider<AppContext>>
     }
 }
 
@@ -86,11 +73,6 @@ impl PartialEq for AppContext {
     }
 }
 
-#[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
-extern "C" {
-    fn register_koto_editor_mode();
-}
-
 struct Script {
     name: &'static str,
     script: &'static str,
@@ -99,12 +81,6 @@ struct Script {
 struct ScriptGroup {
     name: &'static str,
     scripts: &'static [Script],
-}
-
-fn get_element_by_id(id: &str) -> Element {
-    document()
-        .get_element_by_id(id)
-        .unwrap_or_else(|| panic!("Failed to get div with id '{id}'"))
 }
 
 fn get_local_storage_value(id: &str) -> Option<String> {
@@ -125,9 +101,4 @@ fn set_local_storage_value(id: &str, value: &str) {
         .expect("Missing local storage")
         .set(id, &value)
         .ok();
-}
-
-#[macro_export]
-macro_rules! console_log {
-    ($($t:tt)*) => (web_sys::console::log_1(&JsValue::from(format_args!($($t)*).to_string())))
 }

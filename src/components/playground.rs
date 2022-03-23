@@ -7,13 +7,13 @@ use {
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
     gloo_utils::window,
-    web_sys::HtmlCanvasElement,
+    web_sys::{Element, HtmlCanvasElement},
     yew::prelude::*,
 };
 
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
-    EditorChanged { script: Box<str> },
+    EditorChanged,
     ScriptMenuChanged { script: &'static str },
     ToggleVimBindings,
     AnimationFrame { time: f64 },
@@ -22,8 +22,10 @@ pub enum Msg {
 }
 
 pub struct Playground {
-    self_ref: NodeRef,
     canvas_ref: NodeRef,
+    compiler_output_ref: NodeRef,
+    script_output_ref: NodeRef,
+
     editor: Option<AceEditor>,
     koto: Option<KotoWrapper>,
 
@@ -59,6 +61,10 @@ impl Playground {
         self.editor.as_ref().expect("Missing editor")
     }
 
+    fn get_editor_contents(&mut self) -> String {
+        self.get_editor().get_session().get_value()
+    }
+
     fn set_editor_contents(&mut self, contents: &str) {
         self.get_editor().get_session().set_value(contents);
     }
@@ -82,8 +88,9 @@ impl Component for Playground {
 
     fn create(ctx: &Context<Self>) -> Self {
         Self {
-            self_ref: NodeRef::default(),
             canvas_ref: NodeRef::default(),
+            compiler_output_ref: NodeRef::default(),
+            script_output_ref: NodeRef::default(),
             editor: None,
             koto: None,
             script: "".into(),
@@ -118,8 +125,9 @@ impl Component for Playground {
                 self.set_vim_bindings_enabled(self.vim_bindings_enabled);
                 false
             }
-            Msg::EditorChanged { script } => {
+            Msg::EditorChanged => {
                 self.animation_frame = None;
+                let script = self.get_editor_contents();
                 if !script.is_empty() {
                     let koto = self.get_koto();
                     koto.compile_script(&script);
@@ -128,7 +136,7 @@ impl Component for Playground {
                         self.request_animation_frame(ctx)
                     }
                 }
-                self.script = script;
+                self.script = script.into();
                 false
             }
             Msg::ScriptMenuChanged { script } => {
@@ -187,21 +195,20 @@ impl Component for Playground {
                 <EditorToolbar
                     vim_bindings_enabled={self.vim_bindings_enabled}
                     on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
-                    on_script_selected={ctx.link().callback(|script| Msg::ScriptMenuChanged {script})}
+                    on_script_selected={
+                        ctx.link().callback(|script| Msg::ScriptMenuChanged {script})
+                    }
                 />
 
                 <Editor
-                    on_changed={ctx.link().callback(|script| Msg::EditorChanged {script})}
                     on_initialized={ctx.link().callback(|editor| Msg::EditorInitialized {editor})}
+                    on_changed={ctx.link().callback(|_| Msg::EditorChanged)}
                 />
             </div>
         };
 
         html! {
-            <div
-              ref={self.self_ref.clone()}
-              class="playground"
-            >
+            <div class="playground">
                 { editor_area }
 
                 <canvas
@@ -213,13 +220,13 @@ impl Component for Playground {
                 ></canvas>
 
                 <textarea
-                  id="compiler-output"
+                  ref={self.compiler_output_ref.clone()}
                   class="fixed-mono"
                   readonly=true
                 ></textarea>
 
                 <textarea
-                  id="script-output"
+                  ref={self.script_output_ref.clone()}
                   class="fixed-mono"
                   readonly=true
                 ></textarea>
@@ -234,7 +241,10 @@ impl Component for Playground {
             canvas.set_width(canvas.client_width() as u32);
             canvas.set_height(canvas.client_height() as u32);
 
-            self.koto = Some(KotoWrapper::new(canvas));
+            let compiler_output = self.compiler_output_ref.cast::<Element>().unwrap();
+            let script_output = self.script_output_ref.cast::<Element>().unwrap();
+
+            self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output));
         }
     }
 }
