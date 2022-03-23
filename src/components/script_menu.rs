@@ -1,4 +1,14 @@
-use {crate::AppContext, web_sys::HtmlSelectElement, yew::prelude::*};
+use {cloned::cloned, web_sys::HtmlSelectElement, yew::prelude::*};
+
+struct Script {
+    name: &'static str,
+    script: &'static str,
+}
+
+struct ScriptGroup {
+    name: &'static str,
+    scripts: &'static [Script],
+}
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -7,11 +17,38 @@ pub struct Props {
 
 #[function_component(ScriptMenu)]
 pub fn script_menu(props: &Props) -> Html {
-    let context = use_context::<AppContext>().expect("Missing context");
+    let script_groups = use_ref(|| {
+        vec![
+            ScriptGroup {
+                name: "Examples",
+                scripts: &[Script {
+                    name: "Fizz Buzz",
+                    script: include_str!("../scripts/examples/fizz_buzz.koto"),
+                }],
+            },
+            ScriptGroup {
+                name: "Canvas",
+                scripts: &[
+                    Script {
+                        name: "Alignment",
+                        script: include_str!("../scripts/canvas/alignment.koto"),
+                    },
+                    Script {
+                        name: "Boids",
+                        script: include_str!("../scripts/canvas/boids.koto"),
+                    },
+                    Script {
+                        name: "Random Rects",
+                        script: include_str!("../scripts/canvas/random_rects.koto"),
+                    },
+                ],
+            },
+        ]
+    });
 
     let menu_items = use_ref(|| {
-        let menu_items = html! {
-            for context.scripts.iter().map(|script_group|{
+        html! {
+            for script_groups.iter().map(|script_group|{
                 html! {
                     <optgroup label={script_group.name.to_string()}>
                         {
@@ -26,18 +63,16 @@ pub fn script_menu(props: &Props) -> Html {
                     </optgroup>
                 }
             })
-        };
-        menu_items
+        }
     });
 
     let onchange = Callback::from({
-        let scripts = context.scripts.clone();
-        let on_script_selected = props.on_script_selected.clone();
+        cloned!(script_groups, props.on_script_selected);
         move |event: Event| {
             let menu: HtmlSelectElement = event.target_unchecked_into();
             let index = menu.selected_index();
             if index > 0 {
-                let script = scripts
+                let script = script_groups
                     .iter()
                     .flat_map(|script_group| script_group.scripts.iter())
                     .nth(index as usize - 1)
@@ -50,7 +85,7 @@ pub fn script_menu(props: &Props) -> Html {
 
     html! {
         <select {onchange}>
-            <option>{"Example Scripts"}</option>
+            <option>{"Examples"}</option>
 
             { (*menu_items).clone() }
         </select>

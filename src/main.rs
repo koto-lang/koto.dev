@@ -4,7 +4,7 @@ mod koto_wrapper;
 
 use {
     components::playground::Playground, console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::window, std::rc::Rc, wasm_bindgen::prelude::*, yew::prelude::*,
+    gloo_utils::window, wasm_bindgen::prelude::*, yew::prelude::*,
 };
 
 #[global_allocator]
@@ -23,64 +23,11 @@ extern "C" {
 
 #[function_component(App)]
 fn app() -> Html {
-    let context = use_ref(|| AppContext {
-        scripts: vec![
-            ScriptGroup {
-                name: "Examples",
-                scripts: &[Script {
-                    name: "Fizz Buzz",
-                    script: include_str!("scripts/examples/fizz_buzz.koto"),
-                }],
-            },
-            ScriptGroup {
-                name: "Canvas",
-                scripts: &[
-                    Script {
-                        name: "Alignment",
-                        script: include_str!("scripts/canvas/alignment.koto"),
-                    },
-                    Script {
-                        name: "Boids",
-                        script: include_str!("scripts/canvas/boids.koto"),
-                    },
-                    Script {
-                        name: "Random Rects",
-                        script: include_str!("scripts/canvas/random_rects.koto"),
-                    },
-                ],
-            },
-        ]
-        .into(),
-    });
-
     html! {
-        <ContextProvider<AppContext> context={(*context).clone()}>
-            <div class="container">
-                <Playground />
-            </div>
-        </ContextProvider<AppContext>>
+        <div class="container">
+            <Playground />
+        </div>
     }
-}
-
-#[derive(Clone)]
-struct AppContext {
-    scripts: Rc<[ScriptGroup]>,
-}
-
-impl PartialEq for AppContext {
-    fn eq(&self, other: &Self) -> bool {
-        Rc::ptr_eq(&self.scripts, &other.scripts)
-    }
-}
-
-struct Script {
-    name: &'static str,
-    script: &'static str,
-}
-
-struct ScriptGroup {
-    name: &'static str,
-    scripts: &'static [Script],
 }
 
 fn get_local_storage_value(id: &str) -> Option<String> {
