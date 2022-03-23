@@ -1,4 +1,4 @@
-use {cloned::cloned, web_sys::HtmlSelectElement, yew::prelude::*};
+use {cloned::cloned, yew::prelude::*};
 
 struct Script {
     name: &'static str,
@@ -47,50 +47,68 @@ pub fn script_menu(props: &Props) -> Html {
     });
 
     let menu_items = use_ref(|| {
-        html! {
-            for script_groups.iter().map(|script_group|{
-                html! {
-                    <optgroup label={script_group.name.to_string()}>
-                        {
-                            for script_group.scripts.iter().map(|script| {
-                                html! {
-                                    <option>
-                                        {script.name.to_string()}
-                                    </option>
-                                }
-                            })
-                        }
-                    </optgroup>
-                }
-            })
-        }
-    });
-
-    let onchange = Callback::from({
-        cloned!(script_groups, props.on_script_selected);
-        move |event: Event| {
-            let menu: HtmlSelectElement = event.target_unchecked_into();
-            let index = menu.selected_index();
-            if index > 0 {
+        let on_menu_item_clicked = Callback::from({
+            cloned!(script_groups, props.on_script_selected);
+            move |index| {
                 let script = script_groups
                     .iter()
                     .flat_map(|script_group| script_group.scripts.iter())
-                    .nth(index as usize - 1)
+                    .nth(index as usize)
                     .unwrap()
                     .script;
                 on_script_selected.emit(script);
             }
+        });
+
+        let mut script_index = 0;
+
+        html! {
+            <ul class="uk-nav uk-nav-default">
+            {
+                for script_groups.iter().map(|script_group|{
+                    html! {
+                        <>
+                            <li class="uk-nav-header">{script_group.name.to_string()}</li>
+
+                            {
+                                for script_group.scripts.iter().map(|script| {
+                                    let index = script_index;
+                                    script_index += 1;
+                                    html! {
+                                        <li>
+                                            <a
+                                                onclick={
+                                                    Callback::from({
+                                                        cloned!(on_menu_item_clicked);
+                                                        move |_| on_menu_item_clicked.emit(index)
+                                                    })
+                                                }
+                                            >
+                                                {script.name.to_string()}
+                                            </a>
+                                        </li>
+                                    }
+                                })
+                            }
+
+                            <li class="uk-nav-divider"></li>
+                        </>
+                    }
+                })
+            }
+            </ul>
         }
     });
 
     html! {
-        <select
-            uk-tooltip="title: Example Koto Scripts; delay: 500"
-            {onchange}
-        >
-            <option>{"Examples"}</option>
+        <div class="uk-inline">
+            <button class="uk-button uk-button-default uk-button-small" type="button">
+                {"Examples"}
+            </button>
 
-            { (*menu_items).clone() }
-        </select>
+            <div uk-dropdown="mode: click" uk-toggle="true">
+                { (*menu_items).clone() }
+            </div>
+        </div>
     }
 }

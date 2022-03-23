@@ -18,8 +18,6 @@ pub fn editor_toolbar(props: &Props) -> Html {
     let button_size = 0.8;
     html! {
         <div class="editor-toolbar">
-            <div class="horizontal-spacer"></div>
-
             <ToolbarButton
                 icon="play"
                 title="Run Script"
