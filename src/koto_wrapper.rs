@@ -74,18 +74,24 @@ impl Color {
     }
 }
 
+pub enum ScriptState {
+    NotReady,
+    Compiled,
+    Recompiled,
+    Initialized,
+}
+
 pub struct KotoWrapper {
     koto: Koto,
     play_module: ValueMap,
-    call_initial_state: bool,
-    user_state: Value,
-    is_ready: bool,
     compiler_output: Element,
     script_output: Element,
     canvas: HtmlCanvasElement,
     canvas_context: CanvasRenderingContext2d,
     output_buffer: String,
     message_queue: KotoMessageQueue,
+    script_state: ScriptState,
+    user_state: Value,
 }
 
 impl KotoWrapper {
@@ -135,8 +141,7 @@ impl KotoWrapper {
             canvas_context,
             output_buffer: String::with_capacity(128),
             message_queue,
-            call_initial_state: true,
-            is_ready: false,
+            script_state: ScriptState::NotReady,
             user_state: Value::Map(ValueMap::default()),
         }
     }
@@ -144,7 +149,6 @@ impl KotoWrapper {
     pub fn compile_script(&mut self, script: &str) {
         debug_assert!(!script.is_empty());
 
-        self.is_ready = false;
         self.message_queue.borrow_mut().clear();
 
         {
@@ -160,45 +164,51 @@ impl KotoWrapper {
             return;
         }
 
-        if let Err(e) = self.koto.run() {
-            self.log_error(&e.to_string());
-            return;
+        self.compiler_output.set_inner_html("Success");
+        self.script_state = if matches!(self.script_state, ScriptState::NotReady) {
+            ScriptState::Compiled
+        } else {
+            ScriptState::Recompiled
+        }
+    }
+
+    pub fn run(&mut self) {
+        if !self.is_ready() {
+            panic!("Attempting to run koto script when not in a ready state");
         }
 
-        if self.call_initial_state {
-            let maybe_fn = self
-                .play_module
-                .data()
-                .get_with_string("initial_state")
-                .cloned();
+        if self.is_initialized() {
+            panic!("Attempting to run koto script when already initialized");
+        }
+
+        if let Err(e) = self.koto.run() {
+            return self.log_error(&e.to_string());
+        }
+
+        if matches!(self.script_state, ScriptState::Compiled) {
+            let maybe_fn = self.play_module.data().get_with_string("setup").cloned();
             self.user_state = match maybe_fn {
                 Some(f) => match self.koto.run_function(f, CallArgs::None) {
                     Ok(state) => state,
                     Err(e) => {
-                        self.log_error(&e.to_string());
-                        return;
+                        return self.log_error(&e.to_string());
                     }
                 },
                 None => Value::Map(ValueMap::default()),
             };
-            self.call_initial_state = false;
         }
 
         if let Err(e) = self.run_play_function("on_load", &[self.user_state.clone()]) {
-            self.log_error(&e.to_string());
-            return;
+            return self.log_error(&e.to_string());
         }
 
-        self.compiler_output.set_inner_html("Success");
-
-        self.is_ready = true;
+        self.script_state = ScriptState::Initialized;
 
         self.process_koto_messages();
     }
 
     pub fn reset(&mut self) {
-        self.call_initial_state = true;
-        self.is_ready = false;
+        self.script_state = ScriptState::NotReady;
         self.canvas_context.clear_rect(
             0.0,
             0.0,
@@ -210,14 +220,19 @@ impl KotoWrapper {
     }
 
     pub fn is_ready(&self) -> bool {
-        self.is_ready
+        !matches!(self.script_state, ScriptState::NotReady)
+    }
+
+    pub fn is_initialized(&self) -> bool {
+        matches!(self.script_state, ScriptState::Initialized)
     }
 
     pub fn update_should_be_called(&self) -> bool {
-        self.is_ready && self.play_module.data().get_with_string("update").is_some()
+        self.is_initialized() && self.play_module.data().get_with_string("update").is_some()
     }
 
-    fn log_error(&self, error: &str) {
+    fn log_error(&mut self, error: &str) {
+        self.script_state = ScriptState::NotReady;
         self.compiler_output.set_inner_html(error);
         self.compiler_output
             .set_scroll_top(self.compiler_output.scroll_height());
@@ -235,11 +250,9 @@ impl KotoWrapper {
     }
 
     pub fn on_resize(&mut self) {
-        if self.is_ready {
+        if self.is_ready() {
             if let Err(e) = self.koto.run() {
-                self.log_error(&e.to_string());
-                self.is_ready = false;
-                return;
+                return self.log_error(&e.to_string());
             }
 
             self.process_koto_messages();
@@ -247,14 +260,13 @@ impl KotoWrapper {
     }
 
     pub fn run_update(&mut self, time: f64) {
-        debug_assert!(self.is_ready);
+        debug_assert!(self.is_ready());
 
         match self.run_play_function("update", &[self.user_state.clone(), time.into()]) {
             Ok(_) => {
                 self.process_koto_messages();
             }
             Err(e) => {
-                self.is_ready = false;
                 self.log_error(&e.to_string());
             }
         }

@@ -105,7 +105,7 @@ draw_boid = |boid|
     canvas.set_stroke_color visual_range_color
     canvas.stroke()
 
-play.initial_state = ||
+play.setup = ||
   last_time: 0
   boids: generate(boid_count, make_boid).to_list()
 

@@ -15,6 +15,8 @@ pub enum Msg {
     EditorInitialized { editor: AceEditor },
     EditorChanged,
     ScriptMenuChanged { script: &'static str },
+    PlayButtonClicked,
+    ReloadButtonClicked,
     ToggleVimBindings,
     AnimationFrame { time: f64 },
     WindowResized,
@@ -32,6 +34,7 @@ pub struct Playground {
     script: Box<str>,
     vim_bindings_enabled: bool,
 
+    run_script_enabled: bool,
     animation_frame: Option<AnimationFrame>,
     last_time: Option<f64>,
     current_time: f64,
@@ -72,6 +75,7 @@ impl Playground {
     fn reset(&mut self) {
         self.get_koto().reset();
         self.animation_frame = None;
+        self.current_time = 0.0;
         self.last_time = None;
     }
 
@@ -79,6 +83,20 @@ impl Playground {
         self.vim_bindings_enabled = enabled;
         self.get_editor()
             .set_keyboard_handler(if enabled { "ace/keyboard/vim" } else { "" });
+    }
+
+    fn run_script(&mut self, ctx: &Context<Self>) {
+        debug_assert!(self.run_script_enabled);
+
+        let koto = self.get_koto();
+
+        if koto.is_ready() && !koto.is_initialized() {
+            koto.run();
+        }
+
+        if koto.is_ready() && koto.update_should_be_called() {
+            self.request_animation_frame(ctx)
+        }
     }
 }
 
@@ -99,6 +117,7 @@ impl Component for Playground {
             animation_frame: None,
             last_time: None,
             current_time: 0.0,
+            run_script_enabled: true,
             _event_listeners: vec![
                 EventListener::new(&window(), "resize", {
                     let link = ctx.link().clone();
@@ -131,17 +150,30 @@ impl Component for Playground {
                 if !script.is_empty() {
                     let koto = self.get_koto();
                     koto.compile_script(&script);
-
-                    if koto.update_should_be_called() {
-                        self.request_animation_frame(ctx)
+                    if self.run_script_enabled {
+                        self.run_script(ctx);
                     }
                 }
                 self.script = script.into();
-                false
+                true
             }
             Msg::ScriptMenuChanged { script } => {
                 self.reset();
                 self.set_editor_contents(script);
+                false
+            }
+            Msg::PlayButtonClicked => {
+                self.run_script_enabled = !self.run_script_enabled;
+                if self.run_script_enabled {
+                    self.run_script(ctx);
+                } else {
+                    self.animation_frame = None;
+                }
+                true
+            }
+            Msg::ReloadButtonClicked => {
+                self.reset();
+                ctx.link().send_message(Msg::EditorChanged);
                 false
             }
             Msg::ToggleVimBindings => {
@@ -162,10 +194,11 @@ impl Component for Playground {
                 }
 
                 if koto.is_ready() {
-                    self.request_animation_frame(ctx)
+                    self.request_animation_frame(ctx);
+                    false
+                } else {
+                    true
                 }
-
-                false
             }
             Msg::WindowResized => {
                 let canvas = self.get_canvas();
@@ -193,7 +226,10 @@ impl Component for Playground {
         let editor_area = html! {
             <div class="editor-area">
                 <EditorToolbar
+                    script_playing={self.run_script_enabled}
                     vim_bindings_enabled={self.vim_bindings_enabled}
+                    on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
+                    on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
                     on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
                     on_script_selected={
                         ctx.link().callback(|script| Msg::ScriptMenuChanged {script})

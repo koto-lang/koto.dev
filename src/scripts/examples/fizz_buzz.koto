@@ -7,7 +7,7 @@ fizz_buzz = |n|
     _, 0 then "Buzz"
     else n
 
-play.initial_state = ||
+play.setup = ||
   update_time: 0
   n: 0
 
