@@ -1,5 +1,5 @@
 use {
-    super::{editor::Editor, script_menu::ScriptMenu},
+    super::{editor::Editor, editor_toolbar::EditorToolbar},
     crate::{
         ace_bindings::AceEditor, get_local_storage_value, koto_wrapper::KotoWrapper,
         set_local_storage_value,
@@ -26,15 +26,15 @@ pub struct Playground {
     canvas_ref: NodeRef,
     editor: Option<AceEditor>,
     koto: Option<KotoWrapper>,
-    animation_frame: Option<AnimationFrame>,
 
+    script: Box<str>,
+    vim_bindings_enabled: bool,
+
+    animation_frame: Option<AnimationFrame>,
     last_time: Option<f64>,
     current_time: f64,
 
-    _window_resized_listener: EventListener,
-    _before_unload_listener: EventListener,
-    script: Box<str>,
-    vim_bindings_enabled: bool,
+    _event_listeners: Vec<EventListener>,
 }
 
 impl Playground {
@@ -86,20 +86,22 @@ impl Component for Playground {
             canvas_ref: NodeRef::default(),
             editor: None,
             koto: None,
-            animation_frame: None,
-            last_time: None,
-            current_time: 0.0,
-            _window_resized_listener: EventListener::new(&window(), "resize", {
-                let link = ctx.link().clone();
-                move |_| link.send_message(Msg::WindowResized)
-            }),
-            _before_unload_listener: EventListener::new(&window(), "beforeunload", {
-                let link = ctx.link().clone();
-                move |_| link.send_message(Msg::BeforeUnload)
-            }),
             script: "".into(),
             vim_bindings_enabled: get_local_storage_value("vim-bindings-enabled")
                 .map_or(false, |enabled| enabled == "true"),
+            animation_frame: None,
+            last_time: None,
+            current_time: 0.0,
+            _event_listeners: vec![
+                EventListener::new(&window(), "resize", {
+                    let link = ctx.link().clone();
+                    move |_| link.send_message(Msg::WindowResized)
+                }),
+                EventListener::new(&window(), "beforeunload", {
+                    let link = ctx.link().clone();
+                    move |_| link.send_message(Msg::BeforeUnload)
+                }),
+            ],
         }
     }
 
@@ -118,7 +120,6 @@ impl Component for Playground {
             }
             Msg::EditorChanged { script } => {
                 self.animation_frame = None;
-
                 if !script.is_empty() {
                     let koto = self.get_koto();
                     koto.compile_script(&script);
@@ -127,9 +128,7 @@ impl Component for Playground {
                         self.request_animation_frame(ctx)
                     }
                 }
-
                 self.script = script;
-
                 false
             }
             Msg::ScriptMenuChanged { script } => {
@@ -162,12 +161,9 @@ impl Component for Playground {
             }
             Msg::WindowResized => {
                 let canvas = self.get_canvas();
-
                 canvas.set_width(canvas.client_width() as u32);
                 canvas.set_height(canvas.client_height() as u32);
-
                 self.get_koto().on_resize();
-
                 false
             }
             Msg::BeforeUnload => {
@@ -180,39 +176,19 @@ impl Component for Playground {
                         "false"
                     },
                 );
-
                 false
             }
         }
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        let vim_bindings_toggle = html! {
-            <button
-                class={
-                    if self.vim_bindings_enabled {
-                        "uk-button-primary"
-                    } else {
-                        "uk-button-default"
-                    }
-                }
-                onclick={ctx.link().callback(|_| Msg::ToggleVimBindings)}
-            >
-                <span uk-icon="icon: vimeo"></span>
-            </button>
-        };
-
         let editor_area = html! {
             <div class="editor-area">
-               <div class="editor-toolbar">
-                 <div class="horizontal-spacer"></div>
-
-                 { vim_bindings_toggle }
-
-                 <ScriptMenu
+                <EditorToolbar
+                    vim_bindings_enabled={self.vim_bindings_enabled}
+                    on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
                     on_script_selected={ctx.link().callback(|script| Msg::ScriptMenuChanged {script})}
-                 />
-               </div>
+                />
 
                 <Editor
                     on_changed={ctx.link().callback(|script| Msg::EditorChanged {script})}
