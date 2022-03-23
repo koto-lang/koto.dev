@@ -22,6 +22,7 @@ pub fn editor_toolbar(props: &Props) -> Html {
 
             <ToolbarButton
                 icon="play"
+                title="Run Script"
                 size={button_size}
                 toggled={props.script_playing}
                 on_clicked={props.on_play_clicked.clone()}
@@ -29,6 +30,7 @@ pub fn editor_toolbar(props: &Props) -> Html {
 
             <ToolbarButton
                 icon="refresh"
+                title="Reload Script"
                 size={button_size}
                 on_clicked={props.on_reload_clicked.clone()}
             />
@@ -37,6 +39,7 @@ pub fn editor_toolbar(props: &Props) -> Html {
 
             <ToolbarButton
                 icon="vimeo"
+                title="Toggle Vim Keybindings"
                 size={button_size}
                 toggled={props.vim_bindings_enabled}
                 on_clicked={props.on_vim_bindings_clicked.clone()}

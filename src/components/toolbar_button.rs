@@ -3,6 +3,7 @@ use {cloned::cloned, yew::prelude::*};
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub icon: &'static str,
+    pub title: &'static str,
     #[prop_or(1.0)]
     pub size: f32,
     #[prop_or("uk-button-default")]
@@ -18,6 +19,7 @@ pub struct Props {
 pub fn toolbar_button(props: &Props) -> Html {
     html! {
         <button
+            uk-tooltip={format!("title: {}; delay: 500", props.title)}
             class={
                 if props.toggled {
                     props.toggle_on_class

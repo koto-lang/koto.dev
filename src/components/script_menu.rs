@@ -84,7 +84,10 @@ pub fn script_menu(props: &Props) -> Html {
     });
 
     html! {
-        <select {onchange}>
+        <select
+            uk-tooltip="title: Example Koto Scripts; delay: 500"
+            {onchange}
+        >
             <option>{"Examples"}</option>
 
             { (*menu_items).clone() }
