@@ -1,13 +1,14 @@
 use {
     super::{editor::Editor, editor_toolbar::EditorToolbar},
     crate::{
-        ace_bindings::AceEditor, get_local_storage_value, koto_wrapper::KotoWrapper,
-        set_local_storage_value,
+        ace_bindings::AceEditor, copy_text_to_clipboard, get_local_storage_value,
+        koto_wrapper::KotoWrapper, set_local_storage_value, show_notification,
     },
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
     gloo_utils::window,
-    web_sys::{Element, HtmlCanvasElement},
+    js_sys::{decode_uri_component, encode_uri_component},
+    web_sys::{Element, HtmlCanvasElement, UrlSearchParams},
     yew::prelude::*,
 };
 
@@ -17,6 +18,7 @@ pub enum Msg {
     ScriptMenuChanged { script: &'static str },
     PlayButtonClicked,
     ReloadButtonClicked,
+    ShareButtonClicked,
     ToggleVimBindings,
     AnimationFrame { time: f64 },
     WindowResized,
@@ -98,6 +100,16 @@ impl Playground {
             self.request_animation_frame(ctx)
         }
     }
+
+    fn copy_link_to_clipboard(&self) {
+        let location = window().location();
+        let origin = location.origin().expect("Missing location origin");
+        let path = location.pathname().expect("Missing location pathname");
+        let script = encode_uri_component(&self.script);
+        let link = format!("{origin}{path}?script={script}");
+        copy_text_to_clipboard(&link);
+        show_notification("Link copied to clipboard", "link");
+    }
 }
 
 impl Component for Playground {
@@ -135,12 +147,30 @@ impl Component for Playground {
         match msg {
             Msg::EditorInitialized { editor } => {
                 self.editor = Some(editor);
-                self.set_editor_contents(
-                    get_local_storage_value("script")
-                        .as_ref()
-                        .map(|s| s.as_str())
-                        .unwrap_or(include_str!("../scripts/canvas/random_rects.koto")),
-                );
+                let script = {
+                    let url_params = UrlSearchParams::new_with_str(
+                        &window()
+                            .location()
+                            .search()
+                            .expect("Missing location search string"),
+                    )
+                    .expect("Failed to create UrlSearchParams");
+
+                    if let Some(script) = url_params.get("script") {
+                        match decode_uri_component(&script) {
+                            Ok(script) => script.into(),
+                            Err(_) => {
+                                show_notification("Failed to read script from url", "error");
+                                "".to_string()
+                            }
+                        }
+                    } else {
+                        get_local_storage_value("script").unwrap_or(
+                            include_str!("../scripts/canvas/random_rects.koto").to_string(),
+                        )
+                    }
+                };
+                self.set_editor_contents(&script);
                 self.set_vim_bindings_enabled(self.vim_bindings_enabled);
                 false
             }
@@ -174,6 +204,10 @@ impl Component for Playground {
             Msg::ReloadButtonClicked => {
                 self.reset();
                 ctx.link().send_message(Msg::EditorChanged);
+                false
+            }
+            Msg::ShareButtonClicked => {
+                self.copy_link_to_clipboard();
                 false
             }
             Msg::ToggleVimBindings => {
@@ -231,6 +265,7 @@ impl Component for Playground {
                     on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
                     on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
                     on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
+                    on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
                         ctx.link().callback(|script| Msg::ScriptMenuChanged {script})
                     }

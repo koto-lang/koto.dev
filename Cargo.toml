@@ -25,18 +25,11 @@ yew = "0.19.3"                   # A framework for making client-side single-pag
 version = "0.3.56"
 features = [
   'CanvasRenderingContext2d',
-  'console',
-  'Document',
   'Element',
-  'HtmlButtonElement',
   'HtmlCanvasElement',
-  'HtmlElement',
-  'HtmlOptionElement',
-  'HtmlOptGroupElement',
-  'HtmlSelectElement',
-  'Node',
+  'Location',
   'Storage',
-  'Text',
+  'UrlSearchParams',
   'Window',
 ]
 

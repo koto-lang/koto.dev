@@ -21,6 +21,16 @@ extern "C" {
     fn register_koto_editor_mode();
 }
 
+#[wasm_bindgen(module = "/src/show_notification.js")]
+extern "C" {
+    fn show_notification(message: &str, icon: &str);
+}
+
+#[wasm_bindgen(module = "/src/copy_text_to_clipboard.js")]
+extern "C" {
+    fn copy_text_to_clipboard(text: &str);
+}
+
 #[function_component(App)]
 fn app() -> Html {
     html! {

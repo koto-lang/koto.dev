@@ -10,6 +10,7 @@ pub struct Props {
     pub on_play_clicked: Callback<()>,
     pub on_reload_clicked: Callback<()>,
     pub on_vim_bindings_clicked: Callback<()>,
+    pub on_share_clicked: Callback<()>,
     pub on_script_selected: Callback<&'static str>,
 }
 
@@ -40,8 +41,14 @@ pub fn editor_toolbar(props: &Props) -> Html {
                 toggled={props.vim_bindings_enabled}
                 on_clicked={props.on_vim_bindings_clicked.clone()}
             />
-
             <div class="horizontal-spacer"></div>
+
+            <ToolbarButton
+                icon_left="link"
+                caption="Share"
+                tooltip="Copy a shareable link to the clipboard"
+                on_clicked={props.on_share_clicked.clone()}
+            />
 
             <ScriptMenu on_script_selected={props.on_script_selected.clone()} />
         </div>
