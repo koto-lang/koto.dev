@@ -15,30 +15,28 @@ pub struct Props {
 
 #[function_component(EditorToolbar)]
 pub fn editor_toolbar(props: &Props) -> Html {
-    let button_size = 0.8;
     html! {
         <div class="editor-toolbar">
             <ToolbarButton
-                icon="play"
-                title="Run Script"
-                size={button_size}
+                icon_left="play"
+                caption="Run"
+                tooltip="Run the script"
                 toggled={props.script_playing}
                 on_clicked={props.on_play_clicked.clone()}
             />
 
             <ToolbarButton
-                icon="refresh"
-                title="Reload Script"
-                size={button_size}
+                icon_left="refresh"
+                caption="Reload"
+                tooltip="Reload the script"
                 on_clicked={props.on_reload_clicked.clone()}
             />
 
             <div class="horizontal-spacer"></div>
 
             <ToolbarButton
-                icon="vimeo"
-                title="Toggle Vim Keybindings"
-                size={button_size}
+                icon_left="vimeo"
+                tooltip="Toggle Vim keybindings"
                 toggled={props.vim_bindings_enabled}
                 on_clicked={props.on_vim_bindings_clicked.clone()}
             />

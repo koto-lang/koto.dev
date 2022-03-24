@@ -1,4 +1,4 @@
-use {cloned::cloned, yew::prelude::*};
+use {super::toolbar_button::ToolbarButton, cloned::cloned, yew::prelude::*};
 
 struct Script {
     name: &'static str,
@@ -74,24 +74,19 @@ pub fn script_menu(props: &Props) -> Html {
                                 for script_group.scripts.iter().map(|script| {
                                     let index = script_index;
                                     script_index += 1;
+                                    let onclick = Callback::from({
+                                        cloned!(on_menu_item_clicked);
+                                        move |_| on_menu_item_clicked.emit(index)
+                                    });
                                     html! {
                                         <li>
-                                            <a
-                                                onclick={
-                                                    Callback::from({
-                                                        cloned!(on_menu_item_clicked);
-                                                        move |_| on_menu_item_clicked.emit(index)
-                                                    })
-                                                }
-                                            >
+                                            <a {onclick}>
                                                 {script.name.to_string()}
                                             </a>
                                         </li>
                                     }
                                 })
                             }
-
-                            <li class="uk-nav-divider"></li>
                         </>
                     }
                 })
@@ -102,9 +97,11 @@ pub fn script_menu(props: &Props) -> Html {
 
     html! {
         <div class="uk-inline">
-            <button class="uk-button uk-button-default uk-button-small" type="button">
-                {"Examples"}
-            </button>
+            <ToolbarButton
+                icon_right="chevron-down"
+                caption="Examples"
+                tooltip="Load an example script"
+            />
 
             <div uk-dropdown="mode: click" uk-toggle="true">
                 { (*menu_items).clone() }

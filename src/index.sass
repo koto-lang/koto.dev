@@ -1,3 +1,24 @@
+.flex-column
+  display: flex
+  flex-direction: column
+
+.flex-grow
+  flex: 100%
+
+.fixed-mono
+  font-family: monospace
+  resize: none
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+.fullsize
+  width: 100%
+  height: 100%
+
+.horizontal-spacer
+  margin-left: auto
+
 body
   background-color: #cccccc
   margin: 0
@@ -24,9 +45,6 @@ body
     grid-template-columns: 50% 50%
     grid-template-rows: 80% 20%
 
-.horizontal-spacer
-  margin-left: auto
-
 .editor-area
   display: flex
   flex-direction: column
@@ -36,21 +54,3 @@ body
   display: flex
   flex-direction: row
   align-items: flex-end
-
-.fixed-mono
-  font-family: monospace
-  resize: none
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-
-.fullsize
-  width: 100%
-  height: 100%
-
-.flex-column
-  display: flex
-  flex-direction: column
-
-.flex-grow
-  flex: 100%
