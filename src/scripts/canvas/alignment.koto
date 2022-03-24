@@ -15,7 +15,7 @@ canvas.line_to w, h
 canvas.move_to w, 0
 canvas.line_to 0, h
 
-canvas.set_stroke_color 100, 100, 100
+canvas.set_stroke_color 120, 120, 120
 canvas.stroke()
 
 # Center square

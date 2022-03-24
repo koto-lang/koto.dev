@@ -1,27 +1,19 @@
 mod ace_bindings;
-mod app;
+mod components;
 mod koto_wrapper;
 
 use {
-    crate::{app::App, koto_wrapper::KotoMessageQueue},
-    console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::{document, window},
-    std::{cell::RefCell, collections::VecDeque, rc::Rc},
-    wasm_bindgen::prelude::*,
-    web_sys::Element,
+    components::playground::Playground, console_error_panic_hook::set_once as set_panic_hook,
+    gloo_utils::window, wasm_bindgen::prelude::*, yew::prelude::*,
 };
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-thread_local! {
-    static KOTO_MESSAGE_QUEUE: KotoMessageQueue = Rc::new(RefCell::new(VecDeque::new()));
-}
-
 fn main() {
     set_panic_hook();
     register_koto_editor_mode();
-    App::setup();
+    yew::start_app::<App>();
 }
 
 #[wasm_bindgen(module = "/src/koto-highlight-rules.js")]
@@ -29,47 +21,23 @@ extern "C" {
     fn register_koto_editor_mode();
 }
 
-struct Script {
-    name: &'static str,
-    script: &'static str,
+#[wasm_bindgen(module = "/src/show_notification.js")]
+extern "C" {
+    fn show_notification(message: &str, icon: &str);
 }
 
-struct ScriptGroup {
-    name: &'static str,
-    scripts: &'static [Script],
+#[wasm_bindgen(module = "/src/copy_text_to_clipboard.js")]
+extern "C" {
+    fn copy_text_to_clipboard(text: &str);
 }
 
-const SCRIPTS: &[ScriptGroup] = &[
-    ScriptGroup {
-        name: "Examples",
-        scripts: &[Script {
-            name: "Fizz Buzz",
-            script: include_str!("scripts/examples/fizz_buzz.koto"),
-        }],
-    },
-    ScriptGroup {
-        name: "Canvas",
-        scripts: &[
-            Script {
-                name: "Boids",
-                script: include_str!("scripts/canvas/boids.koto"),
-            },
-            Script {
-                name: "Random Rects",
-                script: include_str!("scripts/canvas/random_rects.koto"),
-            },
-            Script {
-                name: "Alignment",
-                script: include_str!("scripts/canvas/alignment.koto"),
-            },
-        ],
-    },
-];
-
-fn get_element_by_id(id: &str) -> Element {
-    document()
-        .get_element_by_id(id)
-        .unwrap_or_else(|| panic!("Failed to get div with id '{id}'"))
+#[function_component(App)]
+fn app() -> Html {
+    html! {
+        <div class="container">
+            <Playground />
+        </div>
+    }
 }
 
 fn get_local_storage_value(id: &str) -> Option<String> {
@@ -90,9 +58,4 @@ fn set_local_storage_value(id: &str, value: &str) {
         .expect("Missing local storage")
         .set(id, &value)
         .ok();
-}
-
-#[macro_export]
-macro_rules! console_log {
-    ($($t:tt)*) => (web_sys::console::log_1(&JsValue::from(format_args!($($t)*).to_string())))
 }

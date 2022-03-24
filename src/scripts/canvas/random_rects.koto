@@ -10,7 +10,7 @@ random_color = ||
   a = random_float 0.4, 0.6
   make_num4 r, g, b, a
 
-play.initial_state = ||
+play.setup = ||
   update_time: 0
 
 play.update = |state, time|
