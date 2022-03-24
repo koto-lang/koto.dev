@@ -20,6 +20,7 @@ pub enum Msg {
     ReloadButtonClicked,
     ShareButtonClicked,
     ToggleVimBindings,
+    ToggleEditorTheme,
     AnimationFrame { time: f64 },
     WindowResized,
     BeforeUnload,
@@ -34,9 +35,11 @@ pub struct Playground {
     koto: Option<KotoWrapper>,
 
     script: Box<str>,
-    vim_bindings_enabled: bool,
-
     run_script_enabled: bool,
+
+    vim_bindings_enabled: bool,
+    light_theme_enabled: bool,
+
     animation_frame: Option<AnimationFrame>,
     last_time: Option<f64>,
     current_time: f64,
@@ -79,6 +82,15 @@ impl Playground {
         self.animation_frame = None;
         self.current_time = 0.0;
         self.last_time = None;
+    }
+
+    fn set_light_theme_enabled(&mut self, enabled: bool) {
+        self.light_theme_enabled = enabled;
+        self.get_editor().set_theme(if enabled {
+            "ace/theme/solarized_light"
+        } else {
+            "ace/theme/solarized_dark"
+        });
     }
 
     fn set_vim_bindings_enabled(&mut self, enabled: bool) {
@@ -124,6 +136,8 @@ impl Component for Playground {
             editor: None,
             koto: None,
             script: "".into(),
+            light_theme_enabled: get_local_storage_value("light-theme-enabled")
+                .map_or(false, |enabled| enabled == "true"),
             vim_bindings_enabled: get_local_storage_value("vim-bindings-enabled")
                 .map_or(false, |enabled| enabled == "true"),
             animation_frame: None,
@@ -172,6 +186,7 @@ impl Component for Playground {
                 };
                 self.set_editor_contents(&script);
                 self.set_vim_bindings_enabled(self.vim_bindings_enabled);
+                self.set_light_theme_enabled(self.light_theme_enabled);
                 false
             }
             Msg::EditorChanged => {
@@ -210,6 +225,10 @@ impl Component for Playground {
                 self.copy_link_to_clipboard();
                 false
             }
+            Msg::ToggleEditorTheme => {
+                self.set_light_theme_enabled(!self.light_theme_enabled);
+                true
+            }
             Msg::ToggleVimBindings => {
                 self.set_vim_bindings_enabled(!self.vim_bindings_enabled);
                 true
@@ -244,6 +263,14 @@ impl Component for Playground {
             Msg::BeforeUnload => {
                 set_local_storage_value("script", &self.script);
                 set_local_storage_value(
+                    "light-theme-enabled",
+                    if self.light_theme_enabled {
+                        "true"
+                    } else {
+                        "false"
+                    },
+                );
+                set_local_storage_value(
                     "vim-bindings-enabled",
                     if self.vim_bindings_enabled {
                         "true"
@@ -261,9 +288,11 @@ impl Component for Playground {
             <div class="editor-area">
                 <EditorToolbar
                     script_playing={self.run_script_enabled}
+                    light_theme_enabled={self.light_theme_enabled}
                     vim_bindings_enabled={self.vim_bindings_enabled}
                     on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
                     on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
+                    on_theme_clicked={ctx.link().callback(|_| Msg::ToggleEditorTheme)}
                     on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
                     on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
@@ -284,8 +313,7 @@ impl Component for Playground {
 
                 <canvas
                   ref={self.canvas_ref.clone()}
-                  id="koto-canvas"
-                  class="fullsize"
+                  class="playground-canvas fullsize"
                   width="400"
                   height="400"
                 ></canvas>

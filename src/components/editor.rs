@@ -22,7 +22,6 @@ pub fn editor(props: &Props) -> Html {
             move |_| {
                 let ace = get_ace();
                 let editor = ace.edit(EDITOR_ID);
-                editor.set_theme("ace/theme/solarized_dark");
                 editor.set_show_print_margin(false);
 
                 let session = editor.get_session();
@@ -45,4 +44,9 @@ pub fn editor(props: &Props) -> Html {
     html! {
         <div id={EDITOR_ID} class="flex-grow"></div>
     }
+}
+
+#[wasm_bindgen(module = "/src/copy_text_to_clipboard.js")]
+extern "C" {
+    fn setup_ace_base_path(text: &str);
 }
