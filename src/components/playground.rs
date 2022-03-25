@@ -1,8 +1,8 @@
 use {
     super::{editor::Editor, editor_toolbar::EditorToolbar},
     crate::{
-        ace_bindings::AceEditor, copy_text_to_clipboard, get_local_storage_value,
-        koto_wrapper::KotoWrapper, set_local_storage_value, show_notification,
+        ace_bindings::AceEditor, copy_text_to_clipboard, koto_wrapper::KotoWrapper,
+        show_notification, stored_value::StoredValue,
     },
     gloo_events::EventListener,
     gloo_render::AnimationFrame,
@@ -34,11 +34,11 @@ pub struct Playground {
     editor: Option<AceEditor>,
     koto: Option<KotoWrapper>,
 
-    script: Box<str>,
     run_script_enabled: bool,
 
-    vim_bindings_enabled: bool,
-    light_theme_enabled: bool,
+    script: StoredValue<String>,
+    vim_bindings_enabled: StoredValue<bool>,
+    light_theme_enabled: StoredValue<bool>,
 
     animation_frame: Option<AnimationFrame>,
     last_time: Option<f64>,
@@ -65,11 +65,11 @@ impl Playground {
         self.koto.as_mut().expect("Missing koto wrapper")
     }
 
-    fn get_editor(&mut self) -> &AceEditor {
+    fn get_editor(&self) -> &AceEditor {
         self.editor.as_ref().expect("Missing editor")
     }
 
-    fn get_editor_contents(&mut self) -> String {
+    fn get_editor_contents(&self) -> String {
         self.get_editor().get_session().get_value()
     }
 
@@ -99,22 +99,21 @@ impl Playground {
                     Ok(script) => script.into(),
                     Err(_) => {
                         show_notification("Failed to read script from url", "error");
-                        "".to_string()
+                        "".into()
                     }
                 }
             } else {
-                get_local_storage_value("script")
-                    .unwrap_or(include_str!("../scripts/canvas/random_rects.koto").to_string())
+                self.script.clone()
             }
         };
 
         self.set_editor_contents(&script);
-        self.set_vim_bindings_enabled(self.vim_bindings_enabled);
-        self.set_light_theme_enabled(self.light_theme_enabled);
+        self.set_vim_bindings_enabled(*self.vim_bindings_enabled);
+        self.set_light_theme_enabled(*self.light_theme_enabled);
     }
 
     fn set_light_theme_enabled(&mut self, enabled: bool) {
-        self.light_theme_enabled = enabled;
+        self.light_theme_enabled.set(enabled);
         self.get_editor().set_theme(if enabled {
             "ace/theme/solarized_light"
         } else {
@@ -123,7 +122,7 @@ impl Playground {
     }
 
     fn set_vim_bindings_enabled(&mut self, enabled: bool) {
-        self.vim_bindings_enabled = enabled;
+        self.vim_bindings_enabled.set(enabled);
         self.get_editor()
             .set_keyboard_handler(if enabled { "ace/keyboard/vim" } else { "" });
     }
@@ -164,11 +163,11 @@ impl Component for Playground {
             script_output_ref: NodeRef::default(),
             editor: None,
             koto: None,
-            script: "".into(),
-            light_theme_enabled: get_local_storage_value("light-theme-enabled")
-                .map_or(false, |enabled| enabled == "true"),
-            vim_bindings_enabled: get_local_storage_value("vim-bindings-enabled")
-                .map_or(false, |enabled| enabled == "true"),
+            script: StoredValue::new_with_default("script", || {
+                include_str!("../scripts/canvas/random_rects.koto").into()
+            }),
+            light_theme_enabled: StoredValue::new("light_theme_enabled"),
+            vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
             animation_frame: None,
             last_time: None,
             current_time: 0.0,
@@ -203,7 +202,7 @@ impl Component for Playground {
                         self.run_script(ctx);
                     }
                 }
-                self.script = script.into();
+                self.script.set(script.into());
                 true
             }
             Msg::ScriptMenuChanged { script } => {
@@ -230,11 +229,11 @@ impl Component for Playground {
                 false
             }
             Msg::ToggleEditorTheme => {
-                self.set_light_theme_enabled(!self.light_theme_enabled);
+                self.set_light_theme_enabled(!*self.light_theme_enabled);
                 true
             }
             Msg::ToggleVimBindings => {
-                self.set_vim_bindings_enabled(!self.vim_bindings_enabled);
+                self.set_vim_bindings_enabled(!*self.vim_bindings_enabled);
                 true
             }
             Msg::AnimationFrame { time } => {
@@ -265,23 +264,9 @@ impl Component for Playground {
                 false
             }
             Msg::BeforeUnload => {
-                set_local_storage_value("script", &self.script);
-                set_local_storage_value(
-                    "light-theme-enabled",
-                    if self.light_theme_enabled {
-                        "true"
-                    } else {
-                        "false"
-                    },
-                );
-                set_local_storage_value(
-                    "vim-bindings-enabled",
-                    if self.vim_bindings_enabled {
-                        "true"
-                    } else {
-                        "false"
-                    },
-                );
+                self.script.save();
+                self.light_theme_enabled.save();
+                self.vim_bindings_enabled.save();
                 false
             }
         }
@@ -292,8 +277,8 @@ impl Component for Playground {
             <div class="editor-area">
                 <EditorToolbar
                     script_playing={self.run_script_enabled}
-                    light_theme_enabled={self.light_theme_enabled}
-                    vim_bindings_enabled={self.vim_bindings_enabled}
+                    light_theme_enabled={*self.light_theme_enabled}
+                    vim_bindings_enabled={*self.vim_bindings_enabled}
                     on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
                     on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
                     on_theme_clicked={ctx.link().callback(|_| Msg::ToggleEditorTheme)}

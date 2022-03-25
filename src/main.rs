@@ -1,6 +1,7 @@
 mod ace_bindings;
 mod components;
 mod koto_wrapper;
+mod stored_value;
 
 use {
     components::playground::Playground, console_error_panic_hook::set_once as set_panic_hook,
