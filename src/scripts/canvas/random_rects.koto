@@ -4,13 +4,14 @@ import play.random_color
 
 random_int = |min, max|
   x = random.number()
-  (min.lerp max, x).round()
+  min.lerp(max, x).round()
 
 play.setup = ||
-  canvas.set_fill_color random_color() * 0.6 + 0.3
-  canvas.fill_rect 0, 0, canvas.width(), canvas.height()
-  return
-    update_time: 0
+  canvas.clear
+    random_int(100, 200),
+    random_int(100, 200),
+    random_int(100, 200)
+  { update_time: 0 }
 
 play.update = |state, time|
   if time >= state.update_time

@@ -25,7 +25,7 @@ pub enum KotoMessage {
         counter_clockwise: bool,
     },
     BeginPath,
-    Clear,
+    Clear(Option<Color>),
     ClearOutput,
     Fill,
     FillRect(Rect),
@@ -306,8 +306,19 @@ impl KotoWrapper {
                         .unwrap();
                 }
                 KotoMessage::BeginPath => self.canvas_context.begin_path(),
-                KotoMessage::Clear => {
+                KotoMessage::Clear(None) => {
                     self.canvas_context.clear_rect(
+                        0.0,
+                        0.0,
+                        self.canvas.width() as f64,
+                        self.canvas.height() as f64,
+                    );
+                }
+                KotoMessage::Clear(Some(color)) => {
+                    let color_rgb = color.as_css_rgb();
+                    self.canvas_context
+                        .set_fill_style(&JsValue::from(color_rgb));
+                    self.canvas_context.fill_rect(
                         0.0,
                         0.0,
                         self.canvas.width() as f64,
@@ -450,8 +461,34 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     result.add_fn("clear", {
         cloned!(queue);
-        move |_, _| {
-            queue.borrow_mut().push_back(KotoMessage::Clear);
+        move |vm, args| {
+            let maybe_color = match vm.get_args(args) {
+                [] => None,
+                [Number(n1), Number(n2), Number(n3)] => {
+                    Some((n1.into(), n2.into(), n3.into(), 1.0))
+                }
+                [Number(n1), Number(n2), Number(n3), Number(n4)] => {
+                    Some((n1.into(), n2.into(), n3.into(), n4.into()))
+                }
+                [Num4(color)] => Some((
+                    color.0 as f64,
+                    color.1 as f64,
+                    color.2 as f64,
+                    color.3 as f64,
+                )),
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "play.random_color",
+                        "an optional alpha value",
+                        unexpected,
+                    )
+                }
+            }
+            .map(|(r, g, b, a)| Color { r, g, b, a });
+
+            queue
+                .borrow_mut()
+                .push_back(KotoMessage::Clear(maybe_color));
             Ok(Empty)
         }
     });
