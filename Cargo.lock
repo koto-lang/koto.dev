@@ -357,6 +357,7 @@ version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
  "fb_cloned",
+ "getrandom",
  "glob",
  "gloo-console",
  "gloo-events",
@@ -366,6 +367,7 @@ dependencies = [
  "js-sys",
  "koto",
  "koto_random",
+ "rand",
  "wasm-bindgen",
  "web-sys",
  "wee_alloc",

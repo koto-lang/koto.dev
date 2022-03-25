@@ -17,9 +17,16 @@ gloo-render = "0.1.0"            # Convenience crate for working with browser's 
 gloo-utils = "0.1.2"             # Convenience crate for common `web_sys` features
 instant = "0.1.12"               # A partial replacement for std::time::Instant that works on WASM too.
 js-sys = "0.3.56"                # Bindings for all JS global objects and functions in all JS environments like Node.js and bro…
+rand = "0.8.5"                   # Random number generators and other randomness functionality.
 wasm-bindgen = "0.2.79"          # Easy support for interacting between JS and Rust.
 wee_alloc = "0.4.5"              # wee_alloc: The Wasm-Enabled, Elfin Allocator
 yew = "0.19.3"                   # A framework for making client-side single-page apps
+
+
+[dependencies.getrandom]
+# A small cross-platform library for retrieving random data from system source
+version = "0.2.4"
+features = ["js"]
 
 [dependencies.web-sys]
 version = "0.3.56"

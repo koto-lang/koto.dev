@@ -7,6 +7,7 @@ use {
         },
         Koto, KotoError, KotoSettings,
     },
+    rand::{thread_rng, Rng},
     std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
     web_sys::{CanvasRenderingContext2d, Element, HtmlCanvasElement},
@@ -222,7 +223,10 @@ impl KotoWrapper {
     }
 
     pub fn is_ready(&self) -> bool {
-        !matches!(self.script_state, ScriptState::NotReady | ScriptState::ErrorAfterInitialized)
+        !matches!(
+            self.script_state,
+            ScriptState::NotReady | ScriptState::ErrorAfterInitialized
+        )
     }
 
     pub fn is_initialized(&self) -> bool {
@@ -363,6 +367,33 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
         move |_, _| {
             queue.borrow_mut().push_back(KotoMessage::ClearOutput);
             Ok(Empty)
+        }
+    });
+
+    result.add_fn("random_color", {
+        move |vm, args| {
+            let alpha = match vm.get_args(args) {
+                [] => 1.0,
+                [Number(alpha)] => alpha.into(),
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "play.random_color",
+                        "an optional alpha value",
+                        unexpected,
+                    )
+                }
+            };
+
+            let mut rng = thread_rng();
+            let r: u8 = rng.gen_range(0..=255);
+            let g: u8 = rng.gen_range(0..=255);
+            let b: u8 = rng.gen_range(0..=255);
+            Ok(Num4(koto::runtime::num4::Num4(
+                r.into(),
+                g.into(),
+                b.into(),
+                alpha,
+            )))
         }
     });
 

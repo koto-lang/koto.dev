@@ -4,11 +4,11 @@
 - [ ] Only show canvas when used by script
 
 # Maybe
-- [ ] play.random_color()
 - [ ] Run koto on a worker?
       - Probably requires SharedArrayBuffer to be efficient
 
 # Done
+- [x] play.random_color()
 - [x] Move editor logic into App
 - [x] tests for builtin scripts
 - [x] local storage for current script
