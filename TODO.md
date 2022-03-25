@@ -5,6 +5,8 @@
 
 # Maybe
 - [ ] play.random_color()
+- [ ] Run koto on a worker?
+      - Probably requires SharedArrayBuffer to be efficient
 
 # Done
 - [x] Move editor logic into App

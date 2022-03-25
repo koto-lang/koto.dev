@@ -439,7 +439,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 unexpected => {
                     return unexpected_type_error_with_slice(
                         "canvas.fill_rect",
-                        "x & y (as Numbers or a Num2), width, heigth",
+                        "(x and y (as Numbers or a Num2), width, height)",
                         unexpected,
                     )
                 }
@@ -514,7 +514,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 unexpected => {
                     return unexpected_type_error_with_slice(
                         "canvas.rect",
-                        "x & y (as Numbers or a Num2), width, heigth",
+                        "x and y (as Numbers or a Num2), width, height",
                         unexpected,
                     )
                 }
@@ -668,7 +668,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 unexpected => {
                     return unexpected_type_error_with_slice(
                         "canvas.stroke_rect",
-                        "x & y (as Numbers or a Num2), width, heigth",
+                        "(x and y (as Numbers or a Num2), width, height)",
                         unexpected,
                     )
                 }

@@ -11,7 +11,10 @@ random_color = ||
   make_num4 r, g, b, a
 
 play.setup = ||
-  update_time: 0
+  canvas.set_fill_color random_color()
+  canvas.fill_rect 0, 0, canvas.width(), canvas.height()
+  return
+    update_time: 0
 
 play.update = |state, time|
   if time >= state.update_time
