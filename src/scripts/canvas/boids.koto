@@ -1,30 +1,33 @@
-import iterator.generate
 from number import pi, pi_2, tau
 
 boid_count = 50
 
-boid_width = 12
-boid_height = 14
-visual_range = 80
+boid_width = 15
+boid_height = 18
+visual_range = boid_width * 4
 boundary = 20
+
+background_color = make_num4 60, 80, 80, 1
 
 show_ranges = false
 visual_range_color = make_num4 230, 230, 230, 1
 
 attraction_factor = 0.5
 matching_factor = 0.5
-avoidance_factor = 3
+avoidance_factor = 2
 boundary_turn_rate = 8
 minimum_distance = boid_width * 1.5
 
-initial_speed = 6
-speed_limit = 8
+initial_speed = 4
+speed_limit = 6
 
 make_boid = ||
   x = random.number() * canvas.width()
   y = random.number() * canvas.height()
   direction = random.number() * tau
+  color = 120.lerp 220, random.number()
   return
+    color: make_num4 color, color, color, 1.0
     position: make_num2 x, y
     velocity: make_num2 direction.cos() * initial_speed, direction.sin() * initial_speed
 
@@ -76,38 +79,45 @@ update_boid = |boid, state, time_delta|
 draw_boid = |boid|
   x, y = boid.position
 
-  canvas.translate x, y
-  canvas.rotate boid.velocity.angle() + pi_2 # Adjust rotation to match canvas orientation
-  canvas.translate -x, -y
+  # Rotate the canvas transformation to match the boid's angle
+  canvas
+    .translate x, y
+    .rotate boid.velocity.angle() + pi_2
+    .translate -x, -y
 
   w2 = boid_width / 2
   bottom = y + boid_height / 3
   top = bottom - boid_height
-  bump = bottom - boid_height / 5
+  bump = bottom - boid_height / 6
 
-  canvas.begin_path()
-  canvas.move_to x - w2, bottom
-  canvas.line_to x, top
-  canvas.line_to x + w2, bottom
-  canvas.line_to x, bump
-  canvas.line_to x - w2, bottom
+  canvas
+    .begin_path()
+    .move_to x - w2, bottom
+    .line_to x, top
+    .line_to x + w2, bottom
+    .line_to x, bump
+    .line_to x - w2, bottom
+    .set_fill_color boid.color
+    .fill()
 
-  canvas.set_fill_color 180, 180, 180
-  canvas.fill()
-
+  # Reset the canvas transformation
   canvas.set_transform 1, 0, 0, 1, 0, 0
 
   if show_ranges
-    canvas.begin_path()
-    canvas.arc x, y, visual_range, 0, tau
-    canvas.move_to x + minimum_distance, y
-    canvas.arc x, y, minimum_distance, 0, tau
-    canvas.set_stroke_color visual_range_color
-    canvas.stroke()
+    canvas
+      .begin_path()
+      .arc x, y, visual_range, 0, tau
+      .move_to x + minimum_distance, y
+      .arc x, y, minimum_distance, 0, tau
+      .set_stroke_color visual_range_color
+      .stroke()
 
 play.setup = ||
+  boids:
+    iterator
+      .generate boid_count, make_boid
+      .to_list()
   last_time: 0
-  boids: generate(boid_count, make_boid).to_list()
 
 play.on_load = |state|
   state.boids.resize_with boid_count, make_boid
@@ -116,8 +126,7 @@ play.update = |state, time|
   time_delta = time - state.last_time
   state.last_time = time
 
-  canvas.set_fill_color 100, 100, 100
-  canvas.fill_rect 0, 0, canvas.width(), canvas.height()
+  canvas.clear background_color
 
   for boid in state.boids
     update_boid boid, state, time_delta

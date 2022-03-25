@@ -8,11 +8,11 @@ fizz_buzz = |n|
     else n
 
 play.setup = ||
-  update_time: 0
-  n: 0
+  next_update_time: 0
+  current_value: 0
 
 play.update = |state, time|
-  if time >= state.update_time
-    state.update_time = time + 0.2
-    n = state.n += 1
+  if time >= state.next_update_time
+    state.next_update_time = time + 0.2
+    n = state.current_value += 1
     print fizz_buzz n

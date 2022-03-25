@@ -414,10 +414,10 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
 fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> ValueMap {
     use Value::*;
 
-    let result = ValueMap::default();
+    let canvas_module = ValueMap::default();
 
-    result.add_fn("arc", {
-        cloned!(queue);
+    canvas_module.add_fn("arc", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y, radius, start_angle, end_angle, counter_clockwise) = match vm.get_args(args) {
                 [Num2(n), Number(radius), Number(start_angle), Number(end_angle)] => {
@@ -448,19 +448,19 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 end_angle,
                 counter_clockwise,
             });
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
     }});
 
-    result.add_fn("begin_path", {
-        cloned!(queue);
+    canvas_module.add_fn("begin_path", {
+        cloned!(canvas_module, queue);
         move |_, _| {
             queue.borrow_mut().push_back(KotoMessage::BeginPath);
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("clear", {
-        cloned!(queue);
+    canvas_module.add_fn("clear", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let maybe_color = match vm.get_args(args) {
                 [] => None,
@@ -489,20 +489,20 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::Clear(maybe_color));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("fill", {
-        cloned!(queue);
+    canvas_module.add_fn("fill", {
+        cloned!(canvas_module, queue);
         move |_, _| {
             queue.borrow_mut().push_back(KotoMessage::Fill);
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("fill_rect", {
-        cloned!(queue);
+    canvas_module.add_fn("fill_rect", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y, width, height) = match vm.get_args(args) {
                 [Num2(pos), Number(width), Number(height)] => {
@@ -525,17 +525,17 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 width,
                 height,
             }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("height", {
+    canvas_module.add_fn("height", {
         cloned!(canvas);
         move |_, _| Ok(Number(canvas.height().into()))
     });
 
-    result.add_fn("line_to", {
-        cloned!(queue);
+    canvas_module.add_fn("line_to", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
@@ -551,12 +551,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::LineTo(Point { x, y }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("move_to", {
-        cloned!(queue);
+    canvas_module.add_fn("move_to", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
@@ -572,12 +572,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::MoveTo(Point { x, y }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("rect", {
-        cloned!(queue);
+    canvas_module.add_fn("rect", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y, width, height) = match vm.get_args(args) {
                 [Num2(pos), Number(width), Number(height)] => {
@@ -600,12 +600,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 width,
                 height,
             }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("rotate", {
-        cloned!(queue);
+    canvas_module.add_fn("rotate", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let n = match vm.get_args(args) {
                 [Number(n)] => n.into(),
@@ -618,12 +618,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 }
             };
             queue.borrow_mut().push_back(KotoMessage::Rotate(n));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("set_fill_color", {
-        cloned!(queue);
+    canvas_module.add_fn("set_fill_color", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (r, g, b, a) = match vm.get_args(args) {
                 [Number(n1), Number(n2), Number(n3)] => (n1.into(), n2.into(), n3.into(), 1.0),
@@ -647,12 +647,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::SetFillColor(Color { r, b, g, a }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("set_line_width", {
-        cloned!(queue);
+    canvas_module.add_fn("set_line_width", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let width = match vm.get_args(args) {
                 [Number(n)] => n,
@@ -667,12 +667,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::SetLineWidth(width.into()));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("set_stroke_color", {
-        cloned!(queue);
+    canvas_module.add_fn("set_stroke_color", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (r, g, b, a) = match vm.get_args(args) {
                 [Number(n1), Number(n2), Number(n3)] => (n1.into(), n2.into(), n3.into(), 1.0),
@@ -696,12 +696,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::SetStrokeColor(Color { r, b, g, a }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("set_transform", {
-        cloned!(queue);
+    canvas_module.add_fn("set_transform", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (a, b, c, d, e, f) = match vm.get_args(args) {
                 [Number(a), Number(b), Number(c), Number(d), Number(e), Number(f)] => {
@@ -718,20 +718,20 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::SetTransform { a, b, c, d, e, f });
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("stroke", {
-        cloned!(queue);
+    canvas_module.add_fn("stroke", {
+        cloned!(canvas_module, queue);
         move |_, _| {
             queue.borrow_mut().push_back(KotoMessage::Stroke);
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("stroke_rect", {
-        cloned!(queue);
+    canvas_module.add_fn("stroke_rect", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y, width, height) = match vm.get_args(args) {
                 [Num2(pos), Number(width), Number(height)] => {
@@ -754,12 +754,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 width,
                 height,
             }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("translate", {
-        cloned!(queue);
+    canvas_module.add_fn("translate", {
+        cloned!(canvas_module, queue);
         move |vm, args| {
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
@@ -775,16 +775,16 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::Translate(Point { x, y }));
-            Ok(Empty)
+            Ok(Map(canvas_module.clone()))
         }
     });
 
-    result.add_fn("width", {
+    canvas_module.add_fn("width", {
         cloned!(canvas);
         move |_, _| Ok(Number(canvas.width().into()))
     });
 
-    result
+    canvas_module
 }
 
 // Captures output from Koto in a String

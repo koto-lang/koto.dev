@@ -1,47 +1,38 @@
 import number.tau
 
 w, h = canvas.width(), canvas.height()
-w2, h2 = w/2, h/2
-
-# Clear the background
-canvas.set_fill_color 50, 50, 80
-canvas.fill_rect 0, 0, w, h
-
-# Diagonals
-canvas.begin_path()
-
-canvas.move_to 0, 0
-canvas.line_to w, h
-canvas.move_to w, 0
-canvas.line_to 0, h
-
-canvas.set_stroke_color 120, 120, 120
-canvas.stroke()
-
-# Center square
-
-canvas.begin_path()
+w2, h2 = w / 2, h / 2
 z = (w.min h) / 2
 
-# Center square
-canvas.rect w2 - z, h2 - z, z * 2, z * 2
+# Clear the background
+canvas.clear 50, 50, 80
 
-# Center +
-canvas.move_to w2, h2 - z
-canvas.line_to w2, h2 + z
-canvas.move_to w2 - z, h2
-canvas.line_to w2 + z, h2
+# Background diagonals
+canvas.begin_path()
+  .move_to 0, 0
+  .line_to w, h
+  .move_to w, 0
+  .line_to 0, h
+  .set_stroke_color 100, 100, 100
+  .stroke()
 
-# Center diamond
-canvas.move_to w2, h2 - z
-canvas.line_to w2 + z, h2
-canvas.line_to w2, h2 + z
-canvas.line_to w2 - z, h2
-canvas.line_to w2, h2 - z
-
-# Center circle
-canvas.move_to w2 + z, h2
-canvas.arc w2, h2, z, 0, tau
-
-canvas.set_stroke_color 180, 180, 180
-canvas.stroke()
+# Centered shapes
+canvas.begin_path()
+  .rect w2 - z, h2 - z, z * 2, z * 2
+  # Center cross
+  .move_to w2, h2 - z
+  .line_to w2, h2 + z
+  .move_to w2 - z, h2
+  .line_to w2 + z, h2
+  # Center diamond
+  .move_to w2, h2 - z
+  .line_to w2 + z, h2
+  .line_to w2, h2 + z
+  .line_to w2 - z, h2
+  .line_to w2, h2 - z
+  # Center circle
+  .move_to w2 + z, h2
+  .arc w2, h2, z, 0, tau
+  # Stroke
+  .set_stroke_color 180, 180, 180
+  .stroke()
