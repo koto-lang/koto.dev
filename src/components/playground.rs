@@ -84,6 +84,35 @@ impl Playground {
         self.last_time = None;
     }
 
+    fn setup_editor(&mut self) {
+        let script = {
+            let url_params = UrlSearchParams::new_with_str(
+                &window()
+                    .location()
+                    .search()
+                    .expect("Missing location search string"),
+            )
+            .expect("Failed to create UrlSearchParams");
+
+            if let Some(script) = url_params.get("script") {
+                match decode_uri_component(&script) {
+                    Ok(script) => script.into(),
+                    Err(_) => {
+                        show_notification("Failed to read script from url", "error");
+                        "".to_string()
+                    }
+                }
+            } else {
+                get_local_storage_value("script")
+                    .unwrap_or(include_str!("../scripts/canvas/random_rects.koto").to_string())
+            }
+        };
+
+        self.set_editor_contents(&script);
+        self.set_vim_bindings_enabled(self.vim_bindings_enabled);
+        self.set_light_theme_enabled(self.light_theme_enabled);
+    }
+
     fn set_light_theme_enabled(&mut self, enabled: bool) {
         self.light_theme_enabled = enabled;
         self.get_editor().set_theme(if enabled {
@@ -161,32 +190,7 @@ impl Component for Playground {
         match msg {
             Msg::EditorInitialized { editor } => {
                 self.editor = Some(editor);
-                let script = {
-                    let url_params = UrlSearchParams::new_with_str(
-                        &window()
-                            .location()
-                            .search()
-                            .expect("Missing location search string"),
-                    )
-                    .expect("Failed to create UrlSearchParams");
-
-                    if let Some(script) = url_params.get("script") {
-                        match decode_uri_component(&script) {
-                            Ok(script) => script.into(),
-                            Err(_) => {
-                                show_notification("Failed to read script from url", "error");
-                                "".to_string()
-                            }
-                        }
-                    } else {
-                        get_local_storage_value("script").unwrap_or(
-                            include_str!("../scripts/canvas/random_rects.koto").to_string(),
-                        )
-                    }
-                };
-                self.set_editor_contents(&script);
-                self.set_vim_bindings_enabled(self.vim_bindings_enabled);
-                self.set_light_theme_enabled(self.light_theme_enabled);
+                self.setup_editor();
                 false
             }
             Msg::EditorChanged => {

@@ -74,11 +74,13 @@ impl Color {
     }
 }
 
+#[derive(Debug)]
 pub enum ScriptState {
     NotReady,
     Compiled,
     Recompiled,
     Initialized,
+    ErrorAfterInitialized,
 }
 
 pub struct KotoWrapper {
@@ -220,7 +222,7 @@ impl KotoWrapper {
     }
 
     pub fn is_ready(&self) -> bool {
-        !matches!(self.script_state, ScriptState::NotReady)
+        !matches!(self.script_state, ScriptState::NotReady | ScriptState::ErrorAfterInitialized)
     }
 
     pub fn is_initialized(&self) -> bool {
@@ -232,7 +234,12 @@ impl KotoWrapper {
     }
 
     fn log_error(&mut self, error: &str) {
-        self.script_state = ScriptState::NotReady;
+        use ScriptState::*;
+        self.script_state = match self.script_state {
+            Initialized | ErrorAfterInitialized => ErrorAfterInitialized,
+            _ => NotReady,
+        };
+
         self.compiler_output.set_inner_html(error);
         self.compiler_output
             .set_scroll_top(self.compiler_output.scroll_height());
