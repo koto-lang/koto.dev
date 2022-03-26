@@ -2,8 +2,8 @@ use {
     cloned::cloned,
     koto::{
         runtime::{
-            unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead, KotoWrite,
-            RuntimeError, Value, ValueMap,
+            runtime_error, unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead,
+            KotoWrite, RuntimeError, Value, ValueMap,
         },
         Koto, KotoError, KotoSettings,
     },
@@ -29,14 +29,22 @@ pub enum KotoMessage {
     ClearOutput,
     Fill,
     FillRect(Rect),
+    FillText {
+        text: String,
+        position: Point,
+        max_width: Option<f64>,
+    },
     LineTo(Point),
     MoveTo(Point),
     Print(String),
     Rect(Rect),
     Rotate(f64),
     SetFillColor(Color),
+    SetFont(String),
     SetLineWidth(f64),
     SetStrokeColor(Color),
+    SetTextAlign(String),
+    SetTextBaseline(String),
     SetTransform {
         a: f64,
         b: f64,
@@ -47,6 +55,11 @@ pub enum KotoMessage {
     },
     Stroke,
     StrokeRect(Rect),
+    StrokeText {
+        text: String,
+        position: Point,
+        max_width: Option<f64>,
+    },
     Translate(Point),
 }
 
@@ -330,6 +343,21 @@ impl KotoWrapper {
                 KotoMessage::FillRect(r) => {
                     self.canvas_context.fill_rect(r.x, r.y, r.width, r.height)
                 }
+                KotoMessage::FillText {
+                    text,
+                    position,
+                    max_width,
+                } => {
+                    if let Some(max_width) = max_width {
+                        self.canvas_context
+                            .fill_text_with_max_width(&text, position.x, position.y, max_width)
+                            .unwrap()
+                    } else {
+                        self.canvas_context
+                            .fill_text(&text, position.x, position.y)
+                            .unwrap();
+                    }
+                }
                 KotoMessage::LineTo(p) => self.canvas_context.line_to(p.x, p.y),
                 KotoMessage::MoveTo(p) => self.canvas_context.move_to(p.x, p.y),
                 KotoMessage::Print(s) => self.output_buffer.push_str(&s),
@@ -340,6 +368,7 @@ impl KotoWrapper {
                     self.canvas_context
                         .set_fill_style(&JsValue::from(color_rgb))
                 }
+                KotoMessage::SetFont(font) => self.canvas_context.set_font(&font),
                 KotoMessage::SetLineWidth(width) => self.canvas_context.set_line_width(width),
                 KotoMessage::SetStrokeColor(color) => {
                     let color_rgb = color.as_css_rgb();
@@ -349,9 +378,30 @@ impl KotoWrapper {
                 KotoMessage::SetTransform { a, b, c, d, e, f } => {
                     self.canvas_context.set_transform(a, b, c, d, e, f).unwrap()
                 }
+                KotoMessage::SetTextAlign(text_align) => {
+                    self.canvas_context.set_text_align(&text_align);
+                }
+                KotoMessage::SetTextBaseline(baseline) => {
+                    self.canvas_context.set_text_baseline(&baseline);
+                }
                 KotoMessage::Stroke => self.canvas_context.stroke(),
                 KotoMessage::StrokeRect(r) => {
                     self.canvas_context.stroke_rect(r.x, r.y, r.width, r.height)
+                }
+                KotoMessage::StrokeText {
+                    text,
+                    position,
+                    max_width,
+                } => {
+                    if let Some(max_width) = max_width {
+                        self.canvas_context
+                            .stroke_text_with_max_width(&text, position.x, position.y, max_width)
+                            .unwrap()
+                    } else {
+                        self.canvas_context
+                            .stroke_text(&text, position.x, position.y)
+                            .unwrap();
+                    }
                 }
                 KotoMessage::Translate(p) => self.canvas_context.translate(p.x, p.y).unwrap(),
             }
@@ -529,6 +579,33 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
         }
     });
 
+    canvas_module.add_fn("fill_text", {
+        cloned!(canvas_module, queue);
+        move |vm, args| {
+            let (text, x, y, max_width) = match vm.get_args(args) {
+                [Str(text), Number(x), Number(y)] => (text, x.into(), y.into(), None),
+                [Str(text), Number(x), Number(y), Number(max_width)] => {
+                    (text, x.into(), y.into(), Some(max_width.into()))
+                }
+                [Str(text), Num2(n)] => (text, n.0, n.1, None),
+                [Str(text), Num2(n), Number(max_width)] => (text, n.0, n.1, Some(max_width.into())),
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "canvas.fill_text",
+                        "(text, x and y (as Numbers or a Num2), max width (optional))",
+                        unexpected,
+                    )
+                }
+            };
+            queue.borrow_mut().push_back(KotoMessage::FillText {
+                text: text.to_string(),
+                position: Point { x, y },
+                max_width,
+            });
+            Ok(Map(canvas_module.clone()))
+        }
+    });
+
     canvas_module.add_fn("height", {
         cloned!(canvas);
         move |_, _| Ok(Number(canvas.height().into()))
@@ -651,6 +728,26 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
         }
     });
 
+    canvas_module.add_fn("set_font", {
+        cloned!(canvas_module, queue);
+        move |vm, args| {
+            let font = match vm.get_args(args) {
+                [Str(font)] => font,
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "canvas.set_font",
+                        "a String",
+                        unexpected,
+                    )
+                }
+            };
+            queue
+                .borrow_mut()
+                .push_back(KotoMessage::SetFont(font.to_string()));
+            Ok(Map(canvas_module.clone()))
+        }
+    });
+
     canvas_module.add_fn("set_line_width", {
         cloned!(canvas_module, queue);
         move |vm, args| {
@@ -696,6 +793,77 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             queue
                 .borrow_mut()
                 .push_back(KotoMessage::SetStrokeColor(Color { r, b, g, a }));
+            Ok(Map(canvas_module.clone()))
+        }
+    });
+
+    canvas_module.add_fn("set_text_align", {
+        cloned!(canvas_module, queue);
+        let allowed_values = &["left", "right", "center", "start", "end"];
+        move |vm, args| {
+            let text_align = match vm.get_args(args) {
+                [Str(s)] => {
+                    if !allowed_values.contains(&s.as_str()) {
+                        return runtime_error!(
+                            "The provided value must be one of the following: {:?}",
+                            allowed_values
+                        );
+                    }
+                    s.to_string()
+                }
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "canvas.set_text_align",
+                        &format!(
+                            "a String matching one of the following values: {:?}",
+                            allowed_values,
+                        ),
+                        unexpected,
+                    )
+                }
+            };
+            queue
+                .borrow_mut()
+                .push_back(KotoMessage::SetTextAlign(text_align));
+            Ok(Map(canvas_module.clone()))
+        }
+    });
+
+    canvas_module.add_fn("set_text_baseline", {
+        cloned!(canvas_module, queue);
+        let allowed_values = &[
+            "top",
+            "hanging",
+            "middle",
+            "alphabetic",
+            "ideographic",
+            "bottom",
+        ];
+        move |vm, args| {
+            let baseline = match vm.get_args(args) {
+                [Str(s)] => {
+                    if !allowed_values.contains(&s.as_str()) {
+                        return runtime_error!(
+                            "The provided value must be one of the following: {:?}",
+                            allowed_values
+                        );
+                    }
+                    s.to_string()
+                }
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "canvas.set_text_baseline",
+                        &format!(
+                            "a String matching one of the following values: {:?}",
+                            allowed_values,
+                        ),
+                        unexpected,
+                    )
+                }
+            };
+            queue
+                .borrow_mut()
+                .push_back(KotoMessage::SetTextBaseline(baseline));
             Ok(Map(canvas_module.clone()))
         }
     });
@@ -754,6 +922,33 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 width,
                 height,
             }));
+            Ok(Map(canvas_module.clone()))
+        }
+    });
+
+    canvas_module.add_fn("stroke_text", {
+        cloned!(canvas_module, queue);
+        move |vm, args| {
+            let (text, x, y, max_width) = match vm.get_args(args) {
+                [Str(text), Number(x), Number(y)] => (text, x.into(), y.into(), None),
+                [Str(text), Number(x), Number(y), Number(max_width)] => {
+                    (text, x.into(), y.into(), Some(max_width.into()))
+                }
+                [Str(text), Num2(n)] => (text, n.0, n.1, None),
+                [Str(text), Num2(n), Number(max_width)] => (text, n.0, n.1, Some(max_width.into())),
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "canvas.stroke_text",
+                        "(text, x and y (as Numbers or a Num2), max width (optional))",
+                        unexpected,
+                    )
+                }
+            };
+            queue.borrow_mut().push_back(KotoMessage::StrokeText {
+                text: text.to_string(),
+                position: Point { x, y },
+                max_width,
+            });
             Ok(Map(canvas_module.clone()))
         }
     });
