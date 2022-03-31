@@ -155,6 +155,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "gloo-net"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2899cb1a13be9020b010967adc6b2a8a343b6f1428b90238c9d53ca24decc6db"
+dependencies = [
+ "gloo-utils",
+ "js-sys",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
 name = "gloo-render"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -361,6 +377,7 @@ dependencies = [
  "glob",
  "gloo-console",
  "gloo-events",
+ "gloo-net",
  "gloo-render",
  "gloo-utils",
  "instant",
@@ -368,6 +385,7 @@ dependencies = [
  "koto",
  "koto_random",
  "rand",
+ "serde",
  "wasm-bindgen",
  "web-sys",
  "wee_alloc",

@@ -5,9 +5,12 @@ use {
         show_notification, stored_value::StoredValue,
     },
     gloo_events::EventListener,
+    gloo_net::http::Request,
     gloo_render::AnimationFrame,
     gloo_utils::window,
     js_sys::{decode_uri_component, encode_uri_component},
+    serde::Deserialize,
+    std::collections::HashMap,
     web_sys::{Element, HtmlCanvasElement, UrlSearchParams},
     yew::prelude::*,
 };
@@ -15,6 +18,7 @@ use {
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
     EditorChanged,
+    GistLoaded { contents: String },
     ScriptMenuChanged { script: &'static str },
     PlayButtonClicked,
     ReloadButtonClicked,
@@ -24,6 +28,7 @@ pub enum Msg {
     AnimationFrame { time: f64 },
     WindowResized,
     BeforeUnload,
+    ShowError { error: String },
 }
 
 pub struct Playground {
@@ -84,7 +89,7 @@ impl Playground {
         self.last_time = None;
     }
 
-    fn setup_editor(&mut self) {
+    fn setup_editor(&mut self, ctx: &Context<Self>) {
         let script = {
             let url_params = UrlSearchParams::new_with_str(
                 &window()
@@ -94,7 +99,40 @@ impl Playground {
             )
             .expect("Failed to create UrlSearchParams");
 
-            if let Some(script) = url_params.get("script") {
+            if let Some(gist) = url_params.get("gist") {
+                match decode_uri_component(&gist) {
+                    Ok(gist) => {
+                        ctx.link().send_future(async move {
+                            match Request::get(&format!("https://api.github.com/gists/{gist}"))
+                                .send()
+                                .await
+                            {
+                                Ok(response) => match response.json::<Gist>().await {
+                                    Ok(gist) => match gist.files.values().next() {
+                                        Some(file) => Msg::GistLoaded {
+                                            contents: file.content.clone(),
+                                        },
+                                        None => Msg::ShowError {
+                                            error: "The gist doesn't contain any files".into(),
+                                        },
+                                    },
+                                    Err(_) => Msg::ShowError {
+                                        error: "Failed to load gist".into(),
+                                    },
+                                },
+                                Err(error) => Msg::ShowError {
+                                    error: format!("Failed to access gist (error: '{error}')"),
+                                },
+                            }
+                        });
+                        "".into()
+                    }
+                    Err(_) => {
+                        show_notification("Failed to read gist ID from url", "error");
+                        "".into()
+                    }
+                }
+            } else if let Some(script) = url_params.get("script") {
                 match decode_uri_component(&script) {
                     Ok(script) => script.into(),
                     Err(_) => {
@@ -189,7 +227,7 @@ impl Component for Playground {
         match msg {
             Msg::EditorInitialized { editor } => {
                 self.editor = Some(editor);
-                self.setup_editor();
+                self.setup_editor(ctx);
                 false
             }
             Msg::EditorChanged => {
@@ -204,6 +242,11 @@ impl Component for Playground {
                 }
                 self.script.set(script.into());
                 true
+            }
+            Msg::GistLoaded { contents } => {
+                self.reset();
+                self.set_editor_contents(&contents);
+                false
             }
             Msg::ScriptMenuChanged { script } => {
                 self.reset();
@@ -267,6 +310,10 @@ impl Component for Playground {
                 self.script.save();
                 self.light_theme_enabled.save();
                 self.vim_bindings_enabled.save();
+                false
+            }
+            Msg::ShowError { error } => {
+                show_notification(&error, "error");
                 false
             }
         }
@@ -335,4 +382,14 @@ impl Component for Playground {
             self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output));
         }
     }
+}
+
+#[derive(Deserialize)]
+struct Gist {
+    files: HashMap<String, GistFile>,
+}
+
+#[derive(Deserialize)]
+struct GistFile {
+    content: String,
 }
