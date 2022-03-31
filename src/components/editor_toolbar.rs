@@ -55,7 +55,7 @@ pub fn editor_toolbar(props: &Props) -> Html {
             <ToolbarButton
                 icon_left="link"
                 caption="Share"
-                tooltip="Copy a shareable link to the clipboard"
+                tooltip="Get shareable links for the current script"
                 on_clicked={props.on_share_clicked.clone()}
             />
 

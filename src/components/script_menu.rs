@@ -98,6 +98,7 @@ pub fn script_menu(props: &Props) -> Html {
     html! {
         <div class="uk-inline">
             <ToolbarButton
+                icon_left="thumbnails"
                 icon_right="chevron-down"
                 caption="Examples"
                 tooltip="Load an example script"

@@ -1,14 +1,13 @@
 use {
-    super::{editor::Editor, editor_toolbar::EditorToolbar},
+    super::{editor::Editor, editor_toolbar::EditorToolbar, share::Share},
     crate::{
-        ace_bindings::AceEditor, copy_text_to_clipboard, koto_wrapper::KotoWrapper,
-        show_notification, stored_value::StoredValue,
+        ace_bindings::AceEditor, koto_wrapper::KotoWrapper, show_notification,
+        stored_value::StoredValue,
     },
     gloo_events::EventListener,
     gloo_net::http::Request,
     gloo_render::AnimationFrame,
     gloo_utils::window,
-    js_sys::{decode_uri_component, encode_uri_component},
     serde::Deserialize,
     std::collections::HashMap,
     web_sys::{Element, HtmlCanvasElement, UrlSearchParams},
@@ -23,6 +22,7 @@ pub enum Msg {
     PlayButtonClicked,
     ReloadButtonClicked,
     ShareButtonClicked,
+    ShareModalClosed,
     ToggleVimBindings,
     ToggleEditorTheme,
     AnimationFrame { time: f64 },
@@ -48,6 +48,8 @@ pub struct Playground {
     animation_frame: Option<AnimationFrame>,
     last_time: Option<f64>,
     current_time: f64,
+
+    show_share_dialog: bool,
 
     _event_listeners: Vec<EventListener>,
 }
@@ -100,46 +102,32 @@ impl Playground {
             .expect("Failed to create UrlSearchParams");
 
             if let Some(gist) = url_params.get("gist") {
-                match decode_uri_component(&gist) {
-                    Ok(gist) => {
-                        ctx.link().send_future(async move {
-                            match Request::get(&format!("https://api.github.com/gists/{gist}"))
-                                .send()
-                                .await
-                            {
-                                Ok(response) => match response.json::<Gist>().await {
-                                    Ok(gist) => match gist.files.values().next() {
-                                        Some(file) => Msg::GistLoaded {
-                                            contents: file.content.clone(),
-                                        },
-                                        None => Msg::ShowError {
-                                            error: "The gist doesn't contain any files".into(),
-                                        },
-                                    },
-                                    Err(_) => Msg::ShowError {
-                                        error: "Failed to load gist".into(),
-                                    },
+                ctx.link().send_future(async move {
+                    match Request::get(&format!("https://api.github.com/gists/{gist}"))
+                        .send()
+                        .await
+                    {
+                        Ok(response) => match response.json::<Gist>().await {
+                            Ok(gist) => match gist.files.values().next() {
+                                Some(file) => Msg::GistLoaded {
+                                    contents: file.content.clone(),
                                 },
-                                Err(error) => Msg::ShowError {
-                                    error: format!("Failed to access gist (error: '{error}')"),
+                                None => Msg::ShowError {
+                                    error: "The gist doesn't contain any files".into(),
                                 },
-                            }
-                        });
-                        "".into()
+                            },
+                            Err(_) => Msg::ShowError {
+                                error: "Failed to load gist".into(),
+                            },
+                        },
+                        Err(error) => Msg::ShowError {
+                            error: format!("Failed to access gist (error: '{error}')"),
+                        },
                     }
-                    Err(_) => {
-                        show_notification("Failed to read gist ID from url", "error");
-                        "".into()
-                    }
-                }
+                });
+                "".into()
             } else if let Some(script) = url_params.get("script") {
-                match decode_uri_component(&script) {
-                    Ok(script) => script.into(),
-                    Err(_) => {
-                        show_notification("Failed to read script from url", "error");
-                        "".into()
-                    }
-                }
+                script.into()
             } else {
                 self.script.clone()
             }
@@ -178,16 +166,6 @@ impl Playground {
             self.request_animation_frame(ctx)
         }
     }
-
-    fn copy_link_to_clipboard(&self) {
-        let location = window().location();
-        let origin = location.origin().expect("Missing location origin");
-        let path = location.pathname().expect("Missing location pathname");
-        let script = encode_uri_component(&self.script);
-        let link = format!("{origin}{path}?script={script}");
-        copy_text_to_clipboard(&link);
-        show_notification("Link copied to clipboard", "link");
-    }
 }
 
 impl Component for Playground {
@@ -210,6 +188,7 @@ impl Component for Playground {
             last_time: None,
             current_time: 0.0,
             run_script_enabled: true,
+            show_share_dialog: false,
             _event_listeners: vec![
                 EventListener::new(&window(), "resize", {
                     let link = ctx.link().clone();
@@ -268,8 +247,13 @@ impl Component for Playground {
                 false
             }
             Msg::ShareButtonClicked => {
-                self.copy_link_to_clipboard();
-                false
+                // self.copy_link_to_clipboard();
+                self.show_share_dialog = true;
+                true
+            }
+            Msg::ShareModalClosed => {
+                self.show_share_dialog = false;
+                true
             }
             Msg::ToggleEditorTheme => {
                 self.set_light_theme_enabled(!*self.light_theme_enabled);
@@ -344,28 +328,43 @@ impl Component for Playground {
         };
 
         html! {
-            <div class="playground">
-                { editor_area }
+            <>
+                <div class="playground">
+                    { editor_area }
 
-                <canvas
-                  ref={self.canvas_ref.clone()}
-                  class="playground-canvas fullsize"
-                  width="400"
-                  height="400"
-                ></canvas>
+                    <canvas
+                      ref={self.canvas_ref.clone()}
+                      class="playground-canvas fullsize"
+                      width="400"
+                      height="400"
+                    ></canvas>
 
-                <textarea
-                  ref={self.compiler_output_ref.clone()}
-                  class="fixed-mono"
-                  readonly=true
-                ></textarea>
+                    <textarea
+                      ref={self.compiler_output_ref.clone()}
+                      class="fixed-mono"
+                      readonly=true
+                    ></textarea>
 
-                <textarea
-                  ref={self.script_output_ref.clone()}
-                  class="fixed-mono"
-                  readonly=true
-                ></textarea>
-            </div>
+                    <textarea
+                      ref={self.script_output_ref.clone()}
+                      class="fixed-mono"
+                      readonly=true
+                    ></textarea>
+                </div>
+
+                {
+                    if self.show_share_dialog {
+                        html! {
+                            <Share
+                                script={self.script.clone()}
+                                on_hidden={ctx.link().callback(|_| Msg::ShareModalClosed)}
+                            />
+                        }
+                    } else {
+                        html! {}
+                    }
+                }
+            </>
         }
     }
 
@@ -381,6 +380,8 @@ impl Component for Playground {
 
             self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output));
         }
+
+        self.show_share_dialog = false;
     }
 }
 

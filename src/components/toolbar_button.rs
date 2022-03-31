@@ -26,10 +26,9 @@ pub fn toolbar_button(props: &Props) -> Html {
     };
 
     let caption = {
-        let class = if props.icon_left.is_some() {
-            classes!("uk-margin-small-left")
-        } else {
-            classes!()
+        let mut class = classes!("uk-text-light");
+        if props.icon_left.is_some() {
+            class.push("uk-margin-small-left");
         };
 
         if let Some(caption) = props.caption {
