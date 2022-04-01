@@ -1,12 +1,9 @@
 # Draw random rectangles on the canvas
 
-import play.random_color
+import play.random_color, random.pick
 
 play.setup = ||
-  canvas.clear
-    random.pick(100..=200),
-    random.pick(100..=200),
-    random.pick(100..=200)
+  canvas.clear (pick 100..=200), (pick 100..=200), (pick 100..=200)
   { next_update_time: 0 }
 
 play.update = |state, time|
@@ -16,10 +13,10 @@ play.update = |state, time|
     size_min = 20
     size_max = 400
 
-    width = random_int size_min, size_max
-    height = random_int size_min, size_max
-    x = random_int 0, canvas.width() - width
-    y = random_int 0, canvas.height() - height
+    width = pick size_min..size_max
+    height = pick size_min..size_max
+    x = pick 0..canvas.width() - width
+    y = pick 0..canvas.height() - height
 
     stroke_alpha = 1
     fill_alpha = 0.7
