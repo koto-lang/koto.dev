@@ -3,4 +3,4 @@ public_url = "/play/"
 
 [[proxy]]
 rewrite = "/play/gist"
-backend = "http://localhost:8787"
+backend = "http://localhost:8787/play/gist"
