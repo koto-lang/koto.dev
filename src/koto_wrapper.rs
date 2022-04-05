@@ -269,7 +269,7 @@ impl KotoWrapper {
     ) -> Result<Value, KotoError> {
         match self.play_module.data().get_with_string(function_name) {
             Some(f) => self.koto.run_function(f.clone(), CallArgs::Separate(args)),
-            None => Ok(Value::Empty),
+            None => Ok(Value::Null),
         }
     }
 
@@ -427,7 +427,7 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
         cloned!(queue);
         move |_, _| {
             queue.borrow_mut().push_back(KotoMessage::ClearOutput);
-            Ok(Empty)
+            Ok(Null)
         }
     });
 
