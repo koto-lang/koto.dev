@@ -378,7 +378,7 @@ dependencies = [
  "gloo-console",
  "gloo-events",
  "gloo-net",
- "gloo-render",
+ "gloo-timers",
  "gloo-utils",
  "instant",
  "js-sys",

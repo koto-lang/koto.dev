@@ -8,11 +8,9 @@ fizz_buzz = |n|
     else n
 
 play.setup = ||
-  next_update_time: 0
   current_value: 0
 
-play.update = |state, time|
-  if time >= state.next_update_time
-    state.next_update_time = time + 0.2
-    n = state.current_value += 1
-    print fizz_buzz n
+play.set_fps 5
+play.update = |state|
+  n = state.current_value += 1
+  print fizz_buzz n

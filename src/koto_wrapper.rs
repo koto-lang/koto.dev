@@ -11,6 +11,7 @@ use {
     std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
     web_sys::{CanvasRenderingContext2d, Element, HtmlCanvasElement},
+    yew::Callback,
 };
 
 pub type KotoMessageQueue = Rc<RefCell<VecDeque<KotoMessage>>>;
@@ -41,6 +42,7 @@ pub enum KotoMessage {
     Rotate(f64),
     SetFillColor(Color),
     SetFont(String),
+    SetFps(f64),
     SetLineWidth(f64),
     SetStrokeColor(Color),
     SetTextAlign(String),
@@ -108,6 +110,7 @@ pub struct KotoWrapper {
     message_queue: KotoMessageQueue,
     script_state: ScriptState,
     user_state: Value,
+    on_fps_changed: Callback<f64>,
 }
 
 impl KotoWrapper {
@@ -115,6 +118,7 @@ impl KotoWrapper {
         canvas: HtmlCanvasElement,
         compiler_output: Element,
         script_output: Element,
+        on_fps_changed: Callback<f64>,
     ) -> Self {
         let message_queue = KotoMessageQueue::default();
 
@@ -159,6 +163,7 @@ impl KotoWrapper {
             message_queue,
             script_state: ScriptState::NotReady,
             user_state: Value::Map(ValueMap::default()),
+            on_fps_changed,
         }
     }
 
@@ -369,6 +374,7 @@ impl KotoWrapper {
                         .set_fill_style(&JsValue::from(color_rgb))
                 }
                 KotoMessage::SetFont(font) => self.canvas_context.set_font(&font),
+                KotoMessage::SetFps(fps) => self.on_fps_changed.emit(fps),
                 KotoMessage::SetLineWidth(width) => self.canvas_context.set_line_width(width),
                 KotoMessage::SetStrokeColor(color) => {
                     let color_rgb = color.as_css_rgb();
@@ -455,6 +461,24 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
                 b.into(),
                 alpha,
             )))
+        }
+    });
+
+    result.add_fn("set_fps", {
+        cloned!(queue);
+        move |vm, args| {
+            let fps = match vm.get_args(args) {
+                [Number(fps)] if *fps >= 0.0 => f64::from(fps),
+                unexpected => {
+                    return unexpected_type_error_with_slice(
+                        "play.set_fps",
+                        "a non-negative Number",
+                        unexpected,
+                    )
+                }
+            };
+            queue.borrow_mut().push_back(KotoMessage::SetFps(fps));
+            Ok(Null)
         }
     });
 

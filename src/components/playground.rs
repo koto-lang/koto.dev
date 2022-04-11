@@ -6,7 +6,7 @@ use {
     },
     gloo_events::EventListener,
     gloo_net::http::Request,
-    gloo_render::AnimationFrame,
+    gloo_timers::callback::Interval,
     gloo_utils::window,
     serde::Deserialize,
     std::collections::HashMap,
@@ -25,9 +25,10 @@ pub enum Msg {
     ShareModalClosed,
     ToggleVimBindings,
     ToggleEditorTheme,
-    AnimationFrame { time: f64 },
+    OnUpdate,
     WindowResized,
     BeforeUnload,
+    SetFps(f64),
     ShowError { error: String },
 }
 
@@ -45,9 +46,10 @@ pub struct Playground {
     vim_bindings_enabled: StoredValue<bool>,
     light_theme_enabled: StoredValue<bool>,
 
-    animation_frame: Option<AnimationFrame>,
+    update_interval: Option<Interval>,
     last_time: Option<f64>,
     current_time: f64,
+    update_fps: f64,
 
     show_share_dialog: bool,
 
@@ -61,10 +63,11 @@ impl Playground {
             .expect("Missing canvas element")
     }
 
-    fn request_animation_frame(&mut self, ctx: &Context<Self>) {
-        self.animation_frame = Some(gloo_render::request_animation_frame({
+    fn setup_update_interval(&mut self, ctx: &Context<Self>) {
+        let interval_ms = (1.0 / self.update_fps * 1000.0).floor() as u32;
+        self.update_interval = Some(Interval::new(interval_ms, {
             let link = ctx.link().clone();
-            move |time| link.send_message(Msg::AnimationFrame { time })
+            move || link.send_message(Msg::OnUpdate)
         }));
     }
 
@@ -86,7 +89,7 @@ impl Playground {
 
     fn reset(&mut self) {
         self.get_koto().reset();
-        self.animation_frame = None;
+        self.update_interval = None;
         self.current_time = 0.0;
         self.last_time = None;
     }
@@ -156,14 +159,16 @@ impl Playground {
     fn run_script(&mut self, ctx: &Context<Self>) {
         debug_assert!(self.run_script_enabled);
 
+        let update_interval_is_none = self.update_interval.is_none();
         let koto = self.get_koto();
 
         if koto.is_ready() && !koto.is_initialized() {
             koto.run();
         }
 
-        if koto.is_ready() && koto.update_should_be_called() {
-            self.request_animation_frame(ctx)
+        // koto.is_ready() is re-checked here in case an error occurred during koto.run()
+        if koto.is_ready() && update_interval_is_none && koto.update_should_be_called() {
+            self.setup_update_interval(ctx)
         }
     }
 }
@@ -184,9 +189,10 @@ impl Component for Playground {
             }),
             light_theme_enabled: StoredValue::new("light_theme_enabled"),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
-            animation_frame: None,
+            update_interval: None,
             last_time: None,
             current_time: 0.0,
+            update_fps: 60.0,
             run_script_enabled: true,
             show_share_dialog: false,
             _event_listeners: vec![
@@ -210,7 +216,6 @@ impl Component for Playground {
                 false
             }
             Msg::EditorChanged => {
-                self.animation_frame = None;
                 let script = self.get_editor_contents();
                 if !script.is_empty() {
                     let koto = self.get_koto();
@@ -237,7 +242,7 @@ impl Component for Playground {
                 if self.run_script_enabled {
                     self.run_script(ctx);
                 } else {
-                    self.animation_frame = None;
+                    self.update_interval = None;
                 }
                 true
             }
@@ -263,10 +268,9 @@ impl Component for Playground {
                 self.set_vim_bindings_enabled(!*self.vim_bindings_enabled);
                 true
             }
-            Msg::AnimationFrame { time } => {
-                self.animation_frame = None;
-
-                let time_delta = (time - self.last_time.unwrap_or(time)) / 1000.0;
+            Msg::OnUpdate => {
+                let time = get_current_time();
+                let time_delta = time - self.last_time.unwrap_or(time);
                 self.current_time += time_delta;
                 let current_time = self.current_time;
                 self.last_time = Some(time);
@@ -276,12 +280,25 @@ impl Component for Playground {
                     koto.run_update(current_time);
                 }
 
+                // is_ready gets checked again here in case of an error when running update()
                 if koto.is_ready() {
-                    self.request_animation_frame(ctx);
                     false
                 } else {
+                    self.update_interval = None;
                     true
                 }
+            }
+            Msg::SetFps(fps) => {
+                // If the update interval is currently active, then restart it with the new fps.
+                // If it's not currelntly active then it'll be set up later in self.run_script().
+                let restart_interval = self.update_fps != fps && self.update_interval.is_some();
+
+                self.update_fps = fps;
+                if restart_interval {
+                    self.setup_update_interval(ctx);
+                }
+
+                false
             }
             Msg::WindowResized => {
                 let canvas = self.get_canvas();
@@ -368,7 +385,7 @@ impl Component for Playground {
         }
     }
 
-    fn rendered(&mut self, _ctx: &Context<Self>, first_render: bool) {
+    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {
         if first_render {
             let canvas = self.get_canvas();
 
@@ -378,11 +395,18 @@ impl Component for Playground {
             let compiler_output = self.compiler_output_ref.cast::<Element>().unwrap();
             let script_output = self.script_output_ref.cast::<Element>().unwrap();
 
-            self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output));
+            self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output, {
+                ctx.link().callback(move |fps| Msg::SetFps(fps))
+            }));
         }
 
         self.show_share_dialog = false;
     }
+}
+
+// Returns the current time in seconds
+fn get_current_time() -> f64 {
+    window().performance().unwrap().now() / 1000.0
 }
 
 #[derive(Deserialize)]
