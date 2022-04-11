@@ -1,7 +1,7 @@
 serve:
-  trunk serve
+  trunk serve --open
 
-gist-worker:
+worker:
   wrangler dev gist-worker/index.js
 
 setup-worker:
