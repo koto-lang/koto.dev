@@ -1,5 +1,5 @@
-[build]
-public_url = "/play/"
+# [build]
+# public_url = "/play/"
 
 [[proxy]]
 rewrite = "/play/gist"
