@@ -2,5 +2,5 @@
 # public_url = "/play/"
 
 [[proxy]]
-rewrite = "/play/gist"
-backend = "http://localhost:8787/play/gist"
+rewrite = "/create-gist"
+backend = "http://localhost:8787/create-gist"
