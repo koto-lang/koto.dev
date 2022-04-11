@@ -1,3 +1,5 @@
+var wordPattern = /[a-zA-Z_\xa1-\uffff][a-zA-Z0-9_\xa1-\uffff]*/.source;
+
 export function register_koto_editor_mode() {
   ace.define(
     "ace/mode/koto",
@@ -52,29 +54,23 @@ export function register_koto_editor_mode() {
                   token: "constant.character.escape.koto",
                   regex: /\\./,
                 },
-                {
-                  include: "#comment-block",
-                },
-                {
-                  defaultToken: "comment.block.koto",
-                },
               ],
             },
           ],
           "#identifiers": [
             {
-              token: "entity.name.function.koto",
-              regex: /\b[[:alpha:]_][[:alnum:]_]*(?=\:)\b/,
+              token: "variable.other.source.koto",
+              regex: "\b" + wordPattern + "\b",
             },
-            // {
-            //   token: "entity.name.function.koto",
-            //   regex: /\b(?!\.\.)(?<=\.)[[:alpha:]_][[:alnum:]_]*\b/,
-            // },
+            {
+              token: "punctuation.meta.decorator.koto",
+              regex: "@(" + wordPattern + ")?",
+            },
           ],
           "#keywords": [
             {
               token: "constant.language.koto",
-              regex: /\b(?:false|true)\b/,
+              regex: /\b(?:false|true|null)\b/,
             },
             {
               token: "constant.language.self.koto",
@@ -161,10 +157,6 @@ export function register_koto_editor_mode() {
             {
               token: "punctuation.definition.parameters.koto",
               regex: /\|/,
-            },
-            {
-              token: "punctuation.meta.decorator.koto",
-              regex: /@/,
             },
           ],
           "#strings": [
