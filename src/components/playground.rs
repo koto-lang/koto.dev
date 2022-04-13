@@ -17,8 +17,8 @@ use {
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
     EditorChanged,
-    GistLoaded { contents: String },
-    ScriptMenuChanged { script: &'static str },
+    ScriptLoaded { contents: String },
+    ScriptMenuChanged { url: &'static str },
     PlayButtonClicked,
     ReloadButtonClicked,
     ShareButtonClicked,
@@ -112,7 +112,7 @@ impl Playground {
                     {
                         Ok(response) => match response.json::<Gist>().await {
                             Ok(gist) => match gist.files.values().next() {
-                                Some(file) => Msg::GistLoaded {
+                                Some(file) => Msg::ScriptLoaded {
                                     contents: file.content.clone(),
                                 },
                                 None => Msg::ShowError {
@@ -185,7 +185,7 @@ impl Component for Playground {
             editor: None,
             koto: None,
             script: StoredValue::new_with_default("script", || {
-                include_str!("../scripts/canvas/random_rects.koto").into()
+                include_str!("../../examples/canvas/random_rects.koto").into()
             }),
             light_theme_enabled: StoredValue::new("light_theme_enabled"),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
@@ -227,14 +227,27 @@ impl Component for Playground {
                 self.script.set(script.into());
                 true
             }
-            Msg::GistLoaded { contents } => {
+            Msg::ScriptLoaded { contents } => {
                 self.reset();
                 self.set_editor_contents(&contents);
                 false
             }
-            Msg::ScriptMenuChanged { script } => {
-                self.reset();
-                self.set_editor_contents(script);
+            Msg::ScriptMenuChanged { url } => {
+                ctx.link().send_future({
+                    async {
+                        match Request::get(url).send().await {
+                            Ok(response) => match response.text().await {
+                                Ok(contents) => Msg::ScriptLoaded { contents },
+                                Err(_) => Msg::ShowError {
+                                    error: "Failed to load example script".to_string(),
+                                },
+                            },
+                            Err(_) => Msg::ShowError {
+                                error: "Failed to load example".to_string(),
+                            },
+                        }
+                    }
+                });
                 false
             }
             Msg::PlayButtonClicked => {
@@ -333,7 +346,7 @@ impl Component for Playground {
                     on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
                     on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
-                        ctx.link().callback(|script| Msg::ScriptMenuChanged {script})
+                        ctx.link().callback(|url| Msg::ScriptMenuChanged {url})
                     }
                 />
 

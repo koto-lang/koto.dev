@@ -2,7 +2,7 @@ use {super::toolbar_button::ToolbarButton, cloned::cloned, yew::prelude::*};
 
 struct Script {
     name: &'static str,
-    script: &'static str,
+    url: &'static str,
 }
 
 struct ScriptGroup {
@@ -23,7 +23,7 @@ pub fn script_menu(props: &Props) -> Html {
                 name: "Examples",
                 scripts: &[Script {
                     name: "Fizz Buzz",
-                    script: include_str!("../scripts/examples/fizz_buzz.koto"),
+                    url: "examples/intro/fizz_buzz.koto",
                 }],
             },
             ScriptGroup {
@@ -31,15 +31,15 @@ pub fn script_menu(props: &Props) -> Html {
                 scripts: &[
                     Script {
                         name: "Alignment",
-                        script: include_str!("../scripts/canvas/alignment.koto"),
+                        url: "examples/canvas/alignment.koto",
                     },
                     Script {
                         name: "Boids",
-                        script: include_str!("../scripts/canvas/boids.koto"),
+                        url: "examples/canvas/boids.koto",
                     },
                     Script {
                         name: "Random Rects",
-                        script: include_str!("../scripts/canvas/random_rects.koto"),
+                        url: "examples/canvas/random_rects.koto",
                     },
                 ],
             },
@@ -50,13 +50,13 @@ pub fn script_menu(props: &Props) -> Html {
         let on_menu_item_clicked = Callback::from({
             cloned!(script_groups, props.on_script_selected);
             move |index| {
-                let script = script_groups
+                let script_url = script_groups
                     .iter()
                     .flat_map(|script_group| script_group.scripts.iter())
                     .nth(index as usize)
                     .unwrap()
-                    .script;
-                on_script_selected.emit(script);
+                    .url;
+                on_script_selected.emit(script_url);
             }
         });
 
