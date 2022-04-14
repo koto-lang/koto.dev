@@ -1,3 +1,6 @@
+[submodule "modules/koto"]
+	path = modules/koto
+	url = git@github.com:koto-lang/koto.git
 [submodule "modules/koto-sublime"]
 	path = modules/koto-sublime
 	url = git@github.com:koto-lang/koto-sublime.git
