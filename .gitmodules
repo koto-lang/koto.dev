@@ -1,3 +1,6 @@
 [submodule "syntaxes/koto-sublime"]
 	path = syntaxes/koto-sublime
 	url = git@github.com:koto-lang/koto-sublime.git
+[submodule "third_party/uikit"]
+	path = third_party/uikit
+	url = git@github.com:uikit/uikit.git

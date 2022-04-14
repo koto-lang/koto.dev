@@ -7,32 +7,54 @@
     <title>The Koto Programming Language</title>
 
     <link rel="stylesheet" href="/main.css" />
+
+    <script src="uikit.min.js"></script>
+    <script src="uikit-icons.min.js"></script>
+
     {% block head %} {% endblock head %}
   </head>
 
   <body>
-    <nav class="navbar is-black px-6" role="navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="/logo.png" />
-          <div class="pl-2">
+    <!-- <div class="uk-container uk-container-expand"> -->
+      <nav class="uk-navbar-container uk-navbar">
+        <div class="uk-navbar-left">
+          <a class="uk-navbar-item uk-logo" href="/">
+            <img class="nav-logo" src="/logo.png" />
             Koto
-          </div>
-        </a>
-      </div>
-
-      <div class="navbar-menu is-active">
-        <div class="navbar-end">
-          <a class="navbar-item" href="/community"> Community </a>
-
-          <a class="navbar-item" href="https://github.com/koto-lang/koto">
-            GitHub
           </a>
         </div>
+
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li class="uk-active">
+              <a class="uk-navbar-item" href="/docs">Docs</a>
+            </li>
+
+            <li class="uk-active">
+              <a class="uk-navbar-item" href="https://play.koto.dev">Play</a>
+            </li>
+
+            <li class="uk-active">
+              <a class="uk-navbar-item" href="/community">Community</a>
+            </li>
+
+            <li class="uk-active">
+              <a
+                class="uk-navbar-item"
+                href="https://github.com/koto-lang/koto"
+              >
+                GitHub
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="uk-section">
+        <div class="uk-container uk-container-expand">
+          {% block content %} {% endblock %}
+        </div>
       </div>
-    </nav>
-    <section class="section">
-      <div class="container">{% block content %} {% endblock %}</div>
-    </section>
+    <!-- </div> -->
   </body>
 </html>

@@ -1,35 +1,32 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+<div uk-grid class="uk-child-width-expand@m uk-grid-match uk-text-center">
+  <div>
+    <div class="uk-card uk-card-body uk-card-primary">
+      <a href="https://discord.gg/JeV8RuK4CT">
+        <span uk-icon="discord"></span>
+        Discord
+      </a>
+    </div>
+  </div>
 
-<div class="tile is-ancestor">
-    <div class="tile is-parent link-tile">
-      <article class="tile is-child notification is-success">
-        <p class="title">
-          <a href="https://discord.gg/JeV8RuK4CT">
-            Discord
-          </a>
-        </p>
-      </article>
+  <div>
+    <div class="uk-card uk-card-body uk-card-primary">
+      <a href="https://github.com/koto-lang/koto/discussions">
+        <span uk-icon="github"></span>
+        GitHub
+      </a>
     </div>
-    <div class="tile is-parent link-tile">
-      <article class="tile is-child notification is-warning">
-        <p class="title">
-          <a href="https://github.com/koto-lang/koto/discussions">
-            GitHub Discussions
-          </a>
-        </p>
-      </article>
+  </div>
+
+  <div>
+    <div class="uk-card uk-card-body uk-card-primary">
+      <a href="https://github.com/koto-lang/koto/blob/HEAD/CODE_OF_CONDUCT.md">
+        <span uk-icon="users"></span>
+        Code of Conduct
+      </a>
     </div>
-    <div class="tile is-parent link-tile">
-      <article class="tile is-child notification is-info">
-        <p class="title">
-          <a href="https://github.com/koto-lang/koto/blob/HEAD/CODE_OF_CONDUCT.md">
-            Code of Conduct
-          </a>
-        </p>
-      </article>
-    </div>
+  </div>
 </div>
 
 {% endblock content %}
