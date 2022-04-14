@@ -8,14 +8,17 @@
 
     <link rel="stylesheet" href="/main.css" />
 
-    <script src="uikit.min.js"></script>
-    <script src="uikit-icons.min.js"></script>
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
 
     {% block head %} {% endblock head %}
   </head>
 
   <body>
     <!-- <div class="uk-container uk-container-expand"> -->
+    <div
+      uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky"
+    >
       <nav class="uk-navbar-container uk-navbar">
         <div class="uk-navbar-left">
           <a class="uk-navbar-item uk-logo" href="/">
@@ -49,12 +52,13 @@
           </ul>
         </div>
       </nav>
+    </div>
 
-      <div class="uk-section">
-        <div class="uk-container uk-container-expand">
-          {% block content %} {% endblock %}
-        </div>
+    <div class="uk-section">
+      <div class="uk-container uk-container-expand">
+        {% block content %} {% endblock %}
       </div>
+    </div>
     <!-- </div> -->
   </body>
 </html>

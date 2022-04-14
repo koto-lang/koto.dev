@@ -7,6 +7,5 @@ highlight_code = true
 highlight_theme = "solarized-dark"
 extra_syntaxes_and_themes = ["syntaxes/koto-sublime"]
 
-
 [extra]
 # Put all your custom variables here
