@@ -1,2 +1,5 @@
+docs:
+  cargo run -p convert-koto-docs
+
 serve:
-  zola serve --open
+  @just docs && zola serve --open --fast

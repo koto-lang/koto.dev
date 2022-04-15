@@ -4,7 +4,7 @@ build_search_index = false
 
 [markdown]
 highlight_code = true
-highlight_theme = "solarized-dark"
+highlight_theme = "solarized-light"
 extra_syntaxes_and_themes = ["syntaxes/koto-sublime"]
 
 [extra]

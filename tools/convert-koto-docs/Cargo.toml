@@ -1,0 +1,14 @@
+[package]
+name = "convert-koto-docs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+pulldown-cmark-to-cmark = "10.0.1"    # Convert pulldown-cmark Events back to the string they were parsed from
+
+[dependencies.pulldown-cmark]
+# Markdown parsing
+version = "0.9.1"
+default-features = false
