@@ -1,7 +1,7 @@
 use {
-    pulldown_cmark::{Event, Parser, Tag},
+    pulldown_cmark::{CodeBlockKind, CowStr, Event, Parser, Tag},
     pulldown_cmark_to_cmark::cmark,
-    std::{error::Error, fs, io::Write, ops::Deref, path::PathBuf},
+    std::{error::Error, fs, io::Write, iter::once, ops::Deref, path::PathBuf},
 };
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -12,33 +12,66 @@ fn main() -> Result<(), Box<dyn Error>> {
         let input_path = entry.path();
         let input_contents = fs::read_to_string(&input_path)?;
 
+        // Parse the input markdown and perform some modifications
         use {Event::*, Tag::*};
-        let mut in_heading = false;
-        let mut reference_found = false;
-        let mut allow_events_through = false;
-        let parser = Parser::new(&input_contents).filter(|event| {
-            // Wait until we reach the '# Reference' heading to start letting events through
-            match event {
-                Start(Heading(_, _, _)) => {
-                    in_heading = true;
-                }
-                End(Heading(_, _, _)) => {
-                    in_heading = false;
-                    if !allow_events_through {
-                        if reference_found {
-                            allow_events_through = true;
-                        } else {
-                            return false;
+        let parser = Parser::new(&input_contents)
+            .filter({
+                // Wait until we reach the '# Reference' heading to start letting events through
+                let mut in_heading = false;
+                let mut reference_found = false;
+                let mut allow_events_through = false;
+                move |event| {
+                    match event {
+                        Start(Heading(_, _, _)) => {
+                            in_heading = true;
                         }
+                        End(Heading(_, _, _)) => {
+                            in_heading = false;
+                            if !allow_events_through {
+                                if reference_found {
+                                    allow_events_through = true;
+                                } else {
+                                    return false;
+                                }
+                            }
+                        }
+                        Text(text) if in_heading && text.deref() == "Reference" => {
+                            reference_found = true;
+                        }
+                        _ => {}
                     }
+                    allow_events_through
                 }
-                Text(text) if in_heading && text.deref() == "Reference" => {
-                    reference_found = true;
+            })
+            .flat_map({
+                // Add a playground link to every koto code block
+                let mut in_koto_code = false;
+                let mut koto_code = CowStr::from("");
+                move |event| {
+                    match &event {
+                        Start(CodeBlock(CodeBlockKind::Fenced(lang))) if lang.deref() == "koto" => {
+                            in_koto_code = true;
+                        }
+                        End(CodeBlock(CodeBlockKind::Fenced(lang))) if lang.deref() == "koto" => {
+                            in_koto_code = false;
+                            let url_component = urlencoding::encode(&koto_code);
+                            let shortcode = format!(
+                                "\
+{{% example_playground_link() %}}
+{url_component}
+{{% end %}}
+"
+                            );
+                            return once(event).chain(Some(Text(shortcode.into())));
+                        }
+                        Text(code) if in_koto_code => {
+                            koto_code = code.clone();
+                        }
+                        _ => {}
+                    };
+                    once(event).chain(None)
                 }
-                _ => {}
-            }
-            allow_events_through
-        });
+            });
 
         let mut output_buffer = String::with_capacity(input_contents.len());
         cmark(parser, &mut output_buffer)?;
