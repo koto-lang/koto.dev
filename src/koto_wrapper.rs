@@ -181,7 +181,7 @@ impl KotoWrapper {
 
         self.koto.clear_module_cache();
         if let Err(error) = self.koto.compile(&script) {
-            self.log_error(&format!("Error while compiling script: {error}"));
+            self.error(&format!("Error while compiling script: {error}"));
             return;
         }
 
@@ -203,7 +203,7 @@ impl KotoWrapper {
         }
 
         if let Err(e) = self.koto.run() {
-            return self.log_error(&e.to_string());
+            return self.error(&e.to_string());
         }
 
         if matches!(self.script_state, ScriptState::Compiled) {
@@ -212,7 +212,7 @@ impl KotoWrapper {
                 Some(f) => match self.koto.run_function(f, CallArgs::None) {
                     Ok(state) => state,
                     Err(e) => {
-                        return self.log_error(&e.to_string());
+                        return self.error(&e.to_string());
                     }
                 },
                 None => Value::Map(ValueMap::default()),
@@ -220,7 +220,7 @@ impl KotoWrapper {
         }
 
         if let Err(e) = self.run_play_function("on_load", &[self.user_state.clone()]) {
-            return self.log_error(&e.to_string());
+            return self.error(&e.to_string());
         }
 
         self.script_state = ScriptState::Initialized;
@@ -255,10 +255,10 @@ impl KotoWrapper {
         self.is_initialized() && self.play_module.data().get_with_string("update").is_some()
     }
 
-    fn log_error(&mut self, error: &str) {
+    fn error(&mut self, error: &str) {
         use ScriptState::*;
         self.script_state = match self.script_state {
-            Initialized | ErrorAfterInitialized => ErrorAfterInitialized,
+            Initialized | Recompiled | ErrorAfterInitialized => ErrorAfterInitialized,
             _ => NotReady,
         };
 
@@ -281,7 +281,7 @@ impl KotoWrapper {
     pub fn on_resize(&mut self) {
         if self.is_ready() {
             if let Err(e) = self.koto.run() {
-                return self.log_error(&e.to_string());
+                return self.error(&e.to_string());
             }
 
             self.process_koto_messages();
@@ -296,7 +296,7 @@ impl KotoWrapper {
                 self.process_koto_messages();
             }
             Err(e) => {
-                self.log_error(&e.to_string());
+                self.error(&e.to_string());
             }
         }
     }
