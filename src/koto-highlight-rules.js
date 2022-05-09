@@ -11,175 +11,215 @@ export function register_koto_editor_mode() {
       var TextHighlightRules = acequire("ace/mode/text_highlight_rules")
         .TextHighlightRules;
 
-      var KotoHighlightRules = function () {
+      var KotoHighlightRules = function() {
+        // regexp must not have capturing parentheses. Use (?:) instead.
+        // regexps are ordered -> the first match is used
+
         this.$rules = {
-          start: [
-            {
-              include: "#comment-block",
-            },
-            {
-              token: "keyword.comment.line.koto",
-              regex: /#.*/,
-            },
-            {
-              include: "#keywords",
-            },
-            {
-              include: "#numbers",
-            },
-            {
-              include: "#operators",
-            },
-            {
-              include: "#punctuation",
-            },
-            {
-              include: "#strings",
-            },
-            {
-              include: "#identifiers",
-            },
-          ],
-          "#comment-block": [
-            {
+          start: [{
+            include: "#all"
+          }],
+          "#all": [{
+            include: "#comment-block"
+          }, {
+            token: "keyword.comment.line.koto",
+            regex: /#.*/
+          }, {
+            include: "#keyword"
+          }, {
+            include: "#number"
+          }, {
+            include: "#operator"
+          }, {
+            include: "#punctuation"
+          }, {
+            include: "#section"
+          }, {
+            include: "#string"
+          }, {
+            include: "#identifier"
+          }],
+          "#comment-block": [{
+            token: "comment.block.koto",
+            regex: /#-/,
+            push: [{
               token: "comment.block.koto",
-              regex: /#-/,
-              push: [
-                {
-                  token: "comment.block.koto",
-                  regex: /-#/,
-                  next: "pop",
-                },
-                {
-                  token: "constant.character.escape.koto",
-                  regex: /\\./,
-                },
-              ],
-            },
-          ],
-          "#identifiers": [
-            {
-              token: "variable.other.source.koto",
-              regex: "\b" + wordPattern + "\b",
-            },
-            {
-              token: "punctuation.meta.decorator.koto",
-              regex: "@(" + wordPattern + ")?",
-            },
-          ],
-          "#keywords": [
-            {
-              token: "constant.language.koto",
-              regex: /\b(?:false|true|null)\b/,
-            },
-            {
-              token: "constant.language.self.koto",
-              regex: /\bself\b/,
-            },
-            {
-              token: "support.function.koto",
-              regex: /\b(?:assert|assert_eq|assert_ne|assert_near)\b/,
-            },
-            {
-              token: "keyword.control.koto",
-              regex: /\b(?:catch|finally|for|in|loop|return|throw|try|until|while|yield)\b/,
-            },
-            {
-              token: "keyword.control.conditional.koto",
-              regex: /\b(?:else|if|match|switch|then)\b/,
-            },
-            {
-              token: "keyword.control.import.koto",
-              regex: /\b(?:export|from|import)\b/,
-            },
-          ],
-          "#numbers": [
-            {
-              token: "constant.numeric.koto",
-              regex: /\b-?[0-9]+\b/,
-            },
-            {
-              token: "constant.numeric.koto",
-              regex: /\b-?[0-9]+.?[0-9]+(?:e[-+]?[0-9]+)?\b/,
-            },
-            {
-              token: "constant.numeric.koto",
-              regex: /\b-?0b[01]+\b/,
-            },
-            {
-              token: "constant.numeric.koto",
-              regex: /\b-?0o[0-7]+\b/,
-            },
-            {
-              token: "constant.numeric.koto",
-              regex: /\b-?0x[0-9a-fA-F]+\b/,
-            },
-          ],
-          "#operators": [
-            {
-              token: "keyword.operator.koto",
-              regex: /\b(?:and|not|or)\b/,
-            },
-            {
-              token: "keyword.operator.koto",
-              regex: /\+|-|%|\*|\//,
-            },
-            {
-              token: "keyword.operator.koto",
-              regex: /\+=|-=|\*=|\/=|%=/,
-            },
-            {
-              token: "keyword.operator.koto",
-              regex: /==?|<=?|>=?/,
-            },
-            {
-              token: "keyword.operator.koto",
-              regex: /\.\.=?/,
-            },
-          ],
-          "#punctuation": [
-            {
+              regex: /-#/,
+              next: "pop"
+            }, {
+              token: "constant.character.escape.koto",
+              regex: /\\./
+            }, {
+              defaultToken: "comment.block.koto"
+            }]
+          }],
+          "#identifier": [{
+            token: "variable.name",
+            regex: /[[:alpha:]_][[:alnum:]_]*/
+          }, {
+            token: "entity.name.function.koto",
+            regex: /\b[[:alpha:]_][[:alnum:]_]*(?=\:)\b/
+          }],
+          "#keyword": [{
+            token: "constant.language.koto",
+            regex: /\b(?:false|true|null)\b/
+          }, {
+            token: "constant.language.self.koto",
+            regex: /\bself\b/
+          }, {
+            token: "support.function.koto",
+            regex: /\b(?:assert|assert_eq|assert_ne|assert_near)\b/
+          }, {
+            token: "keyword.control.koto",
+            regex: /\b(?:catch|finally|for|in|loop|return|throw|try|until|while|yield)\b/
+          }, {
+            token: "keyword.control.conditional.koto",
+            regex: /\b(?:else|if|match|switch|then)\b/
+          }, {
+            token: "keyword.control.import.koto",
+            regex: /\b(?:export|from|import)\b/
+          }, {
+            token: "keyword.other",
+            regex: /\bdebug\b/
+          }],
+          "#number": [{
+            token: "constant.numeric.koto",
+            regex: /\b-?[0-9]+\b/
+          }, {
+            token: "constant.numeric.koto",
+            regex: /\b-?[0-9]+.?[0-9]+(?:e[-+]?[0-9]+)?\b/
+          }, {
+            token: "constant.numeric.koto",
+            regex: /\b-?0b[01]+\b/
+          }, {
+            token: "constant.numeric.koto",
+            regex: /\b-?0o[0-7]+\b/
+          }, {
+            token: "constant.numeric.koto",
+            regex: /\b-?0x[0-9a-fA-F]+\b/
+          }],
+          "#operator": [{
+            token: "keyword.operator.koto",
+            regex: /\b(?:and|not|or)\b/
+          }, {
+            token: "keyword.operator.koto",
+            regex: /\+|-|%|\*|\//
+          }, {
+            token: "keyword.operator.koto",
+            regex: /\+=|-=|\*=|\/=|%=/
+          }, {
+            token: "keyword.operator.koto",
+            regex: /==?|<=?|>=?/
+          }, {
+            token: "keyword.operator.koto",
+            regex: /\.\.=?/
+          }],
+          "#punctuation": [{
+            token: "punctuation.brackets.round.koto",
+            regex: /\(|\)/
+          }, {
+            token: "punctuation.dot.koto",
+            regex: /\./
+          }, {
+            token: "punctuation.comma.koto",
+            regex: /,/
+          }, {
+            token: "punctuation.definition.parameters.koto",
+            regex: /\|/
+          }, {
+            token: "punctuation.meta.decorator.koto",
+            regex: /@(?:[[:alpha:]_][[:alnum:]_]*)?/
+          }],
+          "#section": [{
+            token: "punctuation.brackets.curly.koto",
+            regex: /{/,
+            push: [{
               token: "punctuation.brackets.curly.koto",
-              regex: /\{|\}/,
-            },
-            {
-              token: "punctuation.brackets.round.koto",
-              regex: /\(|\)/,
-            },
-            {
+              regex: /}/,
+              next: "pop"
+            }, {
+              include: "#all"
+            }, {
+              defaultToken: "punctuation.brackets.curly.koto"
+            }]
+          }, {
+            token: "punctuation.brackets.square.koto",
+            regex: /\[/,
+            push: [{
               token: "punctuation.brackets.square.koto",
-              regex: /\[|\]/,
-            },
-            {
-              token: "punctuation.comma.koto",
-              regex: /,/,
-            },
-            {
-              token: "punctuation.definition.parameters.koto",
-              regex: /\|/,
-            },
-          ],
-          "#strings": [
-            {
+              regex: /]/,
+              next: "pop"
+            }, {
+              include: "#all"
+            }, {
+              defaultToken: "punctuation.brackets.square.koto"
+            }]
+          }],
+          "#string": [{
+            include: "#string-single-quoted"
+          }, {
+            include: "#string-double-quoted"
+          }],
+          "#string-single-quoted": [{
+            token: "string.quoted.single.koto",
+            regex: /'/,
+            push: [{
+              token: "string.quoted.single.koto",
+              regex: /'/,
+              next: "pop"
+            }, {
+              include: "#string-escape"
+            }, {
+              include: "#string-template"
+            }, {
+              defaultToken: "string.quoted.single.koto"
+            }]
+          }],
+          "#string-double-quoted": [{
+            token: "string.quoted.double.koto",
+            regex: /"/,
+            push: [{
               token: "string.quoted.double.koto",
               regex: /"/,
-              push: [
-                {
-                  token: "string.quoted.double.koto",
-                  regex: /"/,
-                  next: "pop",
-                },
-                {
-                  token: "constant.character.escape.koto",
-                  regex: /\\./,
-                },
-                {
-                  defaultToken: "string.quoted.double.koto",
-                },
-              ],
-            },
-          ],
-        };
+              next: "pop"
+            }, {
+              include: "#string-escape"
+            }, {
+              include: "#string-template"
+            }, {
+              defaultToken: "string.quoted.double.koto"
+            }]
+          }],
+          "#string-escape": [{
+            token: "constant.character.escape.koto",
+            regex: /\\['$rnt"\\]/
+          }, {
+            token: "constant.character.escape.koto",
+            regex: /\\$/
+          }, {
+            token: "constant.character.escape.koto",
+            regex: /\\x[0-9a-fA-F]{2}/
+          }, {
+            token: "constant.character.escape.koto",
+            regex: /\\u{[0-9a-fA-F]{1,6}}/
+          }],
+          "#string-template": [{
+            token: "variable.parameter.koto",
+            regex: /\$[[:alpha:]_][[:alnum:]_]*/
+          }, {
+            token: "variable.parameter.koto",
+            regex: /\${/,
+            push: [{
+              token: "variable.parameter.koto",
+              regex: /}/,
+              next: "pop"
+            }, {
+              include: "#all"
+            }, {
+              defaultToken: "variable.parameter.koto"
+            }]
+          }]
+        }
 
         this.normalizeRules();
       };
@@ -192,7 +232,7 @@ export function register_koto_editor_mode() {
       };
 
       oop.inherits(KotoHighlightRules, TextHighlightRules);
-      var Mode = function () {
+      var Mode = function() {
         this.HighlightRules = KotoHighlightRules;
       };
       oop.inherits(Mode, TextMode);
