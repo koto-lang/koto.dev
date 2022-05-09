@@ -42,7 +42,7 @@ pub fn editor(props: &Props) -> Html {
     );
 
     html! {
-        <div id={EDITOR_ID} class="flex-grow"></div>
+        <div id={EDITOR_ID} class="playground-editor flex-grow"></div>
     }
 }
 

@@ -1,6 +1,6 @@
 use {
     crate::{get_local_storage_value, set_local_storage_value},
-    std::{fmt::Display, ops::Deref, str::FromStr},
+    std::{fmt::Display, str::FromStr},
 };
 
 pub trait StorableValue: Default + Display + FromStr {}
@@ -28,6 +28,10 @@ impl<T: StorableValue> StoredValue<T> {
         }
     }
 
+    pub fn as_ref(&self) -> &T {
+        &self.value
+    }
+
     pub fn set(&mut self, value: T) {
         self.value = value;
     }
@@ -37,10 +41,8 @@ impl<T: StorableValue> StoredValue<T> {
     }
 }
 
-impl<T: StorableValue> Deref for StoredValue<T> {
-    type Target = T;
-
-    fn deref(&self) -> &Self::Target {
-        &self.value
+impl<T: StorableValue + Copy> StoredValue<T> {
+    pub fn get(&self) -> T {
+        self.value
     }
 }

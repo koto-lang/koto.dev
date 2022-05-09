@@ -55,6 +55,7 @@ pub enum KotoMessage {
         e: f64,
         f: f64,
     },
+    ShowCanvas,
     Stroke,
     StrokeRect(Rect),
     StrokeText {
@@ -111,6 +112,7 @@ pub struct KotoWrapper {
     script_state: ScriptState,
     user_state: Value,
     on_fps_changed: Callback<f64>,
+    on_show_canvas: Callback<()>,
 }
 
 impl KotoWrapper {
@@ -119,6 +121,7 @@ impl KotoWrapper {
         compiler_output: Element,
         script_output: Element,
         on_fps_changed: Callback<f64>,
+        on_show_canvas: Callback<()>,
     ) -> Self {
         let message_queue = KotoMessageQueue::default();
 
@@ -164,6 +167,7 @@ impl KotoWrapper {
             script_state: ScriptState::NotReady,
             user_state: Value::Map(ValueMap::default()),
             on_fps_changed,
+            on_show_canvas,
         }
     }
 
@@ -390,6 +394,7 @@ impl KotoWrapper {
                 KotoMessage::SetTextBaseline(baseline) => {
                     self.canvas_context.set_text_baseline(&baseline);
                 }
+                KotoMessage::ShowCanvas => self.on_show_canvas.emit(()),
                 KotoMessage::Stroke => self.canvas_context.stroke(),
                 KotoMessage::StrokeRect(r) => {
                     self.canvas_context.stroke_rect(r.x, r.y, r.width, r.height)
@@ -478,6 +483,14 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
                 }
             };
             queue.borrow_mut().push_back(KotoMessage::SetFps(fps));
+            Ok(Null)
+        }
+    });
+
+    result.add_fn("show_canvas", {
+        cloned!(queue);
+        move |_, _| {
+            queue.borrow_mut().push_back(KotoMessage::ShowCanvas);
             Ok(Null)
         }
     });

@@ -1,5 +1,7 @@
 import number.tau
 
+play.show_canvas()
+
 w, h = canvas.width(), canvas.height()
 w2, h2 = w / 2, h / 2
 z = (w.min h) / 2

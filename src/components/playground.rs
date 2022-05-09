@@ -4,19 +4,21 @@ use {
         ace_bindings::AceEditor, koto_wrapper::KotoWrapper, show_notification,
         stored_value::StoredValue,
     },
+    // gloo_console::log,
     gloo_events::EventListener,
     gloo_net::http::Request,
     gloo_timers::callback::Interval,
     gloo_utils::window,
     serde::Deserialize,
     std::collections::HashMap,
-    web_sys::{Element, HtmlCanvasElement, UrlSearchParams},
+    web_sys::{Element, HtmlCanvasElement, RequestCache, UrlSearchParams},
     yew::prelude::*,
 };
 
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
     EditorChanged,
+    ShowCanvas,
     ScriptLoaded { contents: String },
     ScriptMenuChanged { url: &'static str },
     PlayButtonClicked,
@@ -33,6 +35,9 @@ pub enum Msg {
 }
 
 pub struct Playground {
+    show_canvas: StoredValue<bool>,
+    resize_canvas: bool,
+
     canvas_ref: NodeRef,
     compiler_output_ref: NodeRef,
     script_output_ref: NodeRef,
@@ -87,7 +92,7 @@ impl Playground {
         self.get_editor().get_session().set_value(contents);
     }
 
-    fn reset(&mut self) {
+    fn reset_koto(&mut self) {
         self.get_koto().reset();
         self.update_interval = None;
         self.current_time = 0.0;
@@ -132,13 +137,13 @@ impl Playground {
             } else if let Some(script) = url_params.get("script") {
                 script.into()
             } else {
-                self.script.clone()
+                self.script.as_ref().clone()
             }
         };
 
         self.set_editor_contents(&script);
-        self.set_vim_bindings_enabled(*self.vim_bindings_enabled);
-        self.set_light_theme_enabled(*self.light_theme_enabled);
+        self.set_vim_bindings_enabled(self.vim_bindings_enabled.get());
+        self.set_light_theme_enabled(self.light_theme_enabled.get());
     }
 
     fn set_light_theme_enabled(&mut self, enabled: bool) {
@@ -178,8 +183,13 @@ impl Component for Playground {
     type Properties = ();
 
     fn create(ctx: &Context<Self>) -> Self {
+        let show_canvas = StoredValue::new("show-canvas");
+        let resize_canvas = show_canvas.get();
+
         Self {
             canvas_ref: NodeRef::default(),
+            show_canvas,
+            resize_canvas,
             compiler_output_ref: NodeRef::default(),
             script_output_ref: NodeRef::default(),
             editor: None,
@@ -187,7 +197,7 @@ impl Component for Playground {
             script: StoredValue::new_with_default("script", || {
                 include_str!("../../examples/canvas/random_rects.koto").into()
             }),
-            light_theme_enabled: StoredValue::new("light_theme_enabled"),
+            light_theme_enabled: StoredValue::new("light-theme-enabled"),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
             update_interval: None,
             last_time: None,
@@ -227,15 +237,30 @@ impl Component for Playground {
                 self.script.set(script.into());
                 true
             }
+            Msg::ShowCanvas => {
+                if !self.show_canvas.get() {
+                    self.show_canvas.set(true);
+                    // The script should be reinitialized now that the canvas is being shown
+                    self.reset_koto();
+                    self.set_editor_contents(&self.get_editor_contents());
+                    // Send a 'window resized' message to redraw the canvas after the re-render
+                    // ctx.link().send_message(Msg::WindowResized);
+                    self.resize_canvas = true;
+                    true
+                } else {
+                    false
+                }
+            }
             Msg::ScriptLoaded { contents } => {
-                self.reset();
+                self.show_canvas.set(false);
+                self.reset_koto();
                 self.set_editor_contents(&contents);
-                false
+                true
             }
             Msg::ScriptMenuChanged { url } => {
                 ctx.link().send_future({
                     async {
-                        match Request::get(url).send().await {
+                        match Request::get(url).cache(RequestCache::NoCache).send().await {
                             Ok(response) => match response.text().await {
                                 Ok(contents) => Msg::ScriptLoaded { contents },
                                 Err(_) => Msg::ShowError {
@@ -260,9 +285,9 @@ impl Component for Playground {
                 true
             }
             Msg::ReloadButtonClicked => {
-                self.reset();
+                self.reset_koto();
                 ctx.link().send_message(Msg::EditorChanged);
-                false
+                true
             }
             Msg::ShareButtonClicked => {
                 // self.copy_link_to_clipboard();
@@ -274,11 +299,11 @@ impl Component for Playground {
                 true
             }
             Msg::ToggleEditorTheme => {
-                self.set_light_theme_enabled(!*self.light_theme_enabled);
+                self.set_light_theme_enabled(!self.light_theme_enabled.get());
                 true
             }
             Msg::ToggleVimBindings => {
-                self.set_vim_bindings_enabled(!*self.vim_bindings_enabled);
+                self.set_vim_bindings_enabled(!self.vim_bindings_enabled.get());
                 true
             }
             Msg::OnUpdate => {
@@ -314,11 +339,12 @@ impl Component for Playground {
                 false
             }
             Msg::WindowResized => {
-                let canvas = self.get_canvas();
-                canvas.set_width(canvas.client_width() as u32);
-                canvas.set_height(canvas.client_height() as u32);
-                self.get_koto().on_resize();
-                false
+                if self.show_canvas.get() {
+                    self.resize_canvas = true;
+                    true
+                } else {
+                    false
+                }
             }
             Msg::BeforeUnload => {
                 self.script.save();
@@ -338,8 +364,8 @@ impl Component for Playground {
             <div class="editor-area">
                 <EditorToolbar
                     script_playing={self.run_script_enabled}
-                    light_theme_enabled={*self.light_theme_enabled}
-                    vim_bindings_enabled={*self.vim_bindings_enabled}
+                    light_theme_enabled={self.light_theme_enabled.get()}
+                    vim_bindings_enabled={self.vim_bindings_enabled.get()}
                     on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
                     on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
                     on_theme_clicked={ctx.link().callback(|_| Msg::ToggleEditorTheme)}
@@ -357,27 +383,33 @@ impl Component for Playground {
             </div>
         };
 
+        let playground_classes = if self.show_canvas.get() {
+            classes!("playground", "with-canvas")
+        } else {
+            classes!("playground", "without-canvas")
+        };
+
         html! {
             <>
-                <div class="playground">
+                <div class={playground_classes}>
                     { editor_area }
 
                     <canvas
-                      ref={self.canvas_ref.clone()}
-                      class="playground-canvas fullsize"
-                      width="400"
-                      height="400"
+                        ref={self.canvas_ref.clone()}
+                        class="playground-canvas fullsize"
+                        width="400"
+                        height="400"
                     ></canvas>
 
                     <textarea
                       ref={self.compiler_output_ref.clone()}
-                      class="fixed-mono"
+                      class="playground-status fixed-mono"
                       readonly=true
                     ></textarea>
 
                     <textarea
                       ref={self.script_output_ref.clone()}
-                      class="fixed-mono"
+                      class="playground-output fixed-mono"
                       readonly=true
                     ></textarea>
                 </div>
@@ -386,7 +418,7 @@ impl Component for Playground {
                     if self.show_share_dialog {
                         html! {
                             <Share
-                                script={self.script.clone()}
+                                script={self.script.as_ref().clone()}
                                 on_hidden={ctx.link().callback(|_| Msg::ShareModalClosed)}
                             />
                         }
@@ -399,18 +431,26 @@ impl Component for Playground {
     }
 
     fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {
-        if first_render {
-            let canvas = self.get_canvas();
+        let canvas = self.get_canvas();
 
+        if self.resize_canvas {
             canvas.set_width(canvas.client_width() as u32);
             canvas.set_height(canvas.client_height() as u32);
+            self.get_koto().on_resize();
+            self.resize_canvas = false;
+        }
 
+        if first_render {
             let compiler_output = self.compiler_output_ref.cast::<Element>().unwrap();
             let script_output = self.script_output_ref.cast::<Element>().unwrap();
 
-            self.koto = Some(KotoWrapper::new(canvas, compiler_output, script_output, {
-                ctx.link().callback(move |fps| Msg::SetFps(fps))
-            }));
+            self.koto = Some(KotoWrapper::new(
+                canvas,
+                compiler_output,
+                script_output,
+                ctx.link().callback(|fps| Msg::SetFps(fps)),
+                ctx.link().callback(|_| Msg::ShowCanvas),
+            ));
         }
 
         self.show_share_dialog = false;

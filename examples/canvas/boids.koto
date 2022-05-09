@@ -113,11 +113,14 @@ draw_boid = |boid|
       .stroke()
 
 play.setup = ||
-  boids:
-    iterator
-      .generate boid_count, make_boid
-      .to_list()
-  last_time: 0
+  play.show_canvas()
+
+  return
+    boids:
+      iterator
+        .generate boid_count, make_boid
+        .to_list()
+    last_time: 0
 
 play.on_load = |state|
   state.boids.resize_with boid_count, make_boid

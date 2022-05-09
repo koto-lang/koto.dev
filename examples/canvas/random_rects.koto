@@ -3,6 +3,7 @@
 import play.random_color, random.pick
 
 play.setup = ||
+  play.show_canvas()
   canvas.clear (pick 100..=200), (pick 100..=200), (pick 100..=200)
 
 play.set_fps 10
