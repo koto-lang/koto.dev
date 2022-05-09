@@ -4,7 +4,11 @@ build_search_index = false
 
 [markdown]
 highlight_code = true
-highlight_theme = "solarized-light"
+highlight_theme = "css"
+highlight_themes_css = [
+  { theme = "solarized-light", filename = "code-light.css" },
+  { theme = "solarized-dark", filename = "code-dark.css" },
+]
 extra_syntaxes_and_themes = ["syntaxes/koto-sublime"]
 
 [extra]
