@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 pulldown-cmark-to-cmark = "10.0.1"    # Convert pulldown-cmark Events back to the string they were parsed from
-urlencoding = "2.1.0"                 # A Rust library for doing URL percentage encoding.
 
 [dependencies.pulldown-cmark]
 # Markdown parsing
