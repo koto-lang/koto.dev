@@ -1,0 +1,35 @@
+%YAML 1.2
+---
+
+# See http://www.sublimetext.com/docs/3/syntax.html#ver-dev
+# See https://www.sublimetext.com/docs/3/scope_naming.html
+name: Kototype
+# file_extensions:
+#   - koto
+scope: source.kototype
+
+variables:
+  ident: '([[:alpha:]_][[:alnum:]_]*)'
+
+contexts:
+  main:
+    - include: keywords
+    - include: names
+    - include: symbols
+
+  keywords:
+    - match: '\b(or)\b'
+      scope: keyword.operator.word.kototype
+
+  names:
+    - match: '\b{{ident}}(?=\:)'
+      scope: constant.character.escape.koto
+    - match: '\b[[:upper:]]\w*\b'
+      scope: entity.name.type.kototype
+
+  symbols:
+    - match: '->'
+      scope: keyword.operator.word.kototype
+    - match: \|
+      scope: variable.other.kototype
+

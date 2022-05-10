@@ -9,7 +9,10 @@ highlight_themes_css = [
   { theme = "solarized-light", filename = "code-light.css" },
   { theme = "solarized-dark", filename = "code-dark.css" },
 ]
-extra_syntaxes_and_themes = ["syntaxes/koto-sublime"]
+extra_syntaxes_and_themes = [
+  "syntaxes/koto-type",
+  "syntaxes/koto-sublime",
+]
 
 [extra]
 # Put all your custom variables here

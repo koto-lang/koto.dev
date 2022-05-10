@@ -54,11 +54,17 @@ fn main() -> Result<(), Box<dyn Error>> {
                         }
                         End(CodeBlock(CodeBlockKind::Fenced(lang))) if lang.deref() == "koto" => {
                             in_koto_code = false;
-                            let url_component = urlencoding::encode(&koto_code);
+                            let playground_code = koto_code
+                                .deref()
+                                .replace("print! ", "print ")
+                                .replace("check! ", "# ")
+                                .replace("skip_check!\n", "");
                             let shortcode = format!(
                                 "\
 {{% example_playground_link() %}}
-{url_component}
+play.clear_output()
+
+{playground_code}
 {{% end %}}
 "
                             );
@@ -66,6 +72,11 @@ fn main() -> Result<(), Box<dyn Error>> {
                         }
                         Text(code) if in_koto_code => {
                             koto_code = code.clone();
+                            let display_code = koto_code
+                                .deref()
+                                .replace("print! ", "")
+                                .replace("check! ", "# ");
+                            return once(Text(display_code.into())).chain(None);
                         }
                         _ => {}
                     };
