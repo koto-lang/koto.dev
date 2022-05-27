@@ -114,5 +114,7 @@ title = \"{name}\"
         write!(output_file, "{}", &output_buffer)?;
     }
 
+    println!("Docs updated");
+
     Ok(())
 }
