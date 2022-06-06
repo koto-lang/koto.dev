@@ -1,9 +1,10 @@
 +++
 title = "Core Library"
 template = "docs-section.html"
-page_template = "docs-page.html"
+page_template = "docs-core-lib.html"
 insert_anchor_links = "right"
 sort_by = "title"
+weight = 1
 +++
 
 # Core Library

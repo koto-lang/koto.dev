@@ -1,0 +1,20 @@
+{% extends "docs-base.html" %}
+
+{% block docscontent %}
+
+<ul class="uk-breadcrumb">
+  {% for ancestor in page.ancestors %}
+    {% if loop.index > 1 %}
+      {% set section = get_section(path=ancestor) %}
+      <li>
+        <a href="{{ section.path }}">
+          {{ section.title }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+{{ page.content | safe }}
+
+{% endblock docscontent %}

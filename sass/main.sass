@@ -3,21 +3,13 @@
 @import url("code-dark.css") (prefers-color-scheme: dark);
 @import url("code-light.css") (prefers-color-scheme: light);
 
+@import 'variables.sass'
+
+html
+  scroll-padding-top: $topbar-height - 4px
+
+.topbar
+  background-color: white
+
 .nav-logo
-  height: 60px
-
-.docs-sidebar
-  position: fixed
-  top: 80px
-  bottom: 0
-  overflow: auto
-  width: 200px
-
-.docs-main
-  left: 260px
-  padding: 20px
-  position: fixed
-  top: 80px
-  bottom: 0
-  overflow: auto
-  width: 66%
+  height: $logo-height

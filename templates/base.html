@@ -20,9 +20,8 @@
     >
       <nav class="uk-navbar-container uk-navbar">
         <div class="uk-navbar-left">
-          <a class="uk-navbar-item uk-logo" href="/">
-            <img class="nav-logo" src="/logo.png" />
-            Koto
+          <a class="uk-navbar-item uk-logo uk-padding" href="/">
+            <img class="nav-logo" src="/koto.svg" />
           </a>
         </div>
 
@@ -52,10 +51,6 @@
       </nav>
     </div>
 
-    <div class="uk-section">
-      <div class="uk-container uk-container-expand">
-        {% block content %} {% endblock %}
-      </div>
-    </div>
+    {% block content %} {% endblock %}
   </body>
 </html>

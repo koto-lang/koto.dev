@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
-
 {% block head %}
-<link rel="stylesheet" href="/core_lib.css" />
+<link rel="stylesheet" href="/docs.css" />
 {% endblock head %}
 
 {% block content %}
@@ -14,40 +13,58 @@
     {% for s in index.subsections %}
       {% set subsection = get_section(path=s) %}
 
-      <li class="uk-nav-header">
+      <li class="uk-nav-header{% if current_path == subsection.path %} uk-active{% endif %}">
         <a href="{{ subsection.permalink }}">
           {{ subsection.title }}
         </a>
       </li>
 
-      {% for page in subsection.pages %}
+      {% if page %}
+        {% set parent_name = page.ancestors | last %}
+        {% set parent = get_section(path = parent_name) %}
+        {% set show_pages = parent == subsection %}
+      {% endif %}
 
-        <li class="{% if current_path == page.path %}uk-active uk-parent{% endif %}">
-          <a href="{{ page.permalink }}">
-            {{ page.title }}
+      {% if section %}
+        {% set show_pages = section == subsection %}
+      {% endif %}
+
+      {% if show_pages %}
+        {% for p in subsection.pages %}
+
+        <li class="{% if current_path == p.path %}uk-active uk-parent{% endif %}">
+          <a href="{{ p.permalink }}">
+            {{ p.title }}
           </a>
 
-          {% if current_path == page.path %}
-            <ul class="uk-nav-sub uk-nav-default">
-              {% for h1 in page.toc %}
-                {% for h2 in h1.children %}
+          {% if current_path == p.path %}
+            {% set first_header = p.toc | first %}
+
+            {% if first_header.children | length > 0 %}
+              <ul class="uk-nav-sub uk-nav-default">
+                {% for h1 in p.toc %}
+                  {% for h2 in h1.children %}
                   <li>
                     <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
                   </li>
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </ul>
+              </ul>
+            {% endif %}
           {% endif %}
         </li>
-      {% endfor %}
-
-      <li class="uk-nav-divider"></li>
+        {% endfor %}
+      {% endif %}
     {% endfor %}
   </ul>
 </nav>
 
-<div class="docs-main">
-  {% block docscontent %} {% endblock %}
+<div class="docs-section uk-section uk-section-default">
+  <div class="uk-container uk-container-small">
+    <div>
+      {% block docscontent %} {% endblock %}
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
