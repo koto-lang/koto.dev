@@ -8,8 +8,23 @@
 html
   scroll-padding-top: $topbar-height - 4px
 
-.topbar
-  background-color: white
+body
+  min-height: 100vh
+
+[color-scheme="light"]
+  body
+    background-color: $global-background
+
+  .navbar
+    background-color: $global-background !important
+
+[color-scheme="dark"]
+  body
+    background-color: $global-secondary-background
+
+  .navbar
+    background-color: $global-secondary-background !important
+
 
 .nav-logo
   height: $logo-height

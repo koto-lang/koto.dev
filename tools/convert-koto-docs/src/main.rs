@@ -52,7 +52,7 @@ fn convert_lang_guide_docs() -> Result<(), Box<dyn Error>> {
 fn convert_core_lib_docs() -> Result<(), Box<dyn Error>> {
     let output_dir = PathBuf::from("content/docs/core");
 
-    for doc in fs::read_dir("modules/koto/docs/reference/core_lib")? {
+    for doc in fs::read_dir("modules/koto/docs/core_lib")? {
         convert_doc(&doc?.path(), output_dir.clone(), None)?;
     }
 

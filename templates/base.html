@@ -11,14 +11,16 @@
     <script src="/uikit.min.js"></script>
     <script src="/uikit-icons.min.js"></script>
 
+    <script src="/color-scheme.js"></script>
+
     {% block head %} {% endblock head %}
   </head>
 
-  <body>
+  <body class="foo">
     <div
       uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky"
     >
-      <nav class="uk-navbar-container uk-navbar">
+      <nav class="navbar uk-navbar-container uk-navbar">
         <div class="uk-navbar-left">
           <a class="uk-navbar-item uk-logo uk-padding" href="/">
             <img class="nav-logo" src="/koto.svg" />
