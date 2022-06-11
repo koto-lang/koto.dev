@@ -1,8 +1,5 @@
 @import 'uikit.sass'
 
-@import url("code-dark.css") (prefers-color-scheme: dark);
-@import url("code-light.css") (prefers-color-scheme: light);
-
 @import 'variables.sass'
 
 html
@@ -15,6 +12,8 @@ body
   height: $logo-height
 
 [color-scheme="light"]
+  @import 'code-light.scss'
+
   body
     background-color: $global-background
 
@@ -22,6 +21,8 @@ body
     background-color: $global-background !important
 
 [color-scheme="dark"]
+  @import 'code-dark.scss'
+
   body
     background-color: $global-secondary-background
 
