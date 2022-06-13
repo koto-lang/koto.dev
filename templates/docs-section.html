@@ -4,4 +4,17 @@
 
 {{ section.content | safe }}
 
+{% set page = section.pages | first %}
+
+{% if page %}
+  <ul class="uk-pagination">
+    <li class="uk-margin-auto-left">
+      <a href="{{ page.path }}" class="uk-link-muted">
+        Next
+        <span class="uk-margin-small-left" uk-pagination-next></span>
+      </a>
+    </li>
+  </ul>
+{% endif %}
+
 {% endblock docscontent %}
