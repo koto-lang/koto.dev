@@ -21,7 +21,6 @@ setColorScheme = function(colorScheme) {
 
 setColorSchemeFromSystemPreference = function(e) {
   const colorScheme = e.matches ? "dark" : "light";
-  console.log(colorScheme);
   setColorScheme(colorScheme);
   if (localStorage) {
     localStorage.setItem(colorSchemeKey, "system");
@@ -33,7 +32,7 @@ systemPreference.addEventListener("change", setColorSchemeFromSystemPreference);
 
 const localStorage = window.localStorage;
 const storedPreference = localStorage.getItem(colorSchemeKey);
-if (storedPreference !== "system") {
+if (storedPreference && storedPreference !== "system") {
   // Apply immediately to set the color-scheme attribute, avoids bg flashes on refresh
   setColorScheme(storedPreference);
 
