@@ -11,39 +11,47 @@
     <script src="/uikit.min.js"></script>
     <script src="/uikit-icons.min.js"></script>
 
+    <script src="/color-scheme.js"></script>
+
     {% block head %} {% endblock head %}
   </head>
 
-  <body>
+  <body class="foo">
     <div
       uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky"
     >
-      <nav class="uk-navbar-container uk-navbar">
+      <nav class="navbar uk-navbar-container uk-navbar">
         <div class="uk-navbar-left">
           <a class="uk-navbar-item uk-logo uk-padding" href="/">
-            <img class="nav-logo" src="/koto.svg" />
+            <img id="nav-logo" src="/koto.svg" />
           </a>
         </div>
 
         <div class="uk-navbar-right">
           <ul class="uk-navbar-nav">
-            <li class="uk-active">
+            <li>
               <a class="uk-navbar-item" href="/docs">Docs</a>
             </li>
 
-            <li class="uk-active">
+            <li>
               <a class="uk-navbar-item" href="https://play.koto.dev"
                 >Playground</a
               >
             </li>
 
-            <li class="uk-active">
+            <li>
               <a class="uk-navbar-item" href="/community">Community</a>
             </li>
 
-            <li class="uk-active">
+            <li>
               <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"
                 >GitHub
+              </a>
+            </li>
+
+            <li>
+              <a class="uk-navbar-item" id="light-switch" onclick="toggleColorScheme();">
+                <img id="light-switch-icon" />
               </a>
             </li>
           </ul>

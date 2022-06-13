@@ -5,14 +5,17 @@ build_search_index = false
 [markdown]
 highlight_code = true
 highlight_theme = "css"
-highlight_themes_css = [
-  { theme = "solarized-light", filename = "code-light.css" },
-  { theme = "solarized-dark", filename = "code-dark.css" },
-]
+
 extra_syntaxes_and_themes = [
   "syntaxes/koto-type",
   "syntaxes/koto-sublime",
 ]
+
+# # The generated files are saved in /sass so they can be conditionally imported.
+# highlight_themes_css = [
+#   { theme = "solarized-light", filename = "code-light.scss" },
+#   { theme = "solarized-dark", filename = "code-dark.scss" },
+# ]
 
 [extra]
 # Put all your custom variables here

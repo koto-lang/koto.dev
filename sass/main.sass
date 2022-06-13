@@ -1,15 +1,49 @@
 @import 'uikit.sass'
 
-@import url("code-dark.css") (prefers-color-scheme: dark);
-@import url("code-light.css") (prefers-color-scheme: light);
-
 @import 'variables.sass'
 
 html
   scroll-padding-top: $topbar-height - 4px
 
-.topbar
-  background-color: white
+body
+  min-height: 100vh
 
-.nav-logo
+#nav-logo
   height: $logo-height
+
+#light-switch-icon
+  height: $navbar-nav-item-font-size * 1.15
+  margin-top: -2px
+
+[color-scheme="light"]
+  @import 'code-light.scss'
+
+  body
+    background-color: $global-background
+
+  .navbar
+    background-color: $global-background !important
+
+  #light-switch-icon
+    filter: opacity(50%)
+
+  #light-switch-icon:hover
+    filter: opacity(75%)
+
+[color-scheme="dark"]
+  @import 'code-dark.scss'
+
+  body
+    background-color: $global-secondary-background
+
+  .navbar
+    background-color: $global-secondary-background !important
+
+  #nav-logo
+    filter: invert(100%)
+
+  #light-switch-icon
+    filter: opacity(50%) invert(100%)
+
+  #light-switch-icon:hover
+    filter: opacity(75%) invert(100%)
