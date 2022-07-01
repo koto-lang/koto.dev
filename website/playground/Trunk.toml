@@ -1,0 +1,6 @@
+# [build]
+# public_url = "/play/"
+
+[[proxy]]
+rewrite = "/create-gist"
+backend = "http://localhost:8787/create-gist"

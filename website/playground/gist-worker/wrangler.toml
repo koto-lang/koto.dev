@@ -1,0 +1,8 @@
+name = "playground"
+
+account_id = "48a4add11bce57b6bac1b9bd0050cb0b"
+workers_dev = true
+compatibility_date = "2022-03-30"
+
+# [secrets]
+# GITHUB_TOKEN
