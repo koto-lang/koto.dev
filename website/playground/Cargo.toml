@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-koto = { git = "https://github.com/koto-lang/koto" }
-koto_random = { git = "https://github.com/koto-lang/koto" }
+koto = { path = "../../modules/koto/src/koto" }
+koto_random = { path = "../../modules/koto/libs/random" }
 
 console_error_panic_hook = "0.1" # A panic hook for `wasm32-unknown-unknown` that logs panics to `console.error`
 fb_cloned = "0.1.2"              # Provides a clone macro
@@ -46,16 +46,6 @@ features = [
   'UrlSearchParams',
   'Window',
 ]
-
-[profile.release]
-panic = 'abort'
-codegen-units = 1
-opt-level = 'z'
-lto = true
-
-[patch."https://github.com/koto-lang/koto"]
-koto = { path = "../koto/src/koto" }
-koto_random = { path = "../koto/libs/random" }
 
 [dev-dependencies]
 glob = "0.3.0"

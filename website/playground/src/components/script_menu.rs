@@ -23,7 +23,7 @@ pub fn script_menu(props: &Props) -> Html {
                 name: "Examples",
                 scripts: &[Script {
                     name: "Fizz Buzz",
-                    url: "examples/intro/fizz_buzz.koto",
+                    url: "/play/examples/intro/fizz_buzz.koto",
                 }],
             },
             ScriptGroup {
@@ -31,15 +31,15 @@ pub fn script_menu(props: &Props) -> Html {
                 scripts: &[
                     Script {
                         name: "Alignment",
-                        url: "examples/canvas/alignment.koto",
+                        url: "/play/examples/canvas/alignment.koto",
                     },
                     Script {
                         name: "Boids",
-                        url: "examples/canvas/boids.koto",
+                        url: "/play/examples/canvas/boids.koto",
                     },
                     Script {
                         name: "Random Rects",
-                        url: "examples/canvas/random_rects.koto",
+                        url: "/play/examples/canvas/random_rects.koto",
                     },
                 ],
             },

@@ -1,5 +1,7 @@
-# [build]
-# public_url = "/play/"
+[build]
+dist = "../static/play"
+index = "./index.html"
+public_url = "/play/"
 
 [[proxy]]
 rewrite = "/create-gist"

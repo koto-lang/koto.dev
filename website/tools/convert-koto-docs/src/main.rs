@@ -21,7 +21,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn convert_lang_guide_docs() -> Result<(), Box<dyn Error>> {
-    let guide_dir = PathBuf::from("modules/koto/docs/language");
+    let guide_dir = PathBuf::from("../modules/koto/docs/language");
     let output_dir = PathBuf::from("content/docs/language");
 
     let mut index_path = guide_dir.clone();
@@ -52,7 +52,7 @@ fn convert_lang_guide_docs() -> Result<(), Box<dyn Error>> {
 fn convert_core_lib_docs() -> Result<(), Box<dyn Error>> {
     let output_dir = PathBuf::from("content/docs/core");
 
-    for doc in fs::read_dir("modules/koto/docs/core_lib")? {
+    for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
         convert_doc(&doc?.path(), output_dir.clone(), None)?;
     }
 
