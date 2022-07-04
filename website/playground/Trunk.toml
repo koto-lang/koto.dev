@@ -6,3 +6,12 @@ public_url = "/play/"
 [[proxy]]
 rewrite = "/create-gist"
 backend = "http://localhost:8787/create-gist"
+
+[[hooks]]
+# Embed the header in the playground's index.html
+stage = "post_build"
+command = "sh"
+command_arguments = [
+  "-c",
+  "koto $TRUNK_SOURCE_DIR/post-process.koto $TRUNK_SOURCE_DIR $TRUNK_STAGING_DIR",
+]

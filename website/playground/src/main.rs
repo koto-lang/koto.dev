@@ -4,8 +4,11 @@ mod koto_wrapper;
 mod stored_value;
 
 use {
-    components::playground::Playground, console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::window, wasm_bindgen::prelude::*, yew::prelude::*,
+    components::playground::Playground,
+    console_error_panic_hook::set_once as set_panic_hook,
+    gloo_utils::{document, window},
+    wasm_bindgen::prelude::*,
+    yew::prelude::*,
 };
 
 #[global_allocator]
@@ -14,7 +17,11 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 fn main() {
     set_panic_hook();
     register_koto_editor_mode();
-    yew::start_app::<App>();
+    let playground_wrapper = document()
+        .get_element_by_id("playground-wrapper")
+        .expect("Missing playground wrapper");
+
+    yew::start_app_in_element::<App>(playground_wrapper);
 }
 
 #[wasm_bindgen(module = "/src/koto-highlight-rules.js")]

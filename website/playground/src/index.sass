@@ -1,5 +1,8 @@
 @import "../../sass/main.sass"
 
+
+$playground-padding: 20px
+
 .flex-column
   display: flex
   flex-direction: column
@@ -26,9 +29,13 @@ body
   margin: 0
   height: 100vh
 
+#playground-wrapper
+  height: calc(100% - $topbar-height - $playground-padding)
+
 .container
-  padding: 20px
-  height: calc(100% - 40px)
+  padding: $playground-padding
+  padding-top: 0px
+  height: 100%
   display: flex
   flex: 100%
 
