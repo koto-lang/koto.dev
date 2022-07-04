@@ -8,15 +8,11 @@
 
     <link data-trunk rel="copy-dir" href="examples" />
 
-    <link data-trunk href="src/index.sass" rel="sass" />
+    <link data-trunk rel="sass" href="src/index.sass" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/css/uikit.min.css"
-      integrity="sha512-4zIHwpUAq+H1BmiVSX3pdrIewjWaffQzXtAjo5ElVcQ1B6GlElz3yeSoWqeoDRrmaSvimMF//JxOO95u8Dx05w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link data-trunk rel="sass" href="../sass/uikit.sass" />
+    <link data-trunk rel="copy-file" href="../../modules/uikit/dist/js/uikit.min.js" />
+    <link data-trunk rel="copy-file" href="../../modules/uikit/dist/js/uikit-icons.min.js" />
   </head>
 
   <body>
@@ -48,18 +44,7 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/js/uikit.min.js"
-      integrity="sha512-42Kij6/EpjfBkAc5AujbI2/VO4XtSVoTi+ZsAqHIJGOqzpSpnL+ggD/NoQHx6nKPfCPLK4Qv8HsqvDA9eYGY9A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.11.1/js/uikit-icons.min.js"
-      integrity="sha512-QEkhj2pEhUoAgTxhqMKlul2ECwyzh7xUPYykhhfp38nIB02x7gG06aQHP6Oh5StJVfUeo9Hkl/4JTC5umnNKug=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="uikit.min.js"></script>
+    <script src="uikit-icons.min.js"></script>
   </body>
 </html>
