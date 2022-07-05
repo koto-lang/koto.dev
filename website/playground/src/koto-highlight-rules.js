@@ -11,6 +11,8 @@ export function register_koto_editor_mode() {
       var TextHighlightRules = acequire("ace/mode/text_highlight_rules")
         .TextHighlightRules;
 
+      const identifier = "[a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*";
+
       var KotoHighlightRules = function() {
         // regexp must not have capturing parentheses. Use (?:) instead.
         // regexps are ordered -> the first match is used
@@ -54,11 +56,11 @@ export function register_koto_editor_mode() {
             }]
           }],
           "#identifier": [{
-            token: "variable.name",
-            regex: /[[:alpha:]_][[:alnum:]_]*/
+            token: "variable.other.member.koto",
+            regex: "\\b" + identifier + "(?=\\:)\\b"
           }, {
-            token: "entity.name.function.koto",
-            regex: /\b[[:alpha:]_][[:alnum:]_]*(?=\:)\b/
+            token: "identifier.koto",
+            regex: identifier
           }],
           "#keyword": [{
             token: "constant.language.koto",
@@ -128,7 +130,7 @@ export function register_koto_editor_mode() {
             regex: /\|/
           }, {
             token: "punctuation.meta.decorator.koto",
-            regex: /@(?:[[:alpha:]_][[:alnum:]_]*)?/
+            regex: "@(?:" + identifier + ")?"
           }],
           "#section": [{
             token: "punctuation.brackets.curly.koto",
@@ -205,7 +207,7 @@ export function register_koto_editor_mode() {
           }],
           "#string-template": [{
             token: "variable.parameter.koto",
-            regex: /\$[[:alpha:]_][[:alnum:]_]*/
+            regex: "\\$" + identifier
           }, {
             token: "variable.parameter.koto",
             regex: /\${/,
