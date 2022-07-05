@@ -4,16 +4,25 @@ use {
         ace_bindings::AceEditor, koto_wrapper::KotoWrapper, show_notification,
         stored_value::StoredValue,
     },
-    // gloo_console::log,
+    gloo_console::log,
     gloo_events::EventListener,
     gloo_net::http::Request,
     gloo_timers::callback::Interval,
-    gloo_utils::window,
+    gloo_utils::{document, window},
     serde::Deserialize,
     std::collections::HashMap,
-    web_sys::{Element, HtmlCanvasElement, RequestCache, UrlSearchParams},
+    wasm_bindgen::{closure::Closure, JsCast},
+    web_sys::{
+        Element, HtmlCanvasElement, MutationObserver, MutationObserverInit, RequestCache,
+        UrlSearchParams,
+    },
     yew::prelude::*,
 };
+
+#[derive(PartialEq, Clone, Copy)]
+pub struct PlaygroundContext {
+    pub dark_mode: bool,
+}
 
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
@@ -30,11 +39,14 @@ pub enum Msg {
     OnUpdate,
     WindowResized,
     BeforeUnload,
+    DocumentAttributesChanged,
     SetFps(f64),
     ShowError { error: String },
 }
 
 pub struct Playground {
+    playground_context: PlaygroundContext,
+
     show_canvas: StoredValue<bool>,
     resize_canvas: bool,
 
@@ -59,6 +71,8 @@ pub struct Playground {
     show_share_dialog: bool,
 
     _event_listeners: Vec<EventListener>,
+    _document_attributes_listener: MutationObserver,
+    _document_attributes_callback: Closure<dyn FnMut()>,
 }
 
 impl Playground {
@@ -183,10 +197,39 @@ impl Component for Playground {
     type Properties = ();
 
     fn create(ctx: &Context<Self>) -> Self {
+        let dark_mode = match document()
+            .document_element()
+            .expect("Missing document element")
+            .get_attribute("color-scheme")
+        {
+            Some(scheme) if scheme == "dark" => true,
+            _ => false,
+        };
+
+        let document_attributes_callback = Closure::wrap({
+            let link = ctx.link().clone();
+            Box::new(move || link.send_message(Msg::DocumentAttributesChanged)) as Box<dyn FnMut()>
+        });
+        let document_attributes_listener =
+            MutationObserver::new(document_attributes_callback.as_ref().unchecked_ref()).unwrap();
+        let mut observation_options = MutationObserverInit::new();
+        observation_options.attributes(true);
+        document_attributes_listener
+            .observe_with_options(
+                &document()
+                    .document_element()
+                    .expect("Missing document element"),
+                &observation_options,
+            )
+            .expect("Failed to add document attributes observer");
+
+        let playground_context = PlaygroundContext { dark_mode };
+
         let show_canvas = StoredValue::new("show-canvas");
         let resize_canvas = show_canvas.get();
 
         Self {
+            playground_context,
             canvas_ref: NodeRef::default(),
             show_canvas,
             resize_canvas,
@@ -215,6 +258,8 @@ impl Component for Playground {
                     move |_| link.send_message(Msg::BeforeUnload)
                 }),
             ],
+            _document_attributes_listener: document_attributes_listener,
+            _document_attributes_callback: document_attributes_callback,
         }
     }
 
@@ -352,6 +397,25 @@ impl Component for Playground {
                 self.vim_bindings_enabled.save();
                 false
             }
+            Msg::DocumentAttributesChanged => {
+                let dark_mode = match document()
+                    .document_element()
+                    .expect("Missing document element")
+                    .get_attribute("color-scheme")
+                {
+                    Some(scheme) if scheme == "dark" => true,
+                    _ => false,
+                };
+
+                log!("document attributes changed: ", dark_mode);
+
+                if self.playground_context.dark_mode != dark_mode {
+                    self.playground_context.dark_mode = dark_mode;
+                    true
+                } else {
+                    false
+                }
+            }
             Msg::ShowError { error } => {
                 show_notification(&error, "error");
                 false
@@ -390,7 +454,7 @@ impl Component for Playground {
         };
 
         html! {
-            <>
+            <ContextProvider<PlaygroundContext> context={self.playground_context}>
                 <div class={playground_classes}>
                     { editor_area }
 
@@ -426,7 +490,7 @@ impl Component for Playground {
                         html! {}
                     }
                 }
-            </>
+            </ContextProvider<PlaygroundContext>>
         }
     }
 

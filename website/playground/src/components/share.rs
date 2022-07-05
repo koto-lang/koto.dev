@@ -1,4 +1,5 @@
 use {
+    super::playground::PlaygroundContext,
     crate::{copy_text_to_clipboard, show_notification},
     cloned::cloned,
     gloo_events::EventListener,
@@ -8,10 +9,11 @@ use {
     serde::{Deserialize, Serialize},
     wasm_bindgen::prelude::*,
     web_sys::Element,
-    yew::prelude::*,
+    yew::{context::ContextHandle, prelude::*},
 };
 
 pub enum Msg {
+    PlaygroundContextChanged(PlaygroundContext),
     GistCreated(CreateGistResponse),
     GistRequestError { error: String },
     GistResponseError { error: String },
@@ -40,6 +42,8 @@ pub struct Share {
     text_url: String,
     self_ref: NodeRef,
     on_hidden_listener: Option<EventListener>,
+    playground_context: PlaygroundContext,
+    _context_listener: ContextHandle<PlaygroundContext>,
 }
 
 impl Component for Share {
@@ -59,11 +63,7 @@ impl Component for Share {
         ctx.link().send_future({
             let script = ctx.props().script.clone();
             async move {
-                match Request::post("/create-gist")
-                    .body(&script)
-                    .send()
-                    .await
-                {
+                match Request::post("/create-gist").body(&script).send().await {
                     Ok(response) => match response.json::<CreateGistResponse>().await {
                         Ok(gist) => Msg::GistCreated(gist),
                         Err(error) => Msg::GistResponseError {
@@ -77,16 +77,27 @@ impl Component for Share {
             }
         });
 
+        let (playground_context, context_listener) = ctx
+            .link()
+            .context(ctx.link().callback(Msg::PlaygroundContextChanged))
+            .expect("Missing playground context");
+
         Self {
             gist_state: GistState::CreatingGist,
             text_url,
             self_ref: NodeRef::default(),
             on_hidden_listener: None,
+            playground_context,
+            _context_listener: context_listener,
         }
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
+            Msg::PlaygroundContextChanged(context) => {
+                self.playground_context = context;
+                true
+            }
             Msg::GistCreated(gist) => {
                 let location = window().location();
 
@@ -178,7 +189,7 @@ impl Component for Share {
                 };
 
                 html! {
-                    <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                    <div class="uk-card uk-card-body uk-border-rounded">
                         <ul class="uk-list">
                             {gist_links}
 
@@ -193,9 +204,22 @@ impl Component for Share {
             }
         };
 
+        let mut dialog_classes = classes![
+            "uk-modal-dialog",
+            "uk-modal-body",
+            "uk-margin-auto-vertical",
+            "uk-border-rounded"
+        ];
+
+        // UIkit doesn't currently have built-in support for inverse colours in modal dialogs
+        if self.playground_context.dark_mode {
+            dialog_classes.push("uk-light");
+            dialog_classes.push("uk-background-secondary");
+        }
+
         html! {
             <div uk-modal="" class="uk-flex-top" ref={self.self_ref.clone()}>
-                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-border-rounded">
+                <div class={dialog_classes}>
                     <h4 class="uk-modal-title uk-text-lighter">
                         {"Share"}
                     </h4>

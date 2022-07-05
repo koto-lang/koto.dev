@@ -5,15 +5,17 @@ setColorScheme = function(colorScheme) {
 
   const body = document.body;
   if (body) {
-    lightSwitch = document.getElementById("light-switch-icon");
+    const lightSwitch = document.getElementById("light-switch-icon");
 
     if (colorScheme == "dark") {
       body.classList.add("uk-light");
       body.classList.remove("uk-dark");
+
       lightSwitch.src = "/sun.svg";
     } else {
       body.classList.add("uk-dark");
       body.classList.remove("uk-light");
+
       lightSwitch.src = "/moon.svg";
     }
   }

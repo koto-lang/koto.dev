@@ -13,6 +13,7 @@ pub struct Props {
     #[prop_or(false)]
     pub toggled: bool,
     pub on_clicked: Option<Callback<()>>,
+    pub uk_toggle: Option<&'static str>,
 }
 
 #[function_component(ToolbarButton)]
@@ -52,6 +53,8 @@ pub fn toolbar_button(props: &Props) -> Html {
         }
     };
 
+    let uk_toggle = props.uk_toggle.map(|target| format!("target: #{target}"));
+
     html! {
         <button
             uk-tooltip={
@@ -81,6 +84,7 @@ pub fn toolbar_button(props: &Props) -> Html {
                     Callback::default()
                 }
             }
+            uk-toggle={uk_toggle}
         >
             {icon_left}
             {caption}

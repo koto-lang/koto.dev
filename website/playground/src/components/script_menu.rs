@@ -1,4 +1,8 @@
-use {super::toolbar_button::ToolbarButton, cloned::cloned, yew::prelude::*};
+use {
+    super::{playground::PlaygroundContext, toolbar_button::ToolbarButton},
+    cloned::cloned,
+    yew::prelude::*,
+};
 
 struct Script {
     name: &'static str,
@@ -80,7 +84,7 @@ pub fn script_menu(props: &Props) -> Html {
                                     });
                                     html! {
                                         <li>
-                                            <a {onclick}>
+                                            <a {onclick} class="uk-modal-close">
                                                 {script.name.to_string()}
                                             </a>
                                         </li>
@@ -95,17 +99,41 @@ pub fn script_menu(props: &Props) -> Html {
         }
     });
 
+    let context = use_context::<PlaygroundContext>().unwrap();
+
+    // UIkit doesn't currently have built-in support for inverse colours in dropdowns
+    // The color classes need to be set on the dropdown itself, and we need a class change on the
+    // uk-inline wrapper to make the re-render work correctly.
+    let mut dialog_classes = classes![
+        "uk-modal-dialog",
+        "uk-modal-body",
+        "uk-margin-auto-vertical",
+        "uk-border-rounded"
+    ];
+    if context.dark_mode {
+        dialog_classes.push("uk-light");
+        dialog_classes.push("uk-background-secondary");
+    }
+
     html! {
-        <div class="uk-inline">
+        <div>
             <ToolbarButton
                 icon_left="thumbnails"
-                icon_right="chevron-down"
                 caption="Examples"
                 tooltip="Load an example script"
+                uk_toggle="examples-dialog"
             />
 
-            <div uk-dropdown="mode: click" uk-toggle="true">
-                { (*menu_items).clone() }
+            <div id="examples-dialog" uk-modal="">
+                <div class={dialog_classes}>
+                    <button type="button" class="uk-modal-close-default" uk-close=""></button>
+
+                    <h4 class="uk-modal-title uk-text-lighter">
+                        {"Examples"}
+                    </h4>
+
+                    { (*menu_items).clone() }
+                </div>
             </div>
         </div>
     }
