@@ -12,6 +12,9 @@ extern "C" {
     #[wasm_bindgen(method, js_name = getSession)]
     pub fn get_session(this: &AceEditor) -> AceSession;
 
+    #[wasm_bindgen(method, js_name = setFontSize)]
+    pub fn set_font_size(this: &AceEditor, size: u16);
+
     #[wasm_bindgen(method, js_name = setTheme)]
     pub fn set_theme(this: &AceEditor, theme: &str);
 

@@ -403,13 +403,13 @@ impl Component for Playground {
 
                     <textarea
                       ref={self.compiler_output_ref.clone()}
-                      class="playground-status fixed-mono"
+                      class="playground-status fixed-mono uk-textarea uk-form-small"
                       readonly=true
                     ></textarea>
 
                     <textarea
                       ref={self.script_output_ref.clone()}
-                      class="playground-output fixed-mono"
+                      class="playground-output fixed-mono uk-textarea uk-form-small"
                       readonly=true
                     ></textarea>
                 </div>

@@ -23,6 +23,7 @@ pub fn editor(props: &Props) -> Html {
                 let ace = get_ace();
                 let editor = ace.edit(EDITOR_ID);
                 editor.set_show_print_margin(false);
+                editor.set_font_size(14);
 
                 let session = editor.get_session();
                 session.set_mode("ace/mode/koto");
