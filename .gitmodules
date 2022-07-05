@@ -7,3 +7,6 @@
 [submodule "modules/uikit"]
 	path = modules/uikit
 	url = git@github.com:uikit/uikit.git
+[submodule "modules/ace"]
+	path = modules/ace
+	url = git@github.com:ajaxorg/ace-builds.git
