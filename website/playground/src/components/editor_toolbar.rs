@@ -6,12 +6,8 @@ use {
 #[derive(PartialEq, Properties)]
 pub struct Props {
     pub script_playing: bool,
-    pub light_theme_enabled: bool,
-    pub vim_bindings_enabled: bool,
     pub on_play_clicked: Callback<()>,
     pub on_reload_clicked: Callback<()>,
-    pub on_theme_clicked: Callback<()>,
-    pub on_vim_bindings_clicked: Callback<()>,
     pub on_share_clicked: Callback<()>,
     pub on_script_selected: Callback<&'static str>,
 }
@@ -33,21 +29,6 @@ pub fn editor_toolbar(props: &Props) -> Html {
                 caption="Reload"
                 tooltip="Reload the script"
                 on_clicked={props.on_reload_clicked.clone()}
-            />
-
-            <div class="horizontal-spacer"></div>
-
-            <ToolbarButton
-                icon_left="bolt"
-                tooltip="Toggle theme brightness"
-                toggled={props.light_theme_enabled}
-                on_clicked={props.on_theme_clicked.clone()}
-            />
-            <ToolbarButton
-                icon_left="vimeo"
-                tooltip="Toggle Vim keybindings"
-                toggled={props.vim_bindings_enabled}
-                on_clicked={props.on_vim_bindings_clicked.clone()}
             />
 
             <div class="horizontal-spacer"></div>

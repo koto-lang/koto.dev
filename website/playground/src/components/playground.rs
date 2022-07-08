@@ -4,7 +4,7 @@ use {
         ace_bindings::AceEditor, koto_wrapper::KotoWrapper, show_notification,
         stored_value::StoredValue,
     },
-    gloo_console::log,
+    // gloo_console::log,
     gloo_events::EventListener,
     gloo_net::http::Request,
     gloo_timers::callback::Interval,
@@ -34,8 +34,6 @@ pub enum Msg {
     ReloadButtonClicked,
     ShareButtonClicked,
     ShareModalClosed,
-    ToggleVimBindings,
-    ToggleEditorTheme,
     OnUpdate,
     WindowResized,
     BeforeUnload,
@@ -61,7 +59,6 @@ pub struct Playground {
 
     script: StoredValue<String>,
     vim_bindings_enabled: StoredValue<bool>,
-    light_theme_enabled: StoredValue<bool>,
 
     update_interval: Option<Interval>,
     last_time: Option<f64>,
@@ -157,18 +154,23 @@ impl Playground {
 
         self.set_editor_contents(&script);
         self.set_vim_bindings_enabled(self.vim_bindings_enabled.get());
-        self.set_light_theme_enabled(self.light_theme_enabled.get());
+        self.update_editor_theme();
     }
 
-    fn set_light_theme_enabled(&mut self, enabled: bool) {
-        self.light_theme_enabled.set(enabled);
-        self.get_editor().set_theme(if enabled {
-            "ace/theme/solarized_light"
-        } else {
-            "ace/theme/solarized_dark"
-        });
+    fn update_editor_theme(&self) {
+        self.get_editor()
+            .set_theme(if self.playground_context.dark_mode {
+                "ace/theme/solarized_dark"
+            } else {
+                "ace/theme/solarized_light"
+            });
     }
 
+    // This was available via a UI toggle, but can now be enabled via:
+    // document.documentElement.setAttribute("editor-bindings", "vim");
+    //
+    // At some point a settings dialog will be added and vim bindings can be re-enabled,
+    // alongside other bindings, e.g. emacs.
     fn set_vim_bindings_enabled(&mut self, enabled: bool) {
         self.vim_bindings_enabled.set(enabled);
         self.get_editor()
@@ -240,7 +242,6 @@ impl Component for Playground {
             script: StoredValue::new_with_default("script", || {
                 include_str!("../../examples/canvas/random_rects.koto").into()
             }),
-            light_theme_enabled: StoredValue::new("light-theme-enabled"),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
             update_interval: None,
             last_time: None,
@@ -343,14 +344,6 @@ impl Component for Playground {
                 self.show_share_dialog = false;
                 true
             }
-            Msg::ToggleEditorTheme => {
-                self.set_light_theme_enabled(!self.light_theme_enabled.get());
-                true
-            }
-            Msg::ToggleVimBindings => {
-                self.set_vim_bindings_enabled(!self.vim_bindings_enabled.get());
-                true
-            }
             Msg::OnUpdate => {
                 let time = get_current_time();
                 let time_delta = time - self.last_time.unwrap_or(time);
@@ -393,28 +386,36 @@ impl Component for Playground {
             }
             Msg::BeforeUnload => {
                 self.script.save();
-                self.light_theme_enabled.save();
                 self.vim_bindings_enabled.save();
                 false
             }
             Msg::DocumentAttributesChanged => {
-                let dark_mode = match document()
+                let document_element = document()
                     .document_element()
-                    .expect("Missing document element")
-                    .get_attribute("color-scheme")
-                {
+                    .expect("Missing document element");
+
+                let dark_mode = match document_element.get_attribute("color-scheme") {
                     Some(scheme) if scheme == "dark" => true,
                     _ => false,
                 };
 
-                log!("document attributes changed: ", dark_mode);
-
-                if self.playground_context.dark_mode != dark_mode {
+                let dark_mode_changed = self.playground_context.dark_mode != dark_mode;
+                if dark_mode_changed {
                     self.playground_context.dark_mode = dark_mode;
-                    true
-                } else {
-                    false
+                    self.update_editor_theme();
                 }
+
+                let vim_bindings_enabled = match document_element.get_attribute("editor-bindings") {
+                    Some(scheme) if scheme == "vim" => true,
+                    _ => false,
+                };
+                let vim_bindings_enabled_changed =
+                    self.vim_bindings_enabled.get() != vim_bindings_enabled;
+                if vim_bindings_enabled_changed {
+                    self.set_vim_bindings_enabled(vim_bindings_enabled);
+                }
+
+                dark_mode_changed
             }
             Msg::ShowError { error } => {
                 show_notification(&error, "error");
@@ -428,12 +429,8 @@ impl Component for Playground {
             <div class="editor-area">
                 <EditorToolbar
                     script_playing={self.run_script_enabled}
-                    light_theme_enabled={self.light_theme_enabled.get()}
-                    vim_bindings_enabled={self.vim_bindings_enabled.get()}
                     on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
                     on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
-                    on_theme_clicked={ctx.link().callback(|_| Msg::ToggleEditorTheme)}
-                    on_vim_bindings_clicked={ctx.link().callback(|_| Msg::ToggleVimBindings)}
                     on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
                         ctx.link().callback(|url| Msg::ScriptMenuChanged {url})
