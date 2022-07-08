@@ -108,7 +108,7 @@ pub fn examples_dialog(props: &Props) -> Html {
         "uk-modal-dialog",
         "uk-modal-body",
         "uk-margin-auto-vertical",
-        "uk-border-rounded"
+        "uk-border-rounded",
     ];
     if context.dark_mode {
         dialog_classes.push("uk-light");

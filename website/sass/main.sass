@@ -8,6 +8,15 @@ html
 body
   min-height: 100vh
 
+.main-logo
+  height: 8em
+
+.nav-logo-padding
+  padding-left: $nav-logo-padding !important
+
+.navbar-extra-padding-right
+  padding-right: $nav-logo-padding - $navbar-nav-item-padding-horizontal
+
 #nav-logo
   height: $logo-height
 
@@ -44,6 +53,9 @@ body
 
   .navbar
     background-color: $global-secondary-background !important
+
+  .main-logo
+    filter: invert(100%)
 
   #nav-logo
     filter: invert(100%)

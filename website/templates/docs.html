@@ -11,8 +11,11 @@
       {% set subsection = get_section(path=s) %}
 
       <div>
-        <a class="uk-card uk-card-body uk-card-default uk-link-toggle" href="{{ subsection.permalink }}">
-          <span class="uk-card-title uk-link-heading">{{ subsection.title }}</span>
+        <a
+          class="uk-button uk-button-default uk-button-large uk-text-capitalize"
+          href="{{ subsection.permalink }}"
+        >
+          {{ subsection.title }}
         </a>
       </div>
 

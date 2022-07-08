@@ -3,8 +3,27 @@
 {% block content %}
 
 <section class="uk-section">
-  <div class="uk-container">
-    {{ section.content | safe }}
+  <div class="uk-container uk-text-center uk-padding-large">
+    <img class="uk-img main-logo" src="/koto.svg" />
+
+    <div class="uk-text-lead uk-padding uk-padding-remove-bottom">
+      A lightweight scripting language for Rust applications.
+    </div>
+
+    <div class="uk-padding">
+      <a
+        class="uk-button uk-button-default uk-button-large uk-text-capitalize"
+        href="/docs/language/getting-started"
+      >
+        Get Started
+      </a>
+    </div>
+
+    <div class="uk-container uk-width-1-2">
+      <div class="uk-text-left">
+        {{ section.content | safe }}
+      </div>
+    </div>
   </div>
 </section>
 
