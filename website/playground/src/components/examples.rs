@@ -19,8 +19,8 @@ pub struct Props {
     pub on_script_selected: Callback<&'static str>,
 }
 
-#[function_component(ScriptMenu)]
-pub fn script_menu(props: &Props) -> Html {
+#[function_component(ExamplesDialog)]
+pub fn examples_dialog(props: &Props) -> Html {
     let script_groups = use_ref(|| {
         vec![
             ScriptGroup {

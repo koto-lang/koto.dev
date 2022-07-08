@@ -1,5 +1,5 @@
 use {
-    super::{script_menu::ScriptMenu, toolbar_button::ToolbarButton},
+    super::{examples::ExamplesDialog, toolbar_button::ToolbarButton},
     yew::prelude::*,
 };
 
@@ -59,7 +59,7 @@ pub fn editor_toolbar(props: &Props) -> Html {
                 on_clicked={props.on_share_clicked.clone()}
             />
 
-            <ScriptMenu on_script_selected={props.on_script_selected.clone()} />
+            <ExamplesDialog on_script_selected={props.on_script_selected.clone()} />
         </div>
     }
 }
