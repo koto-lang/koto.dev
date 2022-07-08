@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The Koto Programming Language</title>
+
+    <link rel="stylesheet" href="/main.css" />
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    <script src="/color-scheme.js"></script>
+
+    {% block head %} {% endblock head %}
+  </head>
+
+  <body>
+    {% include "header.html" %}
+
+    {% block content %} {% endblock %}
+  </body>
+</html>

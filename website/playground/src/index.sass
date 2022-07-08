@@ -1,0 +1,97 @@
+@import "../../sass/main.sass"
+
+
+$playground-padding: 20px
+
+.flex-column
+  display: flex
+  flex-direction: column
+
+.flex-grow
+  flex: 100%
+
+.fixed-mono
+  font-family: monospace !important
+  resize: none
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+.fullsize
+  width: 100%
+  height: 100%
+
+.horizontal-spacer
+  margin-left: auto
+
+body
+  height: 100vh
+
+#playground-wrapper
+  height: calc(100% - $topbar-height - $playground-padding)
+
+.container
+  padding: $playground-padding
+  padding-top: 0px
+  height: 100%
+  display: flex
+  flex: 100%
+
+.playground
+  width: 100%
+  height: 100%
+  display: grid
+
+@media (max-width: 800px)
+  .playground
+    grid-template-columns: 100%
+    grid-template-rows: 40% 40% 10% 10%
+
+@media (min-width: 800px)
+  .playground
+    grid-template-columns: 50% 50%
+    grid-template-rows: 80% 20%
+
+@media (max-width: 800px)
+  .with-canvas
+    grid-template-areas: "editor" "canvas" "output" "status"
+
+@media (min-width: 800px)
+  .with-canvas
+    grid-template-areas: "editor canvas" "status output"
+
+@media (max-width: 800px)
+  .without-canvas
+    grid-template-areas: "editor" "output" "output" "status"
+
+@media (min-width: 800px)
+  .without-canvas
+    grid-template-areas: "editor output" "status output"
+
+.editor-area
+  display: flex
+  flex-direction: column
+
+.editor-toolbar
+  width: 100%
+  display: flex
+  flex-direction: row
+  align-items: flex-end
+
+.playground-editor
+  grid-area: editor
+
+.playground-status
+  grid-area: status
+  padding: 2px
+
+.playground-output
+  grid-area: output
+  padding: 2px
+
+.playground-canvas
+  background-color: #aaaaaa
+  border: 1px
+  border-style: solid
+  border-color: #e5e5e5
+  grid-area: canvas

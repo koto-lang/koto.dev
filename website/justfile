@@ -1,0 +1,39 @@
+docs:
+  cargo run -p convert-koto-docs
+
+docs-watch:
+  cargo watch -w ../modules/koto/docs -w tools/convert-koto-docs -x "run -p convert-koto-docs"
+
+playground:
+  cd playground && trunk build
+
+playground-release:
+  cd playground && trunk build --release
+
+playground-serve:
+  cd playground && trunk serve --open
+
+playground-serve-release:
+  cd playground && trunk serve --release --open
+
+serve:
+  @just docs
+  @just playground
+  zola serve --open --fast
+
+serve-release:
+  @just docs
+  @just playground-release
+  zola serve --open --fast
+
+test:
+  cargo watch -x test
+
+worker:
+  wrangler dev playground/gist-worker/index.js
+
+worker-setup:
+  pnpm install --dir playground/gist-worker
+
+worker-publish:
+  wrangler publish playground/gist-worker/index.js

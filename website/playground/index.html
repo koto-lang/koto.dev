@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Koto Playground</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    <link data-trunk rel="rust" data-opt-level="s" />
+
+    <link data-trunk rel="copy-dir" href="examples" />
+
+    <link data-trunk rel="sass" href="src/index.sass" />
+
+    <link data-trunk rel="sass" href="../sass/uikit.sass" />
+    <link data-trunk rel="copy-file" href="../../modules/uikit/dist/js/uikit.min.js" />
+    <link data-trunk rel="copy-file" href="../../modules/uikit/dist/js/uikit-icons.min.js" />
+
+    <link data-trunk rel="copy-file" href="../../modules/ace/src-min/ace.js" />
+    <link data-trunk rel="copy-file" href="../../modules/ace/src-min/keybinding-vim.js" />
+    <link data-trunk rel="copy-file" href="../../modules/ace/src-min/theme-solarized_dark.js" />
+    <link data-trunk rel="copy-file" href="../../modules/ace/src-min/theme-solarized_light.js" />
+
+    <script src="/color-scheme.js"></script>
+  </head>
+
+  <body>
+    <!-- header-placeholder -->
+
+    <div id="playground-wrapper"></div>
+
+    <script src="uikit.min.js"></script>
+    <script src="uikit-icons.min.js"></script>
+
+    <script src="/play/ace.js"></script>
+    <script src="/play/keybinding-vim.js"></script>
+    <script src="/play/theme-solarized_dark.js"></script>
+    <script src="/play/theme-solarized_light.js"></script>
+  </body>
+</html>

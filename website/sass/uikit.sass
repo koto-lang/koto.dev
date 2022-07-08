@@ -1,0 +1,38 @@
+// See https://getuikit.com/docs/sass
+
+// 1. Custom variables and variable overwrites
+// $global-link-color: #DA7D02;
+
+@font-face
+  font-family: 'RobotoRegular'
+  src: url('/fonts/Roboto-Regular.ttf')
+
+@font-face
+  font-family: 'RobotoLight'
+  src: url('/fonts/Roboto-Light.ttf')
+
+$global-font-family: 'RobotoLight'
+$navbar-nav-item-font-family: 'RobotoRegular'
+
+$base-code-background: #fdf6e3 // Taken from the generated light code color scheme
+
+$base-code-color: grey
+$base-em-color: grey
+$inverse-base-code-color: lighten(grey, 25%)
+$inverse-base-em-color: lighten(grey, 25%)
+
+$section-background: inherit
+
+$inverse-button-primary-background: #1e87f0 // The non-inverse background color
+$inverse-button-primary-color: white
+$inverse-button-primary-hover-color: white
+
+// 2. Import default variables and available mixins.
+@import '../../modules/uikit/src/scss/variables-theme.scss'
+@import '../../modules/uikit/src/scss/mixins-theme.scss'
+
+// 3. Your custom mixin overwrites.
+// @mixin hook-card() { color: #000; }
+
+// 4. Import UIkit.
+@import '../../modules/uikit/src/scss/uikit-theme.scss'

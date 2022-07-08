@@ -1,0 +1,53 @@
+[package]
+name = "playground"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+koto = { path = "../../modules/koto/src/koto" }
+koto_random = { path = "../../modules/koto/libs/random" }
+
+console_error_panic_hook = "0.1" # A panic hook for `wasm32-unknown-unknown` that logs panics to `console.error`
+fb_cloned = "0.1.2"              # Provides a clone macro
+gloo-console = "0.2.1"           # Convenience crate for working with browser's console
+gloo-events = "0.1.1"            # Convenience crate for working with DOM event listeners
+gloo-timers = "0.2.3"            # Convenience crate for working with JavaScript timers
+gloo-utils = "0.1.2"             # Convenience crate for common `web_sys` features
+instant = "0.1.12"               # A partial replacement for std::time::Instant that works on WASM too.
+js-sys = "0.3.56"                # Bindings for all JS global objects and functions in all JS environments like Node.js and bro…
+rand = "0.8.5"                   # Random number generators and other randomness functionality.
+serde = "1.0.136"                # A generic serialization/deserialization framework
+wasm-bindgen = "0.2.79"          # Easy support for interacting between JS and Rust.
+wee_alloc = "0.4.5"              # wee_alloc: The Wasm-Enabled, Elfin Allocator
+yew = "0.19.3"                   # A framework for making client-side single-page apps
+
+
+[dependencies.getrandom]
+# A small cross-platform library for retrieving random data from system source
+version = "0.2.4"
+features = ["js"]
+
+[dependencies.gloo-net]
+# HTTP requests library for WASM Apps
+version = "0.1.0"
+default-features = false
+features = ["http", "json"]
+
+[dependencies.web-sys]
+version = "0.3.56"
+features = [
+  'CanvasRenderingContext2d',
+  'Element',
+  'HtmlCanvasElement',
+  'Location',
+  'MutationObserver',
+  'MutationObserverInit',
+  'Storage',
+  'UrlSearchParams',
+  'Window',
+]
+
+[dev-dependencies]
+glob = "0.3.0"

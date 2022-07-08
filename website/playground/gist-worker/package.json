@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "koto-playground-worker",
+  "version": "1.0.0",
+  "description": "The worker for the Koto playground",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write '**/*.{js,css,json,md}'"
+  },
+  "author": "irh <ian.r.hobson@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.12.0",
+    "itty-router": "^2.6.1"
+  }
+}
