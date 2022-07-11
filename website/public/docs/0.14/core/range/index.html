@@ -1,0 +1,982 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;range">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;range">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;range">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;range">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;range">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;range">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#contains">contains</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#end">end</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#expanded">expanded</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#intersection">intersection</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#is-inclusive">is_inclusive</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#start">start</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#union">union</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="range"><a class="zola-anchor" href="#range" aria-label="Anchor link for: range">range</a></h1>
+<h2 id="contains"><a class="zola-anchor" href="#contains" aria-label="Anchor link for: contains">contains</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if the provided number is within the range, and false otherwise.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if the provided range is entirely containd within the range,
+and false otherwise.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">contains</span> <span class="z-constant z-numeric z-koto">15</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">200</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">100</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">contains</span> <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">1</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">10</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">contains</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">contains</span> <span class="z-constant z-numeric z-koto">14</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">18</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">100</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">200</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">contains</span> <span class="z-constant z-numeric z-koto">50</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">250</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2810%2E%2E20%29%2Econtains%2015%0A%23%20%2D%3E%20true%0A%0Aprint%20%28200%2E%2E%3D100%29%2Econtains%20100%0A%23%20%2D%3E%20true%0A%0Ax%20%3D%201%2E%2E10%0Aprint%20x%2Econtains%20%2D1%0A%23%20%2D%3E%20false%0A%0Aprint%20%2810%2E%2E20%29%2Econtains%2014%2E%2E18%0A%23%20%2D%3E%20true%0A%0Aprint%20%28100%2E%2E200%29%2Econtains%2050%2E%2E250%0A%23%20%2D%3E%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="end"><a class="zola-anchor" href="#end" aria-label="Anchor link for: end">end</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Int</span>
+</span></code></pre>
+<p>Returns the <code>end</code> value of the range.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">50</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">100</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">end</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 100
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">end</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2850%2E%2E100%29%2Eend%28%29%0A%23%20%2D%3E%20100%0A%0Aprint%20%2810%2E%2E0%29%2Eend%28%29%0A%23%20%2D%3E%200" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/range/#start">start</a></li>
+</ul>
+<h2 id="expanded"><a class="zola-anchor" href="#expanded" aria-label="Anchor link for: expanded">expanded</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Range</span>
+</span></code></pre>
+<p>Returns a copy of the input range which has been 'expanded' in both directions
+by the provided amount. For an ascending range this will mean that <code>start</code> will
+decrease by the provided amount, while <code>end</code> will increase.</p>
+<p>Negative amounts will cause the range to shrink rather than grow.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">expanded</span> <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 5..25
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">expanded</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 12..18
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">5</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">5</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">expanded</span> <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 10..-10
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">5</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">5</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">expanded</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 0..0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">5</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">5</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">expanded</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">10</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -5..5
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2810%2E%2E20%29%2Eexpanded%205%0A%23%20%2D%3E%205%2E%2E25%0A%0Aprint%20%2810%2E%2E20%29%2Eexpanded%20%2D2%0A%23%20%2D%3E%2012%2E%2E18%0A%0Aprint%20%285%2E%2E%2D5%29%2Eexpanded%205%0A%23%20%2D%3E%2010%2E%2E%2D10%0A%0Aprint%20%285%2E%2E%2D5%29%2Eexpanded%20%2D5%0A%23%20%2D%3E%200%2E%2E0%0A%0Aprint%20%285%2E%2E%2D5%29%2Eexpanded%20%2D10%0A%23%20%2D%3E%20%2D5%2E%2E5" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="intersection"><a class="zola-anchor" href="#intersection" aria-label="Anchor link for: intersection">intersection</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Range</span>
+</span></code></pre>
+<p>Returns a range representing the intersectin region of the two input ranges.</p>
+<p>If there is no intersecting region then <code>null</code> is returned.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">intersection</span> <span class="z-constant z-numeric z-koto">5</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">15</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 10..15
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">100</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">200</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">intersection</span> <span class="z-constant z-numeric z-koto">250</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">150</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 150..200
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">intersection</span> <span class="z-constant z-numeric z-koto">90</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2810%2E%2E20%29%2Eintersection%205%2E%2E15%0A%23%20%2D%3E%2010%2E%2E15%0A%0Aprint%20%28100%2E%2E200%29%2Eintersection%20250%2E%2E%3D150%0A%23%20%2D%3E%20150%2E%2E200%0A%0Aprint%20%280%2E%2E10%29%2Eintersection%2090%2E%2E99%0A%23%20%2D%3E%20null" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="is-inclusive"><a class="zola-anchor" href="#is-inclusive" aria-label="Anchor link for: is-inclusive">is_inclusive</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if the range has a defined end which is inclusive.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_inclusive</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_inclusive</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">100</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_inclusive</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2810%2E%2E20%29%2Eis%5Finclusive%28%29%0A%23%20%2D%3E%20false%0A%0Aprint%20%281%2E%2E%3D10%29%2Eis%5Finclusive%28%29%0A%23%20%2D%3E%20true%0A%0Aprint%20%28100%2E%2E%29%2Eis%5Finclusive%28%29%0A%23%20%2D%3E%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="start"><a class="zola-anchor" href="#start" aria-label="Anchor link for: start">start</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Int</span>
+</span></code></pre>
+<p>Returns the <code>start</code> value of the range.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">50</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">100</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">start</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 50
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">start</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 10
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%2850%2E%2E100%29%2Estart%28%29%0A%23%20%2D%3E%2050%0A%0Aprint%20%2810%2E%2E0%29%2Estart%28%29%0A%23%20%2D%3E%2010" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-1"><a class="zola-anchor" href="#see-also-1" aria-label="Anchor link for: see-also-1">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/range/#end">end</a></li>
+</ul>
+<h2 id="union"><a class="zola-anchor" href="#union" aria-label="Anchor link for: union">union</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Range</span>
+</span></code></pre>
+<p>Returns the union of the range and a provided number.</p>
+<p>If the number falls outside of the range then the resulting range will be
+expanded to include the number.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Range</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Range</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Range</span>
+</span></code></pre>
+<p>Returns the union of two ranges.</p>
+<p>The resulting range will encompass all values that are contained in the two
+ranges, and any values that lie between them.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">union</span> <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 0..10
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">union</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 0..100
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">b</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">40</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">50</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">union</span> <span class="z-variable z-other z-koto">b</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 10..50
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20%280%2E%2E10%29%2Eunion%205%0A%23%20%2D%3E%200%2E%2E10%0A%0Aprint%20%280%2E%2E10%29%2Eunion%2099%0A%23%20%2D%3E%200%2E%2E100%0A%0Aa%20%3D%2010%2E%2E20%0Ab%20%3D%2040%2E%2E50%0Aprint%20a%2Eunion%20b%0A%23%20%2D%3E%2010%2E%2E50" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;range">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;range">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;range">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#contains">contains</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#end">end</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#expanded">expanded</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#intersection">intersection</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#is-inclusive">is_inclusive</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#start">start</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/range/#union">union</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

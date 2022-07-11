@@ -1,0 +1,1265 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;geometry">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;geometry">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;geometry">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;geometry">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;geometry">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;geometry">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;geometry">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;geometry">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect">rect</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2">vec2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3">vec3</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-1">Rect</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-left">Rect.left</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-right">Rect.right</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-top">Rect.top</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-bottom">Rect.bottom</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-width">Rect.width</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-height">Rect.height</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-center">Rect.center</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-x">Rect.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-y">Rect.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-contains">Rect.contains</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-set-center">Rect.set_center</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-1">Vec2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-angle">Vec2.angle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-length">Vec2.length</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-x">Vec2.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-y">Vec2.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-1">Vec3</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-x">Vec3.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-y">Vec3.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-z">Vec3.z</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-length">Vec3.length</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="geometry"><a class="zola-anchor" href="#geometry" aria-label="Anchor link for: geometry">geometry</a></h1>
+<p>Utilities for working with geometry in Koto.</p>
+<p>The module contains the <a href="https://koto.dev/docs/next/libs/geometry/#vec2-1"><code>Vec2</code></a>, <a href="https://koto.dev/docs/next/libs/geometry/#vec3-1"><code>Vec3</code></a>, and
+<a href="https://koto.dev/docs/next/libs/geometry/#rect-1"><code>Rect</code></a> types.</p>
+<h2 id="rect"><a class="zola-anchor" href="#rect" aria-label="Anchor link for: rect">rect</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rect</span>
+</span></code></pre>
+<p>Initializes a default <code>Rect</code> with each component set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">y</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">width</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">height</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rect</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">size</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rect</span>
+</span></code></pre>
+<p>Initializes a <code>Rect</code> with corresponding position and size.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">rect</span>, <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">rect</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Rect{x: 0, y: 0, width: 0, height: 0}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">rect</span> <span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">20</span>, <span class="z-constant z-numeric z-koto">30</span>, <span class="z-constant z-numeric z-koto">40</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Rect{x: 10, y: 20, width: 30, height: 40}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">rect</span> <span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">99</span>, <span class="z-constant z-numeric z-koto">100</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Rect{x: -1, y: 2, width: 99, height: 100}
+</span></span></code></pre>
+<h2 id="vec2"><a class="zola-anchor" href="#vec2" aria-label="Anchor link for: vec2">vec2</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Initializes a default <code>Vec2</code> with each component set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Initializes a <code>Vec2</code> with <code>x</code> specified, and <code>y</code> set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">y</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Initializes a <code>Vec2</code> with corresponding <code>x</code> and <code>y</code> components.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: 0, y: 0}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">99</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: 99, y: 100}
+</span></span></code></pre>
+<h2 id="vec3"><a class="zola-anchor" href="#vec3" aria-label="Anchor link for: vec3">vec3</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span></code></pre>
+<p>Initializes a default <code>Vec3</code> with each component set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span></code></pre>
+<p>Initializes a <code>Vec3</code> with <code>x</code> specified, and all other components set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">y</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span></code></pre>
+<p>Initializes a <code>Vec3</code> with <code>x</code> and <code>y</code> specified, and <code>z</code> set to <code>0</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">y</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">z</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">z</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">xyz</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec3</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec3</span>
+</span></code></pre>
+<p>Initializes a <code>Vec3</code> with specified <code>x</code>, <code>y</code>, and <code>z</code> components.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>, <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 0, y: 0, z: 0}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: -1, y: 3, z: 0}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">20</span>, <span class="z-constant z-numeric z-koto">30</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 10, y: 20, z: 30}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span> <span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: -1, y: -2, z: 5}
+</span></span></code></pre>
+<h2 id="rect-1"><a class="zola-anchor" href="#rect-1" aria-label="Anchor link for: rect-1">Rect</a></h2>
+<p>The <code>Rect</code> type represents a 2-dimensional rectangle,
+with a defined position and size.</p>
+<p>The position is interpreted as being at the center of the rectangle.</p>
+<p>Comparison operations are available, and the rect's components are iterable.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">20</span>, <span class="z-constant z-numeric z-koto">30</span>, <span class="z-constant z-numeric z-koto">40</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span>, <span class="z-variable z-other z-koto">w</span>, <span class="z-variable z-other z-koto">h</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">r</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span>, <span class="z-variable z-other z-koto">w</span>, <span class="z-variable z-other z-koto">h</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (10.0, 20.0, 30.0, 40.0)
+</span></span></code></pre>
+<h2 id="rect-left"><a class="zola-anchor" href="#rect-left" aria-label="Anchor link for: rect-left">Rect.left</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the position of rectangle's left edge.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Create a rectangle centered at 0, 0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">left</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -100.0
+</span></span></code></pre>
+<h2 id="rect-right"><a class="zola-anchor" href="#rect-right" aria-label="Anchor link for: rect-right">Rect.right</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the position of rectangle's right edge.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Create a rectangle centered at 0, 0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">right</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 100.0
+</span></span></code></pre>
+<h2 id="rect-top"><a class="zola-anchor" href="#rect-top" aria-label="Anchor link for: rect-top">Rect.top</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the position of rectangle's top edge.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Create a rectangle centered at 0, 0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">top</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 50.0
+</span></span></code></pre>
+<h2 id="rect-bottom"><a class="zola-anchor" href="#rect-bottom" aria-label="Anchor link for: rect-bottom">Rect.bottom</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the position of rectangle's bottom edge.</p>
+<h3 id="example-7"><a class="zola-anchor" href="#example-7" aria-label="Anchor link for: example-7">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Create a rectangle centered at 0, 0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">bottom</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -50.0
+</span></span></code></pre>
+<h2 id="rect-width"><a class="zola-anchor" href="#rect-width" aria-label="Anchor link for: rect-width">Rect.width</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the width of the rectangle.</p>
+<h3 id="example-8"><a class="zola-anchor" href="#example-8" aria-label="Anchor link for: example-8">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">width</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 200.0
+</span></span></code></pre>
+<h2 id="rect-height"><a class="zola-anchor" href="#rect-height" aria-label="Anchor link for: rect-height">Rect.height</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the width of the rectangle.</p>
+<h3 id="example-9"><a class="zola-anchor" href="#example-9" aria-label="Anchor link for: example-9">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">height</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 100.0
+</span></span></code></pre>
+<h2 id="rect-center"><a class="zola-anchor" href="#rect-center" aria-label="Anchor link for: rect-center">Rect.center</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Returns the center point of the rectangle.</p>
+<h3 id="example-10"><a class="zola-anchor" href="#example-10" aria-label="Anchor link for: example-10">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">100</span>, <span class="z-constant z-numeric z-koto">42</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">center</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: -100, y: 42}
+</span></span></code></pre>
+<h2 id="rect-x"><a class="zola-anchor" href="#rect-x" aria-label="Anchor link for: rect-x">Rect.x</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Returns the <code>x</code> component of the rectangle's center point.</p>
+<h3 id="example-11"><a class="zola-anchor" href="#example-11" aria-label="Anchor link for: example-11">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">100</span>, <span class="z-constant z-numeric z-koto">42</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">x</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -100.0
+</span></span></code></pre>
+<h2 id="rect-y"><a class="zola-anchor" href="#rect-y" aria-label="Anchor link for: rect-y">Rect.y</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Returns the <code>y</code> component of the rectangle's center point.</p>
+<h3 id="example-12"><a class="zola-anchor" href="#example-12" aria-label="Anchor link for: example-12">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">geometry</span>.<span class="z-variable z-function z-koto">rect</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">100</span>, <span class="z-constant z-numeric z-koto">42</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">y</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 42.0
+</span></span></code></pre>
+<h2 id="rect-contains"><a class="zola-anchor" href="#rect-contains" aria-label="Anchor link for: rect-contains">Rect.contains</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Vec2</span>
+</span></code></pre>
+<p>Returns true if the given <code>Vec2</code> is located within the rectangle's
+bounds.</p>
+<h3 id="example-13"><a class="zola-anchor" href="#example-13" aria-label="Anchor link for: example-13">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">rect</span>, <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">200</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">contains</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">50</span>, <span class="z-constant z-numeric z-koto">50</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">contains</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">500</span>, <span class="z-constant z-numeric z-koto">500</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span></code></pre>
+<h2 id="rect-set-center"><a class="zola-anchor" href="#rect-set-center" aria-label="Anchor link for: rect-set-center">Rect.set_center</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">x</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span> <span class="z-variable z-parameter z-kototype">y</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rect</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Rect</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">xy</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rect</span>
+</span></code></pre>
+<p>Sets the rect's center position to the given <code>x</code> and <code>y</code> coordinates, and
+returns the rect.</p>
+<h3 id="example-14"><a class="zola-anchor" href="#example-14" aria-label="Anchor link for: example-14">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">rect</span>, <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">rect</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">200</span>, <span class="z-constant z-numeric z-koto">200</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">set_center</span> <span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">10</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Rect{x: 10, y: 10, width: 200, height: 200}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">set_center</span> <span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Rect{x: 0, y: 0, width: 200, height: 200}
+</span></span></code></pre>
+<h2 id="vec2-1"><a class="zola-anchor" href="#vec2-1" aria-label="Anchor link for: vec2-1">Vec2</a></h2>
+<p>The <code>Vec2</code> type represents a 2-dimensional vector, with <code>x</code> and <code>y</code> coordinates.</p>
+<p>Arithmetic operations are supported, and the vector's coordinates are iterable.</p>
+<h3 id="example-15"><a class="zola-anchor" href="#example-15" aria-label="Anchor link for: example-15">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">30</span>, <span class="z-constant z-numeric z-koto">40</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: 40, y: 60}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">50</span>, <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-augmented z-koto">*=</span> <span class="z-constant z-numeric z-koto">2</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">0.5</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (50.0, 400.0)
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-augmented z-koto">-=</span> <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: -50, y: 300}
+</span></span></code></pre>
+<h2 id="vec2-angle"><a class="zola-anchor" href="#vec2-angle" aria-label="Anchor link for: vec2-angle">Vec2.angle</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the angle of the vector, expressed in radians.</p>
+<h3 id="example-16"><a class="zola-anchor" href="#example-16" aria-label="Anchor link for: example-16">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">angle</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">.<span class="z-variable z-function z-koto">angle</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">:.<span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.571
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">.<span class="z-variable z-function z-koto">angle</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">:.<span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 3.142
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">.<span class="z-variable z-function z-koto">angle</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">:.<span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1.571
+</span></span></code></pre>
+<h2 id="vec2-length"><a class="zola-anchor" href="#vec2-length" aria-label="Anchor link for: vec2-length">Vec2.length</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Vec2</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the length of the vector.</p>
+<h3 id="example-17"><a class="zola-anchor" href="#example-17" aria-label="Anchor link for: example-17">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">length</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">3</span>, <span class="z-constant z-numeric z-koto">4</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">length</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 5.0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">4</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">length</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 5.0
+</span></span></code></pre>
+<h2 id="vec2-x"><a class="zola-anchor" href="#vec2-x" aria-label="Anchor link for: vec2-x">Vec2.x</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>The <code>x</code> coordinate of the vector.</p>
+<h3 id="example-18"><a class="zola-anchor" href="#example-18" aria-label="Anchor link for: example-18">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: 99, y: 0}
+</span></span></code></pre>
+<h2 id="vec2-y"><a class="zola-anchor" href="#vec2-y" aria-label="Anchor link for: vec2-y">Vec2.y</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>The <code>y</code> coordinate of the vector.</p>
+<h3 id="example-19"><a class="zola-anchor" href="#example-19" aria-label="Anchor link for: example-19">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec2</span> <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">y</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec2{x: 0, y: 100}
+</span></span></code></pre>
+<h2 id="vec3-1"><a class="zola-anchor" href="#vec3-1" aria-label="Anchor link for: vec3-1">Vec3</a></h2>
+<p>The <code>Vec3</code> type represents a 3-dimensional vector, with <code>x</code>, <code>y</code>, and <code>z</code> coordinates.</p>
+<p>Arithmetic operations are supported, and the vector's coordinates are iterable.</p>
+<h3 id="example-20"><a class="zola-anchor" href="#example-20" aria-label="Anchor link for: example-20">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">20</span>, <span class="z-constant z-numeric z-koto">30</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-variable z-other z-koto">vec3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">40</span>, <span class="z-constant z-numeric z-koto">50</span>, <span class="z-constant z-numeric z-koto">60</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 50, y: 70, z: 90}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">10</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">5</span>, <span class="z-constant z-numeric z-koto">10</span>, <span class="z-constant z-numeric z-koto">15</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-augmented z-koto">*=</span> <span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">0.5</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span>, <span class="z-variable z-other z-koto">z</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span>, <span class="z-variable z-other z-koto">z</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (25.0, 200.0, -150.0)
+</span></span></code></pre>
+<h2 id="vec3-x"><a class="zola-anchor" href="#vec3-x" aria-label="Anchor link for: vec3-x">Vec3.x</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>The <code>x</code> coordinate of the vector.</p>
+<h3 id="example-21"><a class="zola-anchor" href="#example-21" aria-label="Anchor link for: example-21">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 99, y: 2, z: 3}
+</span></span></code></pre>
+<h2 id="vec3-y"><a class="zola-anchor" href="#vec3-y" aria-label="Anchor link for: vec3-y">Vec3.y</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>The <code>y</code> coordinate of the vector.</p>
+<h3 id="example-22"><a class="zola-anchor" href="#example-22" aria-label="Anchor link for: example-22">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">y</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 1, y: 99, z: 3}
+</span></span></code></pre>
+<h2 id="vec3-z"><a class="zola-anchor" href="#vec3-z" aria-label="Anchor link for: vec3-z">Vec3.z</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>The <code>z</code> coordinate of the vector.</p>
+<h3 id="example-23"><a class="zola-anchor" href="#example-23" aria-label="Anchor link for: example-23">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">vec3</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">z</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 3.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>.<span class="z-variable z-function z-koto">z</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">v</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Vec3{x: 1, y: 2, z: 99}
+</span></span></code></pre>
+<h2 id="vec3-length"><a class="zola-anchor" href="#vec3-length" aria-label="Anchor link for: vec3-length">Vec3.length</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Vec3</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the length of the vector.</p>
+<h3 id="example-24"><a class="zola-anchor" href="#example-24" aria-label="Anchor link for: example-24">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">geometry</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">vec3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">0</span>, <span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">length</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 10.0
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">vec3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">length</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 3.0
+</span></span></code></pre>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;geometry">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;geometry">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;geometry">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;geometry">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect">rect</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2">vec2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3">vec3</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-1">Rect</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-left">Rect.left</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-right">Rect.right</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-top">Rect.top</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-bottom">Rect.bottom</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-width">Rect.width</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-height">Rect.height</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-center">Rect.center</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-x">Rect.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-y">Rect.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-contains">Rect.contains</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#rect-set-center">Rect.set_center</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-1">Vec2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-angle">Vec2.angle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-length">Vec2.length</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-x">Vec2.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec2-y">Vec2.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-1">Vec3</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-x">Vec3.x</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-y">Vec3.y</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-z">Vec3.z</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/geometry/#vec3-length">Vec3.length</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
