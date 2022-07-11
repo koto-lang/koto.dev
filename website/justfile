@@ -6,12 +6,15 @@ build:
 deploy:
   git fetch
   git checkout deploy
-  git reset --hard origin/main
+  git reset --hard origin/deploy
+  git rebase origin/main
   @just submodules
   @just build
+  git rev-parse origin/main >> deployed.txt
+  git add deployed.txt
   git add -f public
-  git commit -m "Add public dir"
-  git push origin deploy
+  git commit --amend --no-edit
+  git push -f origin deploy
 
 docs:
   cargo run -p convert-koto-docs
