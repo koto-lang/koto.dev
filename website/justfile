@@ -10,6 +10,8 @@ deploy:
   git rebase origin/main
   @just submodules
   @just build
+  echo "" >> deployed.txt
+  date -u +"%Y-%m-%dT%H:%M:%S%Z" >> deployed.txt
   git rev-parse origin/main >> deployed.txt
   git add deployed.txt
   git add -f public
