@@ -1,0 +1,1 @@
+export function show_modal(element) { UIkit.modal(element).show() }

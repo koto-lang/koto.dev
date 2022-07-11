@@ -1,0 +1,1 @@
+export function get_ace() { return ace; }

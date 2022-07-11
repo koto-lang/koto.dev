@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Koto - News</title>
+    <subtitle>A simple, expressive, embeddable programming language</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://koto.dev/news/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://koto.dev/news/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-07-23T00:00:00+00:00</updated>
+    <id>https://koto.dev/news/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Koto 0.16</title>
+        <published>2025-07-23T00:00:00+00:00</published>
+        <updated>2025-07-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/koto-0-16/"/>
+        <id>https://koto.dev/news/koto-0-16/</id>
+        
+        <summary type="html">&lt;p&gt;Koto 0.16 has been &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;koto&#x2F;0.16.0&quot;&gt;released&lt;&#x2F;a&gt;, including automatic code formatting,
+various language improvements, easier conversions to Rust types, and more.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Koto 0.15</title>
+        <published>2025-01-08T00:00:00+00:00</published>
+        <updated>2025-01-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/koto-0-15/"/>
+        <id>https://koto.dev/news/koto-0-15/</id>
+        
+        <summary type="html">&lt;p&gt;Koto 0.15 has been &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;koto&#x2F;0.15.0&quot;&gt;released&lt;&#x2F;a&gt;, bringing new language features,
+improved support for general purpose scripting, and runtime performance improvements.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>koto-ls</title>
+        <published>2025-01-08T00:00:00+00:00</published>
+        <updated>2025-01-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/koto-ls/"/>
+        <id>https://koto.dev/news/koto-ls/</id>
+        
+        <summary type="html">&lt;p&gt;With the &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;koto-ls&quot;&gt;release&lt;&#x2F;a&gt; of &lt;code&gt;koto-ls&lt;&#x2F;code&gt;, Koto now has an &lt;a href=&quot;https:&#x2F;&#x2F;microsoft.github.io&#x2F;language-server-protocol&#x2F;&quot;&gt;LSP&lt;&#x2F;a&gt; server, greatly improving Koto&#x27;s editing experience.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>bevy_koto 0.1</title>
+        <published>2024-04-19T00:00:00+00:00</published>
+        <updated>2024-04-19T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/bevy-koto-0-1/"/>
+        <id>https://koto.dev/news/bevy-koto-0-1/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;koto-lang&#x2F;bevy_koto&#x2F;&quot;&gt;bevy_koto&lt;&#x2F;a&gt; is a crate that adds Koto scripting support for
+the &lt;a href=&quot;https:&#x2F;&#x2F;bevyengine.org&quot;&gt;Bevy&lt;&#x2F;a&gt; game engine.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Koto 0.14</title>
+        <published>2024-04-18T00:00:00+00:00</published>
+        <updated>2024-04-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/koto-0-14/"/>
+        <id>https://koto.dev/news/koto-0-14/</id>
+        
+        <summary type="html">&lt;p&gt;Koto 0.14 has been &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;koto&#x2F;0.14.0&quot;&gt;released&lt;&#x2F;a&gt;, bringing &lt;a href=&quot;&#x2F;docs&#x2F;0.14&#x2F;api&quot;&gt;API improvements&lt;&#x2F;a&gt;
+and improved &lt;a href=&quot;&#x2F;docs&#x2F;0.14&#x2F;libs&quot;&gt;library documentation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>
