@@ -1,0 +1,917 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+
+  
+  
+  
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;api">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+
+  
+  
+  
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;api">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header uk-active ">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+
+      
+        <ul class="uk-nav-sub uk-nav-default">
+          
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#hello-world">Hello World</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#getting-a-return-value">Getting a Return Value</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#getting-an-exported-value">Getting an Exported Value</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-values-to-the-prelude">Adding Values to the Prelude</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#passing-arguments-to-koto">Passing Arguments to Koto</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#calling-rust-functions-in-koto">Calling Rust Functions in Koto</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#calling-koto-functions-in-rust">Calling Koto Functions in Rust</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-a-module-to-the-prelude">Adding a Module to the Prelude</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-a-custom-object-type">Adding a Custom Object Type</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#disabling-type-checks">Disabling type checks</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#using-the-multi-threaded-runtime">Using the multi-threaded runtime</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#using-koto-in-a-repl">Using Koto in a REPL</a>
+            </li>
+            
+          
+        </ul>
+      
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="rust-api"><a class="zola-anchor" href="#rust-api" aria-label="Anchor link for: rust-api">Rust API</a></h1>
+<h2 id="hello-world"><a class="zola-anchor" href="#hello-world" aria-label="Anchor link for: hello-world">Hello World</a></h2>
+<p>To run a Koto script, instantiate <code>koto::Koto</code> and call <code>compile_and_run</code>:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>print &#39;Hello, World!&#39;<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="getting-a-return-value"><a class="zola-anchor" href="#getting-a-return-value" aria-label="Anchor link for: getting-a-return-value">Getting a Return Value</a></h2>
+<p>The result of calling <code>compile_and_run</code> is a <code>KValue</code>, which is Koto's main
+value type.</p>
+<p><code>KValue</code> is an enum that contains variants for each of the core Koto types,
+like <code>Number</code>, <code>String</code>, etc.</p>
+<p>The type of a <code>KValue</code> as a string can be retrieved via <code>KValue::type_as_string</code>,
+and to render a <code>KValue</code>, call <code>Koto::value_to_string</code>.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">anyhow<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>bail<span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>1 + 2<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">match</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">            <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>The result of &#39;<span class="z-constant z-other z-placeholder z-rust">{script}</span>&#39; is <span class="z-constant z-other z-placeholder z-rust">{result}</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        other <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-macro z-rust">bail!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust">            <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Expected a Number, found &#39;{}&#39;: ({})<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust">            other<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">type_as_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust">            koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">value_to_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>other</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust">        </span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="getting-an-exported-value"><a class="zola-anchor" href="#getting-an-exported-value" aria-label="Anchor link for: getting-an-exported-value">Getting an Exported Value</a></h2>
+<p>Values that are exported from the script are inserted in to the <em>exports</em> map,
+which can be accessed by calling <code>Koto::exports()</code>.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">export
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">  exported_a: &#39;42&#39;.to_number()
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">  exported_b: &#39;Hello from Koto&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> exports <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">exports</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> exported_a <span class="z-keyword z-operator z-assignment z-rust">=</span> exports<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">get</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>exported_a<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> exported_b <span class="z-keyword z-operator z-assignment z-rust">=</span> exports<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">get</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>exported_b<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>exported_a: <span class="z-constant z-other z-placeholder z-rust">{}</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-separator z-rust">,</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">value_to_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>exported_a</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-separator z-rust">,</span><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>exported_b: <span class="z-constant z-other z-placeholder z-rust">{}</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-separator z-rust">,</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">value_to_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>exported_b</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-separator z-rust">,</span><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="adding-values-to-the-prelude"><a class="zola-anchor" href="#adding-values-to-the-prelude" aria-label="Anchor link for: adding-values-to-the-prelude">Adding Values to the Prelude</a></h2>
+<p>The runtime's prelude is a <code>KMap</code>, which is Koto's standard hashmap type.</p>
+<p>Values can be added to the prelude via <code>KMap::insert</code>, taking any Rust value
+that implements <code>Into&lt;KValue&gt;</code>. Basic types like strings and numbers are
+automatically converted to corresponding Koto types.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print &#39;name: {name}&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print &#39;how_many: {how_many}&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print &#39;yes_or_no: {if yes_or_no then &#39;yes&#39; else &#39;no&#39;}&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> prelude <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">prelude</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    prelude<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>name<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Alice<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    prelude<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>how_many<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">99</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    prelude<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>yes_or_no<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-constant z-language z-rust">true</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="passing-arguments-to-koto"><a class="zola-anchor" href="#passing-arguments-to-koto" aria-label="Anchor link for: passing-arguments-to-koto">Passing Arguments to Koto</a></h2>
+<p>The arguments that are accessible in a script from <code>koto.args</code> can be set via
+<code>Koto::set_args</code>.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">from koto import args
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">if (size args) &gt; 1
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">  for i, arg in args.enumerate()
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">    print &#39;{i + 1}: {arg}&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">else
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">  print &#39;No arguments&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">set_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">std<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">env<span class="z-punctuation z-accessor z-rust">::</span></span>args<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="calling-rust-functions-in-koto"><a class="zola-anchor" href="#calling-rust-functions-in-koto" aria-label="Anchor link for: calling-rust-functions-in-koto">Calling Rust Functions in Koto</a></h2>
+<p>Any Rust function that implements <code>KotoFunction</code> can be made available to the
+Koto runtime.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> runtime</span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">say_hello()
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">say_hello &#39;Alice&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print plus 10, 20
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> prelude <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">prelude</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Standalone functions can be inserted directly
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    prelude<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>say_hello<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> say_hello</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> The add_fn helper avoids the need for type annotations
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    prelude<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">add_fn</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>plus<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">|</span></span></span><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-section z-parameters z-end z-rust">|</span></span> </span><span class="z-meta z-function z-closure z-rust"><span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>a</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>b</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>a <span class="z-keyword z-operator z-arithmetic z-rust">+</span> b</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>|Number, Number|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">say_hello</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-separator z-rust">:</span> <span class="z-keyword z-operator z-rust">&amp;</span><span class="z-storage z-modifier z-rust">mut</span> CallContext</span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-path z-rust">runtime<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span>KValue<span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Hello?<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Str<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>name</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Hello, <span class="z-constant z-other z-placeholder z-rust">{name}</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-keyword z-control z-rust">return</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>||, or |String|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Null</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="calling-koto-functions-in-rust"><a class="zola-anchor" href="#calling-koto-functions-in-rust" aria-label="Anchor link for: calling-koto-functions-in-rust">Calling Koto Functions in Rust</a></h2>
+<p><code>Koto::call_function</code> can be used to call Koto functions, or any other callable
+Koto values.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">export my_fn = |a, b| &#39;{a} + {b} is {a + b}&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Running the script exports the `my_fn` function
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> my_fn <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">exports</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">get</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>my_fn<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">assert!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>my_fn<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">is_callable</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> result <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">call_function</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>my_fn<span class="z-punctuation z-separator z-rust">,</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-constant z-numeric z-float z-rust">1.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-constant z-numeric z-float z-rust">2.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">println!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Result: <span class="z-constant z-other z-placeholder z-rust">{}</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-separator z-rust">,</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">value_to_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="adding-a-module-to-the-prelude"><a class="zola-anchor" href="#adding-a-module-to-the-prelude" aria-label="Anchor link for: adding-a-module-to-the-prelude">Adding a Module to the Prelude</a></h2>
+<p>A module in Koto is simply a <code>KMap</code>, conventionally with a defined
+<a href="../language/#type"><code>@type</code></a>.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">from my_module import echo, square
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print echo &#39;Hello&#39;
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print square 9
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">prelude</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>my_module<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-function z-rust">make_module</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">make_module</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> KMap</span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> The `KMap::with_type` initializer sets up an empty map with a `@type` entry.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> module <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">KMap<span class="z-punctuation z-accessor z-rust">::</span></span>with_type<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>my_module<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    module<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">add_fn</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>echo<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">|</span></span></span><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-section z-parameters z-end z-rust">|</span></span> </span><span class="z-meta z-function z-closure z-rust"><span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Str<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>s</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-support z-macro z-rust">format!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span><span class="z-constant z-other z-placeholder z-rust">{s}</span>!<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>|String|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    module<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">add_fn</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>square<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">|</span></span></span><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-section z-parameters z-end z-rust">|</span></span> </span><span class="z-meta z-function z-closure z-rust"><span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>n</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>n <span class="z-keyword z-operator z-arithmetic z-rust">*</span> n</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>|Number|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    module
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="adding-a-custom-object-type"><a class="zola-anchor" href="#adding-a-custom-object-type" aria-label="Anchor link for: adding-a-custom-object-type">Adding a Custom Object Type</a></h2>
+<p>Any Rust type that implements <code>KotoObject</code> can be used in the Koto runtime.
+<code>KotoObject</code> requires <code>KotoType</code>, <code>KotoCopy</code>, and <code>KotoEntries</code> to be
+implemented.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">derive<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> runtime</span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">my_type = make_my_type 41
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print my_type.get()
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">print my_type.set 99
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">prelude</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">add_fn</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>make_my_type<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">|</span></span></span><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-section z-parameters z-end z-rust">|</span></span> </span><span class="z-meta z-function z-closure z-rust"><span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">            <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>n</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">MyType<span class="z-punctuation z-accessor z-rust">::</span></span>make_koto_object<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-arithmetic z-rust">*</span>n</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">            unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>|Number|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-function z-closure z-rust"><span class="z-meta z-block z-rust">        </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> MyType is a type that we want to use in Koto
+</span></span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span>
+</span></span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> The KotoCopy and KotoType traits are automatically derived.
+</span></span><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">derive</span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust">Clone<span class="z-punctuation z-separator z-rust">,</span> Copy<span class="z-punctuation z-separator z-rust">,</span> KotoCopy<span class="z-punctuation z-separator z-rust">,</span> KotoType</span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-struct z-rust"><span class="z-storage z-type z-struct z-rust">struct</span> </span><span class="z-meta z-struct z-rust"><span class="z-entity z-name z-struct z-rust">MyType</span></span><span class="z-meta z-struct z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-storage z-type z-rust">i64</span></span><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> The KotoEntries trait is implemented by the koto_impl macro,
+</span></span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> generating Koto functions for any impl function tagged with #[koto_method],
+</span></span><span class="z-source z-rust"><span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> and inserting them into a cached KMap.
+</span></span><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">koto_impl</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-storage z-type z-impl z-rust">impl</span> </span><span class="z-meta z-impl z-rust"><span class="z-entity z-name z-impl z-rust">MyType</span> </span><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">make_koto_object</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span><span class="z-variable z-parameter z-rust">n</span><span class="z-punctuation z-separator z-rust">:</span> KNumber</span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> KObject</span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> From is available for any type that implements KotoObject
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-storage z-type z-rust">let</span> my_type <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-storage z-type z-rust">Self</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>n<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-path z-rust">KObject<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>my_type</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> A simple getter function
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">koto_method</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">get</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span><span class="z-keyword z-operator z-rust">&amp;</span><span class="z-variable z-parameter z-rust">self</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-path z-rust">runtime<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span>KValue<span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-variable z-language z-rust">self</span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-constant z-numeric z-float z-rust">0.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> A function that returns the object instance as the result
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">koto_method</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">set</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span><span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-separator z-rust">:</span> <span class="z-meta z-generic z-rust">MethodContext<span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-storage z-type z-rust">Self</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-path z-rust">runtime<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span>KValue<span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-keyword z-control z-rust">match</span> ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span>args <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">            <span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>n</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">                ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">instance_mut</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-constant z-numeric z-integer z-decimal z-rust">0</span> <span class="z-keyword z-operator z-assignment z-rust">=</span> n<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">                ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">instance_result</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">            </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">            unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_args</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>|Number|<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-storage z-type z-impl z-rust">impl</span> </span><span class="z-meta z-impl z-rust">KotoObject <span class="z-keyword z-other z-rust">for</span></span><span class="z-meta z-impl z-rust"> <span class="z-entity z-name z-impl z-rust">MyType</span> </span><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> KotoObject::Display allows mytype to be used with Koto&#39;s print function
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust">    <span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">display</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span><span class="z-keyword z-operator z-rust">&amp;</span><span class="z-variable z-parameter z-rust">self</span>, <span class="z-variable z-parameter z-rust">ctx</span><span class="z-punctuation z-separator z-rust">:</span> <span class="z-keyword z-operator z-rust">&amp;</span><span class="z-storage z-modifier z-rust">mut</span> DisplayContext</span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-path z-rust">runtime<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        ctx<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">append</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-support z-macro z-rust">format!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>MyType(<span class="z-constant z-other z-placeholder z-rust">{}</span>)<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-separator z-rust">,</span> <span class="z-variable z-language z-rust">self</span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-constant z-numeric z-integer z-decimal z-rust">0</span><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">        <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-impl z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="disabling-type-checks"><a class="zola-anchor" href="#disabling-type-checks" aria-label="Anchor link for: disabling-type-checks">Disabling type checks</a></h2>
+<p>Runtime type checks are enabled by default, the compiler can be prevented from
+emitting type check instructions by disabling the <code>enable_type_checks</code> flag.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> script <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust">let x: String = 123
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Type checks are enabled by default. Running the script will produce an error.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> result <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">assert!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">is_err</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Type checks can disabled via `CompileArgs::enable_type_checks`.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> It should go without saying that checks should only be disabled if you&#39;re confident that your
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> code is correct!
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> result <span class="z-keyword z-operator z-assignment z-rust">=</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">CompileArgs<span class="z-punctuation z-accessor z-rust">::</span></span>new<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>script</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">enable_type_checks</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-language z-rust">false</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">assert!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">is_ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<h2 id="using-the-multi-threaded-runtime"><a class="zola-anchor" href="#using-the-multi-threaded-runtime" aria-label="Anchor link for: using-the-multi-threaded-runtime">Using the multi-threaded runtime</a></h2>
+<p>By default, Koto's runtime is single-threaded, and many of its core types (e.g. <code>KValue</code>) don't
+implement <code>Send</code> or <code>Sync</code>.</p>
+<p>For applications that need to support multi-threaded scripting, the <code>arc</code> feature switches from an
+<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>-based memory strategy to one using <code>Arc&lt;RwLock&lt;T&gt;&gt;</code>.</p>
+<p>Only one memory strategy can be enabled at a time, so default features need to be disabled.</p>
+<pre data-lang="toml" class="language-toml z-code"><code class="language-toml" data-lang="toml"><span class="z-source z-toml"><span class="z-comment z-line z-number-sign z-toml"><span class="z-punctuation z-definition z-comment z-toml">#</span> Cargo.toml</span>
+</span><span class="z-source z-toml"><span class="z-comment z-line z-number-sign z-toml"><span class="z-punctuation z-definition z-comment z-toml">#</span> ...</span>
+</span><span class="z-source z-toml">
+</span><span class="z-source z-toml"><span class="z-punctuation z-definition z-table z-begin z-toml">[</span><span class="z-meta z-tag z-table z-toml"><span class="z-entity z-name z-table z-toml">dependencies</span><span class="z-punctuation z-separator z-table z-toml">.</span><span class="z-entity z-name z-table z-toml">koto</span></span><span class="z-punctuation z-definition z-table z-end z-toml">]</span>
+</span><span class="z-source z-toml"><span class="z-meta z-tag z-key z-toml"><span class="z-entity z-name z-tag z-toml">version</span></span> <span class="z-punctuation z-definition z-key-value z-toml">=</span> <span class="z-string z-quoted z-double z-basic z-toml"><span class="z-punctuation z-definition z-string z-begin z-toml">&quot;</span>0.15<span class="z-punctuation z-definition z-string z-end z-toml">&quot;</span></span>
+</span><span class="z-source z-toml"><span class="z-meta z-tag z-key z-toml"><span class="z-entity z-name z-tag z-toml">default-feautures</span></span> <span class="z-punctuation z-definition z-key-value z-toml">=</span> <span class="z-constant z-language z-toml">false</span>
+</span><span class="z-source z-toml"><span class="z-meta z-tag z-key z-toml"><span class="z-entity z-name z-tag z-toml">features</span></span> <span class="z-punctuation z-definition z-key-value z-toml">=</span> <span class="z-punctuation z-definition z-array z-begin z-toml">[</span><span class="z-string z-quoted z-double z-basic z-toml"><span class="z-punctuation z-definition z-string z-begin z-toml">&quot;</span>arc<span class="z-punctuation z-definition z-string z-end z-toml">&quot;</span></span><span class="z-punctuation z-definition z-array z-end z-toml">]</span>
+</span></code></pre>
+<h2 id="using-koto-in-a-repl"><a class="zola-anchor" href="#using-koto-in-a-repl" aria-label="Anchor link for: using-koto-in-a-repl">Using Koto in a REPL</a></h2>
+<p>Some applications (like REPLs) require assigned variables to persist between each script evaluation.
+This can be achieved by enabling the <code>export_top_level_ids</code> flag,
+which will result in all top-level assignments being exported.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">koto<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-type z-rust">Result</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> koto <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Koto<span class="z-punctuation z-accessor z-rust">::</span></span>default<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> When using Koto in a REPL, variables from previous evaluations need to be made available
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> for the next evaluation.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> This is achieved by telling the compiler to treat each top-level assignment as if it had been
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> exported. i.e., the compiler turns the script `x = 1` into `export x = 1`.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">CompileArgs<span class="z-punctuation z-accessor z-rust">::</span></span>new<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>x = 1<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">export_top_level_ids</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-language z-rust">true</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-macro z-rust">assert!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">exports</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">get</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>x<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">is_some</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> The exports map gets reused by the Koto instance for each run.
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">match</span> koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">compile_and_run</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">CompileArgs<span class="z-punctuation z-accessor z-rust">::</span></span>new<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>x + x<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">export_top_level_ids</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-language z-rust">true</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        <span class="z-meta z-path z-rust">KValue<span class="z-punctuation z-accessor z-rust">::</span></span>Number<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-macro z-rust">assert_eq!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>result<span class="z-punctuation z-separator z-rust">,</span> <span class="z-meta z-path z-rust">KNumber<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">2</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        unexpected <span class="z-keyword z-operator z-rust">=&gt;</span> <span class="z-support z-function z-rust">unexpected_type</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Number<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>unexpected</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<hr />
+
+
+
+
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+
+  
+  
+  
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;api">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+  
+    
+
+    <li class="uk-nav-header uk-active ">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+
+      
+        <ul class="uk-nav-sub uk-nav-default">
+          
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#hello-world">Hello World</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#getting-a-return-value">Getting a Return Value</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#getting-an-exported-value">Getting an Exported Value</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-values-to-the-prelude">Adding Values to the Prelude</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#passing-arguments-to-koto">Passing Arguments to Koto</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#calling-rust-functions-in-koto">Calling Rust Functions in Koto</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#calling-koto-functions-in-rust">Calling Koto Functions in Rust</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-a-module-to-the-prelude">Adding a Module to the Prelude</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#adding-a-custom-object-type">Adding a Custom Object Type</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#disabling-type-checks">Disabling type checks</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#using-the-multi-threaded-runtime">Using the multi-threaded runtime</a>
+            </li>
+            
+            <li>
+              <a href="https://koto.dev/docs/0.15/api/#using-koto-in-a-repl">Using Koto in a REPL</a>
+            </li>
+            
+          
+        </ul>
+      
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
