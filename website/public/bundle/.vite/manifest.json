@@ -1,0 +1,17 @@
+{
+  "js/color-scheme.js": {
+    "file": "colorScheme-BEIaVpeV.js",
+    "name": "colorScheme",
+    "src": "js/color-scheme.js",
+    "isEntry": true
+  },
+  "js/main.js": {
+    "file": "main-BziFg2rg.js",
+    "name": "main",
+    "src": "js/main.js",
+    "isEntry": true,
+    "css": [
+      "main-Cr1cgR8E.css"
+    ]
+  }
+}

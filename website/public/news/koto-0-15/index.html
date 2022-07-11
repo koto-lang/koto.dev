@@ -1,0 +1,364 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <nav role="navigation">
+    <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;">
+      Koto 0.15
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#type-checks">
+            Type Checks
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#optional-chaining">
+            Optional chaining
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#running-external-processes">
+            Running external processes
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#performance-improvements">
+            Performance improvements
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#lsp-server">
+            LSP Server
+          </a>
+        </li>
+
+        
+      
+    
+      
+      
+    
+  
+</ul>
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container">
+    <article class="uk-article">
+      <h1 class="uk-article-title">
+        Koto 0.15
+      </h1>
+
+      
+
+<div class="uk-text-meta">
+  January  8, 2025
+</div>
+
+
+
+      <p>Koto 0.15 has been <a href="https://crates.io/crates/koto/0.15.0">released</a>, bringing new language features,
+improved support for general purpose scripting, and runtime performance improvements.</p>
+<span id="continue-reading"></span>
+<p>Many thanks to the contributors who helped to make this release happen!</p>
+<h3 id="koto">Koto?</h3>
+<p>Koto is a free and open-source programming language which aspires to be an
+ideal scripting language for Rust applications.</p>
+<p>If this is the first time you're reading about Koto, for some background
+information you could take a look at the <a href="/about">About Koto</a> page,
+or you could read the <a href="/docs/0.15/language">language guide</a>.</p>
+<h3 id="type-checks">Type Checks</h3>
+<p>The <code>let</code> keyword has been introduced to allow for type-checked assignments:</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Assignments in Koto usually don&#39;t require a keyword
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> let assignments can include a type check:
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">let</span> <span class="z-variable z-other z-koto">x</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">Number</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">let</span> <span class="z-variable z-other z-koto">y</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">String</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span></code></pre>
+<p>Type checks are performed at runtime, and will throw an error if a check fails.
+For applications that want to use type checks as assertions only in debug builds,
+a <a href="/docs/0.15/api#disabling-type-checks">runtime setting</a> allows them to be disabled.</p>
+<p>Additionally, type checks can be added anywhere that named values can be created:</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-koto">for</span> <span class="z-variable z-other z-koto">i</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">Number</span>, <span class="z-variable z-other z-koto">c</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">String</span> <span class="z-keyword z-control z-koto">in</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>xyz<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>.<span class="z-variable z-function z-koto">enumerate</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">i</span>, <span class="z-variable z-other z-koto">c</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">extract_lines</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">s</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">String</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-keyword z-operator z-type z-koto">-&gt;</span> <span class="z-storage z-type z-koto">Tuple</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">s</span>.<span class="z-variable z-function z-koto">lines</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">to_tuple</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span></code></pre>
+<p>See the guide's <a href="/docs/0.15/language#type-checks">section on type checks</a> for more information.</p>
+<h3 id="optional-chaining">Optional chaining</h3>
+<p>The <code>?</code> operator has been introduced to simplify expression chains where <code>null</code>
+might be encountered as an intermediate value.</p>
+<p>For example, given a map containing some data:</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">planet</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">name</span>: <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Mars<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-variable z-other z-koto">satellites</span>: </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Phobos<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Deimos<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span></code></pre>
+<p>Before 0.15, if you wanted to get an optional value from the map, and then perform an operation on the value, you would need to first access the value and then guard the operation with an <code>if</code> check:</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">name</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-control z-conditional z-koto">if</span> <span class="z-variable z-other z-koto">satellites</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">planet</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>satellites<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-keyword z-control z-conditional z-koto">if</span> <span class="z-variable z-other z-koto">innermost</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">satellites</span>.<span class="z-variable z-function z-koto">first</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">innermost</span>.<span class="z-variable z-function z-koto">to_uppercase</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> PHOBOS
+</span></span></code></pre>
+<p>With optional chaining, you can use the <code>?</code> operator to short-circuit the expression when <code>null</code> is encountered.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">name</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">planet</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>satellites<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"><span class="z-keyword z-operator z-logical z-koto">?</span>.<span class="z-variable z-function z-koto">first</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"><span class="z-keyword z-operator z-logical z-koto">?</span>.<span class="z-variable z-function z-koto">to_uppercase</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> PHOBOS
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">name</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">planet</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>satellites<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"><span class="z-keyword z-operator z-logical z-koto">?</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"><span class="z-keyword z-operator z-logical z-koto">?</span>.<span class="z-variable z-function z-koto">to_uppercase</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> null
+</span></span></code></pre>
+<p>See the guide's <a href="/docs/0.15/language#type-checks">section on optional chaining</a> for more information.</p>
+<h3 id="running-external-processes">Running external processes</h3>
+<p>The core library now includes support for running external processes, making Koto more useful for general purpose scripting.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">args</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>-al<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>/tmp<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> ...
+</span></span></code></pre>
+<h3 id="performance-improvements">Performance improvements</h3>
+<p>Koto's runtime is significantly faster in 0.15 with benchmark improvements generally in the range of 15-30%.</p>
+<p>Koto is also now single-threaded by default which has sped up runtime execution by a modest amount,
+see <a href="/docs/0.15/api#using-the-multi-threaded-runtime">here</a> for information on how to enable the multi-threaded runtime if needed.</p>
+<h3 id="lsp-server">LSP Server</h3>
+<p>It's also worth mentioning that <code>koto-ls</code>, an <a href="https://microsoft.github.io/language-server-protocol/">LSP</a> server for Koto, is now available.</p>
+<p>See the <a href="../koto-ls">news post</a> for more information.</p>
+<h3 id="and-more">...and more!</h3>
+<p>These are some of the release highlights, see <a href="https://github.com/koto-lang/koto/blob/v0.15.0/CHANGELOG.md">here</a> for the full list of changes in 0.15.</p>
+
+      <article>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;">
+      Koto 0.15
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#type-checks">
+            Type Checks
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#optional-chaining">
+            Optional chaining
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#running-external-processes">
+            Running external processes
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#performance-improvements">
+            Performance improvements
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-15&#x2F;#lsp-server">
+            LSP Server
+          </a>
+        </li>
+
+        
+      
+    
+      
+      
+    
+  
+</ul>
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
