@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title></title>
+    <link rel="self" type="application/atom+xml" href="https://koto.dev/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://koto.dev"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-04-19T00:00:00+00:00</updated>
+    <id>https://koto.dev/atom.xml</id>
+    <entry xml:lang="en">
+        <title>bevy_koto 0.1</title>
+        <published>2024-04-19T00:00:00+00:00</published>
+        <updated>2024-04-19T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/bevy-koto-0-1/"/>
+        <id>https://koto.dev/news/bevy-koto-0-1/</id>
+        
+        <content type="html" xml:base="https://koto.dev/news/bevy-koto-0-1/">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;koto-lang&#x2F;bevy_koto&#x2F;&quot;&gt;bevy_koto&lt;&#x2F;a&gt; is a crate that adds Koto scripting support for 
+the &lt;a href=&quot;https:&#x2F;&#x2F;bevyengine.org&quot;&gt;Bevy&lt;&#x2F;a&gt; game engine.&lt;&#x2F;p&gt;
+&lt;p&gt;This is an initial proof of concept, with many missing features, but it
+could hopefully serve as a starting point for some interesting applications. &lt;&#x2F;p&gt;
+&lt;p&gt;Here&#x27;s a video of the crate&#x27;s &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;koto-lang&#x2F;bevy_koto&#x2F;blob&#x2F;main&#x2F;examples&#x2F;demo.rs&quot;&gt;demo app&lt;&#x2F;a&gt;, showing hot-reloading of edits
+to the Koto scripts.&lt;&#x2F;p&gt;
+&lt;div &gt;
+  &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;embed&#x2F;EqgAEOucBP8&quot; title=&quot;YouTube video player&quot;
+    frameborder=&quot;0&quot;
+    allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot;
+    referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen&gt;
+  &lt;&#x2F;iframe&gt;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Koto 0.14</title>
+        <published>2024-04-18T00:00:00+00:00</published>
+        <updated>2024-04-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            Ian Hobson
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://koto.dev/news/koto-0-14/"/>
+        <id>https://koto.dev/news/koto-0-14/</id>
+        
+        <content type="html" xml:base="https://koto.dev/news/koto-0-14/">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;koto&#x2F;0.14.0&quot;&gt;Koto 0.14&lt;&#x2F;a&gt; has been released, bringing &lt;a href=&quot;&#x2F;docs&#x2F;0.14&#x2F;api&quot;&gt;API improvements&lt;&#x2F;a&gt; 
+and improved &lt;a href=&quot;&#x2F;docs&#x2F;0.14&#x2F;libs&quot;&gt;library documentation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;koto&quot;&gt;Koto?&lt;&#x2F;h3&gt;
+&lt;p&gt;Koto is a free and open-source programming language with the goal of being an
+ideal scripting language for Rust applications.&lt;&#x2F;p&gt;
+&lt;p&gt;If this is the first time you&#x27;re reading about Koto, for some background 
+information you could take a look at the &lt;a href=&quot;&#x2F;about&quot;&gt;About Koto&lt;&#x2F;a&gt; page, 
+or you could check out the &lt;a href=&quot;&#x2F;docs&#x2F;0.14&#x2F;language&quot;&gt;language guide&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;details&gt;
+  &lt;summary&gt;Changes in 0.14&lt;&#x2F;summary&gt;
+  &lt;hr&gt;
+
+  &lt;div class=&quot;&quot;&gt;
+    &lt;h3 id=&quot;added&quot;&gt;Added&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;api&quot;&gt;API&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;KMap::get&lt;&#x2F;code&gt; has been introduced as simpler alternative to 
+&lt;code&gt;KMap::data().get().cloned()&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;libs&quot;&gt;Libs&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Markdown docs have been added for the extra libs.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;random.pick&lt;&#x2F;code&gt; can now be used with objects and maps that implement &lt;code&gt;@[]&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;changed&quot;&gt;Changed&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;api-1&quot;&gt;API&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;The use of &lt;code&gt;CallArgs&lt;&#x2F;code&gt; has been simplified with the introduction of &lt;code&gt;From&lt;&#x2F;code&gt;
+implementations for single values, arrays, and slices. 
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CallArgs::None&lt;&#x2F;code&gt; has been removed, instead you can pass in &lt;code&gt;&amp;amp;[]&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;The &lt;code&gt;run_function&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;run_instance_function&lt;&#x2F;code&gt; methods in &lt;code&gt;Koto&lt;&#x2F;code&gt; and &lt;code&gt;KotoVm&lt;&#x2F;code&gt; have
+been renamed to &lt;code&gt;call_function&lt;&#x2F;code&gt; and &lt;code&gt;call_instance_function&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;libs-1&quot;&gt;Libs&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;regex.find_all&lt;&#x2F;code&gt; now returns &lt;code&gt;null&lt;&#x2F;code&gt; when no matches are found.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;regex.captures&lt;&#x2F;code&gt; now doesn&#x27;t add extra by-index entries for named capture
+groups. &lt;code&gt;map.get_index&lt;&#x2F;code&gt; can be used to explicitly retrieve groups by index.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;removed&quot;&gt;Removed&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;api-2&quot;&gt;API&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Koto::run_exported_function&lt;&#x2F;code&gt; has been removed. Functions can be accessed via
+&lt;code&gt;Koto::exports().get()&lt;&#x2F;code&gt; and then called with &lt;code&gt;Koto::call_function()&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;Koto::run_with_args&lt;&#x2F;code&gt; has been removed. For equivalent behaviour, 
+&lt;code&gt;Koto::set_args&lt;&#x2F;code&gt; can be called before calling &lt;code&gt;Koto::run&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;fixed&quot;&gt;Fixed&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;language&quot;&gt;Language&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Arguments in paren-free function calls no longer require whitespace after
+commas. e.g. &lt;code&gt;f 1,2,3&lt;&#x2F;code&gt; would previously be rejected.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+  &lt;&#x2F;div&gt;
+
+  &lt;hr&gt;
+&lt;&#x2F;details&gt;
+</content>
+        
+    </entry>
+</feed>
