@@ -1,0 +1,929 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;regex">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;regex">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;regex">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;regex">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;regex">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;regex">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;regex">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;regex">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#new">new</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-1">Regex</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-is-match">Regex.is_match</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-find">Regex.find</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-find-all">Regex.find_all</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-captures">Regex.captures</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-replace-all">Regex.replace_all</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#matches">Matches</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match">Match</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match-text">Match.text</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match-range">Match.range</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="regex"><a class="zola-anchor" href="#regex" aria-label="Anchor link for: regex">regex</a></h1>
+<p><a href="https://en.wikipedia.org/wiki/Regular_expression">Regular expression</a> utilities for Koto.</p>
+<h2 id="new"><a class="zola-anchor" href="#new" aria-label="Anchor link for: new">new</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Regex</span>
+</span></code></pre>
+<p>Creates a new <a href="https://koto.dev/docs/0.16/libs/regex/#regex-1">Regex</a> from the given string.</p>
+<h2 id="regex-1"><a class="zola-anchor" href="#regex-1" aria-label="Anchor link for: regex-1">Regex</a></h2>
+<p>The core regular expression type used by the <code>regex</code> module.</p>
+<p>The <code>regex</code> module is a wrapper for the <a href="https://github.com/rust-lang/regex"><code>regex</code></a> crate,
+please see <a href="https://docs.rs/regex/latest/regex/">its documentation</a> for more information,
+including a guide to the <a href="https://docs.rs/regex/latest/regex/#syntax">supported syntax</a>.</p>
+<h2 id="regex-is-match"><a class="zola-anchor" href="#regex-is-match" aria-label="Anchor link for: regex-is-match">Regex.is_match</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Regex</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> if the given <code>input</code> string matches against the regular
+expression.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span> <span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>x\d\d<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">is_match</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>x42<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">is_match</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>z99<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span></code></pre>
+<h2 id="regex-find"><a class="zola-anchor" href="#regex-find" aria-label="Anchor link for: regex-find">Regex.find</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Regex</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Match?</span>
+</span></code></pre>
+<p>If the given <code>input</code> string matches the regular expression, then an instance of
+<a href="https://koto.dev/docs/0.16/libs/regex/#match"><code>Match</code></a> is returned that allows the first matched region in the string
+to be inspected. If no matches are found then <code>null</code> is returned.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Make a regex that will match against any group of 2 or 3 a-z characters
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span> <span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>[a-z]{2,3}<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">found</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">find</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>a b xyz jk mno<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">found</span>.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">found</span>.<span class="z-variable z-function z-koto">range</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;xyz&#39;, 4..7)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">find</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>12345<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: null
+</span></span></code></pre>
+<h2 id="regex-find-all"><a class="zola-anchor" href="#regex-find-all" aria-label="Anchor link for: regex-find-all">Regex.find_all</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Regex</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Matches?</span>
+</span></code></pre>
+<p>If the given <code>input</code> string matches the regular expression, then an instance of
+<a href="https://koto.dev/docs/0.16/libs/regex/#matches"><code>Matches</code></a> is returned that allows all matches in the input to be
+inspected. If no matches are found then <code>null</code> is returned.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Make a regex that will match against any group of 2 or 3 a-z characters
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span> <span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>[a-z]{2,3}<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">matches</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">find_all</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>a bc def gh<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">for</span> <span class="z-variable z-other z-koto">found</span> <span class="z-keyword z-control z-koto">in</span> <span class="z-variable z-other z-koto">matches</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">found</span>.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">found</span>.<span class="z-variable z-function z-koto">range</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;bc&#39;, 2..4)
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;def&#39;, 5..8)
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;gh&#39;, 9..11)
+</span></span></code></pre>
+<h2 id="regex-captures"><a class="zola-anchor" href="#regex-captures" aria-label="Anchor link for: regex-captures">Regex.captures</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Regex</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map?</span>
+</span></code></pre>
+<p>If the given string matches the regular expression, then a map is returned
+containing the first match found, along with matches for any capture groups.
+If no matches are found then <code>null</code> is returned.</p>
+<p>Captured groups are entered in the map with their indices as the key,
+and if the group is named then it's also inserted with the name.
+The first entry in the map (index 0) contains the entire match, with subsequent
+captures starting at index 1.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Make a regex that will match against two words inside &lt;&gt; braces
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span> <span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>&lt;(?&lt;group_a&gt;\S+)\s+(\S+)&gt;<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">captures</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">captures</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>!!! &lt;Hello, World!&gt; ???<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Entry 0 contains the complete match
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">captures</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: &lt;Hello, World!&gt;
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Named captured groups use the name as the map key
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">captures</span>.<span class="z-variable z-function z-koto">group_a</span>.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Hello,
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Groups without names use their group index as the map key
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">captures</span>.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: World!
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Named capture groups are also available by index
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">group_name</span>, <span class="z-variable z-other z-koto">capture</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">captures</span>.<span class="z-variable z-function z-koto">get_index</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">group_name</span>, <span class="z-variable z-other z-koto">capture</span>.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;group_a&#39;, &#39;Hello,&#39;)
+</span></span></code></pre>
+<h2 id="regex-replace-all"><a class="zola-anchor" href="#regex-replace-all" aria-label="Anchor link for: regex-replace-all">Regex.replace_all</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Regex</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">replacement</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns a string with each match in the input replaced using rules defined in
+the replacement string.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Make a regex that will match against two words inside &lt;&gt; braces
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span> <span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>&lt;(?&lt;a&gt;\S+)\s+(?&lt;b&gt;\S+)&gt;<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">replace_all</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>!!! &lt;Replace Me&gt; !!!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>&gt;_&gt;<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: !!! &gt;_&gt; !!!
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Capture groups can be referred to in the replacement string
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">r</span>.<span class="z-variable z-function z-koto">replace_all</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>!!! &lt;AAA BBB&gt; !!!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>[$a$b $a$b]<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: !!! [AAABBB AAABBB] !!!
+</span></span></code></pre>
+<h2 id="matches"><a class="zola-anchor" href="#matches" aria-label="Anchor link for: matches">Matches</a></h2>
+<p><code>Matches</code> is an iterator that outputs a <a href="https://koto.dev/docs/0.16/libs/regex/#match"><code>Match</code></a> for each match
+resulting from a call to <a href="https://koto.dev/docs/0.16/libs/regex/#regex-find-all"><code>Regex.find_all</code></a>.</p>
+<h2 id="match"><a class="zola-anchor" href="#match" aria-label="Anchor link for: match">Match</a></h2>
+<p><code>Match</code> is a type produced from calls to search functions like
+<a href="https://koto.dev/docs/0.16/libs/regex/#regex-find"><code>Regex.find</code></a> or <a href="https://koto.dev/docs/0.16/libs/regex/#regex-captures"><code>Regex.captures</code></a> that provides
+access to the matched region of the input string,
+along with the matched region's indices.</p>
+<h2 id="match-text"><a class="zola-anchor" href="#match-text" aria-label="Anchor link for: match-text">Match.text</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Match</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns the matched region of the input string.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>x\d\d<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">find</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>abc def x99 123<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span>.<span class="z-variable z-function z-koto">text</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: x99
+</span></span></code></pre>
+<h2 id="match-range"><a class="zola-anchor" href="#match-range" aria-label="Anchor link for: match-range">Match.range</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Match</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Range</span>
+</span></code></pre>
+<p>Returns the indices of the matched region in the input string.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">regex</span>.<span class="z-variable z-function z-koto">new</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-raw z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">r&#39;</span>x\d\d<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">find</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>abc def x99 123<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span>.<span class="z-variable z-function z-koto">range</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8..11
+</span></span></code></pre>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;regex">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;regex">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;regex">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;regex">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#new">new</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-1">Regex</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-is-match">Regex.is_match</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-find">Regex.find</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-find-all">Regex.find_all</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-captures">Regex.captures</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#regex-replace-all">Regex.replace_all</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#matches">Matches</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match">Match</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match-text">Match.text</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/libs/regex/#match-range">Match.range</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

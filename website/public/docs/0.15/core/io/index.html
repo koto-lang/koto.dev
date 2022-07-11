@@ -1,0 +1,1221 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;io">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;io">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;io">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;io">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;io">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;io">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#create">create</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#current-dir">current_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#exists">exists</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#extend-path">extend_path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#open">open</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#print">print</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#read-to-string">read_to_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#remove-file">remove_file</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stderr">stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stdin">stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stdout">stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#temp-dir">temp_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file">File</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-flush">File.flush</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-is-terminal">File.is_terminal</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-path">File.path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-read-line">File.read_line</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-read-to-string">File.read_to_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-seek">File.seek</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-write">File.write</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-write-line">File.write_line</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="io"><a class="zola-anchor" href="#io" aria-label="Anchor link for: io">io</a></h1>
+<p>A collection of utilities for working with the local filesystem.</p>
+<h2 id="create"><a class="zola-anchor" href="#create" aria-label="Anchor link for: create">create</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns an empty <a href="https://koto.dev/docs/0.15/core/io/#file"><code>File</code></a> at the provided path.
+If the file already exists it will be truncated.</p>
+<h3 id="errors"><a class="zola-anchor" href="#errors" aria-label="Anchor link for: errors">Errors</a></h3>
+<p>A runtime error will be thrown if the file can't be created.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">create</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo.temp<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span>.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Hello<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span>.<span class="z-variable z-function z-koto">read_to_string</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Hello
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=f%20%3D%20io%2Ecreate%20%22foo%2Etemp%22%0Af%2Ewrite%5Fline%20%22Hello%22%0Af%2Eread%5Fto%5Fstring%28%29%0A%23%20Hello" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="current-dir"><a class="zola-anchor" href="#current-dir" aria-label="Anchor link for: current-dir">current_dir</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String?</span>
+</span></code></pre>
+<p>Returns the current working directory as a String, or <code>null</code> if the current
+directory can't be retrieved.</p>
+<h2 id="exists"><a class="zola-anchor" href="#exists" aria-label="Anchor link for: exists">exists</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if a file exists at the provided path.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">path</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo.temp<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">exists</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">create</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">exists</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> true
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=path%20%3D%20%22foo%2Etemp%22%0Aio%2Eexists%20path%0A%23%20false%0A%0Aio%2Ecreate%20path%0Aio%2Eexists%20path%0A%23%20true" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="extend-path"><a class="zola-anchor" href="#extend-path" aria-label="Anchor link for: extend-path">extend_path</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">nodes</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Any...</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Takes an initial path as a string, and extends it with the provided nodes,
+inserting a platform-appropriate separator between each node.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> On Windows
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">extend_path</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>.<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>bar<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>baz.txt<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> .\foo\bar\baz.txt
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> On Linux
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">extend_path</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>.<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>bar<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>, <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>baz.txt<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> ./foo/bar/baz.txt
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=%23%20On%20Windows%0Aio%2Eextend%5Fpath%20%22%2E%22%2C%20%22foo%22%2C%20%22bar%22%2C%20%22baz%2Etxt%22%0A%23%20%2E%5Cfoo%5Cbar%5Cbaz%2Etxt%0A%0A%23%20On%20Linux%0Aio%2Eextend%5Fpath%20%22%2E%22%2C%20%22foo%22%2C%20%22bar%22%2C%20%22baz%2Etxt%22%0A%23%20%2E%2Ffoo%2Fbar%2Fbaz%2Etxt" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="open"><a class="zola-anchor" href="#open" aria-label="Anchor link for: open">open</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Opens the file at the given path, and returns a corresponding <a href="https://koto.dev/docs/0.15/core/io/#file"><code>File</code></a>.</p>
+<h3 id="errors-1"><a class="zola-anchor" href="#errors-1" aria-label="Anchor link for: errors-1">Errors</a></h3>
+<p>An error is thrown if a file can't be opened at the given path.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">open</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>path/to/existing.file<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span>.<span class="z-variable z-function z-koto">exists</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> true
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=f%20%3D%20io%2Eopen%20%22path%2Fto%2Fexisting%2Efile%22%0Af%2Eexists%28%29%0A%23%20true" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="print"><a class="zola-anchor" href="#print" aria-label="Anchor link for: print">print</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype">```<span class="z-storage z-type z-kototype">kototype</span>
+</span><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Any</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Prints a single value to the active output.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Any</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Any...</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Prints a series of values to the active output as a tuple.</p>
+<h3 id="note"><a class="zola-anchor" href="#note" aria-label="Anchor link for: note">Note</a></h3>
+<ul>
+<li>To print formatted strings, see <a href="https://koto.dev/docs/0.15/core/io/./string#format"><code>string.format</code></a>.</li>
+<li>The output for <code>print</code> depends on the configuration of the runtime.
+The default output is <code>stdout</code>.</li>
+</ul>
+<h2 id="read-to-string"><a class="zola-anchor" href="#read-to-string" aria-label="Anchor link for: read-to-string">read_to_string</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns a string containing the contents of the file at the given path.</p>
+<h3 id="errors-2"><a class="zola-anchor" href="#errors-2" aria-label="Anchor link for: errors-2">Errors</a></h3>
+<p>Errors are thrown:</p>
+<ul>
+<li>if the file doesn't contain valid UTF-8 data.</li>
+<li>if a file can't be opened at the given path.</li>
+</ul>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">create</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo.temp<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span>.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Hello!<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">read_to_string</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo.temp<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Hello!
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=f%20%3D%20io%2Ecreate%20%22foo%2Etemp%22%0Af%2Ewrite%5Fline%20%22Hello%21%22%0Aio%2Eread%5Fto%5Fstring%20%22foo%2Etemp%22%0A%23%20Hello%21" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="remove-file"><a class="zola-anchor" href="#remove-file" aria-label="Anchor link for: remove-file">remove_file</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Removes the file at the given path.</p>
+<h3 id="errors-3"><a class="zola-anchor" href="#errors-3" aria-label="Anchor link for: errors-3">Errors</a></h3>
+<ul>
+<li>An error is thrown if a file can't be removed at the given path.</li>
+</ul>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">path</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>foo.temp<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">create</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">exists</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">remove_file</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">exists</span> <span class="z-variable z-other z-koto">path</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=path%20%3D%20%22foo%2Etemp%22%0Aio%2Ecreate%20path%0Aio%2Eexists%20path%0A%23%20true%0A%0Aio%2Eremove%5Ffile%20path%0Aio%2Eexists%20path%0A%23%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="stderr"><a class="zola-anchor" href="#stderr" aria-label="Anchor link for: stderr">stderr</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the standard error output of the current process as a <a href="https://koto.dev/docs/0.15/core/io/#file"><code>File</code></a>.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stderr</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>An error occurred!<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=io%2Estderr%28%29%2Ewrite%5Fline%20%22An%20error%20occurred%21%22" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stdin"><code>io.stdin</code></a></li>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stdout"><code>io.stdout</code></a></li>
+</ul>
+<h2 id="stdin"><a class="zola-anchor" href="#stdin" aria-label="Anchor link for: stdin">stdin</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the standard input of the current process as a <a href="https://koto.dev/docs/0.15/core/io/#file"><code>File</code></a>.</p>
+<h3 id="example-7"><a class="zola-anchor" href="#example-7" aria-label="Anchor link for: example-7">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stdin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">read_to_string</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> &quot;...&quot;
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=io%2Estdin%28%29%2Eread%5Fto%5Fstring%28%29%0A%23%20%22%2E%2E%2E%22" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-1"><a class="zola-anchor" href="#see-also-1" aria-label="Anchor link for: see-also-1">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stderr"><code>io.stderr</code></a></li>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stdout"><code>io.stdout</code></a></li>
+</ul>
+<h2 id="stdout"><a class="zola-anchor" href="#stdout" aria-label="Anchor link for: stdout">stdout</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the standard output of the current process as a <a href="https://koto.dev/docs/0.15/core/io/#file"><code>File</code></a>.</p>
+<h3 id="example-8"><a class="zola-anchor" href="#example-8" aria-label="Anchor link for: example-8">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Hello, World!<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=io%2Estdout%28%29%2Ewrite%5Fline%20%22Hello%2C%20World%21%22" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-2"><a class="zola-anchor" href="#see-also-2" aria-label="Anchor link for: see-also-2">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stderr"><code>io.stderr</code></a></li>
+<li><a href="https://koto.dev/docs/0.15/core/io/#stdin"><code>io.stdin</code></a></li>
+</ul>
+<h2 id="temp-dir"><a class="zola-anchor" href="#temp-dir" aria-label="Anchor link for: temp-dir">temp_dir</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns the path to a temporary directory.</p>
+<h3 id="note-1"><a class="zola-anchor" href="#note-1" aria-label="Anchor link for: note-1">Note</a></h3>
+<p>This defers to Rust's <code>std::env::temp_dir</code>, for details see
+<a href="https://doc.rust-lang.org/std/env/fn.temp_dir.html">its documentation</a>.</p>
+<h2 id="file"><a class="zola-anchor" href="#file" aria-label="Anchor link for: file">File</a></h2>
+<p>An object that represents a file handle.</p>
+<h2 id="file-flush"><a class="zola-anchor" href="#file-flush" aria-label="Anchor link for: file-flush">File.flush</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Ensures that any buffered changes to the file have been written.</p>
+<h3 id="see-also-3"><a class="zola-anchor" href="#see-also-3" aria-label="Anchor link for: see-also-3">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.15/core/io/#file-write"><code>file.write</code></a></li>
+<li><a href="https://koto.dev/docs/0.15/core/io/#file-write-line"><code>file.write_line</code></a></li>
+</ul>
+<h2 id="file-is-terminal"><a class="zola-anchor" href="#file-is-terminal" aria-label="Anchor link for: file-is-terminal">File.is_terminal</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> if the file refers to a terminal/tty.</p>
+<h3 id="example-9"><a class="zola-anchor" href="#example-9" aria-label="Anchor link for: example-9">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">next_line</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-control z-conditional z-koto">if</span> <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stdin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_terminal</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Please provide some input<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stdin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">read_line</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-conditional z-koto">else</span> 
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">io</span>.<span class="z-variable z-function z-koto">stdin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">read_line</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.15/?script=next%5Fline%20%3D%20if%20io%2Estdin%28%29%2Eis%5Fterminal%28%29%0A%20%20print%20%27Please%20provide%20some%20input%27%0A%20%20io%2Estdin%28%29%2Eread%5Fline%28%29%0Aelse%20%0A%20%20io%2Estdin%28%29%2Eread%5Fline%28%29" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="file-path"><a class="zola-anchor" href="#file-path" aria-label="Anchor link for: file-path">File.path</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns the file's path.</p>
+<h2 id="file-read-line"><a class="zola-anchor" href="#file-read-line" aria-label="Anchor link for: file-read-line">File.read_line</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String?</span>
+</span></code></pre>
+<p>Reads a line of output from the file as a string, not including the newline.</p>
+<p>When the end of the file is reached, <code>null</code> will be returned.</p>
+<h3 id="errors-4"><a class="zola-anchor" href="#errors-4" aria-label="Anchor link for: errors-4">Errors</a></h3>
+<p>An error is thrown if the line doesn't contain valid UTF-8 data.</p>
+<h2 id="file-read-to-string"><a class="zola-anchor" href="#file-read-to-string" aria-label="Anchor link for: file-read-to-string">File.read_to_string</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Reads the file's contents to a string.</p>
+<h3 id="errors-5"><a class="zola-anchor" href="#errors-5" aria-label="Anchor link for: errors-5">Errors</a></h3>
+<p>An error is thrown if the file doesn't contain valid UTF-8 data.</p>
+<h2 id="file-seek"><a class="zola-anchor" href="#file-seek" aria-label="Anchor link for: file-seek">File.seek</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">position</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Seeks within the file to the specified position in bytes.</p>
+<h2 id="file-write"><a class="zola-anchor" href="#file-write" aria-label="Anchor link for: file-write">File.write</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Writes the formatted value as a string to the file.</p>
+<h2 id="file-write-line"><a class="zola-anchor" href="#file-write-line" aria-label="Anchor link for: file-write-line">File.write_line</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">File</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Writes the formatted value as a string, with a newline, to the file.</p>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.15">
+
+<nav uk-dropnav>
+  <div>Version: 0.15<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;io">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io">0.16</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;io">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;io">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#create">create</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#current-dir">current_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#exists">exists</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#extend-path">extend_path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#open">open</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#print">print</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#read-to-string">read_to_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#remove-file">remove_file</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stderr">stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stdin">stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#stdout">stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#temp-dir">temp_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file">File</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-flush">File.flush</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-is-terminal">File.is_terminal</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-path">File.path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-read-line">File.read_line</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-read-to-string">File.read_to_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-seek">File.seek</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-write">File.write</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.15/core/io/#file-write-line">File.write_line</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

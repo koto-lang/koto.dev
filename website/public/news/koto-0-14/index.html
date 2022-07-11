@@ -1,0 +1,252 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <nav role="navigation">
+    <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-14&#x2F;">
+      Koto 0.14
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+  
+</ul>
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container">
+    <article class="uk-article">
+      <h1 class="uk-article-title">
+        Koto 0.14
+      </h1>
+
+      
+
+<div class="uk-text-meta">
+  April 18, 2024
+</div>
+
+
+
+      <p>Koto 0.14 has been <a href="https://crates.io/crates/koto/0.14.0">released</a>, bringing <a href="/docs/0.14/api">API improvements</a>
+and improved <a href="/docs/0.14/libs">library documentation</a>.</p>
+<span id="continue-reading"></span><h3 id="koto">Koto?</h3>
+<p>Koto is a free and open-source programming language with the goal of being an
+ideal scripting language for Rust applications.</p>
+<p>If this is the first time you're reading about Koto, for some background
+information you could take a look at the <a href="/about">About Koto</a> page,
+or you could check out the <a href="/docs/0.14/language">language guide</a>.</p>
+<details>
+  <summary>Changes in 0.14</summary>
+  <hr>
+
+  <div class="">
+    <h3 id="added">Added</h3>
+<h4 id="api">API</h4>
+<ul>
+<li><code>KMap::get</code> has been introduced as simpler alternative to
+<code>KMap::data().get().cloned()</code>.</li>
+</ul>
+<h4 id="libs">Libs</h4>
+<ul>
+<li>Markdown docs have been added for the extra libs.</li>
+<li><code>random.pick</code> can now be used with objects and maps that implement <code>@[]</code></li>
+</ul>
+<h3 id="changed">Changed</h3>
+<h4 id="api-1">API</h4>
+<ul>
+<li>The use of <code>CallArgs</code> has been simplified with the introduction of <code>From</code>
+implementations for single values, arrays, and slices.
+<ul>
+<li><code>CallArgs::None</code> has been removed, instead you can pass in <code>&amp;[]</code>.</li>
+</ul>
+</li>
+<li>The <code>run_function</code>/<code>run_instance_function</code> methods in <code>Koto</code> and <code>KotoVm</code> have
+been renamed to <code>call_function</code> and <code>call_instance_function</code>.</li>
+</ul>
+<h4 id="libs-1">Libs</h4>
+<ul>
+<li><code>regex.find_all</code> now returns <code>null</code> when no matches are found.</li>
+<li><code>regex.captures</code> now doesn't add extra by-index entries for named capture
+groups. <code>map.get_index</code> can be used to explicitly retrieve groups by index.</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<h4 id="api-2">API</h4>
+<ul>
+<li><code>Koto::run_exported_function</code> has been removed. Functions can be accessed via
+<code>Koto::exports().get()</code> and then called with <code>Koto::call_function()</code>.</li>
+<li><code>Koto::run_with_args</code> has been removed. For equivalent behaviour,
+<code>Koto::set_args</code> can be called before calling <code>Koto::run</code>.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<h4 id="language">Language</h4>
+<ul>
+<li>Arguments in paren-free function calls no longer require whitespace after
+commas. e.g. <code>f 1,2,3</code> would previously be rejected.</li>
+</ul>
+
+  </div>
+
+  <hr>
+</details>
+
+      <article>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-14&#x2F;">
+      Koto 0.14
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+  
+</ul>
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

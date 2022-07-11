@@ -1,0 +1,1210 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.13">
+
+<nav uk-dropnav>
+  <div>Version: 0.13<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;map">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;map">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map">0.14</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;map">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.13">
+
+<nav uk-dropnav>
+  <div>Version: 0.13<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;map">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;map">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map">0.14</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;map">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#clear">clear</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#contains-key">contains_key</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#extend">extend</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get">get</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get-index">get_index</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get-meta">get_meta</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#insert">insert</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#is-empty">is_empty</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#keys">keys</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#remove">remove</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#sort">sort</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#update">update</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#values">values</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#with-meta">with_meta</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="map"><a class="zola-anchor" href="#map" aria-label="Anchor link for: map">map</a></h1>
+<h2 id="clear"><a class="zola-anchor" href="#clear" aria-label="Anchor link for: clear">clear</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Clears the map by removing all of its elements, and returns the map.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">x</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-variable z-other z-koto">y</span>: <span class="z-constant z-numeric z-koto">42</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">clear</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {}
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%20%7Bx%3A%20%2D1%2C%20y%3A%2042%7D%0Aprint%20x%2Eclear%28%29%0A%23%20%2D%3E%20%7B%7D%0Aprint%20x%0A%23%20%2D%3E%20%7B%7D" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="contains-key"><a class="zola-anchor" href="#contains-key" aria-label="Anchor link for: contains-key">contains_key</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> if the map contains a value with the given key,
+and <code>false</code> otherwise.</p>
+<h2 id="extend"><a class="zola-anchor" href="#extend" aria-label="Anchor link for: extend">extend</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Iterable</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Extends the map with the output of the iterator, and returns the map.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">foo</span>: <span class="z-constant z-numeric z-koto">42</span>, <span class="z-variable z-other z-koto">bar</span>: <span class="z-constant z-numeric z-koto">99</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">extend</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">baz</span>: <span class="z-constant z-numeric z-koto">123</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {foo: 42, bar: 99, baz: 123}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">baz</span> 
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 123
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">extend</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>abc<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>.<span class="z-variable z-function z-koto">each</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">c</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">c</span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">c</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto">!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {a: &#39;a!&#39;, b: &#39;b!&#39;, c: &#39;c!&#39;}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">c</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; c!
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%20%7Bfoo%3A%2042%2C%20bar%3A%2099%7D%0Aprint%20x%2Eextend%20%7Bbaz%3A%20123%7D%0A%23%20%2D%3E%20%7Bfoo%3A%2042%2C%20bar%3A%2099%2C%20baz%3A%20123%7D%0Aprint%20x%2Ebaz%20%0A%23%20%2D%3E%20123%0A%0Ax%20%3D%20%7B%7D%0Aprint%20x%2Eextend%20%27abc%27%2Eeach%20%7Cc%7C%20c%2C%20%27%7Bc%7D%21%27%0A%23%20%2D%3E%20%7Ba%3A%20%27a%21%27%2C%20b%3A%20%27b%21%27%2C%20c%3A%20%27c%21%27%7D%0Aprint%20x%2Ec%0A%23%20%2D%3E%20c%21" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#insert"><code>map.insert</code></a></li>
+</ul>
+<h2 id="get"><a class="zola-anchor" href="#get" aria-label="Anchor link for: get">get</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Returns the value corresponding to the given key, or the provided default value
+if the map doesn't contain the key.</p>
+<p>If no default value is provided then Null is returned.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>goodbye<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>goodbye<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>byeeee<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; byeeee
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">insert</span> <span class="z-constant z-numeric z-koto">99</span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>xyz<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; xyz
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%20%7Bhello%3A%20%2D1%7D%0Aprint%20x%2Eget%20%27hello%27%0A%23%20%2D%3E%20%2D1%0A%0Aprint%20x%2Eget%20%27goodbye%27%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Eget%20%27goodbye%27%2C%20%27byeeee%27%0A%23%20%2D%3E%20byeeee%0A%0Ax%2Einsert%2099%2C%20%27xyz%27%0Aprint%20x%2Eget%2099%0A%23%20%2D%3E%20xyz" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-1"><a class="zola-anchor" href="#see-also-1" aria-label="Anchor link for: see-also-1">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#get-index"><code>map.get_index</code></a></li>
+</ul>
+<h2 id="get-index"><a class="zola-anchor" href="#get-index" aria-label="Anchor link for: get-index">get_index</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Tuple</span>
+</span></code></pre>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Tuple</span>
+</span></code></pre>
+<p>Returns the entry at the given index as a key/value tuple, or the provided
+default value if the map doesn't contain an entry at that index.</p>
+<p>If no default value is provided then Null is returned.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">foo</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-variable z-other z-koto">bar</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get_index</span> <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; (&#39;bar&#39;, -2)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get_index</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get_index</span> <span class="z-constant z-numeric z-koto">99</span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>xyz<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; xyz
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%20%7Bfoo%3A%20%2D1%2C%20bar%3A%20%2D2%7D%0Aprint%20x%2Eget%5Findex%201%0A%23%20%2D%3E%20%28%27bar%27%2C%20%2D2%29%0A%0Aprint%20x%2Eget%5Findex%20%2D99%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Eget%5Findex%2099%2C%20%27xyz%27%0A%23%20%2D%3E%20xyz" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-2"><a class="zola-anchor" href="#see-also-2" aria-label="Anchor link for: see-also-2">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#get"><code>map.get</code></a></li>
+</ul>
+<h2 id="get-meta"><a class="zola-anchor" href="#get-meta" aria-label="Anchor link for: get-meta">get_meta</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Returns a Map that contains the input's Meta Map, and no data.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">my_map</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">data</span>: <span class="z-constant z-numeric z-koto">42</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@type</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>My Map<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">meta</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">map</span>.<span class="z-variable z-function z-koto">get_meta</span> <span class="z-variable z-other z-koto">my_map</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">map</span>.<span class="z-variable z-function z-koto">keys</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">my_map</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">count</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">map</span>.<span class="z-variable z-function z-koto">keys</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">meta</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">count</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">type</span> <span class="z-variable z-other z-koto">meta</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; My Map
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=my%5Fmap%20%3D%0A%20%20data%3A%2042%0A%20%20%40type%3A%20%27My%20Map%27%0A%0Ameta%20%3D%20map%2Eget%5Fmeta%20my%5Fmap%0A%0Aprint%20map%2Ekeys%28my%5Fmap%29%2Ecount%28%29%0A%23%20%2D%3E%201%0Aprint%20map%2Ekeys%28meta%29%2Ecount%28%29%0A%23%20%2D%3E%200%0A%0Aprint%20koto%2Etype%20meta%0A%23%20%2D%3E%20My%20Map" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-3"><a class="zola-anchor" href="#see-also-3" aria-label="Anchor link for: see-also-3">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#with-meta"><code>map.with_meta</code></a></li>
+</ul>
+<h2 id="insert"><a class="zola-anchor" href="#insert" aria-label="Anchor link for: insert">insert</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Inserts an entry into the map with the given key and value.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Inserts an entry into the map with the given key, and Null as its value.</p>
+<p>If the key already existed in the map, then the old value is returned.
+If the key didn't already exist, then Null is returned.</p>
+<p>See the <a href="../../language/#map-key-types">language guide</a> for a description
+of the types of values that can be used as map keys.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">insert</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-constant z-numeric z-koto">99</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -1 already exists at `hello`, so it&#39;s returned here
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">hello</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> hello is now 99
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 99
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">insert</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>goodbye<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-constant z-numeric z-koto">123</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> No existing value at `goodbye`, so null is returned
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">goodbye</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 123
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">insert</span> <span class="z-constant z-numeric z-koto">123</span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hi!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Numbers can be used as map keys 
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> <span class="z-constant z-numeric z-koto">123</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; hi!
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">insert</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>a<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>b<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Tuples can be used as map keys 
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">get</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>a<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>b<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%20%7Bhello%3A%20%2D1%7D%0A%0Aprint%20x%2Einsert%20%27hello%27%2C%2099%20%23%20%2D1%20already%20exists%20at%20%60hello%60%2C%20so%20it%27s%20returned%20here%0A%23%20%2D%3E%20%2D1%0A%0Aprint%20x%2Ehello%20%23%20hello%20is%20now%2099%0A%23%20%2D%3E%2099%0A%0Aprint%20x%2Einsert%20%27goodbye%27%2C%20123%20%23%20No%20existing%20value%20at%20%60goodbye%60%2C%20so%20null%20is%20returned%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Egoodbye%0A%23%20%2D%3E%20123%0A%0Aprint%20x%2Einsert%20123%2C%20%27hi%21%27%20%23%20Numbers%20can%20be%20used%20as%20map%20keys%20%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Eget%20123%0A%23%20%2D%3E%20hi%21%0A%0Aprint%20x%2Einsert%20%28%27a%27%2C%20%27b%27%29%2C%20%2D1%20%23%20Tuples%20can%20be%20used%20as%20map%20keys%20%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Eget%20%28%27a%27%2C%20%27b%27%29%0A%23%20%2D%3E%20%2D1" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-4"><a class="zola-anchor" href="#see-also-4" aria-label="Anchor link for: see-also-4">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#get"><code>map.get</code></a></li>
+<li><a href="https://koto.dev/docs/0.13/core/map/#remove"><code>map.remove</code></a></li>
+<li><a href="https://koto.dev/docs/0.13/core/map/#update"><code>map.update</code></a></li>
+</ul>
+<h2 id="is-empty"><a class="zola-anchor" href="#is-empty" aria-label="Anchor link for: is-empty">is_empty</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> if the map contains no entries, otherwise <code>false</code>.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_empty</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_empty</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=print%20%7B%7D%2Eis%5Fempty%28%29%0A%23%20%2D%3E%20true%0A%0Aprint%20%7Bhello%3A%20%2D1%7D%2Eis%5Fempty%28%29%0A%23%20%2D%3E%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="keys"><a class="zola-anchor" href="#keys" aria-label="Anchor link for: keys">keys</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Iterator</span>
+</span></code></pre>
+<p>Returns an iterator that iterates in order over the map's keys.</p>
+<h3 id="example-7"><a class="zola-anchor" href="#example-7" aria-label="Anchor link for: example-7">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">goodbye</span>: <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">m</span>.<span class="z-variable z-function z-koto">keys</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; hello
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; goodbye
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=m%20%3D%0A%20%20hello%3A%20%2D1%0A%20%20goodbye%3A%2099%0A%0Ax%20%3D%20m%2Ekeys%28%29%0A%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%20hello%0A%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%20goodbye%0A%0Aprint%20x%2Enext%28%29%0A%23%20%2D%3E%20null" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-5"><a class="zola-anchor" href="#see-also-5" aria-label="Anchor link for: see-also-5">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#values"><code>map.values</code></a></li>
+</ul>
+<h2 id="remove"><a class="zola-anchor" href="#remove" aria-label="Anchor link for: remove">remove</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Removes the entry that matches the given key.</p>
+<p>If the entry existed then its value is returned, otherwise Null is returned.</p>
+<h3 id="example-8"><a class="zola-anchor" href="#example-8" aria-label="Anchor link for: example-8">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">goodbye</span>: <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">remove</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">remove</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>xyz<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">remove</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>goodbye<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 99
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">is_empty</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; true
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%0A%20%20hello%3A%20%2D1%0A%20%20goodbye%3A%2099%0A%0Aprint%20x%2Eremove%20%27hello%27%0A%23%20%2D%3E%20%2D1%0A%0Aprint%20x%2Eremove%20%27xyz%27%0A%23%20%2D%3E%20null%0A%0Aprint%20x%2Eremove%20%27goodbye%27%0A%23%20%2D%3E%2099%0A%0Aprint%20x%2Eis%5Fempty%28%29%0A%23%20%2D%3E%20true" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-6"><a class="zola-anchor" href="#see-also-6" aria-label="Anchor link for: see-also-6">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#insert"><code>map.insert</code></a></li>
+</ul>
+<h2 id="sort"><a class="zola-anchor" href="#sort" aria-label="Anchor link for: sort">sort</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Sorts the map's entries by key, and returns the map.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span>, <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> -&gt; <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Sorts the map's entries based on the output of calling a 'key' function for each
+entry, and returns the map. The entry's key and value are passed into the
+function as separate arguments.</p>
+<p>The function result is cached, so it's only called once per entry.</p>
+<h3 id="example-9"><a class="zola-anchor" href="#example-9" aria-label="Anchor link for: example-9">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">hello</span>: <span class="z-constant z-numeric z-koto">123</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">bye</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">tschüss</span>: <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">sort</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Sorts the map by key
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {bye: -1, hello: 123, tschüss: 99}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {bye: -1, hello: 123, tschüss: 99}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Sort the map by value
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">sort</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">_</span><span class="z-punctuation z-separator z-koto">,</span> <span class="z-variable z-parameter z-koto">value</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">value</span> 
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {bye: -1, tschüss: 99, hello: 123}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {bye: -1, tschüss: 99, hello: 123}
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Sort the map by reversed key length
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">sort</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">key</span><span class="z-punctuation z-separator z-koto">,</span> <span class="z-variable z-parameter z-koto">_</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-variable z-other z-koto">key</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; {tschüss: 99, hello: 123, bye: -1}
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%0A%20%20hello%3A%20123%0A%20%20bye%3A%20%2D1%0A%20%20tsch%C3%BCss%3A%2099%0Aprint%20x%2Esort%28%29%20%23%20Sorts%20the%20map%20by%20key%0A%23%20%2D%3E%20%7Bbye%3A%20%2D1%2C%20hello%3A%20123%2C%20tsch%C3%BCss%3A%2099%7D%0Aprint%20x%0A%23%20%2D%3E%20%7Bbye%3A%20%2D1%2C%20hello%3A%20123%2C%20tsch%C3%BCss%3A%2099%7D%0A%0A%23%20Sort%20the%20map%20by%20value%0Aprint%20x%2Esort%20%7C%5F%2C%20value%7C%20value%20%0A%23%20%2D%3E%20%7Bbye%3A%20%2D1%2C%20tsch%C3%BCss%3A%2099%2C%20hello%3A%20123%7D%0Aprint%20x%0A%23%20%2D%3E%20%7Bbye%3A%20%2D1%2C%20tsch%C3%BCss%3A%2099%2C%20hello%3A%20123%7D%0A%0A%23%20Sort%20the%20map%20by%20reversed%20key%20length%0Ax%2Esort%20%7Ckey%2C%20%5F%7C%20%2D%28size%20key%29%0Aprint%20x%0A%23%20%2D%3E%20%7Btsch%C3%BCss%3A%2099%2C%20hello%3A%20123%2C%20bye%3A%20%2D1%7D" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="update"><a class="zola-anchor" href="#update" aria-label="Anchor link for: update">update</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> -&gt; <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Updates the value associated with a given key by calling a function with either
+the existing value, or Null if there isn't a matching entry.</p>
+<p>The result of the function will either replace an existing value, or if no value
+existed then an entry will be inserted into the map with the given key and the
+function's result.</p>
+<p>The function result is then returned from <code>update</code>.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Key</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Value</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> -&gt; <span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>This variant of <code>update</code> takes a default value that is provided to the
+function if a matching entry doesn't exist.</p>
+<h3 id="example-10"><a class="zola-anchor" href="#example-10" aria-label="Anchor link for: example-10">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">goodbye</span>: <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">update</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">n</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">n</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -2
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">hello</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">update</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>tschüss<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-constant z-numeric z-koto">10</span>, <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">n</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">n</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">10</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 100
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">tschüss</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 100
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=x%20%3D%0A%20%20hello%3A%20%2D1%0A%20%20goodbye%3A%2099%0A%0Aprint%20x%2Eupdate%20%27hello%27%2C%20%7Cn%7C%20n%20%2A%202%0A%23%20%2D%3E%20%2D2%0Aprint%20x%2Ehello%0A%23%20%2D%3E%20%2D2%0A%0Aprint%20x%2Eupdate%20%27tsch%C3%BCss%27%2C%2010%2C%20%7Cn%7C%20n%20%2A%2010%0A%23%20%2D%3E%20100%0Aprint%20x%2Etsch%C3%BCss%0A%23%20%2D%3E%20100" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-7"><a class="zola-anchor" href="#see-also-7" aria-label="Anchor link for: see-also-7">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#insert"><code>map.insert</code></a></li>
+</ul>
+<h2 id="values"><a class="zola-anchor" href="#values" aria-label="Anchor link for: values">values</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Iterator</span>
+</span></code></pre>
+<p>Returns an iterator that iterates in order over the map's values.</p>
+<h3 id="example-11"><a class="zola-anchor" href="#example-11" aria-label="Anchor link for: example-11">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">m</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">hello</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">goodbye</span>: <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">m</span>.<span class="z-variable z-function z-koto">values</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; -1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 99
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=m%20%3D%0A%20%20hello%3A%20%2D1%0A%20%20goodbye%3A%2099%0A%0Ax%20%3D%20m%2Evalues%28%29%0A%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%20%2D1%0A%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%2099%0A%0Aprint%20x%2Enext%28%29%0A%23%20%2D%3E%20null" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-8"><a class="zola-anchor" href="#see-also-8" aria-label="Anchor link for: see-also-8">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#keys"><code>map.keys</code></a></li>
+</ul>
+<h2 id="with-meta"><a class="zola-anchor" href="#with-meta" aria-label="Anchor link for: with-meta">with_meta</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Map</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Returns a new Map that contains the data from the first argument,
+along with the Meta Map from the second argument.</p>
+<h3 id="example-12"><a class="zola-anchor" href="#example-12" aria-label="Anchor link for: example-12">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">my_meta</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@type</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>MyMeta<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">foo</span>: <span class="z-constant z-numeric z-koto">42</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">with_meta</span> <span class="z-variable z-other z-koto">my_meta</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">type</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; MyMeta
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.13/?script=my%5Fmeta%20%3D%0A%20%20%40type%3A%20%27MyMeta%27%0A%0Ax%20%3D%20%7Bfoo%3A%2042%7D%2Ewith%5Fmeta%20my%5Fmeta%0A%0Aprint%20koto%2Etype%20x%0A%23%20%2D%3E%20MyMeta" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-9"><a class="zola-anchor" href="#see-also-9" aria-label="Anchor link for: see-also-9">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.13/core/map/#get-meta"><code>map.get_meta</code></a></li>
+</ul>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.13">
+
+<nav uk-dropnav>
+  <div>Version: 0.13<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;map">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;map">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map">0.14</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;map">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#clear">clear</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#contains-key">contains_key</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#extend">extend</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get">get</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get-index">get_index</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#get-meta">get_meta</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#insert">insert</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#is-empty">is_empty</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#keys">keys</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#remove">remove</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#sort">sort</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#update">update</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#values">values</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.13/core/map/#with-meta">with_meta</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

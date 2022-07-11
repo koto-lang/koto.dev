@@ -1,0 +1,944 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;random">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;random">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;random">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;random">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;random">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;random">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;random">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;random">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#bool">bool</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#generator">generator</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#number">number</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#pick">pick</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#seed">seed</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#shuffle">shuffle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng">Rng</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-bool">Rng.bool</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-number">Rng.number</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-pick">Rng.pick</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-shuffle">Rng.shuffle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-seed">Rng.seed</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="random"><a class="zola-anchor" href="#random" aria-label="Anchor link for: random">random</a></h1>
+<p>Utilities for generating random values in Koto.</p>
+<p>At the core of the module is the <code>Rng</code> type, which is a seedable random
+number generator. Each thread has access to a generator with a randomly
+selected seed, or unique generators can be created with <a href="https://koto.dev/docs/next/libs/random/#generator"><code>random.generator</code></a>.</p>
+<p>The <a href="https://prng.di.unimi.it">xoshiro256++</a> algorithm is used to generate random values,
+which is fast and portable, but <em>not</em> cryptographically secure.</p>
+<h2 id="bool"><a class="zola-anchor" href="#bool" aria-label="Anchor link for: bool">bool</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Generates a random boolean using the current thread's generator.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Seed the thread Rng so that we get predictable results
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">seed</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">bool</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">bool</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span></code></pre>
+<h2 id="generator"><a class="zola-anchor" href="#generator" aria-label="Anchor link for: generator">generator</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rng</span>
+</span></code></pre>
+<p>Creates an <a href="https://koto.dev/docs/next/libs/random/#rng"><code>Rng</code></a> with a randomly generated seed.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Rng</span>
+</span></code></pre>
+<p>Creates an <a href="https://koto.dev/docs/next/libs/random/#rng"><code>Rng</code></a> with a specified seed.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">rng</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">generator</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">rng</span>.<span class="z-variable z-function z-koto">pick</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">rng</span>.<span class="z-variable z-function z-koto">bool</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span></code></pre>
+<h2 id="number"><a class="zola-anchor" href="#number" aria-label="Anchor link for: number">number</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Generates a random number using the current thread's generator.</p>
+<p>The number will be a floating point value in the range from 0 up to but not
+including 1.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Seed the thread Rng so that we get predictable results
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">seed</span> <span class="z-constant z-numeric z-koto">123</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Print random floats up to 3 decimal places
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">number</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">:.<span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.646
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span></span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">number</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto">:.<span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.838
+</span></span></code></pre>
+<h2 id="pick"><a class="zola-anchor" href="#pick" aria-label="Anchor link for: pick">pick</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Indexable</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Any?</span>
+</span></code></pre>
+<p>Selects a random value from the input using the current thread's generator.</p>
+<ul>
+<li>If the input is empty, then <code>null</code> will be returned.</li>
+<li>If the input is a map, then a tuple containing the key and value of a
+randomly selected entry will be returned.</li>
+<li>If the input is a range, then the result will be an integer within the given
+range.</li>
+<li>If the input is some other indexable type (like a list or tuple),
+then a randomly selected element from the input will be returned.</li>
+</ul>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Seed the thread Rng so that we get predictable results
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">seed</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">pick</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">123</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">99</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">pick</span> <span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 19
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">pick</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">foo</span>: <span class="z-constant z-numeric z-koto">42</span>, <span class="z-variable z-other z-koto">bar</span>: <span class="z-constant z-numeric z-koto">99</span>, <span class="z-variable z-other z-koto">baz</span>: <span class="z-constant z-numeric z-koto">123</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (&#39;baz&#39;, 123)
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">random</span>.<span class="z-variable z-function z-koto">pick</span> </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: null
+</span></span></code></pre>
+<h2 id="seed"><a class="zola-anchor" href="#seed" aria-label="Anchor link for: seed">seed</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Seeds the current thread's generator so that it produces predictable results.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">iterator</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">generate</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">random</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pick</span>, <span class="z-variable z-other z-koto">seed</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Returns a tuple containing three numbers from 1 to 10
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">pick_3</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">generate</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">pick</span> <span class="z-constant z-numeric z-koto">1</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-parens">, <span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">to_tuple</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">seed</span> <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">pick_3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (9, 8, 2)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">seed</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">pick_3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (8, 6, 7)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">seed</span> <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">pick_3</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: (9, 8, 2)
+</span></span></code></pre>
+<h2 id="shuffle"><a class="zola-anchor" href="#shuffle" aria-label="Anchor link for: shuffle">shuffle</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Indexable</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Any</span>
+</span></code></pre>
+<p>Reorders the entries in a container so that they have a new randomly shuffled order,
+and returns the container.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">random</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">seed</span>, <span class="z-variable z-other z-koto">shuffle</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span>, <span class="z-constant z-numeric z-koto">4</span>, <span class="z-constant z-numeric z-koto">5</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">seed</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">shuffle</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: [1, 5, 4, 3, 2]
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">shuffle</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: [3, 1, 4, 2, 5]
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">a</span>: <span class="z-constant z-numeric z-koto">1</span>, <span class="z-variable z-other z-koto">b</span>: <span class="z-constant z-numeric z-koto">2</span>, <span class="z-variable z-other z-koto">c</span>: <span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">shuffle</span> <span class="z-variable z-other z-koto">y</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: {c: 3, a: 1, b: 2}
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">shuffle</span> <span class="z-variable z-other z-koto">y</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: {c: 3, b: 2, a: 1}
+</span></span></code></pre>
+<h2 id="rng"><a class="zola-anchor" href="#rng" aria-label="Anchor link for: rng">Rng</a></h2>
+<p><code>Rng</code> is the <code>random</code> module's core random generator.</p>
+<p>The <a href="https://prng.di.unimi.it">xoshiro256++</a> algorithm is used to generate random values,
+which is fast and portable, but <em>not cryptographically secure</em>.</p>
+<h2 id="rng-bool"><a class="zola-anchor" href="#rng-bool" aria-label="Anchor link for: rng-bool">Rng.bool</a></h2>
+<p>See <a href="https://koto.dev/docs/next/libs/random/#bool">random.bool</a>.</p>
+<h2 id="rng-number"><a class="zola-anchor" href="#rng-number" aria-label="Anchor link for: rng-number">Rng.number</a></h2>
+<p>See <a href="https://koto.dev/docs/next/libs/random/#number">random.number</a>.</p>
+<h2 id="rng-pick"><a class="zola-anchor" href="#rng-pick" aria-label="Anchor link for: rng-pick">Rng.pick</a></h2>
+<p>See <a href="https://koto.dev/docs/next/libs/random/#pick">random.pick</a>.</p>
+<h2 id="rng-shuffle"><a class="zola-anchor" href="#rng-shuffle" aria-label="Anchor link for: rng-shuffle">Rng.shuffle</a></h2>
+<p>See <a href="https://koto.dev/docs/next/libs/random/#shuffle">random.shuffle</a>.</p>
+<h2 id="rng-seed"><a class="zola-anchor" href="#rng-seed" aria-label="Anchor link for: rng-seed">Rng.seed</a></h2>
+<p>See <a href="https://koto.dev/docs/next/libs/random/#seed">random.seed</a>.</p>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="next">
+
+<nav uk-dropnav>
+  <div>Version: 0.17 (Unreleased)<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;random">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;libs&#x2F;random">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;random">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;libs&#x2F;random">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;color&#x2F;">
+              color
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;geometry&#x2F;">
+              geometry
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;json&#x2F;">
+              json
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;random&#x2F;">
+              random
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#bool">bool</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#generator">generator</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#number">number</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#pick">pick</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#seed">seed</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#shuffle">shuffle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng">Rng</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-bool">Rng.bool</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-number">Rng.number</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-pick">Rng.pick</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-shuffle">Rng.shuffle</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/next/libs/random/#rng-seed">Rng.seed</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;regex&#x2F;">
+              regex
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;tempfile&#x2F;">
+              tempfile
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;toml&#x2F;">
+              toml
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;libs&#x2F;yaml&#x2F;">
+              yaml
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
