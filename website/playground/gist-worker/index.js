@@ -6,9 +6,9 @@ import { Router } from 'itty-router'
 const router = Router()
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
-router.get('/create-gist/version', () => new Response('0.1.2'))
+router.get('/play/create-gist/version', () => new Response('0.1.3'))
 
-router.post('/create-gist', async (request) => {
+router.post('/play/create-gist', async (request) => {
   const script = await request.text()
 
   const { data: gist } = await octokit.rest.gists.create({

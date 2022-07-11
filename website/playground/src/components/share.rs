@@ -63,7 +63,7 @@ impl Component for Share {
         ctx.link().send_future({
             let script = ctx.props().script.clone();
             async move {
-                match Request::post("/create-gist").body(&script).send().await {
+                match Request::post("/play/create-gist").body(&script).send().await {
                     Ok(response) => match response.json::<CreateGistResponse>().await {
                         Ok(gist) => Msg::GistCreated(gist),
                         Err(error) => Msg::GistResponseError {

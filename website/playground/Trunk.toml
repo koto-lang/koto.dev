@@ -4,8 +4,8 @@ index = "./index.html"
 public_url = "/play/"
 
 [[proxy]]
-rewrite = "/create-gist"
-backend = "http://localhost:8787/create-gist"
+rewrite = "/play/create-gist"
+backend = "http://localhost:8787/play/create-gist"
 
 [[hooks]]
 # Embed the header in the playground's index.html
