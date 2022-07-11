@@ -1,0 +1,960 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;test">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;test">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;test">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;test">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;test">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;test">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert">assert</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-eq">assert_eq</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-ne">assert_ne</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-near">assert_near</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#run-tests">run_tests</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="test"><a class="zola-anchor" href="#test" aria-label="Anchor link for: test">test</a></h1>
+<p>A collection of utilities for writing tests.</p>
+<h2 id="assert"><a class="zola-anchor" href="#assert" aria-label="Anchor link for: assert">assert</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Bool</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Throws a runtime error if the argument if false.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will pass, and no error will be thrown
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-constant z-numeric z-koto">1</span> <span class="z-keyword z-operator z-comparison z-koto">&lt;</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will fail and throw an error
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">try</span>
+</span><span class="z-source z-koto">  <span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-constant z-numeric z-koto">1</span> <span class="z-keyword z-operator z-comparison z-koto">&gt;</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">catch</span> <span class="z-variable z-other z-koto">error</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">error</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=%23%20This%20assertion%20will%20pass%2C%20and%20no%20error%20will%20be%20thrown%0Aassert%201%20%3C%202%0A%0A%23%20This%20assertion%20will%20fail%20and%20throw%20an%20error%0Atry%0A%20%20assert%201%20%3E%202%0Acatch%20error%0A%20%20print%20error" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="assert-eq"><a class="zola-anchor" href="#assert-eq" aria-label="Anchor link for: assert-eq">assert_eq</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">a</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">b</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Checks the two input values for equality and throws an error if they're not
+equal.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will pass, and no error will be thrown
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">1</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will fail and throw an error
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">try</span>
+</span><span class="z-source z-koto">  <span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">2</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">5</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">catch</span> <span class="z-variable z-other z-koto">error</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">error</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=%23%20This%20assertion%20will%20pass%2C%20and%20no%20error%20will%20be%20thrown%0Aassert%5Feq%201%20%2B%201%2C%202%0A%0A%23%20This%20assertion%20will%20fail%20and%20throw%20an%20error%0Atry%0A%20%20assert%5Feq%202%20%2B%202%2C%205%0Acatch%20error%0A%20%20print%20error" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="assert-ne"><a class="zola-anchor" href="#assert-ne" aria-label="Anchor link for: assert-ne">assert_ne</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">a</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">b</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Any</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Checks the two input values for inequality and throws an error if they're equal.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will pass, and no error will be thrown
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_ne</span> <span class="z-constant z-numeric z-koto">1</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will fail and throw an error
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">try</span>
+</span><span class="z-source z-koto">  <span class="z-keyword z-control z-flow z-assert z-koto">assert_ne</span> <span class="z-constant z-numeric z-koto">2</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">4</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">catch</span> <span class="z-variable z-other z-koto">error</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">error</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=%23%20This%20assertion%20will%20pass%2C%20and%20no%20error%20will%20be%20thrown%0Aassert%5Fne%201%20%2B%201%2C%203%0A%0A%23%20This%20assertion%20will%20fail%20and%20throw%20an%20error%0Atry%0A%20%20assert%5Fne%202%20%2B%202%2C%204%0Acatch%20error%0A%20%20print%20error" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="assert-near"><a class="zola-anchor" href="#assert-near" aria-label="Anchor link for: assert-near">assert_near</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">a</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">b</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">a</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">b</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">error_margin</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Checks that the two input numbers are equal, within an allowed margin of error.</p>
+<p>This is useful when testing floating-point operations, where the result can be
+close to a target with some acceptable imprecision.</p>
+<p>The margin of error is optional, defaulting to <code>1.0e-12</code>.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">allowed_error</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">0.01</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will pass, and no error will be thrown
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1.3</span>, <span class="z-constant z-numeric z-koto">1.301</span>, <span class="z-variable z-other z-koto">allowed_error</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> This assertion will fail and throw an error
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">try</span>
+</span><span class="z-source z-koto">  <span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1.3</span>, <span class="z-constant z-numeric z-koto">1.32</span>, <span class="z-variable z-other z-koto">allowed_error</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">catch</span> <span class="z-variable z-other z-koto">error</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-variable z-other z-koto">error</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> error: Assertion failed, &#39;1.3&#39; and &#39;1.32&#39; are not within 0.01 of each other
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> The allowed margin of error is optional, defaulting to a very small value
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span> <span class="z-keyword z-operator z-arithmetic z-koto">%</span> <span class="z-constant z-numeric z-koto">0.2</span>, <span class="z-constant z-numeric z-koto">0.2</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=allowed%5Ferror%20%3D%200%2E01%0A%23%20This%20assertion%20will%20pass%2C%20and%20no%20error%20will%20be%20thrown%0Aassert%5Fnear%201%2E3%2C%201%2E301%2C%20allowed%5Ferror%0A%0A%23%20This%20assertion%20will%20fail%20and%20throw%20an%20error%0Atry%0A%20%20assert%5Fnear%201%2E3%2C%201%2E32%2C%20allowed%5Ferror%0Acatch%20error%0A%20%20print%20error%0A%23%20error%3A%20Assertion%20failed%2C%20%271%2E3%27%20and%20%271%2E32%27%20are%20not%20within%200%2E01%20of%20each%20other%0A%0A%23%20The%20allowed%20margin%20of%20error%20is%20optional%2C%20defaulting%20to%20a%20very%20small%20value%0Aassert%5Fnear%201%20%25%200%2E2%2C%200%2E2" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="run-tests"><a class="zola-anchor" href="#run-tests" aria-label="Anchor link for: run-tests">run_tests</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">tests</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Map</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>Runs the <code>@test</code> functions contained in the map.</p>
+<p><code>@pre_test</code> and <code>@post_test</code> functions can be implemented in the same way as when exporting
+<a href="../../language/#module-tests">module tests</a>.
+<code>@pre_test</code> will be run before each <code>@test</code>, and <code>@post_test</code> will be run after.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">make_x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">n</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">data</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">n</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@+:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">other</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">make_x</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">data</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-variable z-other z-koto">other</span>.<span class="z-variable z-function z-koto">data</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@-:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">other</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">make_x</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">data</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-other z-koto">other</span>.<span class="z-variable z-function z-koto">data</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x_tests</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@pre_test</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x1</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">make_x</span> <span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x2</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">make_x</span> <span class="z-constant z-numeric z-koto">200</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@post_test</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Test complete<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@test</span><span class="z-entity z-name z-function z-koto"> addition</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Testing addition<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">    <span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x1</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x2</span>, <span class="z-variable z-other z-koto">make_x</span> <span class="z-constant z-numeric z-koto">300</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@test</span><span class="z-entity z-name z-function z-koto"> subtraction</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Testing subtraction<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">    <span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x1</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">x2</span>, <span class="z-variable z-other z-koto">make_x</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">100</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@test</span><span class="z-entity z-name z-function z-koto"> failing_test</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>About to fail<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">    <span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-constant z-language z-koto">false</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">try</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">test</span>.<span class="z-variable z-function z-koto">run_tests</span> <span class="z-variable z-other z-koto">x_tests</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-koto">catch</span> <span class="z-variable z-other z-koto">_</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>A test failed<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Testing addition
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Test complete
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Testing subtraction
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Test complete
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: About to fail
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: A test failed
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=make%5Fx%20%3D%20%7Cn%7C%0A%20%20data%3A%20n%0A%20%20%40%2B%3A%20%7Cother%7C%20make%5Fx%20self%2Edata%20%2B%20other%2Edata%0A%20%20%40%2D%3A%20%7Cother%7C%20make%5Fx%20self%2Edata%20%2D%20other%2Edata%0A%0Ax%5Ftests%20%3D%0A%20%20%40pre%5Ftest%3A%20%7C%7C%0A%20%20%20%20self%2Ex1%20%3D%20make%5Fx%20100%0A%20%20%20%20self%2Ex2%20%3D%20make%5Fx%20200%0A%0A%20%20%40post%5Ftest%3A%20%7C%7C%0A%20%20%20%20print%20%27Test%20complete%27%0A%0A%20%20%40test%20addition%3A%20%7C%7C%0A%20%20%20%20print%20%27Testing%20addition%27%0A%20%20%20%20assert%5Feq%20self%2Ex1%20%2B%20self%2Ex2%2C%20make%5Fx%20300%0A%0A%20%20%40test%20subtraction%3A%20%7C%7C%0A%20%20%20%20print%20%27Testing%20subtraction%27%0A%20%20%20%20assert%5Feq%20self%2Ex1%20%2D%20self%2Ex2%2C%20make%5Fx%20%2D100%0A%0A%20%20%40test%20failing%5Ftest%3A%20%7C%7C%0A%20%20%20%20print%20%27About%20to%20fail%27%0A%20%20%20%20assert%20false%0A%0Atry%0A%20%20test%2Erun%5Ftests%20x%5Ftests%0Acatch%20%5F%0A%20%20print%20%27A%20test%20failed%27%0A%23%3A%20Testing%20addition%0A%23%3A%20Test%20complete%0A%23%3A%20Testing%20subtraction%0A%23%3A%20Test%20complete%0A%23%3A%20About%20to%20fail%0A%23%3A%20A%20test%20failed" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;test">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;test">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;test">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert">assert</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-eq">assert_eq</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-ne">assert_ne</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#assert-near">assert_near</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/test/#run-tests">run_tests</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

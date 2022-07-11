@@ -1,0 +1,2011 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;number">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;number">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;number">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;number">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;number">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;number">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#abs">abs</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#acos">acos</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#acosh">acosh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#and">and</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#asin">asin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#asinh">asinh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atan">atan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atanh">atanh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atan2">atan2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#ceil">ceil</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#clamp">clamp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#cos">cos</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#cosh">cosh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#degrees">degrees</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#e">e</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#exp">exp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#exp2">exp2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#flip-bits">flip_bits</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#floor">floor</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#infinity">infinity</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#is-int">is_int</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#is-nan">is_nan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#lerp">lerp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#ln">ln</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#log2">log2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#log10">log10</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#max">max</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#min">min</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#nan">nan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#negative-infinity">negative_infinity</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#or">or</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi">pi</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi-2">pi_2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi-4">pi_4</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#radians">radians</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#recip">recip</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#round">round</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#shift-left">shift_left</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#shift-right">shift_right</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sin">sin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sinh">sinh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sqrt">sqrt</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tan">tan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tanh">tanh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tau">tau</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#to-int">to_int</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#xor">xor</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="number"><a class="zola-anchor" href="#number" aria-label="Anchor link for: number">number</a></h1>
+<h2 id="abs"><a class="zola-anchor" href="#abs" aria-label="Anchor link for: abs">abs</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the absolute value of the number.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">abs</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">abs</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20%2D1%2Eabs%28%29%0A%23%3A%201%0A%0Aprint%201%2Eabs%28%29%0A%23%3A%201" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="acos"><a class="zola-anchor" href="#acos" aria-label="Anchor link for: acos">acos</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the arc cosine of the number. <code>acos</code> is the inverse function of <code>cos</code>.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">acos</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">acos</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Aassert%5Fnear%200%2Eacos%28%29%2C%20pi%20%2F%202%0Aassert%5Feq%201%2Eacos%28%29%2C%200" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="acosh"><a class="zola-anchor" href="#acosh" aria-label="Anchor link for: acosh">acosh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the inverse hyperbolic cosine of the number.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">acosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_nan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">acosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">acosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1.3169578969248166</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%200%2Eacosh%28%29%2Eis%5Fnan%28%29%0Aassert%5Feq%201%2Eacosh%28%29%2C%200%0Aassert%5Fnear%202%2Eacosh%28%29%2C%201%2E3169578969248166" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="and"><a class="zola-anchor" href="#and" aria-label="Anchor link for: and">and</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the bitwise combination of the binary representations of two numbers,
+where a <code>1</code> in both of the inputs produces a <code>1</code> in the corresponding output
+position.</p>
+<h3 id="note"><a class="zola-anchor" href="#note" aria-label="Anchor link for: note">Note</a></h3>
+<p>If either input is a float then its integer part will be used.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-integer z-binary z-koto">0b1010</span>.<span class="z-keyword z-operator z-word z-koto">and</span> <span class="z-constant z-numeric z-integer z-binary z-koto">0b1100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 0b1000
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200b1010%2Eand%200b1100%0A%23%200b1000%0A%23%3A%208" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="asin"><a class="zola-anchor" href="#asin" aria-label="Anchor link for: asin">asin</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the arc sine of the number. <code>asin</code> is the inverse function of <code>sin</code>.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">asin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">asin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">2</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Aassert%5Feq%200%2Easin%28%29%2C%200%0Aassert%5Fnear%201%2Easin%28%29%2C%20pi%20%2F%202" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="asinh"><a class="zola-anchor" href="#asinh" aria-label="Anchor link for: asinh">asinh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the inverse hyperbolic sine of the number.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">asinh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">asinh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0.8813735870195429</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Feq%200%2Easinh%28%29%2C%200%0Aassert%5Fnear%201%2Easinh%28%29%2C%200%2E8813735870195429" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="atan"><a class="zola-anchor" href="#atan" aria-label="Anchor link for: atan">atan</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the arc tangent of the number. <code>atan</code> is the inverse function of <code>tan</code>.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">atan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">atan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">4</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Aassert%5Feq%200%2Eatan%28%29%2C%200%0Aassert%5Fnear%201%2Eatan%28%29%2C%20pi%20%2F%204" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="atanh"><a class="zola-anchor" href="#atanh" aria-label="Anchor link for: atanh">atanh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the inverse hyperbolic tangent of the number.</p>
+<h3 id="example-7"><a class="zola-anchor" href="#example-7" aria-label="Anchor link for: example-7">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">atanh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -inf
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">atanh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">atanh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: inf
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20%2D1%2Eatanh%28%29%0A%23%3A%20%2Dinf%0A%0Aprint%200%2Eatanh%28%29%0A%23%3A%200%2E0%0A%0Aprint%201%2Eatanh%28%29%0A%23%3A%20inf" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="atan2"><a class="zola-anchor" href="#atan2" aria-label="Anchor link for: atan2">atan2</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the arc tangent of <code>y</code> and <code>x</code> in radians, using the signs of <code>y</code> and
+<code>x</code> to determine the correct quadrant.</p>
+<h3 id="example-8"><a class="zola-anchor" href="#example-8" aria-label="Anchor link for: example-8">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>, <span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-variable z-other z-koto">y</span>.<span class="z-variable z-function z-koto">atan2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">x</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">4</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-variable z-other z-koto">y</span>.<span class="z-variable z-function z-koto">atan2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-variable z-other z-koto">x</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">4</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Ax%2C%20y%20%3D%201%2C%201%0A%0Aassert%5Fnear%20y%2Eatan2%28x%29%2C%20pi%20%2F%204%0Aassert%5Fnear%20y%2Eatan2%28%2Dx%29%2C%20pi%20%2D%20pi%20%2F%204" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="ceil"><a class="zola-anchor" href="#ceil" aria-label="Anchor link for: ceil">ceil</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the integer that's greater than or equal to the input.</p>
+<h3 id="example-9"><a class="zola-anchor" href="#example-9" aria-label="Anchor link for: example-9">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">ceil</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">ceil</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">ceil</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200%2E5%2Eceil%28%29%0A%23%3A%201%0A%0Aprint%202%2Eceil%28%29%0A%23%3A%202%0A%0Aprint%20%2D0%2E5%2Eceil%28%29%0A%23%3A%200" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#floor"><code>number.floor</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#round"><code>number.round</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#to-int"><code>number.to_int</code></a></li>
+</ul>
+<h2 id="clamp"><a class="zola-anchor" href="#clamp" aria-label="Anchor link for: clamp">clamp</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">input</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">min</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">max</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the <code>input</code> number restricted to the range defined by <code>min</code> and <code>max</code>.</p>
+<h3 id="example-10"><a class="zola-anchor" href="#example-10" aria-label="Anchor link for: example-10">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">clamp</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1.5</span>.<span class="z-variable z-function z-koto">clamp</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.5
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">3.0</span>.<span class="z-variable z-function z-koto">clamp</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200%2Eclamp%201%2C%202%0A%23%3A%201%0A%0Aprint%201%2E5%2Eclamp%201%2C%202%0A%23%3A%201%2E5%0A%0Aprint%203%2E0%2Eclamp%201%2C%202%0A%23%3A%202" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="cos"><a class="zola-anchor" href="#cos" aria-label="Anchor link for: cos">cos</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the cosine of the number.</p>
+<h3 id="example-11"><a class="zola-anchor" href="#example-11" aria-label="Anchor link for: example-11">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">cos</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">number</span>.<span class="z-variable z-function z-koto">pi</span>.<span class="z-variable z-function z-koto">cos</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200%2Ecos%28%29%0A%23%3A%201%2E0%0A%0Aprint%20number%2Epi%2Ecos%28%29%0A%23%3A%20%2D1%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="cosh"><a class="zola-anchor" href="#cosh" aria-label="Anchor link for: cosh">cosh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the hyperbolic cosine of the number.</p>
+<h3 id="example-12"><a class="zola-anchor" href="#example-12" aria-label="Anchor link for: example-12">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">cosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">cosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1.5430806348152437</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Feq%200%2Ecosh%28%29%2C%201%0Aassert%5Fnear%201%2Ecosh%28%29%2C%201%2E5430806348152437" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="degrees"><a class="zola-anchor" href="#degrees" aria-label="Anchor link for: degrees">degrees</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Converts radians into degrees.</p>
+<h3 id="example-13"><a class="zola-anchor" href="#example-13" aria-label="Anchor link for: example-13">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>, <span class="z-variable z-other z-koto">tau</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">pi</span>.<span class="z-variable z-function z-koto">degrees</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 180.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">tau</span>.<span class="z-variable z-function z-koto">degrees</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 360.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%2C%20tau%0A%0Aprint%20pi%2Edegrees%28%29%0A%23%3A%20180%2E0%0A%0Aprint%20tau%2Edegrees%28%29%0A%23%3A%20360%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="e"><a class="zola-anchor" href="#e" aria-label="Anchor link for: e">e</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>e</code> constant.</p>
+<h2 id="exp"><a class="zola-anchor" href="#exp" aria-label="Anchor link for: exp">exp</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the result of applying the exponential function,
+equivalent to calling <code>e ^ x</code>.</p>
+<h3 id="example-14"><a class="zola-anchor" href="#example-14" aria-label="Anchor link for: example-14">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">exp</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">exp</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">number</span>.<span class="z-variable z-function z-koto">e</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Feq%200%2Eexp%28%29%2C%201%0Aassert%5Feq%201%2Eexp%28%29%2C%20number%2Ee" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="exp2"><a class="zola-anchor" href="#exp2" aria-label="Anchor link for: exp2">exp2</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the result of applying the base-2 exponential function,
+equivalent to calling <code>2 ^ x</code>.</p>
+<h3 id="example-15"><a class="zola-anchor" href="#example-15" aria-label="Anchor link for: example-15">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">exp2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">3</span>.<span class="z-variable z-function z-koto">exp2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Eexp2%28%29%0A%23%3A%202%2E0%0A%0Aprint%203%2Eexp2%28%29%0A%23%3A%208%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="flip-bits"><a class="zola-anchor" href="#flip-bits" aria-label="Anchor link for: flip-bits">flip_bits</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the input with its bits 'flipped', i.e. <code>1</code> =&gt; <code>0</code>, and <code>0</code> =&gt; <code>1</code>.</p>
+<h3 id="example-16"><a class="zola-anchor" href="#example-16" aria-label="Anchor link for: example-16">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">flip_bits</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -2
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Eflip%5Fbits%28%29%0A%23%3A%20%2D2" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="floor"><a class="zola-anchor" href="#floor" aria-label="Anchor link for: floor">floor</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the integer that's less than or equal to the input.</p>
+<h3 id="example-17"><a class="zola-anchor" href="#example-17" aria-label="Anchor link for: example-17">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">floor</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">floor</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">floor</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200%2E5%2Efloor%28%29%0A%23%3A%200%0A%0Aprint%202%2Efloor%28%29%0A%23%3A%202%0A%0Aprint%20%2D0%2E5%2Efloor%28%29%0A%23%3A%20%2D1" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-1"><a class="zola-anchor" href="#see-also-1" aria-label="Anchor link for: see-also-1">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#ceil"><code>number.ceil</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#round"><code>number.round</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#to-int"><code>number.to_int</code></a></li>
+</ul>
+<h2 id="infinity"><a class="zola-anchor" href="#infinity" aria-label="Anchor link for: infinity">infinity</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>∞</code> constant.</p>
+<h2 id="is-int"><a class="zola-anchor" href="#is-int" aria-label="Anchor link for: is-int">is_int</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if the number is an integer.</p>
+<h3 id="example-18"><a class="zola-anchor" href="#example-18" aria-label="Anchor link for: example-18">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">is_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1.5</span>.<span class="z-variable z-function z-koto">is_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Eis%5Fint%28%29%0A%23%3A%20true%0A%0Aprint%201%2E5%2Eis%5Fint%28%29%0A%23%3A%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-2"><a class="zola-anchor" href="#see-also-2" aria-label="Anchor link for: see-also-2">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#is-nan"><code>number.is_nan</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#to-int"><code>number.to_int</code></a></li>
+</ul>
+<h2 id="is-nan"><a class="zola-anchor" href="#is-nan" aria-label="Anchor link for: is-nan">is_nan</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns true if the number is <code>NaN</code>.</p>
+<h3 id="example-19"><a class="zola-anchor" href="#example-19" aria-label="Anchor link for: example-19">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">is_nan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">0</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">is_nan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Eis%5Fnan%28%29%0A%23%3A%20false%0A%0Aprint%20%280%20%2F%200%29%2Eis%5Fnan%28%29%0A%23%3A%20true" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-3"><a class="zola-anchor" href="#see-also-3" aria-label="Anchor link for: see-also-3">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#is-int"><code>number.is_int</code></a></li>
+</ul>
+<h2 id="lerp"><a class="zola-anchor" href="#lerp" aria-label="Anchor link for: lerp">lerp</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">a</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">b</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">t</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Linearly interpolates between <code>a</code> and <code>b</code> using the interpolation factor <code>t</code>.</p>
+<p>The range (<code>a</code> -&gt; <code>b</code>) corresponds to the value range of (<code>0</code> -&gt; <code>1</code>) for <code>t</code>.</p>
+<p>e.g.</p>
+<ul>
+<li>At <code>t</code> == <code>0</code>, the result is equal to <code>a</code>.</li>
+<li>At <code>t</code> == <code>1</code>, the result is equal to <code>b</code>.</li>
+<li>At other values of <code>t</code>, the result is a proportional mix of <code>a</code> and <code>b</code>.</li>
+<li>Values for <code>t</code> outside of (<code>0</code> -&gt; <code>1</code>) will extrapolate from the (<code>a</code> -&gt; <code>b</code>)
+range.</li>
+</ul>
+<h3 id="example-20"><a class="zola-anchor" href="#example-20" aria-label="Anchor link for: example-20">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>, <span class="z-variable z-other z-koto">b</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">lerp</span> <span class="z-variable z-other z-koto">b</span>, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">lerp</span> <span class="z-variable z-other z-koto">b</span>, <span class="z-constant z-numeric z-koto">0.5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.5
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">lerp</span> <span class="z-variable z-other z-koto">b</span>, <span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">lerp</span> <span class="z-variable z-other z-koto">b</span>, <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">0.5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.5
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">a</span>.<span class="z-variable z-function z-koto">lerp</span> <span class="z-variable z-other z-koto">b</span>, <span class="z-constant z-numeric z-koto">1.5</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.5
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=a%2C%20b%20%3D%201%2C%202%0A%0Aprint%20a%2Elerp%20b%2C%200%0A%23%3A%201%0Aprint%20a%2Elerp%20b%2C%200%2E5%0A%23%3A%201%2E5%0Aprint%20a%2Elerp%20b%2C%201%0A%23%3A%202%0A%0Aprint%20a%2Elerp%20b%2C%20%2D0%2E5%0A%23%3A%200%2E5%0Aprint%20a%2Elerp%20b%2C%201%2E5%0A%23%3A%202%2E5" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="ln"><a class="zola-anchor" href="#ln" aria-label="Anchor link for: ln">ln</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the natural logarithm of the number.</p>
+<h3 id="example-21"><a class="zola-anchor" href="#example-21" aria-label="Anchor link for: example-21">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">ln</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">number</span>.<span class="z-variable z-function z-koto">e</span>.<span class="z-variable z-function z-koto">ln</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Eln%28%29%0A%23%3A%200%2E0%0A%0Aprint%20number%2Ee%2Eln%28%29%0A%23%3A%201%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="log2"><a class="zola-anchor" href="#log2" aria-label="Anchor link for: log2">log2</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the base-2 logarithm of the number.</p>
+<h3 id="example-22"><a class="zola-anchor" href="#example-22" aria-label="Anchor link for: example-22">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">log2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">4</span>.<span class="z-variable z-function z-koto">log2</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%202%2Elog2%28%29%0A%23%3A%201%2E0%0A%0Aprint%204%2Elog2%28%29%0A%23%3A%202%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="log10"><a class="zola-anchor" href="#log10" aria-label="Anchor link for: log10">log10</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the base-10 logarithm of the number.</p>
+<h3 id="example-23"><a class="zola-anchor" href="#example-23" aria-label="Anchor link for: example-23">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">10</span>.<span class="z-variable z-function z-koto">log10</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">100</span>.<span class="z-variable z-function z-koto">log10</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%2010%2Elog10%28%29%0A%23%3A%201%2E0%0A%0Aprint%20100%2Elog10%28%29%0A%23%3A%202%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="max"><a class="zola-anchor" href="#max" aria-label="Anchor link for: max">max</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the larger of the two numbers.</p>
+<h3 id="example-24"><a class="zola-anchor" href="#example-24" aria-label="Anchor link for: example-24">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">max</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">4.5</span>.<span class="z-variable z-function z-koto">max</span> <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 4.5
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Emax%202%0A%23%3A%202%0A%0Aprint%204%2E5%2Emax%203%0A%23%3A%204%2E5" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="min"><a class="zola-anchor" href="#min" aria-label="Anchor link for: min">min</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the smaller of the two numbers.</p>
+<h3 id="example-25"><a class="zola-anchor" href="#example-25" aria-label="Anchor link for: example-25">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">min</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">4.5</span>.<span class="z-variable z-function z-koto">min</span> <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 3
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%201%2Emin%202%0A%23%3A%201%0A%0Aprint%204%2E5%2Emin%203%0A%23%3A%203" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="nan"><a class="zola-anchor" href="#nan" aria-label="Anchor link for: nan">nan</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>NaN</code> (Not a Number) constant.</p>
+<h2 id="negative-infinity"><a class="zola-anchor" href="#negative-infinity" aria-label="Anchor link for: negative-infinity">negative_infinity</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>-∞</code> constant.</p>
+<h2 id="or"><a class="zola-anchor" href="#or" aria-label="Anchor link for: or">or</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the bitwise combination of the binary representations of two numbers,
+where a <code>1</code> in either of the inputs produces a <code>1</code> in the corresponding output
+position.</p>
+<h3 id="note-1"><a class="zola-anchor" href="#note-1" aria-label="Anchor link for: note-1">Note</a></h3>
+<p>If either input is a float then its integer part will be used.</p>
+<h3 id="example-26"><a class="zola-anchor" href="#example-26" aria-label="Anchor link for: example-26">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-integer z-binary z-koto">0b1010</span>.<span class="z-keyword z-operator z-word z-koto">or</span> <span class="z-constant z-numeric z-integer z-binary z-koto">0b1100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 0b1110
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 14
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200b1010%2Eor%200b1100%0A%23%200b1110%0A%23%3A%2014" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="pi"><a class="zola-anchor" href="#pi" aria-label="Anchor link for: pi">pi</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>π</code> constant.</p>
+<h2 id="pi-2"><a class="zola-anchor" href="#pi-2" aria-label="Anchor link for: pi-2">pi_2</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>π</code> constant divided by <code>2</code>.</p>
+<h2 id="pi-4"><a class="zola-anchor" href="#pi-4" aria-label="Anchor link for: pi-4">pi_4</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>π</code> constant divided by <code>4</code>.</p>
+<h2 id="radians"><a class="zola-anchor" href="#radians" aria-label="Anchor link for: radians">radians</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Converts degrees into radians.</p>
+<h3 id="example-27"><a class="zola-anchor" href="#example-27" aria-label="Anchor link for: example-27">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">90</span>.<span class="z-variable z-function z-koto">radians</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">360</span>.<span class="z-variable z-function z-koto">radians</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">2</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Aassert%5Fnear%2090%2Eradians%28%29%2C%20pi%20%2F%202%0Aassert%5Fnear%20360%2Eradians%28%29%2C%20pi%20%2A%202" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="recip"><a class="zola-anchor" href="#recip" aria-label="Anchor link for: recip">recip</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the reciprocal of the number, i.e. <code>1 / x</code>.</p>
+<h3 id="example-28"><a class="zola-anchor" href="#example-28" aria-label="Anchor link for: example-28">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">recip</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0.5
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%202%2Erecip%28%29%0A%23%3A%200%2E5" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="round"><a class="zola-anchor" href="#round" aria-label="Anchor link for: round">round</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the nearest integer to the input number.
+Half-way values round away from zero.</p>
+<h3 id="example-29"><a class="zola-anchor" href="#example-29" aria-label="Anchor link for: example-29">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">round</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span>.<span class="z-variable z-function z-koto">round</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">round</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200%2E5%2Eround%28%29%0A%23%3A%201%0A%0Aprint%202%2Eround%28%29%0A%23%3A%202%0A%0Aprint%20%2D0%2E5%2Eround%28%29%0A%23%3A%20%2D1" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-4"><a class="zola-anchor" href="#see-also-4" aria-label="Anchor link for: see-also-4">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#ceil"><code>number.ceil</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#floor"><code>number.floor</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#to-int"><code>number.to_int</code></a></li>
+</ul>
+<h2 id="shift-left"><a class="zola-anchor" href="#shift-left" aria-label="Anchor link for: shift-left">shift_left</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">shift_amount</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the result of shifting the bits of the first number to the left by the
+amount specified by the second number.</p>
+<h3 id="note-2"><a class="zola-anchor" href="#note-2" aria-label="Anchor link for: note-2">Note</a></h3>
+<p>If either input is a float then its integer part will be used.</p>
+<h3 id="note-3"><a class="zola-anchor" href="#note-3" aria-label="Anchor link for: note-3">Note</a></h3>
+<p>The shift amount must be greater than or equal to <code>0</code>.</p>
+<h3 id="example-30"><a class="zola-anchor" href="#example-30" aria-label="Anchor link for: example-30">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-integer z-binary z-koto">0b1010</span>.<span class="z-variable z-function z-koto">shift_left</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 0b101000
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 40
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200b1010%2Eshift%5Fleft%202%0A%23%200b101000%0A%23%3A%2040" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="shift-right"><a class="zola-anchor" href="#shift-right" aria-label="Anchor link for: shift-right">shift_right</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">shift_amount</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the result of shifting the bits of the first number to the right by the
+amount specified by the second number.</p>
+<h3 id="note-4"><a class="zola-anchor" href="#note-4" aria-label="Anchor link for: note-4">Note</a></h3>
+<p>If either input is a float then its integer part will be used.</p>
+<h3 id="note-5"><a class="zola-anchor" href="#note-5" aria-label="Anchor link for: note-5">Note</a></h3>
+<p>The shift amount must be greater than or equal to <code>0</code>.</p>
+<h3 id="example-31"><a class="zola-anchor" href="#example-31" aria-label="Anchor link for: example-31">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-integer z-binary z-koto">0b1010</span>.<span class="z-variable z-function z-koto">shift_right</span> <span class="z-constant z-numeric z-koto">2</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 0b0010
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200b1010%2Eshift%5Fright%202%0A%23%200b0010%0A%23%3A%202" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="sin"><a class="zola-anchor" href="#sin" aria-label="Anchor link for: sin">sin</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the sine of the number.</p>
+<h3 id="example-32"><a class="zola-anchor" href="#example-32" aria-label="Anchor link for: example-32">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">pi</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">0.5</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">sin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1.0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">1.5</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">sin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=from%20number%20import%20pi%0A%0Aprint%20%28pi%20%2A%200%2E5%29%2Esin%28%29%0A%23%3A%201%2E0%0A%0Aprint%20%28pi%20%2A%201%2E5%29%2Esin%28%29%0A%23%3A%20%2D1%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="sinh"><a class="zola-anchor" href="#sinh" aria-label="Anchor link for: sinh">sinh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the hyperbolic sine of the number.</p>
+<h3 id="example-33"><a class="zola-anchor" href="#example-33" aria-label="Anchor link for: example-33">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">sinh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">sinh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1.1752011936438014</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Feq%200%2Esinh%28%29%2C%200%0Aassert%5Fnear%201%2Esinh%28%29%2C%201%2E1752011936438014" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="sqrt"><a class="zola-anchor" href="#sqrt" aria-label="Anchor link for: sqrt">sqrt</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the square root of the number.</p>
+<h3 id="example-34"><a class="zola-anchor" href="#example-34" aria-label="Anchor link for: example-34">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">64</span>.<span class="z-variable z-function z-koto">sqrt</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8.0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%2064%2Esqrt%28%29%0A%23%3A%208%2E0" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="tan"><a class="zola-anchor" href="#tan" aria-label="Anchor link for: tan">tan</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the tangent of the number.</p>
+<h3 id="example-35"><a class="zola-anchor" href="#example-35" aria-label="Anchor link for: example-35">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-constant z-numeric z-koto">0</span>.<span class="z-variable z-function z-koto">tan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">tan</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1.557407724654902</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Feq%200%2Etan%28%29%2C%200%0Aassert%5Fnear%201%2Etan%28%29%2C%201%2E557407724654902" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="tanh"><a class="zola-anchor" href="#tanh" aria-label="Anchor link for: tanh">tanh</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the hyperbolic tangent of the number.</p>
+<h3 id="example-36"><a class="zola-anchor" href="#example-36" aria-label="Anchor link for: example-36">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_near</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">tanh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">sinh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-arithmetic z-koto">/</span> <span class="z-constant z-numeric z-koto">1</span>.<span class="z-variable z-function z-koto">cosh</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%5Fnear%201%2Etanh%28%29%2C%201%2Esinh%28%29%20%2F%201%2Ecosh%28%29" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="tau"><a class="zola-anchor" href="#tau" aria-label="Anchor link for: tau">tau</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Provides the <code>τ</code> constant, equivalent to <code>2π</code>.</p>
+<h2 id="to-int"><a class="zola-anchor" href="#to-int" aria-label="Anchor link for: to-int">to_int</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the integer part of the input number.</p>
+<p>This is often called <code>trunc</code> in other languages.</p>
+<h3 id="example-37"><a class="zola-anchor" href="#example-37" aria-label="Anchor link for: example-37">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2.9</span>.<span class="z-variable z-function z-koto">to_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 2
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">1.5</span>.<span class="z-variable z-function z-koto">to_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 1
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">0.5</span>.<span class="z-variable z-function z-koto">to_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1.9</span>.<span class="z-variable z-function z-koto">to_int</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: -1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%202%2E9%2Eto%5Fint%28%29%0A%23%3A%202%0A%0Aprint%201%2E5%2Eto%5Fint%28%29%0A%23%3A%201%0A%0Aprint%20%2D0%2E5%2Eto%5Fint%28%29%0A%23%3A%200%0A%0Aprint%20%2D1%2E9%2Eto%5Fint%28%29%0A%23%3A%20%2D1" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-5"><a class="zola-anchor" href="#see-also-5" aria-label="Anchor link for: see-also-5">See Also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/number/#ceil"><code>number.ceil</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#floor"><code>number.floor</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#is-int"><code>number.is_int</code></a></li>
+<li><a href="https://koto.dev/docs/0.16/core/number/#round"><code>number.round</code></a></li>
+</ul>
+<h2 id="xor"><a class="zola-anchor" href="#xor" aria-label="Anchor link for: xor">xor</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the bitwise combination of the binary representations of two numbers,
+where a <code>1</code> in one (and only one) of the input positions
+produces a <code>1</code> in the corresponding output position.</p>
+<h3 id="note-6"><a class="zola-anchor" href="#note-6" aria-label="Anchor link for: note-6">Note</a></h3>
+<p>If either input is a float then its integer part will be used.</p>
+<h3 id="example-38"><a class="zola-anchor" href="#example-38" aria-label="Anchor link for: example-38">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-integer z-binary z-koto">0b1010</span>.<span class="z-variable z-function z-koto">xor</span> <span class="z-constant z-numeric z-integer z-binary z-koto">0b1100</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 0b0110
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 6
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%200b1010%2Exor%200b1100%0A%23%200b0110%0A%23%3A%206" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;number">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;number">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;number">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#abs">abs</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#acos">acos</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#acosh">acosh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#and">and</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#asin">asin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#asinh">asinh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atan">atan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atanh">atanh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#atan2">atan2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#ceil">ceil</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#clamp">clamp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#cos">cos</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#cosh">cosh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#degrees">degrees</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#e">e</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#exp">exp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#exp2">exp2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#flip-bits">flip_bits</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#floor">floor</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#infinity">infinity</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#is-int">is_int</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#is-nan">is_nan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#lerp">lerp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#ln">ln</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#log2">log2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#log10">log10</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#max">max</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#min">min</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#nan">nan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#negative-infinity">negative_infinity</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#or">or</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi">pi</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi-2">pi_2</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#pi-4">pi_4</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#radians">radians</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#recip">recip</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#round">round</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#shift-left">shift_left</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#shift-right">shift_right</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sin">sin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sinh">sinh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#sqrt">sqrt</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tan">tan</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tanh">tanh</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#tau">tau</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#to-int">to_int</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/number/#xor">xor</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,1580 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;os">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;os">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;os">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;os">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;os">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;os">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#args">args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command">command</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#name">name</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#process-id">process_id</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#start-timer">start_timer</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#time">time</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-1">Command</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-args">Command.args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-current-dir">Command.current_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env">Command.env</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env-clear">Command.env_clear</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env-remove">Command.env_remove</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stdin">Command.stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stdout">Command.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stderr">Command.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-spawn">Command.spawn</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-wait-for-output">Command.wait_for_output</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-wait-for-exit">Command.wait_for_exit</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput">CommandOutput</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-exit-code">CommandOutput.exit_code</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-success">CommandOutput.success</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stdout">CommandOutput.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stderr">CommandOutput.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stdout-bytes">CommandOutput.stdout_bytes</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stderr-bytes">CommandOutput.stderr_bytes</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child">Child</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stdin">Child.stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stdout">Child.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stderr">Child.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-has-exited">Child.has_exited</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-output">Child.wait_for_output</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-exit">Child.wait_for_exit</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime">DateTime</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-year">DateTime.year</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-month">DateTime.month</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-day">DateTime.day</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-hour">DateTime.hour</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-minute">DateTime.minute</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-nanosecond">DateTime.nanosecond</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timestamp">DateTime.timestamp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timezone-offset">DateTime.timezone_offset</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timestamp-string">DateTime.timestamp_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer">Timer</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer-subtract">Timer.@- (subtract)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer-elapsed">Timer.elapsed</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="os"><a class="zola-anchor" href="#os" aria-label="Anchor link for: os">os</a></h1>
+<p>A collection of utilities for working with the operating system.</p>
+<h2 id="args"><a class="zola-anchor" href="#args" aria-label="Anchor link for: args">args</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Tuple</span>
+</span></code></pre>
+<p>Provides access to the arguments that were passed into the script when running
+the <code>koto</code> CLI application.</p>
+<p>If no arguments were provided then the list is empty.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Assuming that the script was run with `koto script.koto -- 1 2 &quot;hello&quot;`
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">size</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">args</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 3
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">args</span>.<span class="z-variable z-function z-koto">first</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">args</span>.<span class="z-variable z-function z-koto">last</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> hello
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=%23%20Assuming%20that%20the%20script%20was%20run%20with%20%60koto%20script%2Ekoto%20%2D%2D%201%202%20%22hello%22%60%0Asize%20os%2Eargs%0A%23%203%0Aos%2Eargs%2Efirst%28%29%0A%23%201%0Aos%2Eargs%2Elast%28%29%0A%23%20hello" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command"><a class="zola-anchor" href="#command" aria-label="Anchor link for: command">command</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">program</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Creates a new <a href="https://koto.dev/docs/0.16/core/os/#command-1">Command</a>, which supports executing external programs in separate processes.</p>
+<p>Builder methods allow configuration of properties like <a href="https://koto.dev/docs/0.16/core/os/#command-args">command arguments</a> or <a href="https://koto.dev/docs/0.16/core/os/#command-env">environment variables</a> before <a href="https://koto.dev/docs/0.16/core/os/#command-spawn">spawning</a> the program in a new process.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">args</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>-al<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>/tmp<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: ...
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20os%2Ecommand%28%27ls%27%29%0A%20%20%2Eargs%28%27%2Dal%27%2C%20%27%2Ftmp%27%29%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%23%3A%20%2E%2E%2E" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="name"><a class="zola-anchor" href="#name" aria-label="Anchor link for: name">name</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns a string containing the name of the current operating system, e.g.
+"linux", "macos", "windows", etc.</p>
+<h2 id="process-id"><a class="zola-anchor" href="#process-id" aria-label="Anchor link for: process-id">process_id</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the ID associated with the current process.</p>
+<h2 id="start-timer"><a class="zola-anchor" href="#start-timer" aria-label="Anchor link for: start-timer">start_timer</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Timer</span>
+</span></code></pre>
+<p>Returns a timer that can be used to measure how much time has passed while a
+script is running.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">t</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">start_timer</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> ...after some time...
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Time taken: $</span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">t</span>.<span class="z-variable z-function z-koto">elapsed</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-double z-koto">s<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">t2</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">start_timer</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Seconds between then and now: $</span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">t2</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-other z-koto">t</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=t%20%3D%20os%2Estart%5Ftimer%28%29%0A%0A%23%20%2E%2E%2Eafter%20some%20time%2E%2E%2E%0Aprint%20%22Time%20taken%3A%20%24%7Bt%2Eelapsed%28%29%7Ds%22%0A%0At2%20%3D%20os%2Estart%5Ftimer%28%29%0Aprint%20%22Seconds%20between%20then%20and%20now%3A%20%24%7Bt2%20%2D%20t%7D%22" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="time"><a class="zola-anchor" href="#time" aria-label="Anchor link for: time">time</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">DateTime</span>
+</span></code></pre>
+<p>Returns a <a href="https://koto.dev/docs/0.16/core/os/#datetime">DateTime</a> set to the current time, using the local timezone.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">timestamp</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">DateTime</span>
+</span></code></pre>
+<p>Returns a <a href="https://koto.dev/docs/0.16/core/os/#datetime">DateTime</a> set to the provided <code>timestamp</code> in seconds,
+using the local timezone.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-variable z-parameter z-kototype">timestamp</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">offset</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">Number</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">DateTime</span>
+</span></code></pre>
+<p>Returns a <a href="https://koto.dev/docs/0.16/core/os/#datetime">DateTime</a> set to the provided <code>timestamp</code> in seconds,
+using an <code>offset</code> in seconds.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">now</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">time</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> e.g. 2021-12-11 21:51:14
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">now</span>.<span class="z-variable z-function z-koto">year</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> e.g. 2021
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">now</span>.<span class="z-variable z-function z-koto">hour</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> e.g. 21
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">now</span>.<span class="z-variable z-function z-koto">timestamp</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> e.g. 1639255874.53419
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20now%20%3D%20os%2Etime%28%29%0A%23%20e%2Eg%2E%202021%2D12%2D11%2021%3A51%3A14%0A%0Aprint%20now%2Eyear%28%29%0A%23%20e%2Eg%2E%202021%0A%0Aprint%20now%2Ehour%28%29%0A%23%20e%2Eg%2E%2021%0A%0Aprint%20now%2Etimestamp%28%29%0A%23%20e%2Eg%2E%201639255874%2E53419" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-1"><a class="zola-anchor" href="#command-1" aria-label="Anchor link for: command-1">Command</a></h2>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#command"><code>os.command</code></a></p>
+<h2 id="command-args"><a class="zola-anchor" href="#command-args" aria-label="Anchor link for: command-args">Command.args</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">args...</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Adds the given arguments to the command, and returns the command.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">args</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>-al<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>/tmp<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: ...
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20os%2Ecommand%28%27ls%27%29%0A%20%20%2Eargs%28%27%2Dal%27%2C%20%27%2Ftmp%27%29%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%23%3A%20%2E%2E%2E" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-current-dir"><a class="zola-anchor" href="#command-current-dir" aria-label="Anchor link for: command-current-dir">Command.current_dir</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">path</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Sets the command's working directory, and returns the command.</p>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">current_dir</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>/tmp<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: ...
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20os%2Ecommand%28%27ls%27%29%0A%20%20%2Ecurrent%5Fdir%28%27%2Ftmp%27%29%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%23%3A%20%2E%2E%2E" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-env"><a class="zola-anchor" href="#command-env" aria-label="Anchor link for: command-env">Command.env</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">key</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">value</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Sets an environment variable, and returns the command.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>env<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">env</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>FOO<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>123<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">contains</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>FOO=123<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%20os%2Ecommand%28%27env%27%29%0A%20%20%2Eenv%20%27FOO%27%2C%20%27123%27%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%20%20%2Econtains%20%27FOO%3D123%27" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-env-clear"><a class="zola-anchor" href="#command-env-clear" aria-label="Anchor link for: command-env-clear">Command.env_clear</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Clears all environment variables for the command, and returns the command.</p>
+<p>This prevents the command from inheriting any environment variables from the parent process.</p>
+<h3 id="example-7"><a class="zola-anchor" href="#example-7" aria-label="Anchor link for: example-7">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>env<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">env_clear</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">is_empty</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%20os%2Ecommand%28%27env%27%29%0A%20%20%2Eenv%5Fclear%28%29%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%20%20%2Eis%5Fempty%28%29" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-env-remove"><a class="zola-anchor" href="#command-env-remove" aria-label="Anchor link for: command-env-remove">Command.env_remove</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">key</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Removes the environment variable matching the given key, and returns the command.</p>
+<h3 id="example-8"><a class="zola-anchor" href="#example-8" aria-label="Anchor link for: example-8">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>env<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">env_clear</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">env</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>FOO<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>, <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>123<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">env_remove</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>FOO<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">is_empty</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=assert%20os%2Ecommand%28%27env%27%29%0A%20%20%2Eenv%5Fclear%28%29%0A%20%20%2Eenv%20%27FOO%27%2C%20%27123%27%0A%20%20%2Eenv%5Fremove%20%27FOO%27%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%20%20%2Eis%5Fempty%28%29" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-stdin"><a class="zola-anchor" href="#command-stdin" aria-label="Anchor link for: command-stdin">Command.stdin</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">stream_config</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Configures the command's <code>stdin</code> stream.</p>
+<p>Valid values of <code>stream_config</code> are:</p>
+<ul>
+<li><code>inherit</code>: the stream will be inherited from the parent process.</li>
+<li><code>piped</code>: a pipe will be created to connect the parent and child processes.</li>
+<li><code>null</code>: the stream will be ignored.</li>
+</ul>
+<p>The default stream behavior is <code>inherit</code> when the command is used with <code>spawn</code> or <code>wait_for_exit</code>, and <code>piped</code> when used with <code>wait_for_output</code>.</p>
+<h2 id="command-stdout"><a class="zola-anchor" href="#command-stdout" aria-label="Anchor link for: command-stdout">Command.stdout</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">stream_config</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Configures the command's <code>stdout</code> stream.</p>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#command-stdin">Command.stdin</a> for valid values of <code>stream_config</code>.</p>
+<h2 id="command-stderr"><a class="zola-anchor" href="#command-stderr" aria-label="Anchor link for: command-stderr">Command.stderr</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-variable z-parameter z-kototype">stream_config</span><span class="z-punctuation z-separator z-kototype">:</span> <span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Command</span>
+</span></code></pre>
+<p>Configures the command's <code>stderr</code> stream.</p>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#command-stdin">Command.stdin</a> for valid values of <code>stream_config</code>.</p>
+<h2 id="command-spawn"><a class="zola-anchor" href="#command-spawn" aria-label="Anchor link for: command-spawn">Command.spawn</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Child</span>
+</span></code></pre>
+<p>Executes the command, returning the command's <a href="https://koto.dev/docs/0.16/core/os/#child">Child</a> process.</p>
+<h3 id="example-9"><a class="zola-anchor" href="#example-9" aria-label="Anchor link for: example-9">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">spawned</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>piped<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">spawn</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">spawned</span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: ...
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=spawned%20%3D%20os%2Ecommand%28%27ls%27%29%0A%20%20%2Estdout%28%27piped%27%29%0A%20%20%2Espawn%28%29%0A%0Aprint%20spawned%0A%20%20%2Ewait%5Ffor%5Foutput%28%29%0A%20%20%2Estdout%28%29%0A%23%3A%20%2E%2E%2E" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-wait-for-output"><a class="zola-anchor" href="#command-wait-for-output" aria-label="Anchor link for: command-wait-for-output">Command.wait_for_output</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">CommandOutput</span>
+</span></code></pre>
+<p>Executes the command and waits for it to exit, returning its captured <a href="https://koto.dev/docs/0.16/core/os/#CommandOutput">output</a>.</p>
+<h3 id="example-10"><a class="zola-anchor" href="#example-10" aria-label="Anchor link for: example-10">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: ...
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20os%2Ecommand%28%27ls%27%29%2Ewait%5Ffor%5Foutput%28%29%2Estdout%28%29%0A%23%3A%20%2E%2E%2E" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="command-wait-for-exit"><a class="zola-anchor" href="#command-wait-for-exit" aria-label="Anchor link for: command-wait-for-exit">Command.wait_for_exit</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Command</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number?</span>
+</span></code></pre>
+<p>Executes the command and waits for it to exit, returning its exit code if the command exited normally, or <code>null</code> if it was interrupted.</p>
+<h3 id="example-11"><a class="zola-anchor" href="#example-11" aria-label="Anchor link for: example-11">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>ls<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">wait_for_exit</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 0
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=print%20os%2Ecommand%28%27ls%27%29%2Ewait%5Ffor%5Fexit%28%29%0A%23%3A%200" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="commandoutput"><a class="zola-anchor" href="#commandoutput" aria-label="Anchor link for: commandoutput">CommandOutput</a></h2>
+<p>Contains captured output from a command, and information about how the command exited.</p>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#command-wait-for-output">Command.wait_for_output</a> and <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-output">Child.wait_for_output</a>.</p>
+<h2 id="commandoutput-exit-code"><a class="zola-anchor" href="#commandoutput-exit-code" aria-label="Anchor link for: commandoutput-exit-code">CommandOutput.exit_code</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number?</span>
+</span></code></pre>
+<p>Returns the command's exit code if available.</p>
+<h2 id="commandoutput-success"><a class="zola-anchor" href="#commandoutput-success" aria-label="Anchor link for: commandoutput-success">CommandOutput.success</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> if the command exited successfully.</p>
+<h2 id="commandoutput-stdout"><a class="zola-anchor" href="#commandoutput-stdout" aria-label="Anchor link for: commandoutput-stdout">CommandOutput.stdout</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String?</span>
+</span></code></pre>
+<p>Returns the contents of the command's <code>stdout</code> stream if it contains valid unicode, or <code>null</code> otherwise.</p>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stdout-bytes">CommandOutput.stdout_bytes</a></li>
+</ul>
+<h2 id="commandoutput-stderr"><a class="zola-anchor" href="#commandoutput-stderr" aria-label="Anchor link for: commandoutput-stderr">CommandOutput.stderr</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String?</span>
+</span></code></pre>
+<p>Returns the contents of the command's <code>stderr</code> stream if it contains valid unicode, or <code>null</code> otherwise.</p>
+<h2 id="commandoutput-stdout-bytes"><a class="zola-anchor" href="#commandoutput-stdout-bytes" aria-label="Anchor link for: commandoutput-stdout-bytes">CommandOutput.stdout_bytes</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Iterator</span>
+</span></code></pre>
+<p>Returns an iterator that yields the bytes contained in the command's <code>stdout</code> stream.</p>
+<h2 id="commandoutput-stderr-bytes"><a class="zola-anchor" href="#commandoutput-stderr-bytes" aria-label="Anchor link for: commandoutput-stderr-bytes">CommandOutput.stderr_bytes</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">CommandOutput</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Iterator</span>
+</span></code></pre>
+<p>Returns an iterator that yields the bytes contained in the command's <code>stderr</code> stream.</p>
+<h2 id="child"><a class="zola-anchor" href="#child" aria-label="Anchor link for: child">Child</a></h2>
+<p>A handle to a child process, see <a href="https://koto.dev/docs/0.16/core/os/#command-spawn">Command.spawn</a>.</p>
+<h2 id="child-stdin"><a class="zola-anchor" href="#child-stdin" aria-label="Anchor link for: child-stdin">Child.stdin</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the child process's <code>stdin</code> standard input stream as a <a href="https://koto.dev/docs/0.16/core/os/./io#File">File</a> that supports write operations.</p>
+<h3 id="example-12"><a class="zola-anchor" href="#example-12" aria-label="Anchor link for: example-12">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">spawned</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">command</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>cat<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">stdin</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>piped<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">spawn</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">stdin</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">spawned</span>.<span class="z-variable z-function z-koto">stdin</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">stdin</span>.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">stdin</span>.<span class="z-variable z-function z-koto">write_line</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>one two three<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">spawned</span>.<span class="z-variable z-function z-koto">wait_for_output</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">stdout</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: hello
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: one two three
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=spawned%20%3D%20os%2Ecommand%28%27cat%27%29%0A%20%20%2Estdin%20%27piped%27%0A%20%20%2Espawn%28%29%0A%0Astdin%20%3D%20spawned%2Estdin%28%29%0Astdin%2Ewrite%5Fline%20%27hello%27%0Astdin%2Ewrite%5Fline%20%27one%20two%20three%27%0A%0Aprint%20spawned%2Ewait%5Ffor%5Foutput%28%29%2Estdout%28%29%0A%23%3A%20hello%0A%23%3A%20one%20two%20three" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="child-stdout"><a class="zola-anchor" href="#child-stdout" aria-label="Anchor link for: child-stdout">Child.stdout</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the child process's <code>stdout</code> standard output stream as a <a href="https://koto.dev/docs/0.16/core/os/./io#File">File</a> that supports read operations.</p>
+<p>Calling this function will prevent the stream from being included in <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-output">wait_for_output</a>.</p>
+<h2 id="child-stderr"><a class="zola-anchor" href="#child-stderr" aria-label="Anchor link for: child-stderr">Child.stderr</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">File</span>
+</span></code></pre>
+<p>Returns the child process's <code>stderr</code> standard error stream as a <a href="https://koto.dev/docs/0.16/core/os/./io#File">File</a> that supports read operations.</p>
+<p>Calling this function will prevent the stream from being included in <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-output">wait_for_output</a>.</p>
+<h2 id="child-has-exited"><a class="zola-anchor" href="#child-has-exited" aria-label="Anchor link for: child-has-exited">Child.has_exited</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Bool</span>
+</span></code></pre>
+<p>Returns <code>true</code> without blocking if the child process has exited, and <code>false</code> otherwise.</p>
+<h2 id="child-wait-for-output"><a class="zola-anchor" href="#child-wait-for-output" aria-label="Anchor link for: child-wait-for-output">Child.wait_for_output</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">CommandOutput</span>
+</span></code></pre>
+<p>Closes all input and output streams, waits for the command to exit, and then returns the captured output.</p>
+<p>Note that if the <code>stdout</code> or <code>stderr</code> streams were manually retrieved via <a href="https://koto.dev/docs/0.16/core/os/#child-stdout">Child.stdout</a>/<a href="https://koto.dev/docs/0.16/core/os/#child-stderr">Child.stderr</a> then they won't be included in the captured output.</p>
+<h2 id="child-wait-for-exit"><a class="zola-anchor" href="#child-wait-for-exit" aria-label="Anchor link for: child-wait-for-exit">Child.wait_for_exit</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Child</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number?</span>
+</span></code></pre>
+<p>Closes all input and output streams, waits for the command to exit, and then returns the command's exit code if available.</p>
+<h2 id="datetime"><a class="zola-anchor" href="#datetime" aria-label="Anchor link for: datetime">DateTime</a></h2>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#time"><code>os.time</code></a>.</p>
+<h2 id="datetime-year"><a class="zola-anchor" href="#datetime-year" aria-label="Anchor link for: datetime-year">DateTime.year</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the year component of the provided DateTime.</p>
+<h2 id="datetime-month"><a class="zola-anchor" href="#datetime-month" aria-label="Anchor link for: datetime-month">DateTime.month</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the month component of the provided DateTime.</p>
+<h2 id="datetime-day"><a class="zola-anchor" href="#datetime-day" aria-label="Anchor link for: datetime-day">DateTime.day</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the day component of the provided DateTime.</p>
+<h2 id="datetime-hour"><a class="zola-anchor" href="#datetime-hour" aria-label="Anchor link for: datetime-hour">DateTime.hour</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the hour component of the provided DateTime.</p>
+<h2 id="datetime-minute"><a class="zola-anchor" href="#datetime-minute" aria-label="Anchor link for: datetime-minute">DateTime.minute</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the minute component of the provided DateTime.</p>
+<h2 id="datetime-nanosecond"><a class="zola-anchor" href="#datetime-nanosecond" aria-label="Anchor link for: datetime-nanosecond">DateTime.nanosecond</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the nanosecond component of the provided DateTime.</p>
+<h2 id="datetime-timestamp"><a class="zola-anchor" href="#datetime-timestamp" aria-label="Anchor link for: datetime-timestamp">DateTime.timestamp</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the number of seconds since 00:00:00 UTC on January 1st 1970.</p>
+<h2 id="datetime-timezone-offset"><a class="zola-anchor" href="#datetime-timezone-offset" aria-label="Anchor link for: datetime-timezone-offset">DateTime.timezone_offset</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the DateTime's timezone offset in seconds.</p>
+<h2 id="datetime-timestamp-string"><a class="zola-anchor" href="#datetime-timestamp-string" aria-label="Anchor link for: datetime-timestamp-string">DateTime.timestamp_string</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">DateTime</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns a string representing the DateTime's timezone offset in seconds.</p>
+<h2 id="timer"><a class="zola-anchor" href="#timer" aria-label="Anchor link for: timer">Timer</a></h2>
+<p>See <a href="https://koto.dev/docs/0.16/core/os/#start-timer"><code>os.start_timer</code></a>.</p>
+<h2 id="timer-subtract"><a class="zola-anchor" href="#timer-subtract" aria-label="Anchor link for: timer-subtract">Timer.@- (subtract)</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Timer</span><span class="z-punctuation z-separator z-kototype">,</span> <span class="z-storage z-type z-kototype">Timer</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the time difference in seconds between two timers.</p>
+<h3 id="example-13"><a class="zola-anchor" href="#example-13" aria-label="Anchor link for: example-13">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">t1</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">start_timer</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">t2</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">start_timer</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> t2 was started later than t1, so the time difference is positive
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">t2</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-other z-koto">t1</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">&gt;</span> <span class="z-constant z-numeric z-koto">0</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> t1 was started earlier than t2, so the time difference is negative
+</span></span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">t1</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span> <span class="z-variable z-other z-koto">t2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">&lt;</span> <span class="z-constant z-numeric z-koto">0</span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=t1%20%3D%20os%2Estart%5Ftimer%28%29%0At2%20%3D%20os%2Estart%5Ftimer%28%29%0A%23%20t2%20was%20started%20later%20than%20t1%2C%20so%20the%20time%20difference%20is%20positive%0Aassert%20%28t2%20%2D%20t1%29%20%3E%200%0A%23%20t1%20was%20started%20earlier%20than%20t2%2C%20so%20the%20time%20difference%20is%20negative%0Aassert%20%28t1%20%2D%20t2%29%20%3C%200" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="timer-elapsed"><a class="zola-anchor" href="#timer-elapsed" aria-label="Anchor link for: timer-elapsed">Timer.elapsed</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Timer</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Number</span>
+</span></code></pre>
+<p>Returns the number of seconds that have elapsed since the timer was started.</p>
+<h3 id="example-14"><a class="zola-anchor" href="#example-14" aria-label="Anchor link for: example-14">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">t</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">os</span>.<span class="z-variable z-function z-koto">start_timer</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> ...after some time...
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Time taken: $</span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">t</span>.<span class="z-variable z-function z-koto">elapsed</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-double z-koto">s<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.16/?script=t%20%3D%20os%2Estart%5Ftimer%28%29%0A%0A%23%20%2E%2E%2Eafter%20some%20time%2E%2E%2E%0Aprint%20%22Time%20taken%3A%20%24%7Bt%2Eelapsed%28%29%7Ds%22" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.16">
+
+<nav uk-dropnav>
+  <div>Version: 0.16<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;os">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;os">0.15</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;os">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#args">args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command">command</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#name">name</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#process-id">process_id</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#start-timer">start_timer</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#time">time</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-1">Command</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-args">Command.args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-current-dir">Command.current_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env">Command.env</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env-clear">Command.env_clear</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-env-remove">Command.env_remove</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stdin">Command.stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stdout">Command.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-stderr">Command.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-spawn">Command.spawn</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-wait-for-output">Command.wait_for_output</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#command-wait-for-exit">Command.wait_for_exit</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput">CommandOutput</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-exit-code">CommandOutput.exit_code</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-success">CommandOutput.success</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stdout">CommandOutput.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stderr">CommandOutput.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stdout-bytes">CommandOutput.stdout_bytes</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#commandoutput-stderr-bytes">CommandOutput.stderr_bytes</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child">Child</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stdin">Child.stdin</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stdout">Child.stdout</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-stderr">Child.stderr</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-has-exited">Child.has_exited</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-output">Child.wait_for_output</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#child-wait-for-exit">Child.wait_for_exit</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime">DateTime</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-year">DateTime.year</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-month">DateTime.month</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-day">DateTime.day</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-hour">DateTime.hour</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-minute">DateTime.minute</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-nanosecond">DateTime.nanosecond</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timestamp">DateTime.timestamp</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timezone-offset">DateTime.timezone_offset</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#datetime-timestamp-string">DateTime.timestamp_string</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer">Timer</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer-subtract">Timer.@- (subtract)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.16/core/os/#timer-elapsed">Timer.elapsed</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

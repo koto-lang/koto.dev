@@ -1,0 +1,379 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <nav  role="navigation">
+    
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;about&#x2F;#about-koto">
+      About Koto
+    </a>
+  </li>
+
+  <ul>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#background">Background</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#current-state">Current State</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#features">Features</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#tooling">Tooling</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#projects-using-koto">Projects using Koto</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#influences">Influences</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#performance">Performance</a>
+      </li>
+    
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      <h1 id="about-koto"><a class="zola-anchor" href="#about-koto" aria-label="Anchor link for: about-koto">About Koto</a></h1>
+<p>Koto is a simple and expressive programming language, usable as an extension
+language for <a href="https://rust-lang.org">Rust</a> applications, or as a standalone scripting language.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">print</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>Hello, World!<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: Hello, World!
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">square</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">n</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-other z-koto">n</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-variable z-other z-koto">n</span>
+</span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>8 squared is </span></span><span class="z-meta z-interpolation z-koto"><span class="z-punctuation z-section z-interpolation z-begin z-koto">{</span><span class="z-variable z-other z-koto">square</span> <span class="z-constant z-numeric z-koto">8</span><span class="z-punctuation z-section z-interpolation z-end z-koto">}</span></span><span class="z-source z-koto"><span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8 squared is 64
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">4</span>, <span class="z-constant z-numeric z-koto">6</span>, <span class="z-constant z-numeric z-koto">8</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">each</span> <span class="z-variable z-other z-koto">square</span>
+</span><span class="z-source z-koto">  .<span class="z-variable z-function z-koto">to_list</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: [4, 16, 36, 64]
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play/?script=print%20%27Hello%2C%20World%21%27%0A%23%3A%20Hello%2C%20World%21%0A%0Asquare%20%3D%20%7Cn%7C%20n%20%2A%20n%0Aprint%20%278%20squared%20is%20%7Bsquare%208%7D%27%0A%23%3A%208%20squared%20is%2064%0A%0Aprint%20%282%2C%204%2C%206%2C%208%29%0A%20%20%2Eeach%20square%0A%20%20%2Eto%5Flist%28%29%0A%23%3A%20%5B4%2C%2016%2C%2036%2C%2064%5D" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="background"><a class="zola-anchor" href="#background" aria-label="Anchor link for: background">Background</a></h2>
+<p>Koto was started in 2020 with the goal to create an ideal language for adding
+scripting to applications developed in Rust. Of particular interest were
+interactive systems like animation or game engines, where rapid iteration
+demands a lightweight programming interface that compiles and runs quickly.</p>
+<p>The guiding design principle is that Koto should be <em>simple</em>,
+conceptually as well as visually. To that end, a focus throughout the language's
+development has been on reducing syntax noise and minimizing core concepts
+wherever possible.</p>
+<h2 id="current-state"><a class="zola-anchor" href="#current-state" aria-label="Anchor link for: current-state">Current State</a></h2>
+<p>Koto is a new language and should be considered to have a prominent
+'use at your own risk' disclaimer.</p>
+<p>With that said, Koto is becoming more stable with each release,
+and although we're still some way from a <code>1.0</code> version,
+breaking changes are becoming much less frequent.</p>
+<p>Early adopter feedback is invaluable, so if you do try out Koto please
+get in touch and share your experiences, positive or otherwise!
+You're welcome to reach out in <a href="https://github.com/koto-lang/koto/discussions">Discussions</a>,
+or on <a href="https://discord.gg/JeV8RuK4CT">Discord</a>, or by opening an <a href="https://github.com/koto-lang/koto/issues">issue</a>.</p>
+<p>You can read <a href="/docs/next/language/">the guide</a>,
+try it out in <a href="https://koto.dev/play">the playground</a> or
+the <a href="/docs/next/cli/">CLI</a>, and see how well it works in your
+<a href="/docs/next/api/">existing Rust application</a>.</p>
+<h2 id="features"><a class="zola-anchor" href="#features" aria-label="Anchor link for: features">Features</a></h2>
+<ul>
+<li><strong>Simple and clean syntax:</strong> Koto aims to reduce visual noise and cognitive
+load wherever possible, while still enabling full intuitive control of your
+program.</li>
+<li><strong>Easy integration with Rust:</strong> Koto is implemented in Rust, and is designed
+to be easily added to existing applications.
+Custom value types can be added to the Koto runtime by implementing the
+<a href="https://github.com/koto-lang/koto/blob/main/crates/runtime/src/types/object.rs"><code>KotoObject</code></a> trait.</li>
+<li><strong>Fast compilation:</strong> The compiler has been written with rapid iteration in
+mind, with the goal of compiling a script as quickly as possible.</li>
+<li><strong>Rich iterator support:</strong> Koto has a focus on using iterators for data
+manipulation, with a large collection of iterator generators, adaptors,
+and consumers available in the core library's <a href="/docs/next/core//iterator">iterator module</a>.</li>
+<li><strong>Built-in testing:</strong> Automated testing has
+<a href="/docs/next/language/#testing">first-class support in Koto</a>, making it natural to write tests along
+with your code.</li>
+<li><strong>Optional multi-threaded runtime</strong> By default, Koto has a single-threaded
+runtime. For applications that require multi-threaded scripting,
+a <a href="/docs/next/api/#using-the-multi-threaded-runtime">feature flag</a> enables a thread-safe runtime.</li>
+<li><strong>Tooling:</strong> Support for Koto is available for <a href="https://koto.dev/about/#editors">several popular editors</a>.
+<a href="https://koto.dev/about/#tree-sitter">Tree-sitter</a> and <a href="https://koto.dev/about/#lsp">LSP</a> implementations are also available.
+Auto-formatting and linting are future topics, contributions are welcome!</li>
+</ul>
+<h3 id="missing-incomplete-features"><a class="zola-anchor" href="#missing-incomplete-features" aria-label="Anchor link for: missing-incomplete-features">Missing/Incomplete Features</a></h3>
+<ul>
+<li><strong>Async tasks:</strong> Koto doesn't have support for <code>async</code>/<code>await</code>-style
+asynchronous tasks, although support <a href="https://github.com/koto-lang/koto/issues/277">is planned</a> for the future.</li>
+<li><strong>Integration with other languages:</strong> There's currently no C API for Koto,
+which would allow it to be integrated with languages other than Rust.</li>
+</ul>
+<h2 id="tooling"><a class="zola-anchor" href="#tooling" aria-label="Anchor link for: tooling">Tooling</a></h2>
+<h3 id="editors"><a class="zola-anchor" href="#editors" aria-label="Anchor link for: editors">Editors</a></h3>
+<p>Plugins that provide Koto support are available for the following editors:</p>
+<ul>
+<li><a href="https://github.com/koto-lang/koto-vscode">Visual Studio Code</a></li>
+<li><a href="https://github.com/koto-lang/koto-zed">Zed</a></li>
+<li><a href="https://github.com/koto-lang/koto.vim">Vim / Neovim</a></li>
+<li><a href="https://github.com/koto-lang/koto-sublime">Sublime Text</a></li>
+</ul>
+<p><a href="https://helix-editor.com">Helix</a> has built-in Koto support (since <code>25.01</code>).</p>
+<h3 id="tree-sitter"><a class="zola-anchor" href="#tree-sitter" aria-label="Anchor link for: tree-sitter">Tree-sitter</a></h3>
+<p>A <a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a> implementation is <a href="https://github.com/koto-lang/tree-sitter-koto">available here</a>.
+If you're using Neovim then it's easy to set up with <a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a>.</p>
+<h3 id="lsp"><a class="zola-anchor" href="#lsp" aria-label="Anchor link for: lsp">LSP</a></h3>
+<p>An implementation of the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> for Koto is
+<a href="https://github.com/koto-lang/koto-ls">available here</a>.</p>
+<h2 id="projects-using-koto"><a class="zola-anchor" href="#projects-using-koto" aria-label="Anchor link for: projects-using-koto">Projects using Koto</a></h2>
+<ul>
+<li><a href="https://kotoist.alestsurko.by">Kotoist</a>
+<ul>
+<li>A VST plugin for live coding and algorithmic composition</li>
+</ul>
+</li>
+<li><a href="https://github.com/jasal82/metabuild">Metabuild</a>
+<ul>
+<li>A scriptable build automation system with dependency manager</li>
+</ul>
+</li>
+<li><a href="https://github.com/cornedriesprong/ohm">Ohm</a>
+<ul>
+<li>A live coding language/DSL for audio synthesis and processing</li>
+</ul>
+</li>
+<li><a href="https://github.com/koto-lang/bevy_koto">bevy-koto</a>
+<ul>
+<li>A proof of concept for scripting <a href="https://bevy.org">Bevy</a> entities using Koto</li>
+</ul>
+</li>
+<li><a href="https://github.com/rsaccon/fidget-koto">fidget-koto</a>
+<ul>
+<li>Koto scripting support for <a href="https://github.com/mkeeter/fidget">Fidget</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/alisomay/koto_midi">koto-midi</a>
+<ul>
+<li>A module for working with MIDI messages in Koto scripts</li>
+</ul>
+</li>
+</ul>
+<p>Please open a <a href="https://github.com/koto-lang/koto/pulls">PR</a> if you would like to add your project to this list.</p>
+<h2 id="influences"><a class="zola-anchor" href="#influences" aria-label="Anchor link for: influences">Influences</a></h2>
+<p>Koto was influenced by and is indebted to many other languages.</p>
+<ul>
+<li><strong>Scope:</strong> <a href="https://www.lua.org">Lua</a> was a strong influence on Koto, showing the strength of
+a minimalistic feature-set in an embeddable scripting language.</li>
+<li><strong>Syntax:</strong> <a href="https://coffeescript.org">Coffeescript</a> and <a href="https://moonscript.org">Moonscript</a> show how
+languages can be made easy on the eye by minimizing visual distractions,
+while also managing to avoid inexpressive terseness.</li>
+<li><strong>Language Design:</strong> Although the syntax and core purpose is very different,
+<a href="https://rust-lang.org">Rust</a> had a huge impact on Koto's design. In particular Rust's
+<a href="https://doc.rust-lang.org/rust-by-example/trait/iter.html">rich iterator support</a> was a major influence on emphasizing
+the role of iterators in Koto.</li>
+</ul>
+<h2 id="performance"><a class="zola-anchor" href="#performance" aria-label="Anchor link for: performance">Performance</a></h2>
+<p>Koto's runtime is fast enough for many applications, with similar performance to other embedded scripting languages for Rust (see <a href="https://github.com/khvzak/script-bench-rs">here</a> for a comparison).</p>
+<p>By default, Koto uses a single-threaded runtime. The multi-threaded runtime is available via a <a href="/docs/next/api/#using-the-multi-threaded-runtime">feature flag</a>, but comes with a runtime performance cost typically in the range of ~5-10%.</p>
+<p>When Koto is used as an embedded language within a host application, runtime performance is heavily affected by the way that the application itself is compiled. See <a href="https://nnethercote.github.io/perf-book">The Rust Performance Book</a> for lots of excellent advice on how to improve performance. In particular, the choice of <a href="https://nnethercote.github.io/perf-book/build-configuration.html#alternative-allocators">allocator</a> used by the application should be considered.</p>
+<hr />
+
+    </article>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;about&#x2F;#about-koto">
+      About Koto
+    </a>
+  </li>
+
+  <ul>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#background">Background</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#current-state">Current State</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#features">Features</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#tooling">Tooling</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#projects-using-koto">Projects using Koto</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#influences">Influences</a>
+      </li>
+    
+      <li class="uk-nav-sub">
+        <a href="https://koto.dev/about/#performance">Performance</a>
+      </li>
+    
+  </ul>
+</ul>
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
