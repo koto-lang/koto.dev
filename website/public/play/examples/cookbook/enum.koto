@@ -1,0 +1,45 @@
+# An example of how to make enum-like maps in Koto
+
+# Makes an enum by inserting a key/value pair into a map for each entry
+make_enum = |entries...|
+  entries
+    .enumerate()
+    .each |(index, id)| id, index
+    .to_map()
+
+# Makes a bidirectional enum by inserting a key/value pair into a map for each entry,
+# along with a corresponding reverse entry
+make_bidirectional_enum = |entries...|
+  entries
+    .enumerate()
+    .fold {}, |enum, (index, id)|
+      enum.insert id, index
+      enum.insert index, id
+      enum
+
+@main = ||
+  fruit = make_enum 'apple', 'banana', 'orange'
+  match 1
+    fruit.apple then print 'Apple!'
+    fruit.banana then print 'Banana!'
+    fruit.orange then print 'Orange!'
+    else print '???'
+
+@tests =
+  @test make_enum: ||
+    color = make_enum 'red', 'green', 'blue'
+    assert_eq color.red, 0
+    assert_eq color.green, 1
+    assert_eq color.blue, 2
+    assert_eq color.get_index(0)[0], 'red'
+    assert_eq color.get_index(1)[0], 'green'
+    assert_eq color.get_index(2)[0], 'blue'
+
+  @test make_bidirectional_enum: ||
+    cutlery = make_bidirectional_enum 'fork', 'knife', 'spoon'
+    assert_eq cutlery.fork, 0
+    assert_eq cutlery.knife, 1
+    assert_eq cutlery.spoon, 2
+    assert_eq cutlery.get(0), 'fork'
+    assert_eq cutlery.get(1), 'knife'
+    assert_eq cutlery.get(2), 'spoon'

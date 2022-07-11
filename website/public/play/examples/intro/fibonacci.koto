@@ -1,0 +1,12 @@
+# Print out the first 20 fibonacci numbers
+# https://en.wikipedia.org/wiki/Fibonacci_sequence
+
+fibonacci = ||
+  a, b, c = 1, 1, 1
+  loop
+    yield c
+    c = a + b
+    a, b = b, c
+
+for i, n in fibonacci().take(20).enumerate()
+  print '${i + 1}: $n'
