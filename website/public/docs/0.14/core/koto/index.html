@@ -1,0 +1,1104 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;koto">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;koto">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;koto">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;koto">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;koto">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;koto">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#args">args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#copy">copy</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#deep-copy">deep_copy</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#exports">exports</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#hash">hash</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#load">load</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#run">run</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#script-dir">script_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#script-path">script_path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#size">size</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#type">type</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      
+
+<h1 id="koto"><a class="zola-anchor" href="#koto" aria-label="Anchor link for: koto">koto</a></h1>
+<p>A collection of utilities for working with the Koto runtime.</p>
+<h2 id="args"><a class="zola-anchor" href="#args" aria-label="Anchor link for: args">args</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">Tuple</span>
+</span></code></pre>
+<p>Provides access to the arguments that were passed into the script when running
+the <code>koto</code> CLI application.</p>
+<p>If no arguments were provided then the list is empty.</p>
+<h3 id="example"><a class="zola-anchor" href="#example" aria-label="Anchor link for: example">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Assuming that the script was run with `koto script.koto -- 1 2 &quot;hello&quot;`
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">size</span> <span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">args</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 3
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">args</span>.<span class="z-variable z-function z-koto">first</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">args</span>.<span class="z-variable z-function z-koto">last</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> hello
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=%23%20Assuming%20that%20the%20script%20was%20run%20with%20%60koto%20script%2Ekoto%20%2D%2D%201%202%20%22hello%22%60%0Asize%20koto%2Eargs%0A%23%203%0Akoto%2Eargs%2Efirst%28%29%0A%23%201%0Akoto%2Eargs%2Elast%28%29%0A%23%20hello" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="copy"><a class="zola-anchor" href="#copy" aria-label="Anchor link for: copy">copy</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Makes a copy of the value.</p>
+<h3 id="shared-mutable-data"><a class="zola-anchor" href="#shared-mutable-data" aria-label="Anchor link for: shared-mutable-data">Shared mutable data</a></h3>
+<p>For values that have shared mutable data (i.e., <code>List</code>, <code>Map</code>), unique copies of
+the data will be made. Note that this only applies to the first level of data,
+so nested containers will still share their data with their counterparts in the
+original data. To make a copy where any nested containers are also unique,
+use <a href="https://koto.dev/docs/0.14/core/koto/#deep-copy"><code>koto.deep_copy</code></a>.</p>
+<h3 id="iterator-copies"><a class="zola-anchor" href="#iterator-copies" aria-label="Anchor link for: iterator-copies">Iterator copies</a></h3>
+<p>Copied iterators share the same underlying data as the original, but have a
+unique iteration position, which is part of an iterator's shared state by
+default.</p>
+<p>If the iterator is a generator, some effort will be made to make the generator's
+copy produce the same output as the original. However, this isn't guaranteed to
+be successful. Specifically, the value stack of the copied virtual machine will
+be scanned for iterators, and each iterator will have a copy made. Iterators
+that may be used in other ways by the generator (such as being stored in
+containers or function captures) won't be copied and will still have shared
+state.</p>
+<h3 id="examples"><a class="zola-anchor" href="#examples" aria-label="Anchor link for: examples">Examples</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Copying a map
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">foo</span>: <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-variable z-other z-koto">bar</span>: <span class="z-constant z-numeric z-koto">99</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span>.<span class="z-variable z-function z-koto">foo</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">42</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">foo</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 42
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">z</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">copy</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">z</span>.<span class="z-variable z-function z-koto">bar</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">bar</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> x.bar remains unmodified due to the copy
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 99
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=%23%20Copying%20a%20map%0Ax%20%3D%20%7Bfoo%3A%20%2D1%2C%20bar%3A%2099%7D%0Ay%20%3D%20x%0Ay%2Efoo%20%3D%2042%0Aprint%20x%2Efoo%0A%23%20%2D%3E%2042%0A%0Az%20%3D%20koto%2Ecopy%20x%0Az%2Ebar%20%3D%20%2D1%0Aprint%20x%2Ebar%20%23%20x%2Ebar%20remains%20unmodified%20due%20to%20the%20copy%0A%23%20%2D%3E%2099" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Copying a list
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">10</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">iter</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">x</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> y shares the same iteration position as x.
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">z</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">copy</span> <span class="z-variable z-other z-koto">x</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> z shares the same iteration data (the range 1..=10),
+</span></span><span class="z-source z-koto">                <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> but has a unique iteration position.
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 1
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 2
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> y shares x&#39;s iteration position.
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 3
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">z</span>.<span class="z-variable z-function z-koto">next</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">.<span class="z-variable z-function z-koto">get</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> z isn&#39;t impacted by the advancing of x and y.
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 1
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=%23%20Copying%20a%20list%0A%0Ax%20%3D%20%281%2E%2E%3D10%29%2Eiter%28%29%0Ay%20%3D%20x%20%23%20y%20shares%20the%20same%20iteration%20position%20as%20x%2E%0Az%20%3D%20koto%2Ecopy%20x%20%23%20z%20shares%20the%20same%20iteration%20data%20%28the%20range%201%2E%2E%3D10%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20but%20has%20a%20unique%20iteration%20position%2E%0A%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%201%0Aprint%20x%2Enext%28%29%2Eget%28%29%0A%23%20%2D%3E%202%0Aprint%20y%2Enext%28%29%2Eget%28%29%20%23%20y%20shares%20x%27s%20iteration%20position%2E%0A%23%20%2D%3E%203%0Aprint%20z%2Enext%28%29%2Eget%28%29%20%23%20z%20isn%27t%20impacted%20by%20the%20advancing%20of%20x%20and%20y%2E%0A%23%20%2D%3E%201" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also"><a class="zola-anchor" href="#see-also" aria-label="Anchor link for: see-also">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/koto/#deep-copy"><code>koto.deep_copy</code></a></li>
+</ul>
+<h2 id="deep-copy"><a class="zola-anchor" href="#deep-copy" aria-label="Anchor link for: deep-copy">deep_copy</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Makes a unique <em>deep</em> copy of the value's data.</p>
+<h3 id="shared-mutable-data-1"><a class="zola-anchor" href="#shared-mutable-data-1" aria-label="Anchor link for: shared-mutable-data-1">Shared mutable data</a></h3>
+<p>This makes a unique copy of the value's data, and then recursively makes deep
+copies of any nested containers in the value.</p>
+<p>If only the first level of data needs to be made unique, then use
+<a href="https://koto.dev/docs/0.14/core/koto/#copy"><code>koto.copy</code></a>.</p>
+<h3 id="example-1"><a class="zola-anchor" href="#example-1" aria-label="Anchor link for: example-1">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span></span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-brackets">, </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">3</span>, </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">4</span>, <span class="z-constant z-numeric z-koto">5</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">deep_copy</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">y</span></span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">99</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> a deep copy has been made, so x is unaffected by the assignment to y
+</span></span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; [[1, 2], [3, [4, 5]]]
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=x%20%3D%20%5B%5B1%2C%202%5D%2C%20%5B3%2C%20%5B4%2C%205%5D%5D%5D%0Ay%20%3D%20koto%2Edeep%5Fcopy%20x%0Ay%5B1%5D%5B1%5D%20%3D%2099%0Aprint%20x%20%23%20a%20deep%20copy%20has%20been%20made%2C%20so%20x%20is%20unaffected%20by%20the%20assignment%20to%20y%0A%23%20%2D%3E%20%5B%5B1%2C%202%5D%2C%20%5B3%2C%20%5B4%2C%205%5D%5D%5D" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-1"><a class="zola-anchor" href="#see-also-1" aria-label="Anchor link for: see-also-1">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/koto/#copy"><code>koto.copy</code></a></li>
+</ul>
+<h2 id="exports"><a class="zola-anchor" href="#exports" aria-label="Anchor link for: exports">exports</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Map</span>
+</span></code></pre>
+<p>Returns the current module's <code>export</code> map.</p>
+<p>Although typically module items are exported with <code>export</code> expressions,
+it can be useful to export items programatically.</p>
+<h2 id="hash"><a class="zola-anchor" href="#hash" aria-label="Anchor link for: hash">hash</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Returns the value's hash as an integer, or Null if the value is not hashable.</p>
+<h3 id="example-2"><a class="zola-anchor" href="#example-2" aria-label="Anchor link for: example-2">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">koto</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">hash</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">hash</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hi<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">==</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">hash</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>bye<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Lists aren&#39;t hashable
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">hash</span> </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-source z-koto"> 
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; null
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Tuples are hashable if they only contain hashable values 
+</span></span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">hash</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">==</span> <span class="z-constant z-language z-koto">null</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; false
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=from%20koto%20import%20hash%0A%0Aprint%20%28hash%20%27hi%27%29%20%3D%3D%20%28hash%20%27bye%27%29%0A%23%20%2D%3E%20false%0A%0A%23%20Lists%20aren%27t%20hashable%0Aprint%20hash%20%5B1%2C%202%5D%20%0A%23%20%2D%3E%20null%0A%0A%23%20Tuples%20are%20hashable%20if%20they%20only%20contain%20hashable%20values%20%0Aprint%20%28hash%20%281%2C%202%29%29%20%3D%3D%20null%0A%23%20%2D%3E%20false" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="load"><a class="zola-anchor" href="#load" aria-label="Anchor link for: load">load</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Chunk</span>
+</span></code></pre>
+<p>Compiles the string as Koto code and returns a compiled <code>Chunk</code> on success,
+or throws if a compilation error occurs.</p>
+<h3 id="example-3"><a class="zola-anchor" href="#example-3" aria-label="Anchor link for: example-3">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">chunk</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">load</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>1 + 2<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">run</span> <span class="z-variable z-other z-koto">chunk</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 3
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=chunk%20%3D%20koto%2Eload%20%271%20%2B%202%27%0Aprint%20koto%2Erun%20chunk%0A%23%20%2D%3E%203" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-2"><a class="zola-anchor" href="#see-also-2" aria-label="Anchor link for: see-also-2">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/koto/#run"><code>koto.run</code></a></li>
+</ul>
+<h2 id="run"><a class="zola-anchor" href="#run" aria-label="Anchor link for: run">run</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">String</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Compiles and runs the provided Koto code, and returns the resulting value.
+Errors thrown while executing the code get rethrown.</p>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Chunk</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Value</span>
+</span></code></pre>
+<p>Runs the compiled <code>Chunk</code>, and returns the resulting value.
+Errors thrown while executing the chunk's bytecode get rethrown.</p>
+<h3 id="example-4"><a class="zola-anchor" href="#example-4" aria-label="Anchor link for: example-4">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">run</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>[1, 2, 3, 4].sum()<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; 10
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20koto%2Erun%20%27%5B1%2C%202%2C%203%2C%204%5D%2Esum%28%29%27%0A%23%20%2D%3E%2010" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h3 id="see-also-3"><a class="zola-anchor" href="#see-also-3" aria-label="Anchor link for: see-also-3">See also</a></h3>
+<ul>
+<li><a href="https://koto.dev/docs/0.14/core/koto/#load"><code>koto.load</code></a></li>
+</ul>
+<h2 id="script-dir"><a class="zola-anchor" href="#script-dir" aria-label="Anchor link for: script-dir">script_dir</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">String</span> <span class="z-keyword z-operator z-word z-kototype">or</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>If a script is being executed then <code>script_dir</code> provides the directory that the
+current script is contained in as a String, otherwise <code>script_dir</code> is Null.</p>
+<h2 id="script-path"><a class="zola-anchor" href="#script-path" aria-label="Anchor link for: script-path">script_path</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-storage z-type z-kototype">String</span> <span class="z-keyword z-operator z-word z-kototype">or</span> <span class="z-storage z-type z-kototype">Null</span>
+</span></code></pre>
+<p>If a script is being executed then <code>script_path</code> provides the path of the
+current script as a String, otherwise <code>script_path</code> is Null.</p>
+<h2 id="size"><a class="zola-anchor" href="#size" aria-label="Anchor link for: size">size</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">Integer</span>
+</span></code></pre>
+<p>Returns the <em>size</em> of a value.</p>
+<p>The size of a value is typically defined as the number of elements in a
+container, with some notable exceptions:</p>
+<ul>
+<li>For strings, the size is number of bytes in the string data.</li>
+<li>For ranges, the size is the number of integers in the range.
+<ul>
+<li>For non-inclusive ranges, this is equivalent to
+<code>range.end() - range.start()</code>.</li>
+<li>For inclusive ranges, this is equivalent to
+<code>range.end() + 1 - range.start()</code>.</li>
+<li>If the range is unbounded then an error will be thrown.</li>
+</ul>
+</li>
+<li>An error will be thrown if the value doesn't have a defined size.</li>
+</ul>
+<h3 id="example-5"><a class="zola-anchor" href="#example-5" aria-label="Anchor link for: example-5">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">koto</span> <span class="z-keyword z-control z-import">import</span> <span class="z-variable z-other z-koto">size</span>
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> </span><span class="z-meta z-brackets"><span class="z-punctuation z-section z-brackets z-begin z-koto">[</span><span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span><span class="z-punctuation z-section z-brackets z-end z-koto">]</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span>,<span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; (3, 0)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>hello<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>héllø<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span><span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; (5, 7, 0)
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-constant z-numeric z-koto">10</span><span class="z-keyword z-operator z-bitwise z-koto">..=</span><span class="z-constant z-numeric z-koto">20</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">, </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">size</span> <span class="z-constant z-numeric z-koto">20</span><span class="z-keyword z-operator z-bitwise z-koto">..</span><span class="z-constant z-numeric z-koto">0</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; (10, 11, 20)
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=from%20koto%20import%20size%0Aprint%20%28size%20%5B1%2C%202%2C%203%5D%29%2C%20%28size%20%28%2C%29%29%0A%23%20%2D%3E%20%283%2C%200%29%0A%0Aprint%20%28size%20%27hello%27%29%2C%20%28size%20%27h%C3%A9ll%C3%B8%27%29%2C%20%28size%20%27%27%29%0A%23%20%2D%3E%20%285%2C%207%2C%200%29%0A%0Aprint%20%28size%2010%2E%2E20%29%2C%20%28size%2010%2E%2E%3D20%29%2C%20%28size%2020%2E%2E0%29%0A%23%20%2D%3E%20%2810%2C%2011%2C%2020%29" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+<h2 id="type"><a class="zola-anchor" href="#type" aria-label="Anchor link for: type">type</a></h2>
+<pre data-lang="kototype" class="language-kototype z-code"><code class="language-kototype" data-lang="kototype"><span class="z-source z-kototype"><span class="z-keyword z-other z-function-definition z-kototype">|</span><span class="z-storage z-type z-kototype">Value</span><span class="z-keyword z-other z-function-definition z-kototype">|</span> <span class="z-keyword z-operator z-type z-kototype">-&gt;</span> <span class="z-storage z-type z-kototype">String</span>
+</span></code></pre>
+<p>Returns the type of the input Value as a String.</p>
+<h3 id="example-6"><a class="zola-anchor" href="#example-6" aria-label="Anchor link for: example-6">Example</a></h3>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">type</span> <span class="z-constant z-language z-koto">true</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; Bool
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">x</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">42</span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">type</span> <span class="z-variable z-other z-koto">x</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; Int
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">foo</span> <span class="z-keyword z-operator z-assignment z-koto">=</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@type</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-string z-quoted z-double z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&quot;</span>Foo<span class="z-punctuation z-definition z-string z-end z-koto">&quot;</span></span>
+</span><span class="z-source z-koto"><span class="z-variable z-other z-koto">koto</span>.<span class="z-variable z-function z-koto">type</span> <span class="z-variable z-other z-koto">foo</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> -&gt; Foo
+</span></span></code></pre>
+
+  
+
+
+<div class="uk-text-right playground-link">
+  <a class="uk-link-muted" href="/play-0.14/?script=print%20koto%2Etype%20true%0A%23%20%2D%3E%20Bool%0A%0Ax%20%3D%2042%0Aprint%20koto%2Etype%20x%0A%23%20%2D%3E%20Int%0A%0Afoo%20%3D%0A%20%20%40type%3A%20%22Foo%22%0Aprint%20koto%2Etype%20foo%0A%23%20%2D%3E%20Foo" target="_blank">
+    <span uk-icon="play"></span>
+  </a>
+</div>
+
+
+
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+
+  <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <div class="uk-hidden@s">
+    
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<meta name="docs-version" content="0.14">
+
+<nav uk-dropnav>
+  <div>Version: 0.14<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
+    <ul class="uk-nav uk-dropdown-nav">
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;next&#x2F;core&#x2F;koto">0.17 (Unreleased)</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.16&#x2F;core&#x2F;koto">0.16</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.15&#x2F;core&#x2F;koto">0.15</a>
+        </li>
+      
+        
+        <li class=" uk-active ">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto">0.14</a>
+        </li>
+      
+        
+        <li class="">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.13&#x2F;core&#x2F;koto">0.13</a>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+  </div>
+
+  
+    
+  
+  
+
+  
+  
+
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;language&#x2F;">
+        Language Guide
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;">
+        Core Library
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+      <ul class="uk-nav-sub uk-nav-default">
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;io&#x2F;">
+              io
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;iterator&#x2F;">
+              iterator
+            </a>
+
+            
+          </li>
+        
+          <li class="uk-active">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;koto&#x2F;">
+              koto
+            </a>
+
+            
+              
+
+              
+                <ul class="uk-nav-sub uk-nav-default">
+                  
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#args">args</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#copy">copy</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#deep-copy">deep_copy</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#exports">exports</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#hash">hash</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#load">load</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#run">run</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#script-dir">script_dir</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#script-path">script_path</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#size">size</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://koto.dev/docs/0.14/core/koto/#type">type</a>
+                      </li>
+                    
+                  
+                </ul>
+              
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;list&#x2F;">
+              list
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;map&#x2F;">
+              map
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;number&#x2F;">
+              number
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;os&#x2F;">
+              os
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;range&#x2F;">
+              range
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;string&#x2F;">
+              string
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;test&#x2F;">
+              test
+            </a>
+
+            
+          </li>
+        
+          <li class="">
+            <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;core&#x2F;tuple&#x2F;">
+              tuple
+            </a>
+
+            
+          </li>
+        
+      </ul>
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;libs&#x2F;">
+        Extra Libs
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;cli&#x2F;">
+        Koto CLI
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+    
+
+    <li class="uk-nav-header">
+      <a href="https:&#x2F;&#x2F;koto.dev&#x2F;docs&#x2F;0.14&#x2F;api&#x2F;">
+        Rust API
+      </a>
+    </li>
+
+    
+      
+      
+      
+    
+
+    
+
+    
+  
+</ul>
+
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>

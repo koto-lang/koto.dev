@@ -1,0 +1,397 @@
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Koto Programming Language</title>
+
+    <link rel="mask-icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="https://koto.dev/atom.xml">
+    
+
+    <script src="/uikit.min.js"></script>
+    <script src="/uikit-icons.min.js"></script>
+
+    
+      <link rel="stylesheet" href="/bundle/main-Cr1cgR8E.css" />
+      <script src="/bundle/colorScheme-BEIaVpeV.js"></script>
+    
+
+     
+  </head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">
+            About
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/docs/0.16>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">
+            News
+          </a>
+        </li>
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href=/play-0.16>
+            Playground
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" id="light-switch-navbar">
+            <img class="light-switch-icon" id="light-switch-navbar-icon" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    
+
+<div class="docs-sidebar uk-visible@s">
+  <nav role="navigation">
+    <ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;">
+      Koto 0.16
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#automatic-formatting">
+            Automatic Formatting
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#language-improvements">
+            Language Improvements
+          </a>
+        </li>
+
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#optional-arguments">Optional Arguments</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#wildcard-imports">Wildcard Imports</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#power-operator">Power Operator</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#meta-object-improvements">Meta Object Improvements</a>
+            </li>
+          </ul>
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#improved-koto-rust-value-conversions">
+            Improved Koto ↔ Rust Value Conversions
+          </a>
+        </li>
+
+        
+      
+    
+      
+      
+    
+  
+</ul>
+
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container">
+    <article class="uk-article">
+      <h1 class="uk-article-title">
+        Koto 0.16
+      </h1>
+
+      
+
+<div class="uk-text-meta">
+  July 23, 2025
+</div>
+
+
+
+      <p>Koto 0.16 has been <a href="https://crates.io/crates/koto/0.16.0">released</a>, including automatic code formatting,
+various language improvements, easier conversions to Rust types, and more.</p>
+<span id="continue-reading"></span>
+<p>Many thanks to the contributors who helped to make this release happen!</p>
+<h3 id="koto">Koto?</h3>
+<p>Koto is a free and open-source programming language which is designed to be an
+ideal companion scripting language for Rust applications.</p>
+<p>If this is the first time you're reading about Koto, you can learn more on the <a href="/about">About Koto</a> page, and you can take a look at the <a href="/docs/0.16/language">language guide</a>.</p>
+<h3 id="automatic-formatting">Automatic Formatting</h3>
+<p>Automatic formatting of Koto scripts is now supported by Koto's <a href="https://github.com/koto-lang/koto-ls">LSP server</a>, and by the <a href="/docs/0.16/cli">CLI</a>'s new <code>--format</code> option, which significantly improves Koto's editing experience. The formatting logic is well tested, but it is new, so please report any bugs, unexpected limitations, or strange results by opening an <a href="https://github.com/koto-lang/koto/issues/new">issue</a>.</p>
+<h3 id="language-improvements">Language Improvements</h3>
+<p>Koto v0.16 introduces several quality-of-life improvements to the language (see the <a href="https://github.com/koto-lang/koto/releases/tag/v0.16.0">changelog</a> for a complete list):</p>
+<h4 id="optional-arguments">Optional Arguments</h4>
+<p>Function arguments can now specify default values that will be used when arguments are omitted in function calls.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> Previously, default argument values were typically defined like this:
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">a</span><span class="z-punctuation z-separator z-koto">,</span> <span class="z-variable z-parameter z-koto">b</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">a</span> <span class="z-keyword z-operator z-arithmetic z-koto">+</span> </span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-variable z-other z-koto">b</span> <span class="z-keyword z-operator z-word z-koto">or</span> <span class="z-constant z-numeric z-koto">42</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> In 0.16, you can specify the default value along with the argument:
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">f</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">a</span><span class="z-punctuation z-separator z-koto">,</span> <span class="z-variable z-parameter z-koto">b</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">42</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-parameter z-koto">a</span> + <span class="z-variable z-parameter z-koto">b</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-variable z-parameter z-koto">f</span> 10
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 52
+</span></span></code></pre>
+<p>See the section on <a href="/docs/0.16/language/#optional-arguments">optional arguments</a> in the language guide for more details.</p>
+<h4 id="wildcard-imports">Wildcard Imports</h4>
+<p>All items from a module can now be imported using <code>*</code> wildcard syntax.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-import">from</span> <span class="z-variable z-other z-koto">number</span> <span class="z-keyword z-control z-import">import</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span>
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-flow z-assert z-koto">assert_eq</span> <span class="z-variable z-other z-koto">pi</span> <span class="z-keyword z-operator z-arithmetic z-koto">*</span> <span class="z-constant z-numeric z-koto">2</span>, <span class="z-variable z-other z-koto">tau</span>
+</span></code></pre>
+<h4 id="power-operator">Power Operator</h4>
+<p>A power / exponentiation operator has been added (<code>^</code>, along with <code>^=</code> and corresponding metakeys), replacing the core library's <code>number.pow</code> function.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-constant z-numeric z-koto">2</span> ^ <span class="z-constant z-numeric z-koto">3</span>
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: 8
+</span></span></code></pre>
+<h4 id="meta-object-improvements">Meta Object Improvements</h4>
+<p>If an object defines equality comparison using <code>@==</code>,
+then inequality (<code>!=</code>) will now automatically defer to the custom <code>@==</code> implementation (unless <code>@!=</code> is explicitly defined).</p>
+<p>Similarly, an object now only needs to define <code>@&lt;</code> and <code>@==</code> for the runtime to automatically derive the behavior of all other comparison operators.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-variable z-other z-koto">foo</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">n</span><span class="z-keyword z-other z-function-definition z-koto">|</span>
+</span><span class="z-source z-koto">  <span class="z-variable z-other z-koto">data</span><span class="z-punctuation z-separator z-koto">:</span> <span class="z-storage z-type z-koto">n</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@==:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">other</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">data</span> <span class="z-keyword z-operator z-comparison z-koto">==</span> <span class="z-variable z-other z-koto">other</span>.<span class="z-variable z-function z-koto">data</span>
+</span><span class="z-source z-koto">  <span class="z-entity z-name z-koto">@&lt;:</span> <span class="z-keyword z-other z-function-definition z-koto">|</span><span class="z-variable z-parameter z-koto">other</span><span class="z-keyword z-other z-function-definition z-koto">|</span> <span class="z-variable z-language z-koto">self</span>.<span class="z-variable z-function z-koto">data</span> <span class="z-keyword z-operator z-comparison z-koto">&lt;</span> <span class="z-variable z-other z-koto">other</span>.<span class="z-variable z-function z-koto">data</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> The result of != is derived by inverting the result of @==
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">foo</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">99</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">!=</span> <span class="z-variable z-other z-koto">foo</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">99</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: false
+</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span> The result of &gt; is derived from @&lt; and @==
+</span></span><span class="z-source z-koto"><span class="z-variable z-other z-koto">foo</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-constant z-numeric z-koto">123</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto"> <span class="z-keyword z-operator z-comparison z-koto">&gt;</span> <span class="z-variable z-other z-koto">foo</span></span><span class="z-meta z-parens"><span class="z-punctuation z-section z-parens z-begin z-koto">(</span><span class="z-keyword z-operator z-arithmetic z-koto">-</span><span class="z-constant z-numeric z-koto">1</span><span class="z-punctuation z-section z-parens z-end z-koto">)</span></span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-comment z-line z-koto"><span class="z-punctuation z-definition z-comment z-koto">#</span>: true
+</span></span></code></pre>
+<p>Objects can also now define arithmetic operations when they appear on the right-hand-side of expressions using <code>r</code>-prefixed meta operators (<code>@r+</code>, <code>@r*</code>, etc.). Custom operators on the left-hand-side of an expression take precedence, with the RHS being used as a fallback.</p>
+<h3 id="improved-koto-rust-value-conversions">Improved Koto ↔ Rust Value Conversions</h3>
+<p>Converting between Koto values and Rust types is now easier thanks to <a href="https://docs.rs/koto_serde/0.16.0/koto_serde/index.html">Serde</a> support.</p>
+<p>Rust types that implement <code>Serialize</code> can be converted into Koto values with <code>to_koto_value</code>, and types implementing <code>Deserialize</code> can be created from Koto values using <code>from_koto_value</code>.</p>
+<p>For example, the following Koto script accesses a <code>request</code> value from the prelude, and then exports a map containing <code>caption</code> and <code>numbers</code> entries.</p>
+<pre data-lang="koto" class="language-koto z-code"><code class="language-koto" data-lang="koto"><span class="z-source z-koto"><span class="z-keyword z-control z-conditional z-koto">match</span> <span class="z-variable z-other z-koto">request</span>
+</span><span class="z-source z-koto">  <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>one_to_four<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span> <span class="z-keyword z-control z-conditional z-koto">then</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">caption</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>one to four<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">numbers</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">1</span>, <span class="z-constant z-numeric z-koto">2</span>, <span class="z-constant z-numeric z-koto">3</span>, <span class="z-constant z-numeric z-koto">4</span>
+</span><span class="z-source z-koto">  <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>five_to_eight<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span> <span class="z-keyword z-control z-conditional z-koto">then</span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">caption</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-string z-quoted z-single z-koto"><span class="z-punctuation z-definition z-string z-begin z-koto">&#39;</span>five to eight<span class="z-punctuation z-definition z-string z-end z-koto">&#39;</span></span>
+</span><span class="z-source z-koto">    <span class="z-variable z-other z-koto">numbers</span> <span class="z-keyword z-operator z-assignment z-koto">=</span> <span class="z-constant z-numeric z-koto">5</span>, <span class="z-constant z-numeric z-koto">6</span>, <span class="z-constant z-numeric z-koto">7</span>, <span class="z-constant z-numeric z-koto">8</span>
+</span><span class="z-source z-koto">
+</span><span class="z-source z-koto"><span class="z-keyword z-control z-import">export</span> </span><span class="z-meta z-braces z-koto"><span class="z-punctuation z-section z-braces z-begin z-koto">{</span><span class="z-variable z-other z-koto">caption</span>, <span class="z-variable z-other z-koto">numbers</span><span class="z-punctuation z-section z-braces z-end z-koto">}</span></span><span class="z-source z-koto">
+</span></code></pre>
+<p>In Rust, the <code>request</code> value can be created from an enum that implements <code>Serialize</code>:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">derive</span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust">Serialize</span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">serde</span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust">rename_all <span class="z-keyword z-operator z-rust">=</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>snake_case<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-enum z-rust"><span class="z-storage z-type z-enum z-rust">enum</span> <span class="z-entity z-name z-enum z-rust">Request</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-enum z-rust"><span class="z-meta z-block z-rust">    OneToFour<span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-enum z-rust"><span class="z-meta z-block z-rust">    FiveToEight<span class="z-punctuation z-separator z-rust">,</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-enum z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust">koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">prelude</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span><span class="z-source z-rust">    <span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">insert</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>request<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span><span class="z-punctuation z-separator z-rust">,</span> <span class="z-support z-function z-rust">to_koto_value</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-path z-rust">Request<span class="z-punctuation z-accessor z-rust">::</span></span>FiveToEight</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></code></pre>
+<p>The exported map can then be converted into a struct that implements <code>Deserialize</code>:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">derive</span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust">Deserialize</span></span><span class="z-meta z-annotation z-parameters z-rust"><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-struct z-rust"><span class="z-storage z-type z-struct z-rust">struct</span> </span><span class="z-meta z-struct z-rust"><span class="z-entity z-name z-struct z-rust">Exported</span> </span><span class="z-meta z-struct z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-struct z-rust"><span class="z-meta z-block z-rust">    <span class="z-variable z-other z-member z-rust">caption</span><span class="z-punctuation z-separator z-type z-rust">:</span> String,
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-struct z-rust"><span class="z-meta z-block z-rust">    <span class="z-variable z-other z-member z-rust">numbers</span><span class="z-punctuation z-separator z-type z-rust">:</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Vec</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-storage z-type z-rust">i64</span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span>,
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-struct z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> exported<span class="z-punctuation z-separator z-rust">:</span> Exported <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-support z-function z-rust">from_koto_value</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>koto<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">exports</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">clone</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></code></pre>
+<p>See the complete example <a href="/docs/0.16/api#using-serde-for-value-conversions">here</a>.</p>
+<h3 id="and-more">...and more!</h3>
+<p>These are a few highlights, see <a href="https://github.com/koto-lang/koto/releases/tag/v0.16.0">here</a> for the full list of changes in v0.16.</p>
+
+      <article>
+  </div>
+</div>
+
+
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href=/docs/0.16>Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href=/play-0.16>Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" id="light-switch-mobile-nav">
+        <img class="light-switch-icon" id="light-switch-mobile-nav-icon"/>
+      </a>
+    </div>
+
+
+    
+<hr>
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;">
+      Koto 0.16
+    </a>
+  </li>
+  
+  
+    
+      
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#automatic-formatting">
+            Automatic Formatting
+          </a>
+        </li>
+
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#language-improvements">
+            Language Improvements
+          </a>
+        </li>
+
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#optional-arguments">Optional Arguments</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#wildcard-imports">Wildcard Imports</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#power-operator">Power Operator</a>
+            </li>
+          </ul>
+        
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="https://koto.dev/news/koto-0-16/#meta-object-improvements">Meta Object Improvements</a>
+            </li>
+          </ul>
+        
+      
+    
+      
+        <li class="uk-nav-parent">
+          <a href="https:&#x2F;&#x2F;koto.dev&#x2F;news&#x2F;koto-0-16&#x2F;#improved-koto-rust-value-conversions">
+            Improved Koto ↔ Rust Value Conversions
+          </a>
+        </li>
+
+        
+      
+    
+      
+      
+    
+  
+</ul>
+
+
+      </div>
+</div>
+
+
+    
+      <script type="module" src="/bundle/main-BziFg2rg.js"></script>
+    
+  </body>
+</html>
