@@ -1,3 +1,18 @@
+build:
+  @just docs
+  @just playground-release
+  zola build
+
+deploy:
+  git fetch
+  git checkout deploy
+  git reset --hard origin/main
+  @just submodules
+  @just build
+  git add -f public
+  git commit -m "Add public dir"
+  git push origin deploy
+
 docs:
   cargo run -p convert-koto-docs
 
@@ -25,6 +40,9 @@ serve-release:
   @just docs
   @just playground-release
   zola serve --open --fast
+
+submodules:
+  git submodule update --init --recursive
 
 test:
   cargo watch -x test
