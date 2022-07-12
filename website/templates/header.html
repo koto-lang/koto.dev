@@ -6,10 +6,21 @@
       <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
         <img id="nav-logo" src="/koto.svg" />
       </a>
+
     </div>
 
     <div class="uk-navbar-right">
-      <ul class="uk-navbar-nav">
+      <ul class="uk-navbar-nav uk-hidden@s">
+        <li>
+          <a
+            class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"
+            ><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="uk-navbar-nav uk-visible@s">
         <li>
           <a class="uk-navbar-item uk-text-capitalize" href="/docs">Docs</a>
         </li>
@@ -31,8 +42,8 @@
         </li>
 
         <li>
-          <a class="uk-navbar-item" id="light-switch" onclick="toggleColorScheme();">
-            <img id="light-switch-icon" />
+          <a class="uk-navbar-item light-switch" onclick="toggleColorScheme();">
+            <img class="light-switch-icon" id="light-switch-icon-navbar"/>
           </a>
         </li>
 

@@ -6,65 +6,21 @@
 
 {% block content %}
 
-<nav class="docs-sidebar" role="navigation">
-  <ul class="uk-nav uk-nav-default">
-    {% set index = get_section(path="docs/_index.md") %}
-
-    {% for s in index.subsections %}
-      {% set subsection = get_section(path=s) %}
-
-      <li class="uk-nav-header{% if current_path == subsection.path %} uk-active{% endif %}">
-        <a href="{{ subsection.permalink }}">
-          {{ subsection.title }}
-        </a>
-      </li>
-
-      {% if page %}
-        {% set parent_name = page.ancestors | last %}
-        {% set parent = get_section(path = parent_name) %}
-        {% set show_pages = parent == subsection %}
-      {% endif %}
-
-      {% if section %}
-        {% set show_pages = section == subsection %}
-      {% endif %}
-
-      {% if show_pages %}
-        {% for p in subsection.pages %}
-
-        <li class="{% if current_path == p.path %}uk-active uk-parent{% endif %}">
-          <a href="{{ p.permalink }}">
-            {{ p.title }}
-          </a>
-
-          {% if current_path == p.path %}
-            {% set first_header = p.toc | first %}
-
-            {% if first_header.children | length > 0 %}
-              <ul class="uk-nav-sub uk-nav-default">
-                {% for h1 in p.toc %}
-                  {% for h2 in h1.children %}
-                  <li>
-                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                  </li>
-                  {% endfor %}
-                {% endfor %}
-              </ul>
-            {% endif %}
-          {% endif %}
-        </li>
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </ul>
+<nav class="docs-sidebar uk-visible@s" role="navigation">
+  {% include "docs-nav-contents.html" %}
 </nav>
 
 <div class="docs-section uk-section">
-  <div class="uk-container uk-container-small">
-    <div>
+  <div class="uk-container uk-container-small uk-width-expand">
+    <div class="uk-align-left uk-width-expand">
       {% block docscontent %} {% endblock %}
     </div>
   </div>
 </div>
 
 {% endblock content %}
+
+{% block mobile_nav %}
+  {% include "docs-nav-contents.html" %}
+</nav>
+{% endblock mobile_nav %}

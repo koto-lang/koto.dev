@@ -14,8 +14,19 @@ h2
   width: 200px
   padding: $nav-logo-padding
 
-.docs-section
-  padding-left: 260px
+
+@media (min-width: 640px)
+  .docs-section
+    padding-left: 260px
+    padding-right: 50px
+
+@media (min-width: 960px)
+  .docs-section
+    padding-right: 155px
+
+@media (min-width: 1200px)
+  .docs-section
+    padding-right: 260px
 
 .playground-link
   margin-top: -$base-margin-vertical

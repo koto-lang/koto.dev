@@ -5,18 +5,30 @@ setColorScheme = function(colorScheme) {
 
   const body = document.body;
   if (body) {
-    const lightSwitch = document.getElementById("light-switch-icon");
+    const lightSwitches = document.getElementsByClassName("light-switch-icon");
+    // UIKit doesn't support dark mode for offscreen elements
+    const mobileNav = document.getElementById("mobile-nav-contents");
 
     if (colorScheme == "dark") {
       body.classList.add("uk-light");
       body.classList.remove("uk-dark");
 
-      lightSwitch.src = "/sun.svg";
+      for (let i=0; i < lightSwitches.length; i++) {
+        lightSwitches[i].src = "/sun.svg";
+      }
+
+      mobileNav.classList.add("background-dark");
+      mobileNav.classList.remove("background-light");
     } else {
       body.classList.add("uk-dark");
       body.classList.remove("uk-light");
 
-      lightSwitch.src = "/moon.svg";
+      for (let i=0; i < lightSwitches.length; i++) {
+        lightSwitches[i].src = "/moon.svg";
+      }
+
+      mobileNav.classList.add("background-light");
+      mobileNav.classList.remove("background-dark");
     }
   }
 }

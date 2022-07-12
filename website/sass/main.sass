@@ -20,9 +20,15 @@ body
 #nav-logo
   height: $logo-height
 
-#light-switch-icon
-  height: $nav-parent-icon-height
+.light-switch-icon
+  height: $nav-parent-icon-height * 0.88
   width: $nav-parent-icon-width
+
+.background-dark
+  background: $global-secondary-background !important
+
+.background-light
+  background: $global-background !important
 
 [color-scheme="light"]
   @import 'code-light.scss'
@@ -36,10 +42,10 @@ body
   .navbar
     background-color: $global-background !important
 
-  #light-switch
+  .light-switch
     filter: opacity(50%)
 
-  #light-switch:hover
+  .light-switch:hover
     filter: opacity(70%)
 
 [color-scheme="dark"]
@@ -60,8 +66,8 @@ body
   #nav-logo
     filter: invert(100%)
 
-  #light-switch
+  .light-switch
     filter: opacity(50%) invert(100%)
 
-  #light-switch:hover
+  .light-switch:hover
     filter: opacity(70%) invert(100%)
