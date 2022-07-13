@@ -1,0 +1,19 @@
+<div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/docs">Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/play">Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" onclick="toggleColorScheme();">
+        <img class="light-switch-icon" id="light-switch-icon-mobile-nav"/>
+      </a>
+    </div>
+
+    {% block mobile_nav %}{% endblock %}
+  </div>
+</div>

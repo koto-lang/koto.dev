@@ -14,8 +14,6 @@ The playground is built with [Trunk](https://trunkrs.dev), installation instruct
 
 The Rust Wasm build target should be installed, e.g. `rustup target add wasm32-unknown-unknown`.
 
-Koto is used in a post-processing build step so the CLI should be available in your path, e.g. via `cargo install koto_cli`.
-
 ### Gist Worker
 
 The playground's worker for creating gists uses [Cloudflare Workers](https://workers.cloudflare.com), and the CLI tool for testing and deploying is [Wrangler](https://github.com/cloudflare/wrangler).
