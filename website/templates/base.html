@@ -24,6 +24,8 @@
 
     {% block content %} {% endblock %}
 
-    {% include "mobile-nav.html" %}
+    {% include "mobile-nav-start.html" %}
+    {% block mobile_nav %} {% endblock %}
+    {% include "mobile-nav-end.html" %}
   </body>
 </html>

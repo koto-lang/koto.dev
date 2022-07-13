@@ -12,11 +12,16 @@ fn main() {
         env!("CARGO_MANIFEST_DIR"),
         "/../../templates/header.html"
     ));
-    let mobile_nav = include_str!(concat!(
-        env!("CARGO_MANIFEST_DIR"),
-        "/../../templates/mobile-nav.html"
-    ))
-    .replace("{% block mobile_nav %}{% endblock %}", "");
+    let mobile_nav = concat!(
+        include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../templates/mobile-nav-start.html"
+        )),
+        include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../templates/mobile-nav-end.html"
+        ))
+    );
 
     let output = index
         .replace("<!-- header-placeholder -->", header)
