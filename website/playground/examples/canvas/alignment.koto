@@ -7,7 +7,7 @@ w2, h2 = w / 2, h / 2
 z = (w.min h) / 2
 
 # Clear the background
-canvas.clear 50, 50, 80
+canvas.clear 100, 150, 180
 
 # Background diagonals
 canvas.begin_path()
@@ -15,7 +15,7 @@ canvas.begin_path()
   .line_to w, h
   .move_to w, 0
   .line_to 0, h
-  .set_stroke_color 100, 100, 100
+  .set_stroke_color 170, 170, 170
   .stroke()
 
 # Centered shapes
@@ -36,5 +36,5 @@ canvas.begin_path()
   .move_to w2 + z, h2
   .arc w2, h2, z, 0, tau
   # Stroke
-  .set_stroke_color 180, 180, 180
+  .set_stroke_color 200, 200, 200
   .stroke()

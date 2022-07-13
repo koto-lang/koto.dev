@@ -24,10 +24,17 @@ pub fn examples_dialog(props: &Props) -> Html {
     let script_groups = use_ref(|| {
         vec![
             ScriptGroup {
-                name: "Examples",
+                name: "Getting Started",
+                scripts: &[Script {
+                    name: "Hello World",
+                    url: "/play/examples/intro/hello_world.koto",
+                }],
+            },
+            ScriptGroup {
+                name: "Play",
                 scripts: &[Script {
                     name: "Fizz Buzz",
-                    url: "/play/examples/intro/fizz_buzz.koto",
+                    url: "/play/examples/play/fizz_buzz.koto",
                 }],
             },
             ScriptGroup {
