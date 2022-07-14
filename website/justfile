@@ -52,6 +52,12 @@ submodules:
 test:
   cargo watch -x test
 
+update-koto:
+  test -z "$(git status --porcelain)" || (echo "Dirty working copy" && exit 1)
+  cd ../modules/koto && git fetch && git checkout origin/main
+  git add ../modules/koto
+  git commit -m "Update to the latest version of Koto"
+
 worker:
   wrangler dev playground/gist-worker/index.js
 
