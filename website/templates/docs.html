@@ -5,7 +5,7 @@
 <div class="uk-section">
   <div class="uk-container">
     <div uk-grid class="uk-child-width-expand@m uk-grid-match uk-text-center">
-      {% set index = get_section(path="docs/_index.md") %}
+      {% set index = get_section(path=section.relative_path) %}
 
       {% for s in index.subsections %}
       {% set subsection = get_section(path=s) %}
