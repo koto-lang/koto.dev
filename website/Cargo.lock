@@ -275,7 +275,7 @@ dependencies = [
 
 [[package]]
 name = "koto"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "dunce",
  "koto_bytecode",
@@ -285,7 +285,7 @@ dependencies = [
 
 [[package]]
 name = "koto_bytecode"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "dunce",
  "koto_parser",
@@ -295,7 +295,7 @@ dependencies = [
 
 [[package]]
 name = "koto_lexer"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "unicode-width",
  "unicode-xid",
@@ -303,14 +303,14 @@ dependencies = [
 
 [[package]]
 name = "koto_parser"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "koto_lexer",
 ]
 
 [[package]]
 name = "koto_random"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "getrandom",
  "koto_runtime",
@@ -321,7 +321,7 @@ dependencies = [
 
 [[package]]
 name = "koto_runtime"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
  "chrono",
  "downcast-rs",
