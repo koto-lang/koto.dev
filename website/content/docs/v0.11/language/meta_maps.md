@@ -80,5 +80,3 @@ The following meta functions can also be defined:
 * `@type`
   * Provides a String that's used when checking the map's type:
     * `@type: "X"`
-
-todo! Add a note about sharing meta maps between instances.
