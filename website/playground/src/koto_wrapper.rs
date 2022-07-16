@@ -8,7 +8,7 @@ use {
         Koto, KotoError, KotoSettings,
     },
     rand::{thread_rng, Rng},
-    std::{cell::RefCell, collections::VecDeque, fmt, rc::Rc},
+    std::{cell::RefCell, collections::VecDeque, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
     web_sys::{CanvasRenderingContext2d, Element, HtmlCanvasElement},
     yew::Callback,
@@ -127,6 +127,7 @@ impl KotoWrapper {
 
         let koto = Koto::with_settings(
             KotoSettings::default()
+                .with_stdin(PlaygroundInput {})
                 .with_stdout(OutputCapture {
                     id: "_stdout_".into(),
                     queue: message_queue.clone(),
@@ -1019,15 +1020,39 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
     canvas_module
 }
 
+// Shows a prompt when input is requested
+struct PlaygroundInput {}
+
+impl KotoFile for PlaygroundInput {
+    fn id(&self) -> String {
+        "PlaygroundInput".to_string()
+    }
+}
+
+impl KotoWrite for PlaygroundInput {}
+impl KotoRead for PlaygroundInput {
+    fn read_line(&self) -> Result<Option<String>, RuntimeError> {
+        runtime_error!("stdin is unsupported in the browser")
+    }
+
+    fn read_to_string(&self) -> Result<String, RuntimeError> {
+        runtime_error!("stdin is unsupported in the browser")
+    }
+}
+
 // Captures output from Koto in a String
 struct OutputCapture {
     id: String,
     queue: KotoMessageQueue,
 }
 
-impl KotoFile for OutputCapture {}
-impl KotoRead for OutputCapture {}
+impl KotoFile for OutputCapture {
+    fn id(&self) -> String {
+        self.id.clone()
+    }
+}
 
+impl KotoRead for OutputCapture {}
 impl KotoWrite for OutputCapture {
     fn write(&self, bytes: &[u8]) -> Result<(), RuntimeError> {
         let bytes_str = match std::str::from_utf8(bytes) {
@@ -1049,17 +1074,5 @@ impl KotoWrite for OutputCapture {
 
     fn flush(&self) -> Result<(), RuntimeError> {
         Ok(())
-    }
-}
-
-impl fmt::Display for OutputCapture {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&self.id)
-    }
-}
-
-impl fmt::Debug for OutputCapture {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&self.id)
     }
 }
