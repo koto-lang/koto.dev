@@ -1,12 +1,6 @@
 use {
     cloned::cloned,
-    koto::{
-        runtime::{
-            runtime_error, unexpected_type_error_with_slice, CallArgs, KotoFile, KotoRead,
-            KotoWrite, RuntimeError, Value, ValueMap,
-        },
-        Koto, KotoError, KotoSettings,
-    },
+    koto::{prelude::*, KotoError},
     rand::{thread_rng, Rng},
     std::{cell::RefCell, collections::VecDeque, rc::Rc},
     wasm_bindgen::{prelude::*, JsCast},
@@ -448,13 +442,7 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
             let alpha = match vm.get_args(args) {
                 [] => 1.0,
                 [Number(alpha)] => alpha.into(),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "play.random_color",
-                        "an optional alpha value",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("an optional alpha value", unexpected),
             };
 
             let mut rng = thread_rng();
@@ -475,13 +463,7 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
         move |vm, args| {
             let fps = match vm.get_args(args) {
                 [Number(fps)] if *fps >= 0.0 => f64::from(fps),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "play.set_fps",
-                        "a non-negative Number",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("a non-negative Number", unexpected),
             };
             queue.borrow_mut().push_back(KotoMessage::SetFps(fps));
             Ok(Null)
@@ -521,8 +503,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     (x.into(), y.into(), radius.into(), start_angle.into(), end_angle.into(), *counter_clockwise)
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.arc",
+                    return type_error_with_slice(
                         "x & y (as Numbers or a Num2), radius, start_angle, end_angle, counter_clockwise (optional)",
                         unexpected,
                     )
@@ -564,13 +545,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     color.2 as f64,
                     color.3 as f64,
                 )),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "play.random_color",
-                        "an optional alpha value",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("an optional alpha value", unexpected),
             }
             .map(|(r, g, b, a)| Color { r, g, b, a });
 
@@ -600,8 +575,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     (x.into(), y.into(), width.into(), height.into())
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.fill_rect",
+                    return type_error_with_slice(
                         "(x and y (as Numbers or a Num2), width, height)",
                         unexpected,
                     )
@@ -628,8 +602,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 [Str(text), Num2(n)] => (text, n.0, n.1, None),
                 [Str(text), Num2(n), Number(max_width)] => (text, n.0, n.1, Some(max_width.into())),
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.fill_text",
+                    return type_error_with_slice(
                         "(text, x and y (as Numbers or a Num2), max width (optional))",
                         unexpected,
                     )
@@ -655,13 +628,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
                 [Num2(n)] => (n[0], n[1]),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.line_to",
-                        "two Numbers or a Num2",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("two Numbers or a Num2", unexpected),
             };
             queue
                 .borrow_mut()
@@ -676,13 +643,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
                 [Num2(n)] => (n[0], n[1]),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.move_to",
-                        "two Numbers or a Num2",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("two Numbers or a Num2", unexpected),
             };
             queue
                 .borrow_mut()
@@ -702,8 +663,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     (x.into(), y.into(), width.into(), height.into())
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.rect",
+                    return type_error_with_slice(
                         "x and y (as Numbers or a Num2), width, height",
                         unexpected,
                     )
@@ -724,13 +684,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
         move |vm, args| {
             let n = match vm.get_args(args) {
                 [Number(n)] => n.into(),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.rotate",
-                        "a Number in radians",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("a Number in radians", unexpected),
             };
             queue.borrow_mut().push_back(KotoMessage::Rotate(n));
             Ok(Map(canvas_module.clone()))
@@ -751,13 +705,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     color.2 as f64,
                     color.3 as f64,
                 ),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_fill_color",
-                        "3 or 4 Numbers or a Num4",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("3 or 4 Numbers or a Num4", unexpected),
             };
             queue
                 .borrow_mut()
@@ -771,13 +719,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
         move |vm, args| {
             let font = match vm.get_args(args) {
                 [Str(font)] => font,
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_font",
-                        "a String",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("a String", unexpected),
             };
             queue
                 .borrow_mut()
@@ -791,13 +733,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
         move |vm, args| {
             let width = match vm.get_args(args) {
                 [Number(n)] => n,
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_line_width",
-                        "a Number",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("a Number", unexpected),
             };
             queue
                 .borrow_mut()
@@ -820,13 +756,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     color.2 as f64,
                     color.3 as f64,
                 ),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_stroke_color",
-                        "3 or 4 Numbers or a Num4",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("3 or 4 Numbers or a Num4", unexpected),
             };
             queue
                 .borrow_mut()
@@ -850,8 +780,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     s.to_string()
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_text_align",
+                    return type_error_with_slice(
                         &format!(
                             "a String matching one of the following values: {:?}",
                             allowed_values,
@@ -889,8 +818,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     s.to_string()
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_text_baseline",
+                    return type_error_with_slice(
                         &format!(
                             "a String matching one of the following values: {:?}",
                             allowed_values,
@@ -913,13 +841,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 [Number(a), Number(b), Number(c), Number(d), Number(e), Number(f)] => {
                     (a.into(), b.into(), c.into(), d.into(), e.into(), f.into())
                 }
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.set_transform",
-                        "6 Numbers",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("6 Numbers", unexpected),
             };
             queue
                 .borrow_mut()
@@ -947,8 +869,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                     (x.into(), y.into(), width.into(), height.into())
                 }
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.stroke_rect",
+                    return type_error_with_slice(
                         "(x and y (as Numbers or a Num2), width, height)",
                         unexpected,
                     )
@@ -975,8 +896,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 [Str(text), Num2(n)] => (text, n.0, n.1, None),
                 [Str(text), Num2(n), Number(max_width)] => (text, n.0, n.1, Some(max_width.into())),
                 unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.stroke_text",
+                    return type_error_with_slice(
                         "(text, x and y (as Numbers or a Num2), max width (optional))",
                         unexpected,
                     )
@@ -997,13 +917,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             let (x, y) = match vm.get_args(args) {
                 [Number(x), Number(y)] => (x.into(), y.into()),
                 [Num2(n)] => (n[0], n[1]),
-                unexpected => {
-                    return unexpected_type_error_with_slice(
-                        "canvas.translate",
-                        "two Numbers or a Num2",
-                        unexpected,
-                    )
-                }
+                unexpected => return type_error_with_slice("two Numbers or a Num2", unexpected),
             };
             queue
                 .borrow_mut()
