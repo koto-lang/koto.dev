@@ -31,10 +31,10 @@ playground-release:
   cd playground && trunk build --release
 
 playground-serve:
-  cd playground && trunk serve --open
+  cd playground && trunk serve --ignore ../static --open
 
 playground-serve-release:
-  cd playground && trunk serve --release --open
+  cd playground && trunk serve --ignore ../static --release --open
 
 serve:
   @just docs

@@ -41,16 +41,16 @@ pub fn examples_dialog(props: &Props) -> Html {
                 name: "Canvas",
                 scripts: &[
                     Script {
-                        name: "Alignment",
-                        url: "/play/examples/canvas/alignment.koto",
-                    },
-                    Script {
-                        name: "Boids",
-                        url: "/play/examples/canvas/boids.koto",
+                        name: "Lines",
+                        url: "/play/examples/canvas/lines.koto",
                     },
                     Script {
                         name: "Random Rects",
                         url: "/play/examples/canvas/random_rects.koto",
+                    },
+                    Script {
+                        name: "Boids",
+                        url: "/play/examples/canvas/boids.koto",
                     },
                 ],
             },

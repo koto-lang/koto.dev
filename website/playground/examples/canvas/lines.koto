@@ -1,0 +1,29 @@
+import color, number.lerp, play.random_color
+
+play.show_canvas()
+w, h = canvas.width(), canvas.height()
+
+line_color = color.named 'white'
+steps = 40
+
+play.update = |_, time|
+  clear_alpha = 0.2
+  background_color = color 0.0, 0.2, 0.2, clear_alpha
+  canvas.clear background_color
+
+  speed = 0.8
+  z = (time * speed).sin() / 2 + 0.5
+  steps = lerp 10, 100, z
+  for i in 0..=steps
+    step = i / steps
+    x = w * step
+    y = h * step
+
+    canvas.begin_path()
+      .move_to x, 0
+      .line_to w - x, h
+      .move_to 0, y
+      .line_to w, h - y
+      .set_stroke_color line_color * (1.0 - step * 0.8)
+      .set_line_width 1
+      .stroke()

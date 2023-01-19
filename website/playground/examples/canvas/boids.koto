@@ -1,22 +1,23 @@
-from number import pi, pi_2, tau
+import color, geometry.vec2
+from number import lerp, pi, pi_2, tau
 
-boid_count = 50
+boid_count = 20
 
-boid_width = 15
-boid_height = 18
-visual_range = boid_width * 4
+boid_width = 25
+boid_height = 33
+visual_range = boid_width * 3
 boundary = 20
 
-background_color = make_num4 60, 80, 80, 1
+background_color = color 0.3, 0.3, 0.3
 
 show_ranges = false
-visual_range_color = make_num4 230, 230, 230, 1
+visual_range_color = color 0.6, 0.6, 0.6
 
-attraction_factor = 0.5
-matching_factor = 0.5
-avoidance_factor = 2
+attraction_factor = 0.01
+matching_factor = 0.025
+avoidance_factor = 3
 boundary_turn_rate = 8
-minimum_distance = boid_width * 1.5
+minimum_distance = boid_width * 1.2
 
 initial_speed = 4
 speed_limit = 6
@@ -25,18 +26,18 @@ make_boid = ||
   x = random.number() * canvas.width()
   y = random.number() * canvas.height()
   direction = random.number() * tau
-  color = 120.lerp 220, random.number()
+  c = lerp 0.4, 0.8, random.number()
   return
-    color: make_num4 color, color, color, 1.0
-    position: make_num2 x, y
-    velocity: make_num2 direction.cos() * initial_speed, direction.sin() * initial_speed
+    color: color c, c, c
+    position: vec2 x, y
+    velocity: vec2 direction.cos() * initial_speed, direction.sin() * initial_speed
 
 update_boid = |boid, state, time_delta|
   boids_in_range = 1
-  position = boid.position
-  other_positions_sum = position
-  other_velocities_sum = boid.velocity
-  avoid_close_boids = make_num2 0, 0
+  position = vec2 boid.position
+  other_positions_sum = vec2 position
+  other_velocities_sum = vec2 boid.velocity
+  avoid_close_boids = vec2 0, 0
 
   for other_boid in state.boids
     if boid != other_boid
@@ -74,16 +75,17 @@ update_boid = |boid, state, time_delta|
   switch
     y < boundary then dy = initial_speed
     y > canvas.height() - boundary then dy = -initial_speed
-  boid.velocity += make_num2(dx, dy) * boundary_turn_rate * time_delta
+  boid.velocity += vec2(dx, dy) * boundary_turn_rate * time_delta
 
 draw_boid = |boid|
-  x, y = boid.position
+  xy = boid.position
+  x, y = xy
 
   # Rotate the canvas transformation to match the boid's angle
   canvas
-    .translate x, y
+    .translate xy
     .rotate boid.velocity.angle() + pi_2
-    .translate -x, -y
+    .translate -xy
 
   w2 = boid_width / 2
   bottom = y + boid_height / 3
@@ -106,9 +108,9 @@ draw_boid = |boid|
   if show_ranges
     canvas
       .begin_path()
-      .arc x, y, visual_range, 0, tau
+      .arc xy, visual_range, 0, tau
       .move_to x + minimum_distance, y
-      .arc x, y, minimum_distance, 0, tau
+      .arc xy, minimum_distance, 0, tau
       .set_stroke_color visual_range_color
       .stroke()
 
