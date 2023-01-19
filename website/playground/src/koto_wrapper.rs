@@ -173,9 +173,9 @@ impl KotoWrapper {
 
         {
             let mut play_module = self.play_module.data_mut();
-            play_module.remove_with_string("setup");
-            play_module.remove_with_string("on_load");
-            play_module.remove_with_string("update");
+            play_module.remove("setup");
+            play_module.remove("on_load");
+            play_module.remove("update");
         }
 
         self.koto.clear_module_cache();
@@ -206,7 +206,7 @@ impl KotoWrapper {
         }
 
         if matches!(self.script_state, ScriptState::Compiled) {
-            let maybe_fn = self.play_module.data().get_with_string("setup").cloned();
+            let maybe_fn = self.play_module.data().get("setup").cloned();
             self.user_state = match maybe_fn {
                 Some(f) => match self.koto.run_function(f, CallArgs::None) {
                     Ok(state) => state,
@@ -251,7 +251,7 @@ impl KotoWrapper {
     }
 
     pub fn update_should_be_called(&self) -> bool {
-        self.is_initialized() && self.play_module.data().get_with_string("update").is_some()
+        self.is_initialized() && self.play_module.data().get("update").is_some()
     }
 
     fn error(&mut self, error: &str) {
@@ -271,7 +271,7 @@ impl KotoWrapper {
         function_name: &str,
         args: &[Value],
     ) -> Result<Value, KotoError> {
-        match self.play_module.data().get_with_string(function_name) {
+        match self.play_module.data().get(function_name) {
             Some(f) => self.koto.run_function(f.clone(), CallArgs::Separate(args)),
             None => Ok(Value::Null),
         }
