@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 koto = { path = "../../modules/koto/src/koto" }
+koto_color = { path = "../../modules/koto/libs/color" }
+koto_geometry = { path = "../../modules/koto/libs/geometry" }
 koto_random = { path = "../../modules/koto/libs/random" }
 
 console_error_panic_hook = "0.1" # A panic hook for `wasm32-unknown-unknown` that logs panics to `console.error`
