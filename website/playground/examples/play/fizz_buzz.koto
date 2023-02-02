@@ -1,16 +1,25 @@
 # Fizz buzz in Koto
+# https://en.wikipedia.org/wiki/Fizz_buzz
 
 fizz_buzz = |n|
   match n % 3, n % 5
     0, 0 then "Fizz Buzz"
     0, _ then "Fizz"
     _, 0 then "Buzz"
-    else n
+    else '$n'
 
+# The number of times a second that play.update should be called
+play.set_fps 5
+
+# play.setup returns a state value that will be passed into each update.
+# The state value is maintained between recompiles, so you can make changes to the script without
+# interrupting the flow of your program.
+#
+# Pressing the Reload button will call play.setup again, allowing state to be reinitialized.
 play.setup = ||
   current_value: 0
 
-play.set_fps 5
+# Called regularly with the current state
 play.update = |state|
   n = state.current_value += 1
   print fizz_buzz n

@@ -4,26 +4,31 @@ play.show_canvas()
 w, h = canvas.width(), canvas.height()
 
 line_color = color.named 'white'
-steps = 40
+background_color = (color.named 'grey')
+background_color.set_a 0.5
+speed = 0.8
+steps_min = 3
+steps_max = 10
+line_width = 5
 
 play.update = |_, time|
-  clear_alpha = 0.2
-  background_color = color 0.0, 0.2, 0.2, clear_alpha
   canvas.clear background_color
 
-  speed = 0.8
+  # Oscillate over time between 0 and 1
   z = (time * speed).sin() / 2 + 0.5
-  steps = lerp 10, 100, z
+
+  steps = lerp steps_min, steps_max, z
   for i in 0..=steps
     step = i / steps
     x = w * step
     y = h * step
+    z = line_width
 
     canvas.begin_path()
-      .move_to x, 0
-      .line_to w - x, h
-      .move_to 0, y
-      .line_to w, h - y
-      .set_stroke_color line_color * (1.0 - step * 0.8)
-      .set_line_width 1
+      .move_to x - z, -z
+      .line_to w + z, h - y + z
+      .move_to -z, y - z
+      .line_to w - x + z, h + z
+      .set_stroke_color line_color * (1.0 - step * 0.3)
+      .set_line_width line_width
       .stroke()
