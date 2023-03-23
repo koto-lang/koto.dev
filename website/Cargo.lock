@@ -325,6 +325,7 @@ name = "koto_bytecode"
 version = "0.11.0"
 dependencies = [
  "dunce",
+ "koto_memory",
  "koto_parser",
  "rustc-hash",
  "smallvec",
@@ -355,10 +356,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "koto_memory"
+version = "0.11.0"
+
+[[package]]
 name = "koto_parser"
 version = "0.11.0"
 dependencies = [
  "koto_lexer",
+ "koto_memory",
 ]
 
 [[package]]
@@ -382,6 +388,7 @@ dependencies = [
  "instant",
  "koto_bytecode",
  "koto_lexer",
+ "koto_memory",
  "koto_parser",
  "rustc-hash",
  "smallvec",

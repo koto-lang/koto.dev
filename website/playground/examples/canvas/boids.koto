@@ -79,7 +79,6 @@ update_boid = |boid, state, time_delta|
 
 draw_boid = |boid|
   xy = boid.position
-  x, y = xy
 
   # Rotate the canvas transformation to match the boid's angle
   canvas
@@ -91,6 +90,8 @@ draw_boid = |boid|
   bottom = y + boid_height / 3
   top = bottom - boid_height
   bump = bottom - boid_height / 6
+
+  x, y = xy
 
   canvas
     .begin_path()

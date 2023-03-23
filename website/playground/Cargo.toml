@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-koto = { path = "../../modules/koto/src/koto" }
+koto = { path = "../../modules/koto/core/koto" }
 koto_color = { path = "../../modules/koto/libs/color" }
 koto_geometry = { path = "../../modules/koto/libs/geometry" }
 koto_random = { path = "../../modules/koto/libs/random" }
