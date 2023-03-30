@@ -7,7 +7,7 @@
 {% block content %}
 
 <nav class="docs-sidebar uk-visible@s" role="navigation">
-  {% include "docs-nav-contents.html" %}
+  {% block docsnav %}{% endblock docsnav %}
 </nav>
 
 <div class="docs-section uk-section">
@@ -23,5 +23,5 @@
 {% block mobile_nav %}
   <hr>
 
-  {% include "docs-nav-contents.html" %}
+  {% block docsnav_mobile %}{% endblock docsnav_mobile %}
 {% endblock mobile_nav %}

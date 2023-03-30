@@ -1,11 +1,18 @@
 {% extends "docs-base.html" %}
 
+{% block docsnav %}
+  {% include "docs-lang-guide-nav.html" %}
+{% endblock docsnav %}
+{% block docsnav_mobile %}
+  {% include "docs-lang-guide-nav.html" %}
+{% endblock docsnav_mobile %}
+
 {% block docscontent %}
 
 {{ page.content | safe }}
 
 <ul class="uk-pagination">
-  {% if page.lighter %}
+   {% if page.lighter %}
     {% set other = page.lighter %}
 
     <li>
