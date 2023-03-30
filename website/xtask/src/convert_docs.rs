@@ -31,7 +31,7 @@ fn convert_lang_guide_docs() -> Result<()> {
     let index_contents = fs::read_to_string(index_path)?;
 
     let mut output_path = output_dir.clone();
-    output_path.push("guide.md");
+    output_path.push("_index.md");
     let mut output_file = fs::File::create(&output_path).map_err(|e| {
         format!(
             "Failed to create output file '{}': '{}'",
@@ -39,17 +39,7 @@ fn convert_lang_guide_docs() -> Result<()> {
             e
         )
     })?;
-    write!(
-        output_file,
-        "\
-+++
-title = \"Guide\"
-slug = \"guide\"
-weight = 0
-+++
-
-# Koto Language Guide"
-    )?;
+    write!(output_file, include_str!("../../templates/guide-intro.md"))?;
 
     let mut in_list_item = false;
     for event in Parser::new(&index_contents) {

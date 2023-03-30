@@ -28,29 +28,31 @@
     {% endif %}
 
     {% if show_pages %}
-      {% for p in subsection.pages %}
-        <li class="{% if current_path == p.path %}uk-active uk-parent{% endif %}">
-          <a href="{{ p.permalink }}">
-            {{ p.title }}
-          </a>
+      <ul class="uk-nav-sub uk-nav-default">
+        {% for p in subsection.pages %}
+          <li class="{% if current_path == p.path %}uk-active{% endif %}">
+            <a href="{{ p.permalink }}">
+              {{ p.title }}
+            </a>
 
-          {% if current_path == p.path %}
-            {% set first_header = p.toc | first %}
+            {% if current_path == p.path %}
+              {% set first_header = p.toc | first %}
 
-            {% if first_header.children | length > 0 %}
-              <ul class="uk-nav-sub uk-nav-default">
-                {% for h1 in p.toc %}
-                  {% for h2 in h1.children %}
-                  <li>
-                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                  </li>
+              {% if first_header.children | length > 0 %}
+                <ul class="uk-nav-sub uk-nav-default">
+                  {% for h1 in p.toc %}
+                    {% for h2 in h1.children %}
+                      <li>
+                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                      </li>
+                    {% endfor %}
                   {% endfor %}
-                {% endfor %}
-              </ul>
+                </ul>
+              {% endif %}
             {% endif %}
-          {% endif %}
-        </li>
-      {% endfor %}
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
   {% endfor %}
 </ul>

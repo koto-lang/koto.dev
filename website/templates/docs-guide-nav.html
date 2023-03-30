@@ -13,13 +13,19 @@
     </li>
 
     {% if current_path == subsection.path %}
-      <ul class="uk-nav-sub uk-nav-default">
-        {% for p in subsection.pages %}
-        <li>
-          <a href="{{ p.permalink | safe }}">{{ p.title }}</a>
-        </li>
-        {% endfor %}
-      </ul>
+      {% set first_header = subsection.toc | first %}
+
+      {% if first_header.children | length > 0 %}
+        <ul class="uk-nav-sub uk-nav-default">
+          {% for h1 in subsection.toc %}
+            {% for h2 in h1.children %}
+            <li>
+              <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+            </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endif %}
     {% endif %}
   {% endfor %}
 </ul>
