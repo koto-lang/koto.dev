@@ -30,7 +30,25 @@ fn convert_lang_guide_docs() -> Result<()> {
     index_path.push("_index.md");
     let index_contents = fs::read_to_string(index_path)?;
 
-    let mut weight = 0;
+    let mut output_path = output_dir.clone();
+    output_path.push("guide.md");
+    let mut output_file = fs::File::create(&output_path).map_err(|e| {
+        format!(
+            "Failed to create output file '{}': '{}'",
+            output_path.to_string_lossy(),
+            e
+        )
+    })?;
+    write!(
+        output_file,
+        "\
++++
+title = \"Guide\"
+slug = \"guide\"
+weight = 0
++++"
+    )?;
+
     let mut in_list_item = false;
     for event in Parser::new(&index_contents) {
         match event {
@@ -39,20 +57,9 @@ fn convert_lang_guide_docs() -> Result<()> {
             Start(Link(_, url, _)) if in_list_item => {
                 let mut doc_path = guide_dir.clone();
                 doc_path.push(url.as_ref());
-                let converted = convert_doc(&doc_path, Some(weight))?;
-                weight += 1;
+                let converted = convert_doc(&doc_path, false, true)?;
 
-                let mut output_path = output_dir.clone();
-                output_path.push(doc_path.file_name().unwrap());
-                let mut output_file = fs::File::create(&output_path).map_err(|e| {
-                    format!(
-                        "Failed to create output file '{}': '{}'",
-                        output_path.to_string_lossy(),
-                        e
-                    )
-                })?;
-
-                write!(output_file, "{converted}")?;
+                write!(output_file, "\n\n{converted}")?;
             }
             _ => {}
         }
@@ -68,7 +75,7 @@ fn convert_core_lib_docs() -> Result<()> {
 
     for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
         let doc_path = doc?.path();
-        let converted = convert_doc(&doc_path, None)?;
+        let converted = convert_doc(&doc_path, true, false)?;
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
@@ -86,62 +93,66 @@ fn convert_core_lib_docs() -> Result<()> {
     Ok(())
 }
 
-fn convert_doc(input_path: &Path, weight: Option<usize>) -> Result<String> {
+fn convert_doc(
+    input_path: &Path,
+    generate_front_matter: bool,
+    indent_headers: bool,
+) -> Result<String> {
     use {std::fmt::Write, Event::*, Tag::*};
 
     let input_contents = fs::read_to_string(&input_path)?;
 
-    let slug = input_path
-        .file_stem()
-        .unwrap()
-        .to_str()
-        .unwrap()
-        .to_string();
-
-    let entry_name = {
-        let mut in_heading = false;
-        let mut entry_name = None;
-        for event in Parser::new(&input_contents) {
-            match event {
-                Start(Heading(HeadingLevel::H1, _, _)) => {
-                    in_heading = true;
-                }
-                Text(text) if in_heading => {
-                    entry_name = Some(text.to_string());
-                    break;
-                }
-                _ => {}
-            }
-        }
-
-        entry_name.unwrap_or_else(|| slug.clone())
-    };
-
     // Write out the modified markdown with Zola front matter
     let mut output_buffer = String::with_capacity(input_contents.len());
 
-    write!(
-        output_buffer,
-        "\
+    if generate_front_matter {
+        let slug = input_path
+            .file_stem()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_string();
+
+        let entry_name = {
+            let mut in_heading = false;
+            let mut entry_name = None;
+            for event in Parser::new(&input_contents) {
+                match event {
+                    Start(Heading(HeadingLevel::H1, _, _)) => {
+                        in_heading = true;
+                    }
+                    Text(text) if in_heading => {
+                        entry_name = Some(text.to_string());
+                        break;
+                    }
+                    _ => {}
+                }
+            }
+
+            entry_name.unwrap_or_else(|| slug.clone())
+        };
+
+        write!(
+            output_buffer,
+            "\
 +++
 title = \"{entry_name}\"
 slug = \"{slug}\"
 ",
-    )?;
+        )?;
 
-    if let Some(weight) = weight {
-        writeln!(output_buffer, "weight = {weight}")?;
+        writeln!(output_buffer, "+++\n")?;
     }
 
-    writeln!(output_buffer, "+++\n")?;
-
     // Parse the input markdown and perform some modifications
+    // Each event is converted into an iterator providing modified events,
+    // with flat_map merging the iterators back into a single event stream.
     let parser = Parser::new(&input_contents).flat_map({
         // Add a playground link to every koto code block
         let mut in_koto_code = false;
         let mut koto_code = CowStr::from("");
-        move |event| match &event {
-            Start(CodeBlock(CodeBlockKind::Fenced(lang))) => match lang.split(',').next() {
+        move |event| match event {
+            Start(CodeBlock(CodeBlockKind::Fenced(ref lang))) => match lang.split(',').next() {
                 Some("koto") => {
                     in_koto_code = true;
                     // Split off the language modifier to avoid confusing zola
@@ -170,6 +181,10 @@ play.clear_output()
 "
                 );
                 once(event).chain(Some(Text(shortcode.into())))
+            }
+            Start(Heading(level, fragment, classes)) if indent_headers => {
+                let new_level = HeadingLevel::try_from(level as usize + 1).unwrap_or(level);
+                once(Start(Heading(new_level, fragment, classes))).chain(None)
             }
             Text(code) if in_koto_code => {
                 koto_code = code.clone();
