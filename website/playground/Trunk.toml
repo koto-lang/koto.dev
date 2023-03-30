@@ -13,5 +13,5 @@ stage = "post_build"
 command = "sh"
 command_arguments = [
   "-c",
-  "cargo run --release --manifest-path ../tools/postprocess-playground/Cargo.toml -- $TRUNK_STAGING_DIR",
+  "cargo run --manifest-path ../xtask/Cargo.toml -- playground $TRUNK_STAGING_DIR",
 ]

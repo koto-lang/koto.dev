@@ -1,8 +1,8 @@
 use {
+    super::Result,
     pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag},
     pulldown_cmark_to_cmark::cmark,
     std::{
-        error::Error,
         fs,
         io::Write,
         iter::once,
@@ -11,7 +11,7 @@ use {
     },
 };
 
-fn main() -> Result<(), Box<dyn Error>> {
+pub fn run() -> Result<()> {
     convert_lang_guide_docs()?;
     convert_core_lib_docs()?;
 
@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn convert_lang_guide_docs() -> Result<(), Box<dyn Error>> {
+fn convert_lang_guide_docs() -> Result<()> {
     let guide_dir = PathBuf::from("../modules/koto/docs/language");
     let output_dir = PathBuf::from("content/docs/next/language");
 
@@ -49,7 +49,7 @@ fn convert_lang_guide_docs() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn convert_core_lib_docs() -> Result<(), Box<dyn Error>> {
+fn convert_core_lib_docs() -> Result<()> {
     let output_dir = PathBuf::from("content/docs/next/core");
 
     for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
@@ -59,11 +59,7 @@ fn convert_core_lib_docs() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn convert_doc(
-    input_path: &Path,
-    output_dir: PathBuf,
-    weight: Option<usize>,
-) -> Result<(), Box<dyn Error>> {
+fn convert_doc(input_path: &Path, output_dir: PathBuf, weight: Option<usize>) -> Result<()> {
     let input_contents = fs::read_to_string(&input_path)?;
 
     use {Event::*, Tag::*};
@@ -95,53 +91,52 @@ fn convert_doc(
     };
 
     // Parse the input markdown and perform some modifications
-    let parser = Parser::new(&input_contents)
-        .flat_map({
-            // Add a playground link to every koto code block
-            let mut in_koto_code = false;
-            let mut koto_code = CowStr::from("");
-            move |event| match &event {
-                Start(CodeBlock(CodeBlockKind::Fenced(lang))) => match lang.split(',').next() {
-                    Some("koto") => {
-                        in_koto_code = true;
-                        // Split off the language modifier to avoid confusing zola
-                        once(Start(CodeBlock(CodeBlockKind::Fenced("koto".into())))).chain(None)
-                    }
-                    _ => {
-                        in_koto_code = false;
-                        once(event).chain(None)
-                    }
-                },
-                End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
+    let parser = Parser::new(&input_contents).flat_map({
+        // Add a playground link to every koto code block
+        let mut in_koto_code = false;
+        let mut koto_code = CowStr::from("");
+        move |event| match &event {
+            Start(CodeBlock(CodeBlockKind::Fenced(lang))) => match lang.split(',').next() {
+                Some("koto") => {
+                    in_koto_code = true;
+                    // Split off the language modifier to avoid confusing zola
+                    once(Start(CodeBlock(CodeBlockKind::Fenced("koto".into())))).chain(None)
+                }
+                _ => {
                     in_koto_code = false;
-                    let playground_code = koto_code
-                        .deref()
-                        .replace("print! ", "print ")
-                        .replace("check! ", "# -> ")
-                        .replace("skip_check!\n", "")
-                        .replace("skip_run!\n", "");
-                    let shortcode = format!(
-                        "\
+                    once(event).chain(None)
+                }
+            },
+            End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
+                in_koto_code = false;
+                let playground_code = koto_code
+                    .deref()
+                    .replace("print! ", "print ")
+                    .replace("check! ", "# -> ")
+                    .replace("skip_check!\n", "")
+                    .replace("skip_run!\n", "");
+                let shortcode = format!(
+                    "\
 {{% example_playground_link() %}}
 play.clear_output()
 
 {playground_code}
 {{% end %}}
 "
-                    );
-                    once(event).chain(Some(Text(shortcode.into())))
-                }
-                Text(code) if in_koto_code => {
-                    koto_code = code.clone();
-                    let display_code = koto_code
-                        .deref()
-                        .replace("print! ", "")
-                        .replace("check! ", "# -> ");
-                    once(Text(display_code.into())).chain(None)
-                }
-                _ => once(event).chain(None),
+                );
+                once(event).chain(Some(Text(shortcode.into())))
             }
-        });
+            Text(code) if in_koto_code => {
+                koto_code = code.clone();
+                let display_code = koto_code
+                    .deref()
+                    .replace("print! ", "")
+                    .replace("check! ", "# -> ");
+                once(Text(display_code.into())).chain(None)
+            }
+            _ => once(event).chain(None),
+        }
+    });
 
     let mut output_buffer = String::with_capacity(input_contents.len());
     cmark(parser, &mut output_buffer)?;

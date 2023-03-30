@@ -19,10 +19,10 @@ deploy:
   git push -f origin deploy
 
 docs:
-  cargo run -p convert-koto-docs
+  cargo xtask docs
 
 docs-watch:
-  cargo watch -w ../modules/koto/docs -w tools/convert-koto-docs -x "run -p convert-koto-docs"
+  cargo watch -w ../modules/koto/docs -w xtask -x "xtask docs"
 
 playground:
   cd playground && trunk build
