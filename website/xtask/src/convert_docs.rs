@@ -4,7 +4,6 @@ use {
     pulldown_cmark_to_cmark::cmark,
     std::{
         fs,
-        io::Write,
         iter::once,
         ops::Deref,
         path::{Path, PathBuf},
@@ -21,14 +20,15 @@ pub fn run() -> Result<()> {
 }
 
 fn convert_lang_guide_docs() -> Result<()> {
+    use {std::io::Write, Event::*, Tag::*};
+
     let guide_dir = PathBuf::from("../modules/koto/docs/language");
     let output_dir = PathBuf::from("content/docs/next/language");
 
+    // Read through the index and convert each guide doc in order
     let mut index_path = guide_dir.clone();
     index_path.push("_index.md");
     let index_contents = fs::read_to_string(index_path)?;
-
-    use {Event::*, Tag::*};
 
     let mut weight = 0;
     let mut in_list_item = false;
@@ -39,8 +39,20 @@ fn convert_lang_guide_docs() -> Result<()> {
             Start(Link(_, url, _)) if in_list_item => {
                 let mut doc_path = guide_dir.clone();
                 doc_path.push(url.as_ref());
-                convert_doc(&doc_path, output_dir.clone(), Some(weight))?;
+                let converted = convert_doc(&doc_path, Some(weight))?;
                 weight += 1;
+
+                let mut output_path = output_dir.clone();
+                output_path.push(doc_path.file_name().unwrap());
+                let mut output_file = fs::File::create(&output_path).map_err(|e| {
+                    format!(
+                        "Failed to create output file '{}': '{}'",
+                        output_path.to_string_lossy(),
+                        e
+                    )
+                })?;
+
+                write!(output_file, "{converted}")?;
             }
             _ => {}
         }
@@ -50,19 +62,34 @@ fn convert_lang_guide_docs() -> Result<()> {
 }
 
 fn convert_core_lib_docs() -> Result<()> {
+    use std::io::Write;
+
     let output_dir = PathBuf::from("content/docs/next/core");
 
     for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
-        convert_doc(&doc?.path(), output_dir.clone(), None)?;
+        let doc_path = doc?.path();
+        let converted = convert_doc(&doc_path, None)?;
+
+        let mut output_path = output_dir.clone();
+        output_path.push(doc_path.file_name().unwrap());
+        let mut output_file = fs::File::create(&output_path).map_err(|e| {
+            format!(
+                "Failed to create output file '{}': '{}'",
+                output_path.to_string_lossy(),
+                e
+            )
+        })?;
+
+        write!(output_file, "{converted}")?;
     }
 
     Ok(())
 }
 
-fn convert_doc(input_path: &Path, output_dir: PathBuf, weight: Option<usize>) -> Result<()> {
-    let input_contents = fs::read_to_string(&input_path)?;
+fn convert_doc(input_path: &Path, weight: Option<usize>) -> Result<String> {
+    use {std::fmt::Write, Event::*, Tag::*};
 
-    use {Event::*, Tag::*};
+    let input_contents = fs::read_to_string(&input_path)?;
 
     let slug = input_path
         .file_stem()
@@ -89,6 +116,24 @@ fn convert_doc(input_path: &Path, output_dir: PathBuf, weight: Option<usize>) ->
 
         entry_name.unwrap_or_else(|| slug.clone())
     };
+
+    // Write out the modified markdown with Zola front matter
+    let mut output_buffer = String::with_capacity(input_contents.len());
+
+    write!(
+        output_buffer,
+        "\
++++
+title = \"{entry_name}\"
+slug = \"{slug}\"
+",
+    )?;
+
+    if let Some(weight) = weight {
+        writeln!(output_buffer, "weight = {weight}")?;
+    }
+
+    writeln!(output_buffer, "+++\n")?;
 
     // Parse the input markdown and perform some modifications
     let parser = Parser::new(&input_contents).flat_map({
@@ -138,36 +183,7 @@ play.clear_output()
         }
     });
 
-    let mut output_buffer = String::with_capacity(input_contents.len());
     cmark(parser, &mut output_buffer)?;
 
-    let mut output_path = output_dir.clone();
-    output_path.push(input_path.file_name().unwrap());
-    let mut output_file = fs::File::create(&output_path).map_err(|e| {
-        format!(
-            "Failed to create output file '{}': '{}'",
-            output_path.to_string_lossy(),
-            e
-        )
-    })?;
-
-    // Write out the modified markdown with Zola front matter
-    write!(
-        output_file,
-        "\
-+++
-title = \"{entry_name}\"
-slug = \"{slug}\"
-",
-    )?;
-
-    if let Some(weight) = weight {
-        writeln!(output_file, "weight = {weight}")?;
-    }
-
-    writeln!(output_file, "+++\n")?;
-
-    write!(output_file, "{}", &output_buffer)?;
-
-    Ok(())
+    Ok(output_buffer)
 }
