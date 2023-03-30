@@ -20,37 +20,26 @@
     {% if page %}
       {% set parent_name = page.ancestors | last %}
       {% set parent = get_section(path = parent_name) %}
-      {% set show_pages = parent == subsection %}
     {% endif %}
 
-    {% if section %}
-      {% set show_pages = section == subsection %}
-    {% endif %}
+    {% for p in subsection.pages %}
+      <li class="{% if current_path == p.path %}uk-active uk-parent{% endif %}">
+        {% if current_path == p.path %}
+          {% set first_header = p.toc | first %}
 
-    {% if show_pages %}
-      {% for p in subsection.pages %}
-        <li class="{% if current_path == p.path %}uk-active uk-parent{% endif %}">
-          <a href="{{ p.permalink }}">
-            {{ p.title }}
-          </a>
-
-          {% if current_path == p.path %}
-            {% set first_header = p.toc | first %}
-
-            {% if first_header.children | length > 0 %}
-              <ul class="uk-nav-sub uk-nav-default">
-                {% for h1 in p.toc %}
-                  {% for h2 in h1.children %}
-                  <li>
-                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                  </li>
-                  {% endfor %}
+          {% if first_header.children | length > 0 %}
+            <ul class="uk-nav-sub uk-nav-default">
+              {% for h1 in p.toc %}
+                {% for h2 in h1.children %}
+                <li>
+                  <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                </li>
                 {% endfor %}
-              </ul>
-            {% endif %}
+              {% endfor %}
+            </ul>
           {% endif %}
-        </li>
-      {% endfor %}
-    {% endif %}
+        {% endif %}
+      </li>
+    {% endfor %}
   {% endfor %}
 </ul>

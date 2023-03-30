@@ -46,7 +46,9 @@ fn convert_lang_guide_docs() -> Result<()> {
 title = \"Guide\"
 slug = \"guide\"
 weight = 0
-+++"
++++
+
+# Koto Language Guide"
     )?;
 
     let mut in_list_item = false;
