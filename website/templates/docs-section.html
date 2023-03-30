@@ -1,5 +1,12 @@
 {% extends "docs-base.html" %}
 
+{% block docsnav %}
+  {% include "docs-section-nav.html" %}
+{% endblock docsnav %}
+{% block docsnav_mobile %}
+  {% include "docs-section-nav.html" %}
+{% endblock docsnav_mobile %}
+
 {% block docscontent %}
 
 {{ section.content | safe }}
