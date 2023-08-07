@@ -1,4 +1,5 @@
-import color, geometry.vec2
+import color
+from geometry import vec2
 from number import lerp, pi, pi_2, tau
 
 boid_count = 20

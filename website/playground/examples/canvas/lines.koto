@@ -1,4 +1,6 @@
-import color, number.lerp, play.random_color
+import color
+from number import lerp
+from play import random_color
 
 play.show_canvas()
 w, h = canvas.width(), canvas.height()

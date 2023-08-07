@@ -2099,6 +2099,7 @@ Inserting an adaptor into the `iterator` module makes it available in any iterat
 iterator.every_other = ||
   n = 0
   loop
+    # self is the iterator being adapted
     match self.next()
       # Exit when there are no more values 
       # produced by the iterator
@@ -2124,6 +2125,7 @@ play.clear_output()
 iterator.every_other = ||
   n = 0
   loop
+    # self is the iterator being adapted
     match self.next()
       # Exit when there are no more values 
       # produced by the iterator
@@ -2338,38 +2340,144 @@ print x()
 # -> 8
 
 {% end %}
+#### `@next`
+
+The `@next` meta key allows for values to behave as iterators.
+
+Whenever the runtime needs to produce an iterator from a value, it will first 
+check the value for an implementation of `@next`.
+
+The `@next` function will be called repeatedly during iteration, 
+with the returned value being used as the iterator output. 
+When the returned value is `null` then the iterator will stop producing output. 
+
+````koto
+no_next =
+  foo: 42
+  bar: 99
+
+no_next.to_tuple()
+# -> (('foo', 42), ('bar', 99))
+
+with_next = 
+  start: 10
+  end: 15
+  @next: || 
+    if self.start < self.end
+      result = self.start
+      self.start += 1
+      result
+    else 
+      null
+  
+with_next.to_tuple()
+# -> (10, 11, 12, 13, 14)
+````
+
+{% example_playground_link() %}
+play.clear_output()
+
+no_next =
+  foo: 42
+  bar: 99
+
+print no_next.to_tuple()
+# -> (('foo', 42), ('bar', 99))
+
+with_next = 
+  start: 10
+  end: 15
+  @next: || 
+    if self.start < self.end
+      result = self.start
+      self.start += 1
+      result
+    else 
+      null
+  
+print with_next.to_tuple()
+# -> (10, 11, 12, 13, 14)
+
+{% end %}
+#### `@next_back`
+
+The `@next_back` meta key is used by
+[`iterator.reversed`](../../core/iterator/#reversed) when producing a reversed
+iterator. 
+
+An implementation of `@next_back` is only looked for if `@next` is also 
+implemented.
+
+````koto
+iter =
+  foo: 0
+  @next: || self.foo += 1
+  @next_back: || self.foo -= 1
+
+iter
+  .skip 3
+  .reversed()
+  .take 3
+  .to_tuple()
+# -> (2, 1, 0)
+````
+
+{% example_playground_link() %}
+play.clear_output()
+
+iter =
+  foo: 0
+  @next: || self.foo += 1
+  @next_back: || self.foo -= 1
+
+print iter
+  .skip 3
+  .reversed()
+  .take 3
+  .to_tuple()
+# -> (2, 1, 0)
+
+{% end %}
 #### `@iterator`
 
-The `@iterator` meta key defines how iterators should be made when the value is
-used in an iterable context. The function returns an iterable value that is used
-instead of the default behaviour of iterating over the map's entries.
+The `@iterator` meta key defines how iterators should be created when the value 
+is used in an iterable context. 
+The function returns an iterable value that is then used during iterator 
+operations.
 
 ````koto
 foo = |n|
-  data: n
-  @iterator: || 0..=self.data
+  @iterator: || 
+    yield n + 1
+    yield n + 2
+    yield n + 3
 
-(foo 5).to_tuple()
-# -> (0, 1, 2, 3, 4, 5)
+(foo 0).to_tuple()
+# -> (1, 2, 3)
 
-(foo -3).to_list()
-# -> [0, -1, -2, -3]
+(foo 100).to_list()
+# -> [101, 102, 103]
 ````
 
 {% example_playground_link() %}
 play.clear_output()
 
 foo = |n|
-  data: n
-  @iterator: || 0..=self.data
+  @iterator: || 
+    yield n + 1
+    yield n + 2
+    yield n + 3
 
-print (foo 5).to_tuple()
-# -> (0, 1, 2, 3, 4, 5)
+print (foo 0).to_tuple()
+# -> (1, 2, 3)
 
-print (foo -3).to_list()
-# -> [0, -1, -2, -3]
+print (foo 100).to_list()
+# -> [101, 102, 103]
 
 {% end %}
+Note that this key will be ignored if the value also implements `@next`, 
+which implies that the value is *already* an iterator. 
+
 #### `@display`
 
 The `@display` meta key defines how the value should be represented when
@@ -2781,7 +2889,9 @@ catch _
 Module items can be brought into the current scope using `import`.
 
 ````koto
-import list.last, number.abs
+from list import last
+from number import abs
+
 x = [1, 2, 3]
 last x
 # -> 3
@@ -2793,7 +2903,9 @@ abs -42
 {% example_playground_link() %}
 play.clear_output()
 
-import list.last, number.abs
+from list import last
+from number import abs
+
 x = [1, 2, 3]
 print last x
 # -> 3
@@ -2831,8 +2943,8 @@ print size x
 Imported items can be assigned to alternative names.
 
 ````koto
-list_size = import list.size
-tuple_size = import tuple.size
+list_size = from list import size
+tuple_size = from tuple import size
 list_size [1, 2]
 # -> 2
 tuple_size (3, 2, 1)
@@ -2842,8 +2954,8 @@ tuple_size (3, 2, 1)
 {% example_playground_link() %}
 play.clear_output()
 
-list_size = import list.size
-tuple_size = import tuple.size
+list_size = from list import size
+tuple_size = from tuple import size
 print list_size [1, 2]
 # -> 2
 print tuple_size (3, 2, 1)
@@ -2852,7 +2964,9 @@ print tuple_size (3, 2, 1)
 {% end %}
 ### `export`
 
-`export` is used to add a value to a module's *exports map*.
+`export` expressions are used to add values to a module's *exports map*.
+
+Single values can be assigned to and exported at the same time:
 
 ````koto
 ##################
@@ -2864,7 +2978,7 @@ export say_hello = |name| 'Hello, $name!'
 ##################
 ##################
 
-import my_module.say_hello
+from my_module import say_hello
 
 say_hello 'Koto'
 # -> 'Hello, Koto!' 
@@ -2882,10 +2996,48 @@ export say_hello = |name| 'Hello, $name!'
 ##################
 ##################
 
-import my_module.say_hello
+from my_module import say_hello
 
 say_hello 'Koto'
 # -> 'Hello, Koto!' 
+
+{% end %}
+When exporting multiple values, it can be convenient to use map syntax:
+
+````koto
+
+##################
+# my_module.koto #
+##################
+
+a, b, c = 1, 2, 3
+
+# Inline maps allow for shorthand syntax
+export { a, b, c, foo: 42 }
+
+# Map blocks can also be used with export
+export 
+  bar: 99
+  baz: 'baz'
+````
+
+{% example_playground_link() %}
+play.clear_output()
+
+
+##################
+# my_module.koto #
+##################
+
+a, b, c = 1, 2, 3
+
+# Inline maps allow for shorthand syntax
+export { a, b, c, foo: 42 }
+
+# Map blocks can also be used with export
+export 
+  bar: 99
+  baz: 'baz'
 
 {% end %}
 ### `@tests` and `@main`
@@ -2897,8 +3049,8 @@ Additionally, a module can export a `@main` function.
 The `@main` function will be called after the module has been compiled and
 initialized, and after exported `@tests` have been successfully run.
 
-Note that because meta entries can't be directly accessed after assignment,
-adding an entry to the module's Meta Map doesn't require `export`.
+Note that because meta entries can't be assigned locally, 
+the use of `export` is optional when adding entries to the module's Meta Map.
 
 ````koto
 ##################
@@ -2907,10 +3059,10 @@ adding an entry to the module's Meta Map doesn't require `export`.
 
 export say_hello = |name| 'Hello, $name!'
 
-@main = ||
+@main = || # Equivalent to export @main =
   print 'Successfully initialized `my_module`'
 
-@tests = 
+@tests =
   @test hello_world: ||
     print 'Testing...'
     assert_eq (say_hello 'World'), 'Hello, World!'
@@ -2918,7 +3070,7 @@ export say_hello = |name| 'Hello, $name!'
 ##################
 ##################
 
-import my_module.say_hello
+from my_module import say_hello
 # -> Testing...
 # -> Successfully initialized `my_module`
 
@@ -2935,10 +3087,10 @@ play.clear_output()
 
 export say_hello = |name| 'Hello, $name!'
 
-@main = ||
+@main = || # Equivalent to export @main =
   print 'Successfully initialized `my_module`'
 
-@tests = 
+@tests =
   @test hello_world: ||
     print 'Testing...'
     assert_eq (say_hello 'World'), 'Hello, World!'
@@ -2946,7 +3098,7 @@ export say_hello = |name| 'Hello, $name!'
 ##################
 ##################
 
-import my_module.say_hello
+from my_module import say_hello
 # -> Testing...
 # -> Successfully initialized `my_module`
 

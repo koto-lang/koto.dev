@@ -1,6 +1,7 @@
 # Draw random rectangles on the canvas
 
-import play.random_color, random.pick
+from play import random_color
+from random import pick
 
 play.setup = ||
   play.show_canvas()

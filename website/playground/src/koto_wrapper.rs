@@ -428,15 +428,15 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
 
     result.add_fn("clear_output", {
         cloned!(queue);
-        move |_, _| {
+        move |_| {
             queue.borrow_mut().push_back(KotoMessage::ClearOutput);
             Ok(Null)
         }
     });
 
     result.add_fn("random_color", {
-        move |vm, args| {
-            let alpha = match vm.get_args(args) {
+        move |ctx| {
+            let alpha = match ctx.args() {
                 [] => 1.0,
                 [Number(alpha)] => alpha.into(),
                 unexpected => return type_error_with_slice("an optional alpha value", unexpected),
@@ -449,8 +449,8 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
 
     result.add_fn("set_fps", {
         cloned!(queue);
-        move |vm, args| {
-            let fps = match vm.get_args(args) {
+        move |ctx| {
+            let fps = match ctx.args() {
                 [Number(fps)] if *fps >= 0.0 => f64::from(fps),
                 unexpected => return type_error_with_slice("a non-negative Number", unexpected),
             };
@@ -461,42 +461,13 @@ fn make_play_module(queue: KotoMessageQueue) -> ValueMap {
 
     result.add_fn("show_canvas", {
         cloned!(queue);
-        move |_, _| {
+        move |_| {
             queue.borrow_mut().push_back(KotoMessage::ShowCanvas);
             Ok(Null)
         }
     });
 
     result
-}
-
-fn is_vec2(value: &External) -> bool {
-    value.has_data::<Vec2>()
-}
-
-fn get_vec2(value: &External) -> Vec2 {
-    value.data::<Vec2>().unwrap().clone()
-}
-
-fn get_xy(value: &External) -> (f64, f64) {
-    let xy = value.data::<Vec2>().unwrap();
-    (xy.x, xy.y)
-}
-
-fn is_color(value: &External) -> bool {
-    value.has_data::<Color>()
-}
-
-fn get_color(value: &External) -> Color {
-    value.data::<Color>().unwrap().clone()
-}
-
-fn is_rect(value: &External) -> bool {
-    value.has_data::<Rect>()
-}
-
-fn get_rect(value: &External) -> Rect {
-    value.data::<Rect>().unwrap().clone()
 }
 
 fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> ValueMap {
@@ -506,15 +477,15 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("arc", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let (x, y, radius, start_angle, end_angle, counter_clockwise) = match vm.get_args(args) {
-                [External(xy), Number(radius), Number(start_angle), Number(end_angle)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (x, y, radius.into(), start_angle.into(), end_angle.into(), false)
+        move |ctx| {
+            let (x, y, radius, start_angle, end_angle, counter_clockwise) = match ctx.args() {
+                [Object(xy), Number(radius), Number(start_angle), Number(end_angle)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (xy.x, xy.y, radius.into(), start_angle.into(), end_angle.into(), false)
                 },
-                [External(xy), Number(radius), Number(start_angle), Number(end_angle), Bool(counter_clockwise)] if is_vec2(xy)=> {
-                    let (x, y) = get_xy(xy);
-                    (x, y, radius.into(), start_angle.into(), end_angle.into(), *counter_clockwise)
+                [Object(xy), Number(radius), Number(start_angle), Number(end_angle), Bool(counter_clockwise)] if xy.is_a::<Vec2>()=> {
+                    let xy = xy.cast::<Vec2>()?;
+                    (xy.x, xy.y, radius.into(), start_angle.into(), end_angle.into(), *counter_clockwise)
                 }
                 [Number(x), Number(y), Number(radius), Number(start_angle), Number(end_angle)] => {
                     (x.into(), y.into(), radius.into(), start_angle.into(), end_angle.into(), false)
@@ -542,7 +513,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("begin_path", {
         cloned!(canvas_module, queue);
-        move |_, _| {
+        move |_| {
             queue.borrow_mut().push_back(KotoMessage::BeginPath);
             Ok(Map(canvas_module.clone()))
         }
@@ -550,8 +521,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("clear", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let maybe_color = match vm.get_args(args) {
+        move |ctx| {
+            let maybe_color = match ctx.args() {
                 [] => None,
                 [Number(n1), Number(n2), Number(n3)] => {
                     Some((n1.into(), n2.into(), n3.into(), 1.0))
@@ -559,8 +530,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
                 [Number(n1), Number(n2), Number(n3), Number(n4)] => {
                     Some((n1.into(), n2.into(), n3.into(), n4.into()))
                 }
-                [External(color)] if color.has_data::<Color>() => {
-                    let color = color.data::<Color>().unwrap();
+                [Object(color)] if color.is_a::<Color>() => {
+                    let color = color.cast::<Color>()?;
                     Some((color.red(), color.green(), color.blue(), color.alpha()))
                 }
                 unexpected => return type_error_with_slice("an optional alpha value", unexpected),
@@ -576,7 +547,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("fill", {
         cloned!(canvas_module, queue);
-        move |_, _| {
+        move |_| {
             queue.borrow_mut().push_back(KotoMessage::Fill);
             Ok(Map(canvas_module.clone()))
         }
@@ -584,12 +555,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("fill_rect", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let rect = match vm.get_args(args) {
-                [External(rect)] if is_rect(rect) => get_rect(rect),
-                [External(xy), Number(width), Number(height)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (x, y, width.into(), height.into()).into()
+        move |ctx| {
+            let rect = match ctx.args() {
+                [Object(rect)] if rect.is_a::<Rect>() => rect.cast::<Rect>()?.clone(),
+                [Object(xy), Number(width), Number(height)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (xy.x, xy.y, width.into(), height.into()).into()
                 }
                 [Number(x), Number(y), Number(width), Number(height)] => {
                     (x.into(), y.into(), width.into(), height.into()).into()
@@ -608,19 +579,19 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("fill_text", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let (text, x, y, max_width) = match vm.get_args(args) {
+        move |ctx| {
+            let (text, x, y, max_width) = match ctx.args() {
                 [Str(text), Number(x), Number(y)] => (text, x.into(), y.into(), None),
                 [Str(text), Number(x), Number(y), Number(max_width)] => {
                     (text, x.into(), y.into(), Some(max_width.into()))
                 }
-                [Str(text), External(xy)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (text, x, y, None)
+                [Str(text), Object(xy)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (text, xy.x, xy.y, None)
                 }
-                [Str(text), External(xy), Number(max_width)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (text, x, y, Some(max_width.into()))
+                [Str(text), Object(xy), Number(max_width)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (text, xy.x, xy.y, Some(max_width.into()))
                 }
                 unexpected => {
                     return type_error_with_slice(
@@ -640,14 +611,14 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("height", {
         cloned!(canvas);
-        move |_, _| Ok(Number(canvas.height().into()))
+        move |_| Ok(Number(canvas.height().into()))
     });
 
     canvas_module.add_fn("line_to", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let xy = match vm.get_args(args) {
-                [External(xy)] if is_vec2(xy) => get_vec2(xy),
+        move |ctx| {
+            let xy = match ctx.args() {
+                [Object(xy)] if xy.is_a::<Vec2>() => xy.cast::<Vec2>()?.clone(),
                 [Number(x), Number(y)] => (x.into(), y.into()).into(),
                 unexpected => return type_error_with_slice("two Numbers or a Vec2", unexpected),
             };
@@ -658,9 +629,9 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("move_to", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let xy = match vm.get_args(args) {
-                [External(xy)] if is_vec2(xy) => get_vec2(xy),
+        move |ctx| {
+            let xy = match ctx.args() {
+                [Object(xy)] if xy.is_a::<Vec2>() => xy.cast::<Vec2>()?.clone(),
                 [Number(x), Number(y)] => (x.into(), y.into()).into(),
                 unexpected => return type_error_with_slice("two Numbers or a Vec2", unexpected),
             };
@@ -671,12 +642,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("rect", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let rect = match vm.get_args(args) {
-                [External(rect)] if is_rect(rect) => get_rect(rect),
-                [External(xy), Number(width), Number(height)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (x, y, width.into(), height.into()).into()
+        move |ctx| {
+            let rect = match ctx.args() {
+                [Object(rect)] if rect.is_a::<Rect>() => rect.cast::<Rect>()?.clone(),
+                [Object(xy), Number(width), Number(height)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (xy.x, xy.y, width.into(), height.into()).into()
                 }
                 [Number(x), Number(y), Number(width), Number(height)] => {
                     (x.into(), y.into(), width.into(), height.into()).into()
@@ -695,8 +666,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("rotate", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let n = match vm.get_args(args) {
+        move |ctx| {
+            let n = match ctx.args() {
                 [Number(n)] => n.into(),
                 unexpected => return type_error_with_slice("a Number in radians", unexpected),
             };
@@ -707,9 +678,9 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("set_fill_color", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let color = match vm.get_args(args) {
-                [External(color)] if is_color(color) => get_color(color),
+        move |ctx| {
+            let color = match ctx.args() {
+                [Object(color)] if color.is_a::<Color>() => color.cast::<Color>()?.clone(),
                 [Number(n1), Number(n2), Number(n3)] => {
                     (n1.into(), n2.into(), n3.into(), 1.0).into()
                 }
@@ -729,8 +700,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("set_font", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let font = match vm.get_args(args) {
+        move |ctx| {
+            let font = match ctx.args() {
                 [Str(font)] => font,
                 unexpected => return type_error_with_slice("a String", unexpected),
             };
@@ -743,8 +714,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("set_line_width", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let width = match vm.get_args(args) {
+        move |ctx| {
+            let width = match ctx.args() {
                 [Number(n)] => n,
                 unexpected => return type_error_with_slice("a Number", unexpected),
             };
@@ -757,15 +728,15 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("set_stroke_color", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let color = match vm.get_args(args) {
+        move |ctx| {
+            let color = match ctx.args() {
                 [Number(n1), Number(n2), Number(n3)] => {
                     Color::rgba(n1.into(), n2.into(), n3.into(), 1.0)
                 }
                 [Number(n1), Number(n2), Number(n3), Number(n4)] => {
                     Color::rgba(n1.into(), n2.into(), n3.into(), n4.into())
                 }
-                [External(color)] if is_color(color) => get_color(color),
+                [Object(color)] if color.is_a::<Color>() => color.cast::<Color>()?.clone(),
                 unexpected => {
                     return type_error_with_slice("3 or 4 Numbers or a Color", unexpected)
                 }
@@ -780,8 +751,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
     canvas_module.add_fn("set_text_align", {
         cloned!(canvas_module, queue);
         let allowed_values = &["left", "right", "center", "start", "end"];
-        move |vm, args| {
-            let text_align = match vm.get_args(args) {
+        move |ctx| {
+            let text_align = match ctx.args() {
                 [Str(s)] => {
                     if !allowed_values.contains(&s.as_str()) {
                         return runtime_error!(
@@ -818,8 +789,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
             "ideographic",
             "bottom",
         ];
-        move |vm, args| {
-            let baseline = match vm.get_args(args) {
+        move |ctx| {
+            let baseline = match ctx.args() {
                 [Str(s)] => {
                     if !allowed_values.contains(&s.as_str()) {
                         return runtime_error!(
@@ -848,8 +819,8 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("set_transform", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let (a, b, c, d, e, f) = match vm.get_args(args) {
+        move |ctx| {
+            let (a, b, c, d, e, f) = match ctx.args() {
                 [Number(a), Number(b), Number(c), Number(d), Number(e), Number(f)] => {
                     (a.into(), b.into(), c.into(), d.into(), e.into(), f.into())
                 }
@@ -864,7 +835,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("stroke", {
         cloned!(canvas_module, queue);
-        move |_, _| {
+        move |_| {
             queue.borrow_mut().push_back(KotoMessage::Stroke);
             Ok(Map(canvas_module.clone()))
         }
@@ -872,12 +843,12 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("stroke_rect", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let rect = match vm.get_args(args) {
-                [External(rect)] if is_rect(rect) => get_rect(rect),
-                [External(xy), Number(width), Number(height)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (x, y, width.into(), height.into()).into()
+        move |ctx| {
+            let rect = match ctx.args() {
+                [Object(rect)] if rect.is_a::<Rect>() => rect.cast::<Rect>()?.clone(),
+                [Object(xy), Number(width), Number(height)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (xy.x, xy.y, width.into(), height.into()).into()
                 }
                 [Number(x), Number(y), Number(width), Number(height)] => {
                     (x.into(), y.into(), width.into(), height.into()).into()
@@ -896,19 +867,19 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("stroke_text", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let (text, x, y, max_width) = match vm.get_args(args) {
+        move |ctx| {
+            let (text, x, y, max_width) = match ctx.args() {
                 [Str(text), Number(x), Number(y)] => (text, x.into(), y.into(), None),
                 [Str(text), Number(x), Number(y), Number(max_width)] => {
                     (text, x.into(), y.into(), Some(max_width.into()))
                 }
-                [Str(text), External(xy)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (text, x, y, None)
+                [Str(text), Object(xy)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (text, xy.x, xy.y, None)
                 }
-                [Str(text), External(xy), Number(max_width)] if is_vec2(xy) => {
-                    let (x, y) = get_xy(xy);
-                    (text, x, y, Some(max_width.into()))
+                [Str(text), Object(xy), Number(max_width)] if xy.is_a::<Vec2>() => {
+                    let xy = xy.cast::<Vec2>()?;
+                    (text, xy.x, xy.y, Some(max_width.into()))
                 }
                 unexpected => {
                     return type_error_with_slice(
@@ -928,9 +899,9 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("translate", {
         cloned!(canvas_module, queue);
-        move |vm, args| {
-            let xy = match vm.get_args(args) {
-                [External(xy)] if is_vec2(xy) => get_vec2(xy),
+        move |ctx| {
+            let xy = match ctx.args() {
+                [Object(xy)] if xy.is_a::<Vec2>() => xy.cast::<Vec2>()?.clone(),
                 [Number(x), Number(y)] => (x.into(), y.into()).into(),
                 unexpected => return type_error_with_slice("two Numbers or a Vec2", unexpected),
             };
@@ -941,7 +912,7 @@ fn make_canvas_module(canvas: HtmlCanvasElement, queue: KotoMessageQueue) -> Val
 
     canvas_module.add_fn("width", {
         cloned!(canvas);
-        move |_, _| Ok(Number(canvas.width().into()))
+        move |_| Ok(Number(canvas.width().into()))
     });
 
     canvas_module
