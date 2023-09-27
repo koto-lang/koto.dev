@@ -22,7 +22,6 @@ js-sys = { workspace = true }
 rand = { workspace = true }
 serde = { workspace = true }
 wasm-bindgen = { workspace = true }
-wee_alloc = { workspace = true }
 yew = { workspace = true }
 
 

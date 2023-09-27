@@ -11,9 +11,6 @@ use {
     yew::prelude::*,
 };
 
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-
 fn main() {
     set_panic_hook();
     register_koto_editor_mode();

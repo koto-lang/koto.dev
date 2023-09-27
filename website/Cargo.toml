@@ -37,8 +37,6 @@ serde = "1.0.136"
 wasm-bindgen = "0.2.79"
 # Bindings for all Web APIs, a procedurally generated crate from WebIDL
 web-sys = "0.3.56"
-# wee_alloc: The Wasm-Enabled, Elfin Allocator
-wee_alloc = "0.4.5"
 # A framework for making client-side single-page apps
 yew = "0.19.3"
 
