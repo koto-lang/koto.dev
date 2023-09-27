@@ -1,7 +1,11 @@
-build:
-  @just docs
-  @just playground-release
+build: docs playground-release
   zola build
+
+serve: docs playground
+  zola serve --open --fast
+
+serve-release: docs playground-release
+  zola serve --open --fast
 
 deploy:
   git fetch
@@ -35,16 +39,6 @@ playground-serve:
 
 playground-serve-release:
   cd playground && trunk serve --ignore ../static --release --open
-
-serve:
-  @just docs
-  @just playground
-  zola serve --open --fast
-
-serve-release:
-  @just docs
-  @just playground-release
-  zola serve --open --fast
 
 submodules:
   git submodule update --init --recursive
