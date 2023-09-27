@@ -7,6 +7,10 @@ serve: docs playground
 serve-release: docs playground-release
   zola serve --open --fast
 
+clean:
+  cargo clean
+  rm -rf public
+
 deploy:
   git fetch
   git checkout deploy
