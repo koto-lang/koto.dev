@@ -59,10 +59,6 @@ pub struct Playground {
 }
 
 impl Playground {
-    fn get_koto(&mut self) -> &mut KotoWrapper {
-        self.koto.as_mut().expect("Missing koto wrapper")
-    }
-
     fn get_editor(&self) -> &AceEditor {
         self.editor.as_ref().expect("Missing editor")
     }
@@ -73,10 +69,6 @@ impl Playground {
 
     fn set_editor_contents(&mut self, contents: &str) {
         self.get_editor().get_session().set_value(contents);
-    }
-
-    fn reset_koto(&mut self) {
-        self.get_koto().reset();
     }
 
     fn setup_editor(&mut self, ctx: &Context<Self>) {
@@ -148,11 +140,7 @@ impl Playground {
 
     fn compile_and_run_script(&mut self) {
         let koto = self.koto.as_mut().expect("Missing koto wrapper");
-        koto.reset();
-        koto.compile_script(&self.script.as_ref());
-        if koto.is_ready() {
-            koto.run();
-        }
+        koto.compile_and_run_script(&self.script.as_ref());
     }
 }
 
@@ -231,7 +219,6 @@ impl Component for Playground {
                 }
             }
             Msg::ScriptLoaded { contents } => {
-                self.reset_koto();
                 // We only want to compile the script once, and the Ace editor can send multiple
                 // on_changed events when setting its contents.
                 self.ignore_editor_changed = true;

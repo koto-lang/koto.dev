@@ -10,21 +10,12 @@ pub enum KotoMessage {
     Print(String),
 }
 
-#[derive(Debug)]
-pub enum ScriptState {
-    NotReady,
-    Compiled,
-    Initialized,
-    ErrorAfterInitialized,
-}
-
 pub struct KotoWrapper {
     koto: Koto,
     compiler_output: Element,
     script_output: Element,
     output_buffer: String,
     message_queue: KotoMessageQueue,
-    script_state: ScriptState,
 }
 
 impl KotoWrapper {
@@ -50,13 +41,14 @@ impl KotoWrapper {
             script_output,
             output_buffer: String::with_capacity(128),
             message_queue,
-            script_state: ScriptState::NotReady,
         }
     }
 
-    pub fn compile_script(&mut self, script: &str) {
+    pub fn compile_and_run_script(&mut self, script: &str) {
         debug_assert!(!script.is_empty());
 
+        self.compiler_output.set_inner_html("");
+        self.script_output.set_inner_html("");
         self.message_queue.borrow_mut().clear();
 
         self.koto.exports().data_mut().clear();
@@ -64,56 +56,19 @@ impl KotoWrapper {
 
         if let Err(error) = self.koto.compile(&script) {
             self.error(&format!("Error while compiling script: {error}"));
-            return;
+        } else {
+            self.compiler_output.set_inner_html("Success");
+
+            if let Err(e) = self.koto.run() {
+                return self.error(&e.to_string());
+            }
+
+            self.script_output.set_inner_html("");
+            self.process_koto_messages();
         }
-
-        self.compiler_output.set_inner_html("Success");
-        self.script_state = ScriptState::Compiled;
-    }
-
-    pub fn run(&mut self) {
-        if !self.is_ready() {
-            panic!("Attempting to run koto script when not in a ready state");
-        }
-
-        if self.is_initialized() {
-            panic!("Attempting to run koto script when already initialized");
-        }
-
-        if let Err(e) = self.koto.run() {
-            return self.error(&e.to_string());
-        }
-
-        self.script_state = ScriptState::Initialized;
-
-        self.script_output.set_inner_html("");
-        self.process_koto_messages();
-    }
-
-    pub fn reset(&mut self) {
-        self.script_state = ScriptState::NotReady;
-        self.compiler_output.set_inner_html("");
-        self.script_output.set_inner_html("");
-    }
-
-    pub fn is_ready(&self) -> bool {
-        !matches!(
-            self.script_state,
-            ScriptState::NotReady | ScriptState::ErrorAfterInitialized
-        )
-    }
-
-    pub fn is_initialized(&self) -> bool {
-        matches!(self.script_state, ScriptState::Initialized)
     }
 
     fn error(&mut self, error: &str) {
-        use ScriptState::*;
-        self.script_state = match self.script_state {
-            Initialized | ErrorAfterInitialized => ErrorAfterInitialized,
-            _ => NotReady,
-        };
-
         self.compiler_output.set_inner_html(error);
         self.compiler_output
             .set_scroll_top(self.compiler_output.scroll_height());
