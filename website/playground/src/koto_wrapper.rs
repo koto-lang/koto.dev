@@ -163,14 +163,9 @@ impl KotoWrapper {
 
         self.message_queue.borrow_mut().clear();
 
-        {
-            let mut play_module = self.play_module.data_mut();
-            play_module.remove("setup");
-            play_module.remove("on_load");
-            play_module.remove("update");
-        }
-
+        self.koto.exports().data_mut().clear();
         self.koto.clear_module_cache();
+
         if let Err(error) = self.koto.compile(&script) {
             self.error(&format!("Error while compiling script: {error}"));
             return;
@@ -198,19 +193,16 @@ impl KotoWrapper {
         }
 
         if matches!(self.script_state, ScriptState::Compiled) {
-            let maybe_fn = self.play_module.data().get("setup").cloned();
-            self.user_state = match maybe_fn {
-                Some(f) => match self.koto.run_function(f, CallArgs::None) {
-                    Ok(state) => state,
-                    Err(e) => {
-                        return self.error(&e.to_string());
-                    }
-                },
-                None => Value::Map(ValueMap::default()),
+            self.user_state = match self.run_exported_function("setup", &[]) {
+                Ok(Some(data)) => data,
+                Ok(None) => ValueMap::default().into(),
+                Err(error) => {
+                    return self.error(&error.to_string());
+                }
             };
         }
 
-        if let Err(e) = self.run_play_function("on_load", &[self.user_state.clone()]) {
+        if let Err(e) = self.run_exported_function("on_load", &[self.user_state.clone()]) {
             return self.error(&e.to_string());
         }
 
@@ -258,14 +250,18 @@ impl KotoWrapper {
             .set_scroll_top(self.compiler_output.scroll_height());
     }
 
-    fn run_play_function(
+    fn run_exported_function(
         &mut self,
         function_name: &str,
         args: &[Value],
-    ) -> Result<Value, koto::Error> {
-        match self.play_module.data().get(function_name) {
-            Some(f) => self.koto.run_function(f.clone(), CallArgs::Separate(args)),
-            None => Ok(Value::Null),
+    ) -> Result<Option<Value>, koto::Error> {
+        match self
+            .koto
+            .run_exported_function(function_name, CallArgs::Separate(args))
+        {
+            Ok(result) => Ok(Some(result)),
+            Err(koto::Error::FunctionNotFound) => Ok(None),
+            Err(error) => Err(error),
         }
     }
 
@@ -282,7 +278,7 @@ impl KotoWrapper {
     pub fn run_update(&mut self, time: f64) {
         debug_assert!(self.is_ready());
 
-        match self.run_play_function("update", &[self.user_state.clone(), time.into()]) {
+        match self.run_exported_function("update", &[self.user_state.clone(), time.into()]) {
             Ok(_) => {
                 self.process_koto_messages();
             }
