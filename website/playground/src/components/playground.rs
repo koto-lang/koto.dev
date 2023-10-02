@@ -7,7 +7,6 @@ use {
     // gloo_console::log,
     gloo_events::EventListener,
     gloo_net::http::Request,
-    gloo_timers::callback::Interval,
     gloo_utils::{document, window},
     serde::Deserialize,
     std::collections::HashMap,
@@ -27,8 +26,8 @@ pub enum Msg {
     ScriptLoaded { contents: String },
     PostScriptLoaded,
     ScriptMenuChanged { url: &'static str },
-    PlayButtonClicked,
-    ReloadButtonClicked,
+    RunButtonClicked,
+    AutoRunButtonClicked,
     ShareButtonClicked,
     ShareModalClosed,
     BeforeUnload,
@@ -45,14 +44,10 @@ pub struct Playground {
     editor: Option<AceEditor>,
     koto: Option<KotoWrapper>,
 
-    run_script_enabled: bool,
+    auto_run_enabled: bool,
 
     script: StoredValue<String>,
     vim_bindings_enabled: StoredValue<bool>,
-
-    update_interval: Option<Interval>,
-    last_time: Option<f64>,
-    current_time: f64,
 
     show_share_dialog: bool,
 
@@ -82,9 +77,6 @@ impl Playground {
 
     fn reset_koto(&mut self) {
         self.get_koto().reset();
-        self.update_interval = None;
-        self.current_time = 0.0;
-        self.last_time = None;
     }
 
     fn setup_editor(&mut self, ctx: &Context<Self>) {
@@ -154,12 +146,11 @@ impl Playground {
             .set_keyboard_handler(if enabled { "ace/keyboard/vim" } else { "" });
     }
 
-    fn run_script(&mut self) {
-        debug_assert!(self.run_script_enabled);
-
-        let koto = self.get_koto();
-
-        if koto.is_ready() && !koto.is_initialized() {
+    fn compile_and_run_script(&mut self) {
+        let koto = self.koto.as_mut().expect("Missing koto wrapper");
+        koto.reset();
+        koto.compile_script(&self.script.as_ref());
+        if koto.is_ready() {
             koto.run();
         }
     }
@@ -208,10 +199,7 @@ impl Component for Playground {
                 include_str!("../../examples/intro/fizz_buzz.koto").into()
             }),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
-            update_interval: None,
-            last_time: None,
-            current_time: 0.0,
-            run_script_enabled: true,
+            auto_run_enabled: true,
             show_share_dialog: false,
             ignore_editor_changed: false,
             _event_listeners: vec![EventListener::new(&window(), "beforeunload", {
@@ -235,14 +223,10 @@ impl Component for Playground {
                     false
                 } else {
                     let script = self.get_editor_contents();
-                    if !script.is_empty() {
-                        let koto = self.get_koto();
-                        koto.compile_script(&script);
-                        if self.run_script_enabled {
-                            self.run_script();
-                        }
-                    }
                     self.script.set(script.into());
+                    if self.auto_run_enabled {
+                        self.compile_and_run_script();
+                    }
                     true
                 }
             }
@@ -278,16 +262,15 @@ impl Component for Playground {
                 });
                 false
             }
-            Msg::PlayButtonClicked => {
-                self.run_script_enabled = !self.run_script_enabled;
-                if self.run_script_enabled {
-                    self.run_script();
-                }
+            Msg::RunButtonClicked => {
+                self.compile_and_run_script();
                 true
             }
-            Msg::ReloadButtonClicked => {
-                self.reset_koto();
-                ctx.link().send_message(Msg::EditorChanged);
+            Msg::AutoRunButtonClicked => {
+                self.auto_run_enabled = !self.auto_run_enabled;
+                if self.auto_run_enabled {
+                    self.compile_and_run_script();
+                }
                 true
             }
             Msg::ShareButtonClicked => {
@@ -343,9 +326,9 @@ impl Component for Playground {
         let editor_area = html! {
             <div class="editor-area">
                 <EditorToolbar
-                    script_playing={self.run_script_enabled}
-                    on_play_clicked={ctx.link().callback(|_| Msg::PlayButtonClicked)}
-                    on_reload_clicked={ctx.link().callback(|_| Msg::ReloadButtonClicked)}
+                    auto_run={self.auto_run_enabled}
+                    on_run_clicked={ctx.link().callback(|_| Msg::RunButtonClicked)}
+                    on_auto_run_clicked={ctx.link().callback(|_| Msg::AutoRunButtonClicked)}
                     on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
                         ctx.link().callback(|url| Msg::ScriptMenuChanged {url})

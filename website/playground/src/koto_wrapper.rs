@@ -14,7 +14,6 @@ pub enum KotoMessage {
 pub enum ScriptState {
     NotReady,
     Compiled,
-    Recompiled,
     Initialized,
     ErrorAfterInitialized,
 }
@@ -69,11 +68,7 @@ impl KotoWrapper {
         }
 
         self.compiler_output.set_inner_html("Success");
-        self.script_state = if matches!(self.script_state, ScriptState::NotReady) {
-            ScriptState::Compiled
-        } else {
-            ScriptState::Recompiled
-        }
+        self.script_state = ScriptState::Compiled;
     }
 
     pub fn run(&mut self) {
@@ -115,7 +110,7 @@ impl KotoWrapper {
     fn error(&mut self, error: &str) {
         use ScriptState::*;
         self.script_state = match self.script_state {
-            Initialized | Recompiled | ErrorAfterInitialized => ErrorAfterInitialized,
+            Initialized | ErrorAfterInitialized => ErrorAfterInitialized,
             _ => NotReady,
         };
 

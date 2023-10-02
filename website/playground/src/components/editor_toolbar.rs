@@ -5,9 +5,9 @@ use {
 
 #[derive(PartialEq, Properties)]
 pub struct Props {
-    pub script_playing: bool,
-    pub on_play_clicked: Callback<()>,
-    pub on_reload_clicked: Callback<()>,
+    pub auto_run: bool,
+    pub on_run_clicked: Callback<()>,
+    pub on_auto_run_clicked: Callback<()>,
     pub on_share_clicked: Callback<()>,
     pub on_script_selected: Callback<&'static str>,
 }
@@ -20,15 +20,15 @@ pub fn editor_toolbar(props: &Props) -> Html {
                 icon_left="play"
                 caption="Run"
                 tooltip="Run the script"
-                toggled={props.script_playing}
-                on_clicked={props.on_play_clicked.clone()}
+                on_clicked={props.on_run_clicked.clone()}
             />
 
             <ToolbarButton
                 icon_left="refresh"
-                caption="Reload"
-                tooltip="Reload the script"
-                on_clicked={props.on_reload_clicked.clone()}
+                caption="Watch"
+                tooltip="Automatically run the script when it's changed"
+                toggled={props.auto_run}
+                on_clicked={props.on_auto_run_clicked.clone()}
             />
 
             <div class="horizontal-spacer"></div>
