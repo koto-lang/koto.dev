@@ -85,7 +85,6 @@ pub enum ScriptState {
 
 pub struct KotoWrapper {
     koto: Koto,
-    play_module: ValueMap,
     compiler_output: Element,
     script_output: Element,
     canvas: HtmlCanvasElement,
@@ -144,7 +143,6 @@ impl KotoWrapper {
 
         Self {
             koto,
-            play_module,
             compiler_output,
             script_output,
             canvas,
@@ -235,7 +233,7 @@ impl KotoWrapper {
     }
 
     pub fn update_should_be_called(&self) -> bool {
-        self.is_initialized() && self.play_module.data().get("update").is_some()
+        self.is_initialized() && self.koto.exports().data().get("update").is_some()
     }
 
     fn error(&mut self, error: &str) {

@@ -12,8 +12,11 @@ use {
 };
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     set_panic_hook();
+
     register_koto_editor_mode();
+
     let playground_wrapper = document()
         .get_element_by_id("playground-wrapper")
         .expect("Missing playground wrapper");

@@ -25,6 +25,8 @@ gloo-utils = "0.1.2"
 instant = "0.1.12"
 # Bindings for all JS global objects and functions in all JS environments like Node.js and bro…
 js-sys = "0.3.56"
+# A lightweight logging facade for Rust
+log = "0.4.20"
 # Markdown parsing
 pulldown-cmark = "0.9.1"
 # Convert pulldown-cmark Events back to the string they were parsed from
@@ -35,6 +37,8 @@ rand = "0.8.5"
 serde = "1.0.136"
 # Easy support for interacting between JS and Rust.
 wasm-bindgen = "0.2.79"
+# A logger for the browser console
+wasm-logger = "0.2.0"
 # Bindings for all Web APIs, a procedurally generated crate from WebIDL
 web-sys = "0.3.56"
 # A framework for making client-side single-page apps

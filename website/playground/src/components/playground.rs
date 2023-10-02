@@ -29,6 +29,7 @@ pub enum Msg {
     EditorChanged,
     ShowCanvas,
     ScriptLoaded { contents: String },
+    PostScriptLoaded,
     ScriptMenuChanged { url: &'static str },
     PlayButtonClicked,
     ReloadButtonClicked,
@@ -66,6 +67,8 @@ pub struct Playground {
     update_fps: f64,
 
     show_share_dialog: bool,
+
+    ignore_editor_changed: bool,
 
     _event_listeners: Vec<EventListener>,
     _document_attributes_listener: MutationObserver,
@@ -249,6 +252,7 @@ impl Component for Playground {
             update_fps: 60.0,
             run_script_enabled: true,
             show_share_dialog: false,
+            ignore_editor_changed: false,
             _event_listeners: vec![
                 EventListener::new(&window(), "resize", {
                     let link = ctx.link().clone();
@@ -272,16 +276,20 @@ impl Component for Playground {
                 false
             }
             Msg::EditorChanged => {
-                let script = self.get_editor_contents();
-                if !script.is_empty() {
-                    let koto = self.get_koto();
-                    koto.compile_script(&script);
-                    if self.run_script_enabled {
-                        self.run_script(ctx);
+                if self.ignore_editor_changed {
+                    false
+                } else {
+                    let script = self.get_editor_contents();
+                    if !script.is_empty() {
+                        let koto = self.get_koto();
+                        koto.compile_script(&script);
+                        if self.run_script_enabled {
+                            self.run_script(ctx);
+                        }
                     }
+                    self.script.set(script.into());
+                    true
                 }
-                self.script.set(script.into());
-                true
             }
             Msg::ShowCanvas => {
                 if !self.show_canvas.get() {
@@ -300,8 +308,17 @@ impl Component for Playground {
             Msg::ScriptLoaded { contents } => {
                 self.show_canvas.set(false);
                 self.reset_koto();
+                // We only want to compile the script once, and the Ace editor can send multiple
+                // on_changed events when setting its contents.
+                self.ignore_editor_changed = true;
                 self.set_editor_contents(&contents);
+                ctx.link().send_message(Msg::PostScriptLoaded);
                 true
+            }
+            Msg::PostScriptLoaded => {
+                self.ignore_editor_changed = false;
+                ctx.link().send_message(Msg::EditorChanged);
+                false
             }
             Msg::ScriptMenuChanged { url } => {
                 ctx.link().send_future({
