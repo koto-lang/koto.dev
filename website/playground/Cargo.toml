@@ -7,9 +7,6 @@ edition = "2021"
 
 [dependencies]
 koto = { path = "../../modules/koto/core/koto" }
-koto_color = { path = "../../modules/koto/libs/color" }
-koto_geometry = { path = "../../modules/koto/libs/geometry" }
-koto_random = { path = "../../modules/koto/libs/random" }
 
 console_error_panic_hook = { workspace = true }
 fb_cloned = { workspace = true }
@@ -20,16 +17,10 @@ gloo-utils = { workspace = true }
 instant = { workspace = true }
 js-sys = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
 serde = { workspace = true }
 wasm-bindgen = { workspace = true }
 wasm-logger = { workspace = true }
 yew = { workspace = true }
-
-
-[dependencies.getrandom]
-workspace = true
-features = ["js"]
 
 [dependencies.gloo-net]
 workspace = true
@@ -38,9 +29,7 @@ features = ["http", "json"]
 [dependencies.web-sys]
 workspace = true
 features = [
-  'CanvasRenderingContext2d',
   'Element',
-  'HtmlCanvasElement',
   'Location',
   'MutationObserver',
   'MutationObserverInit',

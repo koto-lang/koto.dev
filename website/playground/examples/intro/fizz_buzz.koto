@@ -1,0 +1,12 @@
+# Fizz buzz in Koto
+# https://en.wikipedia.org/wiki/Fizz_buzz
+
+fizz_buzz = |n|
+  match n % 3, n % 5
+    0, 0 then "Fizz Buzz"
+    0, _ then "Fizz"
+    _, 0 then "Buzz"
+    else '$n'
+
+for i in 1..=25
+  print fizz_buzz i

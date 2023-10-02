@@ -12,10 +12,7 @@ use {
     serde::Deserialize,
     std::collections::HashMap,
     wasm_bindgen::{closure::Closure, JsCast},
-    web_sys::{
-        Element, HtmlCanvasElement, MutationObserver, MutationObserverInit, RequestCache,
-        UrlSearchParams,
-    },
+    web_sys::{Element, MutationObserver, MutationObserverInit, RequestCache, UrlSearchParams},
     yew::prelude::*,
 };
 
@@ -27,7 +24,6 @@ pub struct PlaygroundContext {
 pub enum Msg {
     EditorInitialized { editor: AceEditor },
     EditorChanged,
-    ShowCanvas,
     ScriptLoaded { contents: String },
     PostScriptLoaded,
     ScriptMenuChanged { url: &'static str },
@@ -35,21 +31,14 @@ pub enum Msg {
     ReloadButtonClicked,
     ShareButtonClicked,
     ShareModalClosed,
-    OnUpdate,
-    WindowResized,
     BeforeUnload,
     DocumentAttributesChanged,
-    SetFps(f64),
     ShowError { error: String },
 }
 
 pub struct Playground {
     playground_context: PlaygroundContext,
 
-    show_canvas: StoredValue<bool>,
-    resize_canvas: bool,
-
-    canvas_ref: NodeRef,
     compiler_output_ref: NodeRef,
     script_output_ref: NodeRef,
 
@@ -64,7 +53,6 @@ pub struct Playground {
     update_interval: Option<Interval>,
     last_time: Option<f64>,
     current_time: f64,
-    update_fps: f64,
 
     show_share_dialog: bool,
 
@@ -76,20 +64,6 @@ pub struct Playground {
 }
 
 impl Playground {
-    fn get_canvas(&self) -> HtmlCanvasElement {
-        self.canvas_ref
-            .cast::<HtmlCanvasElement>()
-            .expect("Missing canvas element")
-    }
-
-    fn setup_update_interval(&mut self, ctx: &Context<Self>) {
-        let interval_ms = (1.0 / self.update_fps * 1000.0).floor() as u32;
-        self.update_interval = Some(Interval::new(interval_ms, {
-            let link = ctx.link().clone();
-            move || link.send_message(Msg::OnUpdate)
-        }));
-    }
-
     fn get_koto(&mut self) -> &mut KotoWrapper {
         self.koto.as_mut().expect("Missing koto wrapper")
     }
@@ -180,19 +154,13 @@ impl Playground {
             .set_keyboard_handler(if enabled { "ace/keyboard/vim" } else { "" });
     }
 
-    fn run_script(&mut self, ctx: &Context<Self>) {
+    fn run_script(&mut self) {
         debug_assert!(self.run_script_enabled);
 
-        let update_interval_is_none = self.update_interval.is_none();
         let koto = self.get_koto();
 
         if koto.is_ready() && !koto.is_initialized() {
             koto.run();
-        }
-
-        // koto.is_ready() is re-checked here in case an error occurred during koto.run()
-        if koto.is_ready() && update_interval_is_none && koto.update_should_be_called() {
-            self.setup_update_interval(ctx)
         }
     }
 }
@@ -230,39 +198,26 @@ impl Component for Playground {
 
         let playground_context = PlaygroundContext { dark_mode };
 
-        let show_canvas = StoredValue::new("show-canvas");
-        let resize_canvas = show_canvas.get();
-
         Self {
             playground_context,
-            canvas_ref: NodeRef::default(),
-            show_canvas,
-            resize_canvas,
             compiler_output_ref: NodeRef::default(),
             script_output_ref: NodeRef::default(),
             editor: None,
             koto: None,
             script: StoredValue::new_with_default("script", || {
-                include_str!("../../examples/canvas/random_rects.koto").into()
+                include_str!("../../examples/intro/fizz_buzz.koto").into()
             }),
             vim_bindings_enabled: StoredValue::new("vim-bindings-enabled"),
             update_interval: None,
             last_time: None,
             current_time: 0.0,
-            update_fps: 60.0,
             run_script_enabled: true,
             show_share_dialog: false,
             ignore_editor_changed: false,
-            _event_listeners: vec![
-                EventListener::new(&window(), "resize", {
-                    let link = ctx.link().clone();
-                    move |_| link.send_message(Msg::WindowResized)
-                }),
-                EventListener::new(&window(), "beforeunload", {
-                    let link = ctx.link().clone();
-                    move |_| link.send_message(Msg::BeforeUnload)
-                }),
-            ],
+            _event_listeners: vec![EventListener::new(&window(), "beforeunload", {
+                let link = ctx.link().clone();
+                move |_| link.send_message(Msg::BeforeUnload)
+            })],
             _document_attributes_listener: document_attributes_listener,
             _document_attributes_callback: document_attributes_callback,
         }
@@ -284,29 +239,14 @@ impl Component for Playground {
                         let koto = self.get_koto();
                         koto.compile_script(&script);
                         if self.run_script_enabled {
-                            self.run_script(ctx);
+                            self.run_script();
                         }
                     }
                     self.script.set(script.into());
                     true
                 }
             }
-            Msg::ShowCanvas => {
-                if !self.show_canvas.get() {
-                    self.show_canvas.set(true);
-                    // The script should be reinitialized now that the canvas is being shown
-                    self.reset_koto();
-                    self.set_editor_contents(&self.get_editor_contents());
-                    // Send a 'window resized' message to redraw the canvas after the re-render
-                    // ctx.link().send_message(Msg::WindowResized);
-                    self.resize_canvas = true;
-                    true
-                } else {
-                    false
-                }
-            }
             Msg::ScriptLoaded { contents } => {
-                self.show_canvas.set(false);
                 self.reset_koto();
                 // We only want to compile the script once, and the Ace editor can send multiple
                 // on_changed events when setting its contents.
@@ -341,9 +281,7 @@ impl Component for Playground {
             Msg::PlayButtonClicked => {
                 self.run_script_enabled = !self.run_script_enabled;
                 if self.run_script_enabled {
-                    self.run_script(ctx);
-                } else {
-                    self.update_interval = None;
+                    self.run_script();
                 }
                 true
             }
@@ -360,46 +298,6 @@ impl Component for Playground {
             Msg::ShareModalClosed => {
                 self.show_share_dialog = false;
                 true
-            }
-            Msg::OnUpdate => {
-                let time = get_current_time();
-                let time_delta = time - self.last_time.unwrap_or(time);
-                self.current_time += time_delta;
-                let current_time = self.current_time;
-                self.last_time = Some(time);
-
-                let koto = self.get_koto();
-                if koto.is_ready() {
-                    koto.run_update(current_time);
-                }
-
-                // is_ready gets checked again here in case of an error when running update()
-                if koto.is_ready() {
-                    false
-                } else {
-                    self.update_interval = None;
-                    true
-                }
-            }
-            Msg::SetFps(fps) => {
-                // If the update interval is currently active, then restart it with the new fps.
-                // If it's not currelntly active then it'll be set up later in self.run_script().
-                let restart_interval = self.update_fps != fps && self.update_interval.is_some();
-
-                self.update_fps = fps;
-                if restart_interval {
-                    self.setup_update_interval(ctx);
-                }
-
-                false
-            }
-            Msg::WindowResized => {
-                if self.show_canvas.get() {
-                    self.resize_canvas = true;
-                    true
-                } else {
-                    false
-                }
             }
             Msg::BeforeUnload => {
                 self.script.save();
@@ -461,23 +359,12 @@ impl Component for Playground {
             </div>
         };
 
-        let playground_classes = if self.show_canvas.get() {
-            classes!("playground", "with-canvas")
-        } else {
-            classes!("playground", "without-canvas")
-        };
+        let playground_classes = classes!("playground", "without-canvas");
 
         html! {
             <ContextProvider<PlaygroundContext> context={self.playground_context}>
                 <div class={playground_classes}>
                     { editor_area }
-
-                    <canvas
-                        ref={self.canvas_ref.clone()}
-                        class="playground-canvas fullsize"
-                        width="400"
-                        height="400"
-                    ></canvas>
 
                     <textarea
                       ref={self.compiler_output_ref.clone()}
@@ -508,36 +395,16 @@ impl Component for Playground {
         }
     }
 
-    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {
-        let canvas = self.get_canvas();
-
-        if self.resize_canvas {
-            canvas.set_width(canvas.client_width() as u32);
-            canvas.set_height(canvas.client_height() as u32);
-            self.get_koto().on_resize();
-            self.resize_canvas = false;
-        }
-
+    fn rendered(&mut self, _ctx: &Context<Self>, first_render: bool) {
         if first_render {
             let compiler_output = self.compiler_output_ref.cast::<Element>().unwrap();
             let script_output = self.script_output_ref.cast::<Element>().unwrap();
 
-            self.koto = Some(KotoWrapper::new(
-                canvas,
-                compiler_output,
-                script_output,
-                ctx.link().callback(|fps| Msg::SetFps(fps)),
-                ctx.link().callback(|_| Msg::ShowCanvas),
-            ));
+            self.koto = Some(KotoWrapper::new(compiler_output, script_output));
         }
 
         self.show_share_dialog = false;
     }
-}
-
-// Returns the current time in seconds
-fn get_current_time() -> f64 {
-    window().performance().unwrap().now() / 1000.0
 }
 
 #[derive(Deserialize)]
