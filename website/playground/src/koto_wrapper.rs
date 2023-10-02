@@ -1,6 +1,6 @@
 use {
     cloned::cloned,
-    koto::{prelude::*, KotoError},
+    koto::prelude::*,
     koto_color::Color,
     koto_geometry::{Rect, Vec2},
     rand::{thread_rng, Rng},
@@ -262,7 +262,7 @@ impl KotoWrapper {
         &mut self,
         function_name: &str,
         args: &[Value],
-    ) -> Result<Value, KotoError> {
+    ) -> Result<Value, koto::Error> {
         match self.play_module.data().get(function_name) {
             Some(f) => self.koto.run_function(f.clone(), CallArgs::Separate(args)),
             None => Ok(Value::Null),

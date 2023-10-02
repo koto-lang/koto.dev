@@ -387,6 +387,7 @@ dependencies = [
  "koto_bytecode",
  "koto_parser",
  "koto_runtime",
+ "thiserror",
 ]
 
 [[package]]
