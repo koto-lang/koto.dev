@@ -38,7 +38,6 @@ pub enum Msg {
 pub struct Playground {
     playground_context: PlaygroundContext,
 
-    compiler_output_ref: NodeRef,
     script_output_ref: NodeRef,
 
     editor: Option<AceEditor>,
@@ -179,7 +178,6 @@ impl Component for Playground {
 
         Self {
             playground_context,
-            compiler_output_ref: NodeRef::default(),
             script_output_ref: NodeRef::default(),
             editor: None,
             koto: None,
@@ -329,18 +327,10 @@ impl Component for Playground {
             </div>
         };
 
-        let playground_classes = classes!("playground", "without-canvas");
-
         html! {
             <ContextProvider<PlaygroundContext> context={self.playground_context}>
-                <div class={playground_classes}>
+                <div class="playground">
                     { editor_area }
-
-                    <textarea
-                      ref={self.compiler_output_ref.clone()}
-                      class="playground-status fixed-mono uk-textarea uk-form-small"
-                      readonly=true
-                    ></textarea>
 
                     <textarea
                       ref={self.script_output_ref.clone()}
@@ -367,10 +357,9 @@ impl Component for Playground {
 
     fn rendered(&mut self, _ctx: &Context<Self>, first_render: bool) {
         if first_render {
-            let compiler_output = self.compiler_output_ref.cast::<Element>().unwrap();
             let script_output = self.script_output_ref.cast::<Element>().unwrap();
 
-            self.koto = Some(KotoWrapper::new(compiler_output, script_output));
+            self.koto = Some(KotoWrapper::new(script_output));
         }
 
         self.show_share_dialog = false;

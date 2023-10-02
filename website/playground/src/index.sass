@@ -1,6 +1,5 @@
 @import "../../sass/main.sass"
 
-
 $playground-padding: 30px
 
 .flex-column
@@ -44,29 +43,13 @@ body
 
 @media (max-width: 800px)
   .playground
-    grid-template-columns: 100%
-    grid-template-rows: 40% 40% 10% 10%
+    grid-template-areas: 100%
+    grid-template-rows: 50% 50%
 
 @media (min-width: 800px)
   .playground
     grid-template-columns: 50% 50%
-    grid-template-rows: 80% 20%
-
-@media (max-width: 800px)
-  .with-canvas
-    grid-template-areas: "editor" "canvas" "output" "status"
-
-@media (min-width: 800px)
-  .with-canvas
-    grid-template-areas: "editor canvas" "status output"
-
-@media (max-width: 800px)
-  .without-canvas
-    grid-template-areas: "editor" "output" "output" "status"
-
-@media (min-width: 800px)
-  .without-canvas
-    grid-template-areas: "editor output" "status output"
+    grid-template-rows: 100%
 
 .editor-area
   display: flex
@@ -78,20 +61,5 @@ body
   flex-direction: row
   align-items: flex-end
 
-.playground-editor
-  grid-area: editor
-
-.playground-status
-  grid-area: status
-  padding: 2px
-
 .playground-output
-  grid-area: output
   padding: 2px
-
-.playground-canvas
-  background-color: #aaaaaa
-  border: 1px
-  border-style: solid
-  border-color: #e5e5e5
-  grid-area: canvas

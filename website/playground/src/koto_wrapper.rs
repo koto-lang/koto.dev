@@ -12,14 +12,13 @@ pub enum KotoMessage {
 
 pub struct KotoWrapper {
     koto: Koto,
-    compiler_output: Element,
     script_output: Element,
     output_buffer: String,
     message_queue: KotoMessageQueue,
 }
 
 impl KotoWrapper {
-    pub fn new(compiler_output: Element, script_output: Element) -> Self {
+    pub fn new(script_output: Element) -> Self {
         let message_queue = KotoMessageQueue::default();
 
         let koto = Koto::with_settings(
@@ -37,7 +36,6 @@ impl KotoWrapper {
 
         Self {
             koto,
-            compiler_output,
             script_output,
             output_buffer: String::with_capacity(128),
             message_queue,
@@ -47,7 +45,6 @@ impl KotoWrapper {
     pub fn compile_and_run_script(&mut self, script: &str) {
         debug_assert!(!script.is_empty());
 
-        self.compiler_output.set_inner_html("");
         self.script_output.set_inner_html("");
         self.message_queue.borrow_mut().clear();
 
@@ -57,9 +54,8 @@ impl KotoWrapper {
         if let Err(error) = self.koto.compile(&script) {
             self.error(&format!("Error while compiling script: {error}"));
         } else {
-            self.compiler_output.set_inner_html("Success");
-
             if let Err(e) = self.koto.run() {
+                self.process_koto_messages();
                 return self.error(&e.to_string());
             }
 
@@ -69,9 +65,9 @@ impl KotoWrapper {
     }
 
     fn error(&mut self, error: &str) {
-        self.compiler_output.set_inner_html(error);
-        self.compiler_output
-            .set_scroll_top(self.compiler_output.scroll_height());
+        self.script_output.set_inner_html(error);
+        self.script_output
+            .set_scroll_top(self.script_output.scroll_height());
     }
 
     fn process_koto_messages(&mut self) {
