@@ -80,8 +80,6 @@ print "Hi there, $name!"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'Please enter your name:'
 name = io.stdin().read_line()
 print "Hi there, $name!"
@@ -99,8 +97,6 @@ Single-line comments start with a `#`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # This is a comment, everything until the end of the line is ignored.
 
 {% end %}
@@ -115,8 +111,6 @@ comment.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 #- 
 This is a 
 multi-line 
@@ -149,8 +143,6 @@ Numbers and arithmetic are expressed in a familiar way.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1
 # -> 1
 
@@ -178,8 +170,6 @@ Parentheses can be used to group expressions.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1 + 2) * (3 + 4)
 # -> 21
 
@@ -198,8 +188,6 @@ true or false
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print true and false
 # -> false
 
@@ -218,8 +206,6 @@ not false
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print not true
 # -> false
 
@@ -238,8 +224,6 @@ Values can be compared for equality with the `==` and `!=` operators.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1 + 1 == 2
 # -> true
 
@@ -258,8 +242,6 @@ null
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print null
 # -> null
 
@@ -279,8 +261,6 @@ null or 42
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print not null
 # -> true
 
@@ -305,8 +285,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # Assign the value `42` to `x`
 x = 42
 print x
@@ -335,8 +313,6 @@ a
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a = 100
 print a += 11
 # -> 111
@@ -360,8 +336,6 @@ debug x / 10
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 10 + 20
 debug x / 10
 # -> [2] x / 10: 3.0
@@ -378,8 +352,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = debug 2 + 2
 # -> [1] 2 + 2: 4
 print x
@@ -401,8 +373,6 @@ Strings can be declared using `'` or `"` quotes.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'Hello, World!'
 # -> Hello, World!
 
@@ -422,8 +392,6 @@ several lines.'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'This is a string
 that spans
 several lines.'
@@ -440,8 +408,6 @@ Strings can be joined together with the `+` operator.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'a' + 'Bc' + 'Def'
 # -> aBcDef
 
@@ -456,8 +422,6 @@ Individual elements of a String can be accessed via indexing with `[]` braces.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'abcdef'[3]
 # -> d
 print '👋🥳😆'[1]
@@ -475,8 +439,6 @@ xyz = 123
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 xyz = 123
 print 'The value of xyz is $xyz'
 # -> The value of xyz is 123
@@ -490,8 +452,6 @@ The `$` prefix can also be used to include the results of expressions surrounded
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '2 plus 3 is ${2 + 3}.'
 # -> 2 plus 3 is 5.
 
@@ -522,8 +482,6 @@ all of which start with a `\`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '\$\'\"'
 # -> $'"
 print 'Hi \u{1F44B}'
@@ -543,8 +501,6 @@ print 'This string has to escape its \'single quotes\'.'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print "This string contains 'single quotes'."
 # -> This string contains 'single quotes'.
 
@@ -566,8 +522,6 @@ add = |x, y| x + y
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 hi = || 'Hello!'
 add = |x, y| x + y
 
@@ -585,8 +539,6 @@ add(50, 5)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 hi = || 'Hello!'
 print hi()
 # -> Hello!
@@ -609,8 +561,6 @@ pow 2, 3
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 square = |x| x * x
 print square 8
 # -> 64
@@ -634,8 +584,6 @@ f 2, 3, 4
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |x, y, z|
   x *= 100
   y *= 10
@@ -658,8 +606,6 @@ f 10
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |n|
   return 42
   # This expression won't be reached
@@ -709,8 +655,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 add = |x, y| x + y
 multiply = |x, y| x * y
 square = |x| x * x
@@ -767,8 +711,6 @@ y[1][2]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = ['a', 99, true]
 print x[0]
 # -> a
@@ -797,8 +739,6 @@ x # x and y share the same data
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [10, 20, 30]
 y = x
 y[1] = 99
@@ -821,8 +761,6 @@ x[1]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (-1, 'abc', true)
 print x[1]
 # -> abc
@@ -843,8 +781,6 @@ x, y
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1, 2, 3
 # -> (1, 2, 3)
 
@@ -875,8 +811,6 @@ To create an empty Tuple, or a Tuple with a single entry, use a trailing `,` ins
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # An empty pair of parentheses resolves to Null
 print () 
 # -> null
@@ -905,8 +839,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # A Tuple containing two Lists
 x = ([1, 2, 3], [4, 5, 6])
 
@@ -933,8 +865,6 @@ m.oranges
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m = {apples: 42, oranges: 99, lemons: 63}
 print m.oranges
 # -> 99
@@ -952,8 +882,6 @@ m.apples
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m = 
   apples: 42
   oranges: 99
@@ -978,8 +906,6 @@ m.hello.to.you
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m =
   hello:
     world: 99
@@ -1006,8 +932,6 @@ m.bar
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 bar = 'hi!'
 m = {foo: 42, bar, baz: -1}
 print m.bar
@@ -1029,8 +953,6 @@ a.foo
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a = {foo: 99, bar: -1}
 print a.foo
 # -> 99
@@ -1056,8 +978,6 @@ m.bye 'Friend'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m = 
   hello: |name| 'Hello, $name!'
   bye: |name| 'Bye, $name!'
@@ -1084,8 +1004,6 @@ m.hello()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m = 
   name: 'World'
   hello: || 'Hello, ${self.name}!'
@@ -1113,8 +1031,6 @@ list.first [99, -1, 3]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print string.size 'hello'
 # -> 5
 
@@ -1139,8 +1055,6 @@ Values in Koto automatically have their corresponding core library modules avail
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'xyz'.size()
 # -> 3
 
@@ -1175,8 +1089,6 @@ i.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 i = [10, 20].iter()
 print i.next()
 # -> 10
@@ -1202,8 +1114,6 @@ x.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3, 4, 5].keep |n| n > 3
 print x.next()
 # -> 4
@@ -1229,8 +1139,6 @@ Iterators can be also be *consumed* using functions like
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [1, 2, 3]
   .each |n| n * 2
   .to_tuple()
@@ -1255,8 +1163,6 @@ a, b
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a, b = 10, 20
 print a, b
 # -> (10, 20)
@@ -1273,8 +1179,6 @@ y, x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_tuple = 1, 2
 x, y = my_tuple
 print y, x
@@ -1291,8 +1195,6 @@ a, b, c
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a, b, c = [-1, -2]
 print a, b, c
 # -> (-1, -2, null)
@@ -1311,8 +1213,6 @@ a, b, c
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a, b, c = 1..10
 print a, b, c
 # -> (1, 2, 3)
@@ -1337,8 +1237,6 @@ if x % 2 == 0 then print 'even' else print 'odd'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 99
 if x % 2 == 0 then print 'even' else print 'odd'
 # -> odd
@@ -1358,8 +1256,6 @@ else
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 24
 if x < 0
   print 'negative'
@@ -1390,8 +1286,6 @@ foo, foo
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = if 1 + 1 == 2 then 3 else -1
 print x, x
 # -> (3, 3)
@@ -1424,8 +1318,6 @@ fib 7
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 fib = |n|
   switch
     n <= 0 then 0
@@ -1454,8 +1346,6 @@ match 40 + 2
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print match 40 + 2
   0 then 'zero'
   1 then 'one'
@@ -1484,8 +1374,6 @@ fizz_buzz = |n|
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 fizz_buzz = |n|
   match n % 3, n % 5
     0, 0 then "Fizz Buzz"
@@ -1514,8 +1402,6 @@ match ['a', 'b', 'c'].extend [1, 2, 3]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print match ['a', 'b', 'c'].extend [1, 2, 3]
   ['a', 'b'] then "A list containing 'a' and 'b'"
   [1, ...] then "Starts with '1'"
@@ -1543,8 +1429,6 @@ for n in [10, 20, 30]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 for n in [10, 20, 30]
   print n
 # -> 10
@@ -1565,8 +1449,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = for n in (11, 22, 33, 44, 55)
   if n > 30 
     break n
@@ -1588,8 +1470,6 @@ for n in (-2, -1, 1, 2)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 for n in (-2, -1, 1, 2)
   if n < 0
     continue
@@ -1611,8 +1491,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 0
 while x < 5
   x += 1
@@ -1634,8 +1512,6 @@ until z.is_empty()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 z = [1, 2, 3]
 until z.is_empty()
   print z.pop()
@@ -1659,8 +1535,6 @@ y
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 0
 y = loop
   x += 1
@@ -1691,8 +1565,6 @@ r.contains 20
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print r = 10..20
 # -> 10..20
 print r.start()
@@ -1713,8 +1585,6 @@ r.contains 200
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print r = 100..=200
 # -> 100..=200
 print r.contains 200
@@ -1735,8 +1605,6 @@ for x in 1..=3
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 for x in 1..=3
   print x
 # -> 1
@@ -1768,8 +1636,6 @@ f 1, 2, 3
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |a, b, c|
   print (a, b, c)
 
@@ -1792,8 +1658,6 @@ f 1
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |a, b, c|
   print (a or -1, b or -2, c or -3)
 
@@ -1814,8 +1678,6 @@ f false
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |a| print if a == null then -1 else a
 
 f()
@@ -1838,8 +1700,6 @@ f 1, 2, 3, 4, 5
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |a, b, others...|
   print "a: $a, b: $b, others: $others"
 
@@ -1861,8 +1721,6 @@ f x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # A function that sums a List of three values
 f = |[a, b, c]| a + b + c
 
@@ -1887,8 +1745,6 @@ f x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # A function that takes a Tuple of Lists
 # and sums their entries
 f = |([a, b], [c, d, e])| 
@@ -1908,8 +1764,6 @@ f x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |(..., last)| last * last
 x = (1, 2, 3, 4)
 print f x
@@ -1926,8 +1780,6 @@ f x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = |(first, others...)| first * others.sum()
 x = (10, 1, 2, 3)
 print f x
@@ -1950,8 +1802,6 @@ f [100, 10, 1]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # A function that takes a List,
 # and sums its first and third values 
 f = |[a, _, c]| a + c
@@ -1973,8 +1823,6 @@ my_map
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_map = {foo_a: 1, bar_a: 2, foo_b: 3, bar_b: 4}
 print my_map
   .keep |(key, _value)| key.starts_with 'foo'
@@ -2003,8 +1851,6 @@ f 2
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 1
 
 # x is assigned outside the function,
@@ -2045,8 +1891,6 @@ x.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_first_generator = ||
   yield 1
   yield 2
@@ -2077,8 +1921,6 @@ my_generator(10).to_tuple()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_generator = |x|
   for y in 1..=3
     yield x + y 
@@ -2118,8 +1960,6 @@ iterator.every_other = ||
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # Make an iterator adaptor that yields 
 # every other value from the adapted iterator
 iterator.every_other = ||
@@ -2192,8 +2032,6 @@ foo_a.data
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # foo is a function that makes Foo values
 foo = |n|
   data: n
@@ -2246,8 +2084,6 @@ x.data
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @negate: || foo -self.data
@@ -2271,8 +2107,6 @@ not (foo 10)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @not: || self.data == 0
@@ -2295,8 +2129,6 @@ foo = |n|
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @[]: |index| self.data + index
@@ -2325,8 +2157,6 @@ x()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @||: || 
@@ -2375,8 +2205,6 @@ with_next.to_tuple()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 no_next =
   foo: 42
   bar: 99
@@ -2423,8 +2251,6 @@ iter
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 iter =
   foo: 0
   @next: || self.foo += 1
@@ -2460,8 +2286,6 @@ foo = |n|
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   @iterator: || 
     yield n + 1
@@ -2498,8 +2322,6 @@ x = foo -1
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @display: || 'Foo: {}'.format self.data
@@ -2527,8 +2349,6 @@ koto.type (foo 42)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @type: "Foo"
@@ -2566,8 +2386,6 @@ cat('Smudge').speak()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 animal = |name|
   name: name
   speak: || '${self.noise}! My name is ${self.name}!'
@@ -2615,8 +2433,6 @@ print map.keys(x).to_tuple()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 foo = |n|
   data: n
   @meta hello: "Hello!"
@@ -2665,8 +2481,6 @@ globals.foo_meta =
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # Create an empty map for global values 
 globals = {}
 
@@ -2710,8 +2524,6 @@ finally
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3]
 try
   # Do something that will throw an error 
@@ -2737,8 +2549,6 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = || throw "!Error!"
 
 try
@@ -2771,8 +2581,6 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 try 
   assert 1 + 1 == 3
 catch error
@@ -2801,8 +2609,6 @@ test.run_tests basic_tests
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 basic_tests = 
   @test add: || assert_eq 1 + 1, 2 
   @test subtract: || assert_eq 1 - 1, 0 
@@ -2846,8 +2652,6 @@ catch _
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 make_x = |n|
   data: n
   @+: |other| make_x self.data + other.data
@@ -2901,8 +2705,6 @@ abs -42
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 from list import last
 from number import abs
 
@@ -2928,8 +2730,6 @@ size x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 from tuple import first, last, size
 x = 'a', 'b', 'c'
 print first x
@@ -2952,8 +2752,6 @@ tuple_size (3, 2, 1)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 list_size = from list import size
 tuple_size = from tuple import size
 print list_size [1, 2]
@@ -2985,8 +2783,6 @@ say_hello 'Koto'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 ##################
 # my_module.koto #
 ##################
@@ -3022,8 +2818,6 @@ export
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 
 ##################
 # my_module.koto #
@@ -3079,8 +2873,6 @@ say_hello 'Koto'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 ##################
 # my_module.koto #
 ##################

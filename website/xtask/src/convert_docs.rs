@@ -166,8 +166,6 @@ slug = \"{slug}\"
                 let shortcode = format!(
                     "\
 {{% example_playground_link() %}}
-play.clear_output()
-
 {playground_code}
 {{% end %}}
 "
