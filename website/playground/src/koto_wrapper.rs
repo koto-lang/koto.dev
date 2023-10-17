@@ -91,7 +91,7 @@ impl KotoWrapper {
 struct PlaygroundInput {}
 
 impl KotoFile for PlaygroundInput {
-    fn id(&self) -> ValueString {
+    fn id(&self) -> KString {
         "PlaygroundInput".into()
     }
 }
@@ -109,12 +109,12 @@ impl KotoRead for PlaygroundInput {
 
 // Captures output from Koto in a String
 struct OutputCapture {
-    id: ValueString,
+    id: KString,
     queue: KotoMessageQueue,
 }
 
 impl KotoFile for OutputCapture {
-    fn id(&self) -> ValueString {
+    fn id(&self) -> KString {
         self.id.clone()
     }
 }
