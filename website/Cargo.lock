@@ -331,7 +331,7 @@ dependencies = [
 
 [[package]]
 name = "koto"
-version = "0.11.0"
+version = "0.13.0"
 dependencies = [
  "dunce",
  "koto_bytecode",
@@ -342,7 +342,7 @@ dependencies = [
 
 [[package]]
 name = "koto_bytecode"
-version = "0.11.0"
+version = "0.13.0"
 dependencies = [
  "dunce",
  "koto_memory",
@@ -354,7 +354,7 @@ dependencies = [
 
 [[package]]
 name = "koto_lexer"
-version = "0.11.0"
+version = "0.13.0"
 dependencies = [
  "unicode-width",
  "unicode-xid",
@@ -362,11 +362,11 @@ dependencies = [
 
 [[package]]
 name = "koto_memory"
-version = "0.11.0"
+version = "0.13.0"
 
 [[package]]
 name = "koto_parser"
-version = "0.11.0"
+version = "0.13.0"
 dependencies = [
  "koto_lexer",
  "koto_memory",
@@ -375,7 +375,7 @@ dependencies = [
 
 [[package]]
 name = "koto_runtime"
-version = "0.11.0"
+version = "0.13.0"
 dependencies = [
  "chrono",
  "downcast-rs",
