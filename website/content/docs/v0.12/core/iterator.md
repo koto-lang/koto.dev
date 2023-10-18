@@ -12,8 +12,9 @@ slug = "iterator"
 ````
 
 Checks the Iterable's values against a test Function.
-The Function should return `true` or `false`, and then `all` returns `true`
-if all values pass the test.
+
+The provided function should return `true` or `false`, 
+and then `all` will return `true` if all values pass the test.
 
 `all` stops running as soon as it finds a failing test, and then `false` is
 returned.
@@ -34,8 +35,6 @@ returned.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1..9).all |x| x > 0
 # -> true
 
@@ -55,8 +54,9 @@ print [10, 20, 30]
 ````
 
 Checks the Iterable's values against a test Function.
-The Function should return `true` or `false`, and then `any` returns `true`
-if any of the values pass the test.
+
+The provided function should return `true` or `false`, 
+and then `any` will return `true` if any of the values pass the test.
 
 `any` stops running as soon as it finds a passing test.
 
@@ -76,8 +76,6 @@ if any of the values pass the test.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1..9).any |x| x == 5
 # -> true
 
@@ -102,14 +100,16 @@ followed by the output of the second iterator.
 ### Example
 
 ````koto
-[1, 2].chain([3, 4, 5]).to_tuple()
+[1, 2]
+  .chain [3, 4, 5]
+  .to_tuple()
 # -> (1, 2, 3, 4, 5)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print [1, 2].chain([3, 4, 5]).to_tuple()
+print [1, 2]
+  .chain [3, 4, 5]
+  .to_tuple()
 # -> (1, 2, 3, 4, 5)
 
 {% end %}
@@ -120,30 +120,23 @@ print [1, 2].chain([3, 4, 5]).to_tuple()
 ````
 
 Returns an iterator that splits up the input data into chunks of size `N`,
-where each chunk is provided as an iterator over the chunk's elements.
+where each chunk is provided as a Tuple.
 The final chunk may have fewer than `N` elements.
-
-Note that the input value should be an iterable value that has a defined range,
-e.g. a List or a String (i.e. not an adapted iterator or a generator).
 
 ### Example
 
 ````koto
-(1..=10)
+1..=10
   .chunks 3
-  .each |chunk| chunk.to_list()
   .to_list()
-# -> [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+# -> [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10)]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print (1..=10)
+print 1..=10
   .chunks 3
-  .each |chunk| chunk.to_list()
   .to_list()
-# -> [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+# -> [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10)]
 
 {% end %}
 ## consume
@@ -165,7 +158,7 @@ iterator output value.
 
 ````koto
 result = []
-(1..=10)
+1..=10
   .keep |n| n % 2 == 0
   .each |n| result.push n
   .consume()
@@ -175,7 +168,7 @@ result
 # Alternatively, calling consume with a function is equivalent to having an
 # `each` / `consume` chain
 result = []
-(1..=10)
+1..=10
   .keep |n| n % 2 == 1
   .consume |n| result.push n
 result
@@ -183,10 +176,8 @@ result
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 result = []
-(1..=10)
+1..=10
   .keep |n| n % 2 == 0
   .each |n| result.push n
   .consume()
@@ -196,66 +187,11 @@ print result
 # Alternatively, calling consume with a function is equivalent to having an
 # `each` / `consume` chain
 result = []
-(1..=10)
+1..=10
   .keep |n| n % 2 == 1
   .consume |n| result.push n
 print result
 # -> [1, 3, 5, 7, 9]
-
-{% end %}
-## copy
-
-````kototype
-|Iterator| -> Iterator
-````
-
-Returns an iterator that shares the same iterable data, but with a unique
-iteration position (which is part of an iterator's shared state by default).
-
-### Note
-
-If the iterator is a generator then some effort will be made to make the
-generator's copy provide the same output as the original, however this isn't
-guaranteeed to be successful. Specifically, the value stack of the copied VM
-will be scanned for iterators, and each iterator will have a copy made.
-Iterators that may be used in other ways by the generator (e.g. stored in
-containers or function captures) won't be copied and will still have shared
-state.
-
-### Example
-
-````koto
-x = (1..=10).iter()
-y = x # y shares the same iteration position as x.
-z = x.copy() # z shares the same iteration data (the range 1..=10),
-             # but has a unique iteration position.
-
-x.next()
-# -> 1
-x.next()
-# -> 2
-y.next() # y shares x's iteration position.
-# -> 3
-z.next() # z's iteration hasn't been impacted by the advancing of x and y.
-# -> 1
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-x = (1..=10).iter()
-y = x # y shares the same iteration position as x.
-z = x.copy() # z shares the same iteration data (the range 1..=10),
-             # but has a unique iteration position.
-
-print x.next()
-# -> 1
-print x.next()
-# -> 2
-print y.next() # y shares x's iteration position.
-# -> 3
-print z.next() # z's iteration hasn't been impacted by the advancing of x and y.
-# -> 1
 
 {% end %}
 ## count
@@ -272,19 +208,17 @@ Counts the number of items yielded from the iterator.
 (5..15).count()
 # -> 10
 
-(0..100)
+0..100
   .keep |x| x % 2 == 0
   .count()
 # -> 50
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (5..15).count()
 # -> 10
 
-print (0..100)
+print 0..100
   .keep |x| x % 2 == 0
   .count()
 # -> 50
@@ -296,8 +230,11 @@ print (0..100)
 |Iterable| -> Iterator
 ````
 
-Takes an Iterable and returns a new iterator that endlessly repeats the output
-of the iterable.
+Takes an Iterable and returns a new iterator that endlessly repeats the
+iterable's output.
+
+The iterable's output gets cached, which may result in a large amount of memory
+being used if the cycle has a long length.
 
 ### Example
 
@@ -310,8 +247,6 @@ of the iterable.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1, 2, 3)
   .cycle()
   .take 10
@@ -338,8 +273,6 @@ result of calling the function with each value in the iterable.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (2, 3, 4)
   .each |x| x * 2
   .to_list()
@@ -362,8 +295,6 @@ Returns an iterator that provides each value along with an associated index.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('a', 'b', 'c').enumerate().to_list()
 # -> [(0, 'a'), (1, 'b'), (2, 'c')]
 
@@ -394,8 +325,6 @@ If no match is found then Null is returned.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (10..20).find |x| x > 14 and x < 16
 # -> 15
 
@@ -418,14 +347,16 @@ containers will still be present in the output.
 ### Example
 
 ````koto
-[(2, 4), [6, 8, (10, 12)]].flatten().to_list()
+[(2, 4), [6, 8, (10, 12)]]
+  .flatten()
+  .to_list()
 # -> [2, 4, 6, 8, (10, 12)]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print [(2, 4), [6, 8, (10, 12)]].flatten().to_list()
+print [(2, 4), [6, 8, (10, 12)]]
+  .flatten()
+  .to_list()
 # -> [2, 4, 6, 8, (10, 12)]
 
 {% end %}
@@ -456,15 +387,19 @@ This operation is also known in other languages as `reduce`, `accumulate`,
 ### Example
 
 ````koto
-('a', 'b', 'c').fold '', |result, x| result += x + '-'
-# -> a-b-c-
+('a', 'b', 'c')
+  .fold [], |result, x| 
+    result.push x
+    result.push '-'
+# -> ['a', '-', 'b', '-', 'c', '-']
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print ('a', 'b', 'c').fold '', |result, x| result += x + '-'
-# -> a-b-c-
+print ('a', 'b', 'c')
+  .fold [], |result, x| 
+    result.push x
+    result.push '-'
+# -> ['a', '-', 'b', '-', 'c', '-']
 
 {% end %}
 ### See Also
@@ -478,13 +413,16 @@ print ('a', 'b', 'c').fold '', |result, x| result += x + '-'
 |Function| -> Iterator
 ````
 
+Provides an iterator that yields the result of repeatedly calling the provided
+function. Note that this version of `generate` won't terminate and will iterate
+endlessly.
+
 ````kototype
 |Number, Function| -> Value
 ````
 
 Provides an iterator that yields the result of repeatedly calling the provided
-function. A number of calls to the function can be provided as the first
-argument.
+function `n` times.
 
 ### Example
 
@@ -499,8 +437,6 @@ iterator.generate(3, f).to_tuple()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 state = {x: 0}
 f = || state.x += 1
 print iterator.generate(f).take(5).to_list()
@@ -544,8 +480,6 @@ separators = (1, 2, 3).iter()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('a', 'b', 'c').intersperse('-').to_string()
 # -> a-b-c
 
@@ -569,7 +503,8 @@ so it's usually not necessary to call `.iter()`, however it can be usefult
 sometimes to make a standalone iterator for manual iteration.
 
 Note that calling `.iter` with an `Iterator` will return the iterator without
-modification. If a copy of the iterator is needed then use `.copy()`.
+modification. If a copy of the iterator is needed then see `koto.copy` and
+`koto.deep_copy`.
 
 ### Example
 
@@ -581,8 +516,6 @@ i.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 i = (1..10).iter()
 i.skip 5
 print i.next()
@@ -591,7 +524,8 @@ print i.next()
 {% end %}
 ### See Also
 
-* [`iterator.copy`](#copy)
+* [`koto.copy`](../koto#copy)
+* [`koto.deep_copy`](../koto#deep_copy)
 
 ## keep
 
@@ -608,14 +542,16 @@ discarded.
 ### Example
 
 ````koto
-(0..10).keep(|x| x % 2 == 0).to_tuple()
+0..10
+  .keep |x| x % 2 == 0
+  .to_tuple()
 # -> (0, 2, 4, 6, 8)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print (0..10).keep(|x| x % 2 == 0).to_tuple()
+print 0..10
+  .keep |x| x % 2 == 0
+  .to_tuple()
 # -> (0, 2, 4, 6, 8)
 
 {% end %}
@@ -638,8 +574,6 @@ Consumes the iterator, returning the last yielded value.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1..100).take(5).last()
 # -> 5
 
@@ -673,8 +607,6 @@ found so far, until all values in the iterator have been compared.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (8, -3, 99, -1).max()
 # -> 99
 
@@ -710,8 +642,6 @@ found so far, until all values in the iterator have been compared.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (8, -3, 99, -1).min()
 # -> -3
 
@@ -749,8 +679,6 @@ compared.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (8, -3, 99, -1).min_max()
 # -> (-3, 99)
 
@@ -763,7 +691,7 @@ print (8, -3, 99, -1).min_max()
 ## next
 
 ````kototype
-|Iterator| -> Value
+|Iterable| -> Value
 ````
 
 Returns the next value from the iterator.
@@ -781,8 +709,6 @@ x.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (1, 2).iter()
 print x.next()
 # -> 1
@@ -792,6 +718,151 @@ print x.next()
 # -> null
 
 {% end %}
+### See Also
+
+* [`iterator.next_back`](#next-back)
+
+## next_back
+
+````kototype
+|Iterable| -> Value
+````
+
+Returns the next value from the end of the iterator.
+
+This only works with iterators that have a defined end, so attempting to call
+`next_back` on endless iterators like [`iterator.generate`](#generate) will 
+result in an error.
+
+### Example
+
+````koto
+x = (1..=5).iter()
+x.next_back()
+# -> 5
+x.next_back()
+# -> 4
+# calls to next and next_back can be mixed together
+x.next()
+# -> 1
+x.next_back()
+# -> 3
+x.next_back()
+# -> 2
+# 1 has already been produced by the iterator, so now it's finished
+x.next_back()
+# -> null
+````
+
+{% example_playground_link() %}
+x = (1..=5).iter()
+print x.next_back()
+# -> 5
+print x.next_back()
+# -> 4
+# calls to next and next_back can be mixed together
+print x.next()
+# -> 1
+print x.next_back()
+# -> 3
+print x.next_back()
+# -> 2
+# 1 has already been produced by the iterator, so now it's finished
+print x.next_back()
+# -> null
+
+{% end %}
+### See Also
+
+* [`iterator.next`](#next)
+* [`iterator.reversed`](#reversed)
+
+## peekable
+
+````kototype
+|Iterable| -> Peekable
+````
+
+Wraps the given iterable value in a peekable iterator.
+
+### Peekable.peek
+
+Returns the next value from the iterator without advancing it. 
+The peeked value is cached until the iterator is advanced.
+
+#### Example
+
+````koto
+x = 'abcdef'.peekable()
+x.peek()
+# -> a
+x.peek()
+# -> a
+x.next()
+# -> a
+x.peek()
+# -> b
+````
+
+{% example_playground_link() %}
+x = 'abcdef'.peekable()
+print x.peek()
+# -> a
+print x.peek()
+# -> a
+print x.next()
+# -> a
+print x.peek()
+# -> b
+
+{% end %}
+#### See Also
+
+* [`iterator.next`](#next)
+
+### Peekable.peek_back
+
+Returns the next value from the end of the iterator without advancing it. 
+The peeked value is cached until the iterator is advanced.
+
+#### Example
+
+````koto
+x = 'abcdef'.peekable()
+x.peek_back()
+# -> f
+x.next_back()
+# -> f
+x.peek()
+# -> a
+x.peek_back()
+# -> e
+x.next_back()
+# -> e
+x.next()
+# -> a
+````
+
+{% example_playground_link() %}
+x = 'abcdef'.peekable()
+print x.peek_back()
+# -> f
+print x.next_back()
+# -> f
+print x.peek()
+# -> a
+print x.peek_back()
+# -> e
+print x.next_back()
+# -> e
+print x.next()
+# -> a
+
+{% end %}
+#### See Also
+
+* [`iterator.next_back`](#next-back)
+
 ## position
 
 ````kototype
@@ -820,8 +891,6 @@ If no match is found then Null is returned.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (10..20).position |x| x == 15
 # -> 5
 
@@ -849,8 +918,6 @@ Returns the result of multiplying each value in the iterable together.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (2, 3, 4).product()
 # -> 24
 
@@ -876,27 +943,58 @@ A number of repeats can be optionally provided as the second argument.
 ### Example
 
 ````koto
-iterator.repeat(42).take(5).to_list()
+iterator.repeat(42)
+  .take(5)
+  .to_list()
 # -> [42, 42, 42, 42, 42]
 
-iterator.repeat(-1, 3).to_tuple()
-# -> (-1, -1, -1)
+iterator.repeat('x', 3).to_tuple()
+# -> ('x', 'x', 'x')
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print iterator.repeat(42).take(5).to_list()
+print iterator.repeat(42)
+  .take(5)
+  .to_list()
 # -> [42, 42, 42, 42, 42]
 
-print iterator.repeat(-1, 3).to_tuple()
-# -> (-1, -1, -1)
+print iterator.repeat('x', 3).to_tuple()
+# -> ('x', 'x', 'x')
 
 {% end %}
 ### See Also
 
 * [`iterator.generate`](#generate)
 
+## reversed
+
+````kototype
+|Iterator| -> Iterator
+````
+
+Reverses the order of the iterator's output.
+
+This only works with iterators that have a defined end, so attempting to reverse
+endless iterators like [`iterator.generate`](#generate) will result in an error.
+
+### Example
+
+````koto
+'Héllö'.reversed().to_tuple()
+# -> ('ö', 'l', 'l', 'é', 'H')
+
+(1..=10).reversed().skip(5).to_tuple()
+# -> (5, 4, 3, 2, 1)
+````
+
+{% example_playground_link() %}
+print 'Héllö'.reversed().to_tuple()
+# -> ('ö', 'l', 'l', 'é', 'H')
+
+print (1..=10).reversed().skip(5).to_tuple()
+# -> (5, 4, 3, 2, 1)
+
+{% end %}
 ## skip
 
 ````kototype
@@ -913,15 +1011,44 @@ Skips over a number of steps in the iterator.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (100..200).skip(50).next()
 # -> 150
 
 {% end %}
 ### See also
 
+* [`iterator.step`](#step)
 * [`iterator.take`](#take)
+
+## step
+
+````kototype
+|Iterable, Number| -> Iterator
+````
+
+Steps over the iterable's output by the provided step size.
+
+### Example
+
+````koto
+(0..10).step(3).to_tuple()
+# -> (0, 3, 6, 9)
+
+'Héllö'.step(2).to_string()
+# -> Hlö
+````
+
+{% example_playground_link() %}
+print (0..10).step(3).to_tuple()
+# -> (0, 3, 6, 9)
+
+print 'Héllö'.step(2).to_string()
+# -> Hlö
+
+{% end %}
+### See also
+
+* [`iterator.skip`](#skip)
 
 ## sum
 
@@ -939,8 +1066,6 @@ Returns the result of adding each value in the iterable together.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (2, 3, 4).sum()
 # -> 9
 
@@ -956,21 +1081,32 @@ print (2, 3, 4).sum()
 |Iterable, Number| -> Iterator
 ````
 
-Provides an iterator that consumes a number of values from the input before
+Provides an iterator that yields a number of values from the input before
 finishing.
+
+````kototype
+|Iterable, Callable| -> Iterator
+````
+
+Provides an iterator that yields values from the input while they pass a
+predicate function.
 
 ### Example
 
 ````koto
 (100..200).take(3).to_tuple()
 # -> (100, 101, 102)
+
+'hey!'.take(|c| c != '!').to_string()
+# -> hey
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (100..200).take(3).to_tuple()
 # -> (100, 101, 102)
+
+print 'hey!'.take(|c| c != '!').to_string()
+# -> hey
 
 {% end %}
 ### See also
@@ -993,8 +1129,6 @@ Consumes all values coming from the iterator and places them in a list.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('a', 42, (-1, -2)).to_list()
 # -> ['a', 42, (-1, -2)]
 
@@ -1032,8 +1166,6 @@ key, with Null as the entry's value.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('a', 'b', 'c').to_map()
 # -> {a: null, b: null, c: null}
 
@@ -1048,66 +1180,6 @@ print ('a', 'bbb', 'cc')
 * [`iterator.to_list`](#to-list)
 * [`iterator.to_string`](#to-string)
 * [`iterator.to_tuple`](#to-tuple)
-
-## to_num2
-
-````kototype
-|Iterable| -> Num2
-````
-
-Consumes up to 2 values from the iterator and places them in a Num2.
-
-### Example
-
-````koto
-[1].to_num2()
-# -> num2(1, 0)
-(1..10).keep(|n| n % 2 == 0).to_num2()
-# -> num2(2, 4)
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-print [1].to_num2()
-# -> num2(1, 0)
-print (1..10).keep(|n| n % 2 == 0).to_num2()
-# -> num2(2, 4)
-
-{% end %}
-### See also
-
-* [`iterator.to_num4`](#to-num4)
-
-## to_num4
-
-````kototype
-|Iterable| -> Num4
-````
-
-Consumes up to 4 values from the iterator and places them in a Num2.
-
-### Example
-
-````koto
-[1].to_num4()
-# -> num4(1, 0, 0, 0)
-(1..10).keep(|n| n % 2 == 0).to_num4()
-# -> num4(2, 4, 6, 8)
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-print [1].to_num4()
-# -> num4(1, 0, 0, 0)
-print (1..10).keep(|n| n % 2 == 0).to_num4()
-# -> num4(2, 4, 6, 8)
-
-{% end %}
-### See also
-
-* [`iterator.to_num4`](#to-num4)
 
 ## to_string
 
@@ -1129,8 +1201,6 @@ the formatted values.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('x', 'y', 'z').to_string()
 # -> xyz
 
@@ -1160,8 +1230,6 @@ Consumes all values coming from the iterator and places them in a tuple.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ('a', 42, (-1, -2)).to_list()
 # -> ['a', 42, (-1, -2)]
 
@@ -1179,26 +1247,24 @@ print ('a', 42, (-1, -2)).to_list()
 ````
 
 Returns an iterator that splits up the input data into overlapping windows of
-size `N`, where each window is provided as an iterator over the chunk's
-elements.
+size `N`, where each window is provided as a Tuple.
 
 If the input has fewer than `N` elements then no windows will be produced.
-
-Note that the input value should be an iterable value that has a defined range,
-e.g. a List or a String (i.e. not an adapted iterator or a generator).
 
 ### Example
 
 ````koto
-(1..=5).windows(3).each(iterator.to_list).to_list(),
-# -> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+1..=5
+  .windows 3
+  .to_list(),
+# -> [(1, 2, 3), (2, 3, 4), (3, 4, 5)]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print (1..=5).windows(3).each(iterator.to_list).to_list(),
-# -> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+print 1..=5
+  .windows 3
+  .to_list(),
+# -> [(1, 2, 3), (2, 3, 4), (3, 4, 5)]
 
 {% end %}
 ## zip
@@ -1213,14 +1279,16 @@ corresponding pairs of values, one at a time from each input iterable.
 ### Example
 
 ````koto
-(1, 2, 3).zip(('a', 'b', 'c')).to_list()
+(1, 2, 3)
+  .zip ('a', 'b', 'c')
+  .to_list()
 # -> [(1, 'a'), (2, 'b'), (3, 'c')]
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-print (1, 2, 3).zip(('a', 'b', 'c')).to_list()
+print (1, 2, 3)
+  .zip ('a', 'b', 'c')
+  .to_list()
 # -> [(1, 'a'), (2, 'b'), (3, 'c')]
 
 {% end %}

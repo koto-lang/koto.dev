@@ -30,8 +30,6 @@ f.read_to_string()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = io.create "foo.temp"
 f.write_line "Hello"
 f.read_to_string()
@@ -68,8 +66,6 @@ io.exists path
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 path = "foo.temp"
 io.exists path
 # false
@@ -101,8 +97,6 @@ io.extend_path ".", "foo", "bar", "baz.txt"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # On Windows
 io.extend_path ".", "foo", "bar", "baz.txt"
 # .\foo\bar\baz.txt
@@ -133,8 +127,6 @@ f.exists()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = io.open "path/to/existing.file"
 f.exists()
 # true
@@ -190,8 +182,6 @@ io.read_to_string "foo.temp"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 f = io.create "foo.temp"
 f.write_line "Hello!"
 io.read_to_string "foo.temp"
@@ -224,8 +214,6 @@ io.exists path
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 path = "foo.temp"
 io.create path
 io.exists path
@@ -251,8 +239,6 @@ io.stderr().write_line "An error occurred!"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 io.stderr().write_line "An error occurred!"
 
 {% end %}
@@ -277,8 +263,6 @@ io.stdin().read_to_string()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 io.stdin().read_to_string()
 # "..."
 
@@ -303,8 +287,6 @@ io.stdout().write_line "Hello, World!"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 io.stdout().write_line "Hello, World!"
 
 {% end %}

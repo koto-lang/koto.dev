@@ -22,8 +22,6 @@ x.clear()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3]
 print x.clear()
 # -> []
@@ -47,96 +45,10 @@ Matching is performed with the `==` equality operator.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [1, 'hello', (99, -1)].contains 'hello'
 # -> true
 
 {% end %}
-## copy
-
-````kototype
-|List| -> List
-````
-
-Makes a unique copy of the list data.
-
-Note that this only copies the first level of data, so nested containers
-will share their data with their counterparts in the copy. To make a copy where
-any nested containers are also unique, use [`list.deep_copy`](#deep-copy).
-
-### Example
-
-````koto
-x = [1, 2, 'hello']
-y = x
-y[0] = 'abc' # x and y share the same internal list data
-x
-# -> ['abc', 2, 'hello']
-
-z = x.copy()
-z[1] = -1 # z is a copy of x, so has unique internal data
-x # x remains unchanged after the modificaton of z
-# -> ['abc', 2, 'hello']
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-x = [1, 2, 'hello']
-y = x
-y[0] = 'abc' # x and y share the same internal list data
-print x
-# -> ['abc', 2, 'hello']
-
-z = x.copy()
-z[1] = -1 # z is a copy of x, so has unique internal data
-print x # x remains unchanged after the modificaton of z
-# -> ['abc', 2, 'hello']
-
-{% end %}
-### See also
-
-* [`list.deep_copy`](#deep-copy)
-
-## deep_copy
-
-````kototype
-|List| -> List
-````
-
-Makes a unique *deep* copy of the list data.
-
-This makes a unique copy of the list data, and then recursively makes deep
-copies of any nested containers in the list.
-
-If only the first level of data needs to be made unique, then use
-[`list.copy`](#copy).
-
-### Example
-
-````koto
-x = [[1, 2], [3, [4, 5]]]
-y = x.deep_copy()
-y[1][1] = 99
-x # a deep copy has been made, so x is unaffected by the assignment to y
-# -> [[1, 2], [3, [4, 5]]]
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-x = [[1, 2], [3, [4, 5]]]
-y = x.deep_copy()
-y[1][1] = 99
-print x # a deep copy has been made, so x is unaffected by the assignment to y
-# -> [[1, 2], [3, [4, 5]]]
-
-{% end %}
-### See also
-
-* [`list.copy`](#copy)
-
 ## extend
 
 ````kototype
@@ -160,8 +72,6 @@ x.last()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3]
 print x.extend 'abc'
 # -> [1, 2, 3, 'a', 'b', 'c']
@@ -196,8 +106,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3]
 print x.fill 99
 # -> [99, 99, 99]
@@ -224,8 +132,6 @@ Returns the first value in the list, or Null if the list is empty.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [99, -1, 42].first()
 # -> 99
 
@@ -268,8 +174,6 @@ x.get 5, 123
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [99, -1, 42]
 
 print x.get 1
@@ -309,8 +213,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [99, -1, 42]
 print x.insert 2, 'hello'
 # -> [99, -1, 'hello', 42]
@@ -341,8 +243,6 @@ Returns `true` if the list has a size of zero, and `false` otherwise.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [].is_empty()
 # -> true
 
@@ -369,8 +269,6 @@ Returns the last value in the list, or Null if the list is empty.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [99, -1, 42].last()
 # -> 42
 
@@ -408,8 +306,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [99, -1, 42]
 print x.pop()
 # -> 42
@@ -444,8 +340,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [99, -1]
 print x.push 'hello'
 # -> [99, -1, 'hello']
@@ -475,8 +369,6 @@ Throws an error if the position isn't a valid index in the list.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 [99, -1, 42].remove 1
 # [99, 42]
 
@@ -514,8 +406,6 @@ x.resize 4
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2]
 print x.resize 4, 'x'
 # -> [1, 2, 'x', 'x']
@@ -551,8 +441,6 @@ x.resize_with 2, || new_entries.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 new_entries = (5, 6, 7, 8).iter()
 x = [1, 2]
 print x.resize_with 4, || new_entries.next()
@@ -596,8 +484,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (1..10).to_list()
 print x.retain |n| n < 5
 # -> [1, 2, 3, 4]
@@ -630,8 +516,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = ['hello', -1, 99, 'world']
 print x.reverse()
 # -> ['world', 99, -1, 'hello']
@@ -659,8 +543,6 @@ x.size()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (1..=100).to_list()
 print x.size()
 # -> 100
@@ -708,8 +590,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, -1, 99, 42]
 print x.sort()
 # -> [-1, 1, 42, 99]
@@ -752,8 +632,6 @@ y
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = [1, 2, 3]
 y = [7, 8, 9]
 x.swap y
@@ -781,8 +659,6 @@ Returns a copy of the list data as a tuple.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print [1, 2, 3].to_tuple()
 # -> (1, 2, 3)
 
@@ -812,8 +688,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = ['aaa', 'bb', 'c']
 print x.transform string.size
 # -> [3, 2, 1]
@@ -824,27 +698,5 @@ print x.transform |n| '{}'.format n
 # -> ['3', '2', '1']
 print x
 # -> ['3', '2', '1']
-
-{% end %}
-## with_size
-
-````kototype
-|Number, Value| -> List
-````
-
-Returns a list containing `N` copies of a value.
-
-### Example
-
-````koto
-list.with_size 5, '!'
-# -> ['!', '!', '!', '!', '!']
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-print list.with_size 5, '!'
-# -> ['!', '!', '!', '!', '!']
 
 {% end %}

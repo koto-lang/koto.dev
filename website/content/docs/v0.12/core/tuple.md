@@ -26,8 +26,6 @@ Matching is performed with the `==` equality operator.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1, "hello", [99, -1]).contains "hello"
 # -> true
 
@@ -57,8 +55,6 @@ x.first()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 99, -1, 42
 print x.first()
 # -> 99
@@ -97,8 +93,6 @@ x.get 5, "abc"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 99, -1, 42
 
 print x.get 1
@@ -131,8 +125,6 @@ x.last()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = 99, -1, 42
 print x.last()
 # -> 42
@@ -158,8 +150,6 @@ x.size()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (10, 20, 30, 40, 50)
 print x.size()
 # -> 5
@@ -186,8 +176,6 @@ x # x remains untouched
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = (1, -1, 99, 42)
 y = x.sort_copy()
 print y
@@ -213,8 +201,6 @@ Returns a copy of the tuple's data as a list.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (1, 2, 3).to_list()
 # -> [1, 2, 3]
 

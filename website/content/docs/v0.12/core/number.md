@@ -24,8 +24,6 @@ Returns the absolute value of the number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print -1.abs()
 # -> 1
 
@@ -44,16 +42,14 @@ Returns the arc cosine of the number. `acos` is the inverse function of `cos`.
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 assert_near 0.acos(), pi / 2
 assert_eq 1.acos(), 0
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 assert_near 0.acos(), pi / 2
 assert_eq 1.acos(), 0
@@ -76,8 +72,6 @@ assert_near 2.acosh(), 1.3169578969248166
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert 0.acosh().is_nan()
 assert_eq 1.acosh(), 0
 assert_near 2.acosh(), 1.3169578969248166
@@ -101,8 +95,6 @@ positions produces a `1` in corresponding output positions.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0b1010.and 0b1100
 # 0b1000
 # -> 8
@@ -119,16 +111,14 @@ Returns the arc sine of the number. `asin` is the inverse function of `sin`.
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 assert_eq 0.asin(), 0
 assert_near 1.asin(), pi / 2
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 assert_eq 0.asin(), 0
 assert_near 1.asin(), pi / 2
@@ -150,8 +140,6 @@ assert_near 1.asinh(), 0.8813735870195429
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_eq 0.asinh(), 0
 assert_near 1.asinh(), 0.8813735870195429
 
@@ -167,16 +155,14 @@ Returns the arc tangent of the number. `atan` is the inverse function of `tan`.
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 assert_eq 0.atan(), 0
 assert_near 1.atan(), pi / 4
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 assert_eq 0.atan(), 0
 assert_near 1.atan(), pi / 4
@@ -204,8 +190,6 @@ Returns the inverse hyperbolic tangent of the number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print -1.atanh()
 # -> -inf
 
@@ -225,14 +209,10 @@ print 1.atanh()
 Returns the arc tangent of `y` and `x` in radians, using the signs of `y` and
 `x` to determine the correct quadrant.
 
-### Note
-
-`y.atan2 x` is equivalent to `make_num2(x, y).angle()`.
-
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 x, y = 1, 1
 
@@ -241,9 +221,7 @@ assert_near y.atan2(-x), pi - pi / 4
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 x, y = 1, 1
 
@@ -273,8 +251,6 @@ Returns the integer that's greater than or equal to the input.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0.5.ceil()
 # -> 1
 
@@ -314,8 +290,6 @@ numbers.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0.clamp 1, 2
 # -> 1
 
@@ -340,21 +314,15 @@ Returns the cosine of the number.
 0.cos()
 # -> 1.0
 
-import number.pi
-
-pi.cos()
+number.pi.cos()
 # -> -1.0
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0.cos()
 # -> 1.0
 
-import number.pi
-
-print pi.cos()
+print number.pi.cos()
 # -> -1.0
 
 {% end %}
@@ -374,8 +342,6 @@ assert_near 1.cosh(), 1.5430806348152437
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_eq 0.cosh(), 1
 assert_near 1.cosh(), 1.5430806348152437
 
@@ -401,8 +367,6 @@ tau.degrees()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 from number import pi, tau
 
 print pi.degrees()
@@ -437,8 +401,6 @@ assert_eq 1.exp(), number.e
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_eq 0.exp(), 1
 assert_eq 1.exp(), number.e
 
@@ -463,8 +425,6 @@ equivalent to calling `2.pow x`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.exp2()
 # -> 2.0
 
@@ -488,8 +448,6 @@ Returns the input with its bits 'flipped', i.e. `1` => `0`, and `0` => `1`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.flip_bits()
 # -> -2
 
@@ -516,8 +474,6 @@ Returns the integer that's less than or equal to the input.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0.5.floor()
 # -> 0
 
@@ -561,8 +517,6 @@ Returns true if the number is `NaN`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.is_nan()
 # -> false
 
@@ -607,8 +561,6 @@ a.lerp b, 1.5
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 a, b = 1, 2
 
 print a.lerp b, 0
@@ -638,21 +590,15 @@ Returns the natural logarithm of the number.
 1.ln()
 # -> 0.0
 
-from number import e
-
-e.ln()
+number.e.ln()
 # -> 1.0
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.ln()
 # -> 0.0
 
-from number import e
-
-print e.ln()
+print number.e.ln()
 # -> 1.0
 
 {% end %}
@@ -675,8 +621,6 @@ Returns the base-2 logarithm of the number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 2.log2()
 # -> 1.0
 
@@ -703,8 +647,6 @@ Returns the base-10 logarithm of the number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 10.log10()
 # -> 1.0
 
@@ -731,8 +673,6 @@ Returns the larger of the two numbers.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.max 2
 # -> 2
 
@@ -759,8 +699,6 @@ Returns the smaller of the two numbers.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.min 2
 # -> 1
 
@@ -802,8 +740,6 @@ positions produces a `1` in corresponding output positions.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0b1010.or 0b1100
 # 0b1110
 # -> 14
@@ -849,8 +785,6 @@ Returns the result of raising the first number to the power of the second.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 2.pow 3
 # -> 8
 
@@ -866,16 +800,14 @@ Converts degrees into radians.
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 assert_near 90.radians(), pi / 2
 assert_near 360.radians(), pi * 2
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 assert_near 90.radians(), pi / 2
 assert_near 360.radians(), pi * 2
@@ -897,8 +829,6 @@ Returns the reciprocal of the number, i.e. `1 / x`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 2.recip()
 # -> 0.5
 
@@ -926,8 +856,6 @@ Half-way values round away from zero.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0.5.round()
 # -> 1
 
@@ -966,8 +894,6 @@ The shift amount must be greater than or equal to `0`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0b1010.shift_left 2
 # 0b101000
 # -> 40
@@ -995,8 +921,6 @@ The shift amount must be greater than or equal to `0`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0b1010.shift_right 2
 # 0b0010
 # -> 2
@@ -1013,7 +937,7 @@ Returns the sine of the number.
 ### Example
 
 ````koto
-import number.pi
+from number import pi
 
 (pi * 0.5).sin()
 # -> 1.0
@@ -1023,9 +947,7 @@ import number.pi
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
-import number.pi
+from number import pi
 
 print (pi * 0.5).sin()
 # -> 1.0
@@ -1050,8 +972,6 @@ assert_near 1.sinh(), 1.1752011936438014
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_eq 0.sinh(), 0
 assert_near 1.sinh(), 1.1752011936438014
 
@@ -1072,8 +992,6 @@ Returns the square root of the number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 64.sqrt()
 # -> 8.0
 
@@ -1094,8 +1012,6 @@ assert_near 1.tan(), 1.557407724654902
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_eq 0.tan(), 0
 assert_near 1.tan(), 1.557407724654902
 
@@ -1115,8 +1031,6 @@ assert_near 1.tanh(), 1.sinh() / 1.cosh()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 assert_near 1.tanh(), 1.sinh() / 1.cosh()
 
 {% end %}
@@ -1144,8 +1058,6 @@ Returns the number as a `Float`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 1.to_float()
 # -> 1.0
 
@@ -1177,8 +1089,6 @@ This is often called `trunc` in other languages.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 2.9.to_int()
 # -> 2
 
@@ -1217,8 +1127,6 @@ produces a `1` in corresponding output positions.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 0b1010.xor 0b1100
 # 0b0110
 # -> 6

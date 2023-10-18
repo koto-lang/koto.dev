@@ -22,8 +22,6 @@ contained in the string data.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'Hëy!'.bytes().to_tuple()
 # -> (72, 195, 171, 121, 33)
 
@@ -58,8 +56,6 @@ Note that this is the default iteration behaviour for a string, so calling
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'Héllø! 👋'.chars().to_tuple()
 # -> ('H', 'é', 'l', 'l', 'ø', '!', ' ', '👋')
 
@@ -89,8 +85,6 @@ Returns `true` if the second provided string is a sub-string of the first.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'xyz'.contains 'abc'
 # -> false
 
@@ -123,8 +117,6 @@ Returns `true` if the first string ends with the second string.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'abcdef'.ends_with 'def'
 # -> true
 
@@ -150,8 +142,6 @@ For example, newlines get replaced with `\n`, tabs get replaced with `\t`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '👋'.escape()
 # -> \u{1f44b}
 
@@ -243,8 +233,6 @@ e.g. `'x{:4.2}x'.format 'abcd'` will output `xab  x`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '{}, {}!'.format 'Hello', 'World'
 # -> Hello, World!
 
@@ -283,8 +271,6 @@ Returns `true` if the string contains no characters.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'abcdef'.is_empty()
 # -> false
 
@@ -310,8 +296,6 @@ string.from_bytes (72, 195, 171, 121, 33)
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print string.from_bytes (72, 195, 171, 121, 33)
 # -> Hëy!
 
@@ -343,8 +327,6 @@ Lines end with either `\r\n` or `\n`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'foo\nbar\nbaz'.lines().to_tuple()
 # -> ('foo', 'bar', 'baz')
 
@@ -369,8 +351,6 @@ replaced with an alternative string.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '10101'.replace '0', 'x'
 # -> 1x1x1
 
@@ -401,8 +381,6 @@ Equivalent to calling `.chars().count()`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print ''.size()
 # -> 0
 
@@ -411,52 +389,6 @@ print 'abcdef'.size()
 
 print '🥳👋😁'.size()
 # -> 3
-
-{% end %}
-## slice
-
-````kototype
-|String, Number| -> String
-````
-
-Returns a string with the contents of the input string starting from the
-provided character index.
-
-````kototype
-|String, Number, Number| -> String
-````
-
-Returns the sub-string of the input string,
-starting at the first index and ending at the second number.
-
-### Note
-
-Invalid start indices return Null.
-
-### Example
-
-````koto
-'abcdef'.slice 3
-# -> def
-
-'abcdef'.slice 2, 4
-# -> cd
-
-'abcdef'.slice 100, 110
-# -> null
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-print 'abcdef'.slice 3
-# -> def
-
-print 'abcdef'.slice 2, 4
-# -> cd
-
-print 'abcdef'.slice 100, 110
-# -> null
 
 {% end %}
 ## split
@@ -491,8 +423,6 @@ returns true.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'a,b,c'.split(',').to_tuple()
 # -> ('a', 'b', 'c')
 
@@ -522,8 +452,6 @@ Returns `true` if the first string starts with the second string.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'abcdef'.starts_with 'abc'
 # -> true
 
@@ -550,8 +478,6 @@ Returns a lowercase version of the input string.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'HÉLLÖ'.to_lowercase()
 # -> héllö
 
@@ -578,8 +504,6 @@ Returns the string parsed as a number.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '123'.to_number()
 # -> 123
 
@@ -606,8 +530,6 @@ Returns an uppercase version of the input string.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print 'héllö'.to_uppercase()
 # -> HÉLLÖ
 
@@ -634,8 +556,6 @@ Returns the string with whitespace at the start and end of the string trimmed.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print '   x    '.trim()
 # -> x
 

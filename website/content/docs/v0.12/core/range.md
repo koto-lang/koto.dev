@@ -13,6 +13,13 @@ slug = "range"
 
 Returns true if the provided number is within the range, and false otherwise.
 
+````kototype
+|Range, Range| -> Bool
+````
+
+Returns true if the provided range is entirely containd within the range, 
+and false otherwise.
+
 ### Example
 
 ````koto
@@ -25,11 +32,15 @@ Returns true if the provided number is within the range, and false otherwise.
 x = 1..10
 x.contains -1
 # -> false
+
+(10..20).contains 14..18
+# -> true
+
+(100..200).contains 50..250
+# -> false
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (10..20).contains 15
 # -> true
 
@@ -38,6 +49,12 @@ print (200..=100).contains 100
 
 x = 1..10
 print x.contains -1
+# -> false
+
+print (10..20).contains 14..18
+# -> true
+
+print (100..200).contains 50..250
 # -> false
 
 {% end %}
@@ -60,8 +77,6 @@ Returns the `end` value of the range.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (50..100).end()
 # -> 100
 
@@ -105,8 +120,6 @@ Negative amounts will cause the range to shrink rather than grow.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (10..20).expanded 5
 # -> 5..25
 
@@ -123,6 +136,72 @@ print (5..-5).expanded -10
 # -> -5..5
 
 {% end %}
+## intersection
+
+````kototype
+|Range, Range| -> Range
+````
+
+Returns a range representing the intersectin region of the two input ranges.
+
+If there is no intersecting region then `null` is returned.
+
+### Example
+
+````koto
+(10..20).intersection 5..15
+# -> 10..15
+
+(100..200).intersection 250..=150
+# -> 150..200
+
+(0..10).intersection 90..99
+# -> null
+````
+
+{% example_playground_link() %}
+print (10..20).intersection 5..15
+# -> 10..15
+
+print (100..200).intersection 250..=150
+# -> 150..200
+
+print (0..10).intersection 90..99
+# -> null
+
+{% end %}
+## is_inclusive
+
+````kototype
+|Range| -> Bool
+````
+
+Returns true if the range has a defined end which is inclusive.
+
+### Example
+
+````koto
+(10..20).is_inclusive()
+# -> false
+
+(1..=10).is_inclusive()
+# -> true
+
+(100..).is_inclusive()
+# -> false
+````
+
+{% example_playground_link() %}
+print (10..20).is_inclusive()
+# -> false
+
+print (1..=10).is_inclusive()
+# -> true
+
+print (100..).is_inclusive()
+# -> false
+
+{% end %}
 ## size
 
 ````kototype
@@ -130,9 +209,8 @@ print (5..-5).expanded -10
 ````
 
 Returns the size of the range.
-This is equivalent to `range.end() - range.start()`.
-
-Note that for descending ranges, a negative value will be returned.
+For non-inclusive ranges, this is equivalent to `range.end() - range.start()`.
+For inclusive ranges, this is equivalent to `range.end() + 1 - range.start()`.
 
 ### Example
 
@@ -144,12 +222,10 @@ Note that for descending ranges, a negative value will be returned.
 # -> 101
 
 (20..0).size()
-# -> -20
+# -> 20
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (10..20).size()
 # -> 10
 
@@ -157,7 +233,7 @@ print (100..=200).size()
 # -> 101
 
 print (20..0).size()
-# -> -20
+# -> 20
 
 {% end %}
 ## start
@@ -179,8 +255,6 @@ Returns the `start` value of the range.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (50..100).start()
 # -> 50
 
@@ -228,8 +302,6 @@ a.union b
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print (0..10).union 5
 # -> 0..10
 

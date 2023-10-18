@@ -38,8 +38,6 @@ print "Seconds between then and now: ${t2 - t}"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 t = os.start_timer()
 
 # ...after some time...
@@ -88,8 +86,6 @@ now.timestamp()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print now = os.time()
 # e.g. 2021-12-11 21:51:14
 
@@ -203,8 +199,6 @@ assert (t1 - t2) < 0
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 t1 = os.start_timer()
 t2 = os.start_timer()
 # t2 was started later than t1, so the time difference is positive
@@ -231,8 +225,6 @@ print "Time taken: ${t.elapsed()}s"
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 t = os.start_timer()
 
 # ...after some time...

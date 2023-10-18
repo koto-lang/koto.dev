@@ -29,8 +29,6 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # This assertion will pass, and no error will be thrown
 assert 1 < 2
 
@@ -64,8 +62,6 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # This assertion will pass, and no error will be thrown
 assert_eq 1 + 1, 2
 
@@ -98,8 +94,6 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 # This assertion will pass, and no error will be thrown
 assert_ne 1 + 1, 3
 
@@ -120,29 +114,12 @@ catch error
 |Number, Number, Number| -> Null
 ````
 
-````kototype
-|Num2, Num2| -> Null
-````
-
-````kototype
-|Num2, Num2, Number| -> Null
-````
-
-````kototype
-|Num4, Num4| -> Null
-````
-
-````kototype
-|Num4, Num4, Number| -> Null
-````
-
 Checks that the two input numbers are equal, within an allowed margin of error.
 
 This is useful when testing floating-point operations, where the result can be
 close to a target with some acceptable imprecision.
 
-The margin of error is optional, defaulting to `1.0e-12` for `Number` and `Num2`
-comparisons, and `1.0e-6` for `Num4` comparisons.
+The margin of error is optional, defaulting to `1.0e-12`.
 
 ### Example
 
@@ -163,8 +140,6 @@ assert_near 1 % 0.2, 0.2
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 allowed_error = 0.01
 # This assertion will pass, and no error will be thrown
 assert_near 1.3, 1.301, allowed_error
@@ -192,11 +167,11 @@ Runs the tests contained in the map.
 
 ````koto
 my_tests =
-  @pre_test: |self| self.test_data = 1, 2, 3
-  @post_test: |self| self.test_data = null
+  @pre_test: || self.test_data = 1, 2, 3
+  @post_test: || self.test_data = null
 
-  @test data_size: |self| assert_eq self.test_data.size(), 3
-  @test failure: |self| assert_eq self.test_data.size(), 0
+  @test data_size: || assert_eq self.test_data.size(), 3
+  @test failure: || assert_eq self.test_data.size(), 0
 
 try
   test.run_tests my_tests
@@ -205,14 +180,12 @@ catch error
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_tests =
-  @pre_test: |self| self.test_data = 1, 2, 3
-  @post_test: |self| self.test_data = null
+  @pre_test: || self.test_data = 1, 2, 3
+  @post_test: || self.test_data = null
 
-  @test data_size: |self| assert_eq self.test_data.size(), 3
-  @test failure: |self| assert_eq self.test_data.size(), 0
+  @test data_size: || assert_eq self.test_data.size(), 3
+  @test failure: || assert_eq self.test_data.size(), 0
 
 try
   test.run_tests my_tests

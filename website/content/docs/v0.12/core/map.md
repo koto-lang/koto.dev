@@ -24,8 +24,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = {x: -1, y: 42}
 print x.clear()
 # -> {}
@@ -41,90 +39,6 @@ print x
 
 Returns `true` if the map contains a value with the given key,
 and `false` otherwise.
-
-## copy
-
-````kototype
-|Map| -> Map
-````
-
-Makes a unique copy of the map data.
-
-Note that this only copies the first level of data, so nested containers
-will share their data with their counterparts in the copy. To make a copy where
-any nested containers are also unique, use [`map.deep_copy`](#deep-copy).
-
-### Example
-
-````koto
-x = {foo: -1, bar: 99}
-y = x
-y.foo = 42
-x.foo
-# -> 42
-
-z = x.copy()
-z.bar = -1
-x.bar # x.bar remains unmodified due to the copy
-# -> 99
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-x = {foo: -1, bar: 99}
-y = x
-y.foo = 42
-print x.foo
-# -> 42
-
-z = x.copy()
-z.bar = -1
-print x.bar # x.bar remains unmodified due to the copy
-# -> 99
-
-{% end %}
-### See also
-
-* [`map.deep_copy`](#deep-copy)
-
-## deep_copy
-
-````kototype
-|Map| -> Map
-````
-
-Makes a unique *deep* copy of the map data.
-
-This makes a unique copy of the map data, and then recursively makes deep copies
-of any nested containers in the map.
-
-If only the first level of data needs to be made unique, then use
-[`map.copy`](#copy).
-
-### Example
-
-````koto
-x = {foo: 42, bar: {baz: 99}}
-y = x.deep_copy()
-y.bar.baz = 123
-x.bar.baz # a deep copy has been made, so x is unaffected by the change to y
-# -> 99
-````
-
-{% example_playground_link() %}
-play.clear_output()
-
-x = {foo: 42, bar: {baz: 99}}
-y = x.deep_copy()
-y.bar.baz = 123
-print x.bar.baz # a deep copy has been made, so x is unaffected by the change to y
-# -> 99
-
-{% end %}
-### See also
-
-* [`map.copy`](#copy)
 
 ## extend
 
@@ -151,8 +65,6 @@ x.c
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = {foo: 42, bar: 99}
 print x.extend {baz: 123}
 # -> {foo: 42, bar: 99, baz: 123}
@@ -204,8 +116,6 @@ x.get 99
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = {hello: -1}
 print x.get 'hello'
 # -> -1
@@ -255,8 +165,6 @@ x.get_index 99, 'xyz'
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = {foo: -1, bar: -2}
 print x.get_index 1
 # -> ('bar', -2)
@@ -287,11 +195,11 @@ my_map =
   data: 42
   @type: 'My Map'
 
-meta = my_map.get_meta_map()
+meta = map.get_meta_map my_map
 
-my_map.keys().count()
+map.keys(my_map).count()
 # -> 1
-meta.keys().count()
+map.keys(meta).count()
 # -> 0
 
 koto.type meta
@@ -299,17 +207,15 @@ koto.type meta
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_map =
   data: 42
   @type: 'My Map'
 
-meta = my_map.get_meta_map()
+meta = map.get_meta_map my_map
 
-print my_map.keys().count()
+print map.keys(my_map).count()
 # -> 1
-print meta.keys().count()
+print map.keys(meta).count()
 # -> 0
 
 print koto.type meta
@@ -323,24 +229,40 @@ print koto.type meta
 ## insert
 
 ````kototype
-|Map, Key| -> Value
-````
-
-Inserts Null into the map with the given key.
-
-````kototype
 |Map, Key, Value| -> Value
 ````
 
-Inserts a value into the map with the given key.
+Inserts an entry into the map with the given key and value. 
+
+````kototype
+|Map, Key| -> Value
+````
+
+Inserts an entry into the map with the given key, and Null as its value.
 
 If the key already existed in the map, then the old value is returned.
 If the key didn't already exist, then Null is returned.
+
+### Map Keys
+
+Map keys are typically strings, but any *immutable* value can be used.
+
+Values that can be used as keys are:
+
+* `Bool`
+* `Number`
+* `Null`
+* `Range`
+* `String`
+* `Tuple` 
+  * A Tuple can only be used as a key when its contained values are immutable, 
+    any mutable value (like a `List` or `Map`) will throw an error.
 
 ### Example
 
 ````koto
 x = {hello: -1}
+
 x.insert 'hello', 99 # -1 already exists at `hello`, so it's returned here
 # -> -1
 
@@ -352,12 +274,23 @@ x.insert 'goodbye', 123 # No existing value at `goodbye`, so null is returned
 
 x.goodbye
 # -> 123
+
+x.insert 123, 'hi!' # Numbers can be used as map keys 
+# -> null
+
+x.get 123
+# -> hi!
+
+x.insert ('a', 'b'), -1 # Tuples can be used as map keys 
+# -> null
+
+x.get ('a', 'b')
+# -> -1
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x = {hello: -1}
+
 print x.insert 'hello', 99 # -1 already exists at `hello`, so it's returned here
 # -> -1
 
@@ -370,9 +303,22 @@ print x.insert 'goodbye', 123 # No existing value at `goodbye`, so null is retur
 print x.goodbye
 # -> 123
 
+print x.insert 123, 'hi!' # Numbers can be used as map keys 
+# -> null
+
+print x.get 123
+# -> hi!
+
+print x.insert ('a', 'b'), -1 # Tuples can be used as map keys 
+# -> null
+
+print x.get ('a', 'b')
+# -> -1
+
 {% end %}
 ### See also
 
+* [`map.get`](#get)
 * [`map.remove`](#remove)
 * [`map.update`](#update)
 
@@ -395,8 +341,6 @@ Returns `true` if the map contains no entries, otherwise `false`.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print {}.is_empty()
 # -> true
 
@@ -436,8 +380,6 @@ x.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m =
   hello: -1
   goodbye: 99
@@ -489,8 +431,6 @@ x.is_empty()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x =
   hello: -1
   goodbye: 99
@@ -531,8 +471,6 @@ Returns the number of entries contained in the map.
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 print {}.size()
 # -> 0
 
@@ -587,8 +525,6 @@ x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x =
   hello: 123
   bye: -1
@@ -651,8 +587,6 @@ x.tschüss
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 x =
   hello: -1
   goodbye: 99
@@ -700,8 +634,6 @@ x.next()
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 m =
   hello: -1
   goodbye: 99
@@ -750,8 +682,6 @@ koto.type x
 ````
 
 {% example_playground_link() %}
-play.clear_output()
-
 my_meta =
   @type: 'My Meta'
 
