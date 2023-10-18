@@ -43,8 +43,6 @@ impl KotoWrapper {
     }
 
     pub fn compile_and_run_script(&mut self, script: &str) {
-        debug_assert!(!script.is_empty());
-
         self.script_output.set_inner_html("");
         self.message_queue.borrow_mut().clear();
 

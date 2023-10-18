@@ -22,19 +22,38 @@ pub struct Props {
 #[function_component(ExamplesDialog)]
 pub fn examples_dialog(props: &Props) -> Html {
     let script_groups = use_ref(|| {
-        vec![ScriptGroup {
-            name: "Getting Started",
-            scripts: &[
-                Script {
-                name: "Hello World",
-                url: "/play/examples/intro/hello_world.koto",
+        vec![
+            ScriptGroup {
+                name: "Getting Started",
+                scripts: &[
+                    Script {
+                        name: "Hello World",
+                        url: "/play/examples/intro/hello_world.koto",
+                    },
+                    Script {
+                        name: "Fizz Buzz",
+                        url: "/play/examples/intro/fizz_buzz.koto",
+                    },
+                    Script {
+                        name: "Fibonacci",
+                        url: "/play/examples/intro/fibonacci.koto",
+                    },
+                ],
             },
-                Script {
-                name: "Fizz Buzz",
-                url: "/play/examples/intro/fizz_buzz.koto",
+            ScriptGroup {
+                name: "Cookbook",
+                scripts: &[
+                    Script {
+                        name: "Enums",
+                        url: "/play/examples/cookbook/enum.koto",
+                    },
+                    Script {
+                        name: "Sets",
+                        url: "/play/examples/cookbook/set.koto",
+                    },
+                ],
             },
-            ],
-        }]
+        ]
     });
 
     let menu_items = use_ref(|| {

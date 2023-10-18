@@ -1,0 +1,51 @@
+# An example of how to build a Set in Koto by wrapping a Map
+
+# The meta map shared by all Set objects
+set_meta =
+  @type: 'Set'
+
+  @meta contains: |value|
+    self.data.contains_key value
+
+  @meta keys: |value|
+    self.data.keys()
+
+  # Allow Sets to be used directly as iterables
+  @iterator: || self.keys()
+
+  @meta extend: |values|
+    for value in values
+      self.data.insert value
+    self
+
+  @meta insert: |value|
+    self.data.insert value
+    self
+
+  @meta is_empty: || self.size() == 0
+  @meta size: || self.data.size()
+
+# A Set initializer, inserting the given values into the set
+make_set = |values|
+  data = if values != null
+    values.to_map()
+  else
+    {}
+  # Return a map containing the provided data as a Map, along with the Set metamap
+  {data}.with_meta_map set_meta
+
+# An iterator consumer that makes a set from the iterator's output values
+iterator.to_set = || make_set self
+
+@main = ||
+  s = make_set()
+  s.insert 42
+  s.extend (99, 42, 99, -1)
+  print s.to_tuple()
+
+@tests =
+  @test chars_to_set: ||
+    s = 'abccbadeffed'.to_set()
+    assert_eq s.keys().to_string(), 'abcdef'
+    assert s.contains 'c'
+    assert not s.contains 'x'
