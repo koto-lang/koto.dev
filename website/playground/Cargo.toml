@@ -3,11 +3,7 @@ name = "playground"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-koto = { path = "../../modules/koto/crates/koto" }
-
 console_error_panic_hook = { workspace = true }
 fb_cloned = { workspace = true }
 gloo-console = { workspace = true }
@@ -21,6 +17,11 @@ serde = { workspace = true }
 wasm-bindgen = { workspace = true }
 wasm-logger = { workspace = true }
 yew = { workspace = true }
+
+[dependencies.koto]
+path = "../../modules/koto/crates/koto"
+default-features = false
+features = ["rc"]
 
 [dependencies.gloo-net]
 workspace = true
