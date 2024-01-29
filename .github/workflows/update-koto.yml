@@ -21,6 +21,11 @@ jobs:
         with:
           tool: just@1.5.0,zola@0.18.0
 
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
       - name: Update
         run: |
           cd modules/koto
