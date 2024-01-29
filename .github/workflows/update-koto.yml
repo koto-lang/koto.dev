@@ -2,7 +2,7 @@ name: Update Koto
 
 on:
   repository_dispatch:
-    types: [update-event]
+    types: [update-koto]
 
 jobs:
   update-koto:
