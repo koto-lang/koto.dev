@@ -42,3 +42,8 @@ jobs:
           git add modules/koto
           git commit -m "Update to the latest version of Koto"
           git push
+
+      - name: Deploy
+        run: |
+          cd website 
+          just deploy
