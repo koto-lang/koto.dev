@@ -1,12 +1,25 @@
 <ul class="uk-nav uk-nav-default">
-  {% set version_section = section.ancestors | last %}
+  {% set index = get_section(path = section.ancestors | last) %}
+  {% set versions = get_section(path = index.ancestors | last) %}
 
-  {% set index = get_section(path = version_section) %}
+  <nav uk-dropnav>
+    <div>Version: {{index.title}}<span uk-drop-parent-icon></span></div>
+    <div class="uk-dropdown">
+      <ul class="uk-nav uk-dropdown-nav">
+        {% for x in versions.subsections | reverse %}
+        {% set subsection = get_section(path=x) %}
+        <li class="{% if subsection == index %} uk-active {% endif %}">
+          <a href="{{subsection.permalink }}/language">{{subsection.title}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
 
   {% for s in index.subsections %}
     {% set subsection = get_section(path=s) %}
 
-    <li class="uk-nav-header{% if current_path == subsection.path %} uk-active{% endif %}">
+    <li class="uk-nav-header{% if current_path == subsection.path %} uk-active {% endif %}">
       <a href="{{ subsection.permalink }}">
         {{ subsection.title }}
       </a>
