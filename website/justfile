@@ -1,6 +1,9 @@
 build: docs playground-release
   zola build
 
+build-debug: docs playground
+  zola build
+
 serve: docs playground
   zola serve --open --fast
 
