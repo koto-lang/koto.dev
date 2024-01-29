@@ -15,7 +15,7 @@ clean:
   rm -rf public
 
 deploy:
-  git fetch
+  git fetch origin
   git checkout deploy
   git reset --hard origin/deploy
   git rebase origin/main
