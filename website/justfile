@@ -18,7 +18,7 @@ deploy:
   git fetch origin
   git checkout deploy
   git reset --hard origin/deploy
-  git rebase origin/main
+  git rebase @^ --onto origin/main
   @just submodules
   @just build
   echo "" >> deployed.txt
