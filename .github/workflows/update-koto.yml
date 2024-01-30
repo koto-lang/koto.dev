@@ -36,6 +36,7 @@ jobs:
         run: |
           cd website
           just build-debug
+          just test
 
       - name: Commit
         run: |

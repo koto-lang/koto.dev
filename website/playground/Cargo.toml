@@ -41,4 +41,5 @@ features = [
 ]
 
 [dev-dependencies]
+anyhow = { workspace = true }
 glob = { workspace = true }

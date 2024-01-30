@@ -32,5 +32,7 @@ jobs:
         run: just docs
       - name: Build Playground
         run: just playground
+      - name: Test Playground
+        run: just test
       - name: Build Website
         run: just build-debug

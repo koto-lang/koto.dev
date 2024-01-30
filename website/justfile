@@ -51,13 +51,16 @@ submodules:
   git submodule update --init --recursive
 
 test:
-  cargo watch -x test
+  cargo test
 
 update-koto:
   test -z "$(git status --porcelain)" || (echo "Dirty working copy" && exit 1)
   cd ../modules/koto && git fetch && git checkout origin/main
   git add ../modules/koto
   git commit -m "Update to the latest version of Koto"
+
+watch command:
+  cargo watch -s "just {{command}}"
 
 worker:
   wrangler dev playground/gist-worker/index.js
