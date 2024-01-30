@@ -2,6 +2,7 @@
 dist = "../static/play"
 index = "./index.html"
 public_url = "/play/"
+no_minification = true
 
 [[proxy]]
 rewrite = "/play/create-gist"

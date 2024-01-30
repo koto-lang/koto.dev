@@ -3,6 +3,8 @@ members = ["playground", "xtask"]
 resolver = "2"
 
 [workspace.dependencies]
+# Flexible concrete Error type built on std::error::Error
+anyhow = "1.0.79"
 # A panic hook for `wasm32-unknown-unknown` that logs panics to `console.error`
 console_error_panic_hook = "0.1"
 # Provides a clone macro

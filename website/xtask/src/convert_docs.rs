@@ -1,13 +1,11 @@
-use {
-    super::Result,
-    pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag},
-    pulldown_cmark_to_cmark::cmark,
-    std::{
-        fs,
-        iter::once,
-        ops::Deref,
-        path::{Path, PathBuf},
-    },
+use anyhow::{Context, Result};
+use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag};
+use pulldown_cmark_to_cmark::cmark;
+use std::{
+    fs,
+    iter::once,
+    ops::Deref,
+    path::{Path, PathBuf},
 };
 
 pub fn run() -> Result<()> {
@@ -32,13 +30,8 @@ fn convert_lang_guide_docs() -> Result<()> {
 
     let mut output_path = output_dir.clone();
     output_path.push("_index.md");
-    let mut output_file = fs::File::create(&output_path).map_err(|e| {
-        format!(
-            "Failed to create output file '{}': '{}'",
-            output_path.to_string_lossy(),
-            e
-        )
-    })?;
+    let mut output_file = fs::File::create(&output_path)
+        .with_context(|| format!("Failed to create output file '{output_path:?}'"))?;
     write!(output_file, include_str!("../../templates/guide-intro.md"))?;
 
     let mut in_list_item = false;
@@ -71,13 +64,8 @@ fn convert_core_lib_docs() -> Result<()> {
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
-        let mut output_file = fs::File::create(&output_path).map_err(|e| {
-            format!(
-                "Failed to create output file '{}': '{}'",
-                output_path.to_string_lossy(),
-                e
-            )
-        })?;
+        let mut output_file = fs::File::create(&output_path)
+            .with_context(|| format!("Failed to create output file '{output_path:?}'"))?;
 
         write!(output_file, "{converted}")?;
     }
