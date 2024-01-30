@@ -1,5 +1,5 @@
 +++
 title = "Docs"
 template = "docs-version.html"
-sort_by = "title"
+sort_by = "weight"
 +++

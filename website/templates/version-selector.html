@@ -1,0 +1,27 @@
+{% if page %}
+  {% set version_path = page.ancestors | reverse | nth(n = 1) %}
+  {% set page = page.components | last %}
+  {% set parent = page.components | reverse | nth(n = 1) %}
+  {% set leaf = parent ~ "/" ~ page %}
+{% endif %}
+{% if section %}
+  {% set version_path = section.ancestors | last %}
+  {% set leaf = section.components | last %}
+{% endif %}
+
+{% set index = get_section(path = version_path) %}
+{% set versions = get_section(path = index.ancestors | last) %}
+
+<nav uk-dropnav>
+  <div>Version: {{index.title}}<span uk-drop-parent-icon></span></div>
+  <div class="uk-dropdown">
+    <ul class="uk-nav uk-dropdown-nav">
+      {% for x in versions.subsections | reverse %}
+        {% set subsection = get_section(path=x) %}
+        <li class="{% if subsection == index %} uk-active {% endif %}">
+          <a href="{{subsection.permalink}}{{leaf}}">{{subsection.title}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
