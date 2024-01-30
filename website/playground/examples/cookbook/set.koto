@@ -1,17 +1,17 @@
-# An example of how to build a Set in Koto by wrapping a Map
+# An example of how to build a Set in Koto
 
 # The meta map shared by all Set objects
-set_meta =
+set_ops =
   @type: 'Set'
+
+  # Allow Sets to be used directly as iterables
+  @iterator: || self.keys()
 
   @meta contains: |value|
     self.data.contains_key value
 
   @meta keys: |value|
     self.data.keys()
-
-  # Allow Sets to be used directly as iterables
-  @iterator: || self.keys()
 
   @meta extend: |values|
     for value in values
@@ -25,18 +25,18 @@ set_meta =
   @meta is_empty: || self.size() == 0
   @meta size: || self.data.size()
 
-# A Set initializer, inserting the given values into the set
+# A Set initializer, inserting the given values into the Set
 make_set = |values|
-  data = if values != null
-    values.to_map()
-  else
-    {}
-  # Return a map containing the provided data as a Map, along with the Set metamap
-  {data}.with_meta_map set_meta
+  # Calling .to_map() on an iterator of single values produces a map with each unique value
+  # represented by a key.
+  data = if values then values.to_map() else {}
+  # Return a map containing the provided data, along with the Set metamap
+  {data}.set_meta set_ops
 
-# An iterator consumer that makes a set from the iterator's output values
+# An iterator consumer that makes a Set from the iterator's output values
 iterator.to_set = || make_set self
 
+# Show a Set in use
 @main = ||
   s = make_set()
   s.insert 42
