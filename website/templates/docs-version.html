@@ -7,18 +7,17 @@
     <div uk-grid class="uk-child-width-expand@m uk-grid-match uk-text-center">
       {% set index = get_section(path=section.relative_path) %}
 
-      {% for s in index.subsections %}
-      {% set subsection = get_section(path=s) %}
+      {% for s in index.subsections  %}
+        {% set subsection = get_section(path=s) %}
 
-      <div>
-        <a
-          class="uk-button uk-button-default uk-button-large uk-text-capitalize"
-          href="{{ subsection.permalink }}"
-        >
-          {{ subsection.title }}
-        </a>
-      </div>
-
+        <div>
+          <a
+            class="uk-button uk-button-default uk-button-large uk-text-capitalize"
+            href="{{ subsection.permalink }}"
+          >
+            {{ subsection.title }}
+          </a>
+        </div>
       {% endfor %}
     </div>
   </div>

@@ -2,6 +2,7 @@
 title = "Language Guide"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
+weight = 1
 +++
 
 # The Koto Language Guide

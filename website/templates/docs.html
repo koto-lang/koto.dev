@@ -7,7 +7,7 @@
     <div uk-grid class="uk-child-width-expand@m uk-grid-match uk-text-center">
       {% set index = get_section(path=section.relative_path) %}
 
-      {% for s in index.subsections | reverse %}
+      {% for s in index.subsections %}
       {% set subsection = get_section(path=s) %}
 
       <div>

@@ -6,11 +6,11 @@
     <div>Version: {{index.title}}<span uk-drop-parent-icon></span></div>
     <div class="uk-dropdown">
       <ul class="uk-nav uk-dropdown-nav">
-        {% for x in versions.subsections | reverse %}
-        {% set subsection = get_section(path=x) %}
-        <li class="{% if subsection == index %} uk-active {% endif %}">
-          <a href="{{subsection.permalink }}/language">{{subsection.title}}</a>
-        </li>
+        {% for x in versions.subsections  %}
+          {% set subsection = get_section(path=x) %}
+          <li class="{% if subsection == index %} uk-active {% endif %}">
+            <a href="{{subsection.permalink }}/language">{{subsection.title}}</a>
+          </li>
         {% endfor %}
       </ul>
     </div>
