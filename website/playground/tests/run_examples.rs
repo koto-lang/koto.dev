@@ -1,6 +1,6 @@
 use anyhow::{bail, Context, Result};
 use glob::glob;
-use koto::{prelude::*, Ptr, PtrMut};
+use koto::{prelude::*, PtrMut};
 use std::fs;
 
 #[test]
@@ -9,15 +9,19 @@ fn run_playground_examples() -> Result<()> {
 
     let output = PtrMut::from(String::new());
 
-    let mut koto = Koto::with_settings(KotoSettings {
-        stdout: make_ptr!(OutputCapture {
+    let mut koto = Koto::with_settings(
+        KotoSettings {
+            run_tests: true,
+            run_import_tests: true,
+            ..Default::default()
+        }
+        .with_stdout(OutputCapture {
+            output: output.clone(),
+        })
+        .with_stderr(OutputCapture {
             output: output.clone(),
         }),
-        stderr: make_ptr!(OutputCapture { output }),
-        run_tests: true,
-        run_import_tests: true,
-        ..Default::default()
-    });
+    );
 
     for path in glob("**/*.koto").context("failed to scan for scripts")? {
         let path = path.context("failed to read path")?;
@@ -25,7 +29,10 @@ fn run_playground_examples() -> Result<()> {
             .with_context(|| format!("failed to read from path '{path:?}'"))?;
 
         if let Err(e) = koto.compile_and_run(&script) {
-            bail!("error while running script '{path:?}'\n  -> {}", e.to_string());
+            bail!(
+                "error while running script '{path:?}'\n  -> {}",
+                e.to_string()
+            );
         }
 
         found_script = true;
