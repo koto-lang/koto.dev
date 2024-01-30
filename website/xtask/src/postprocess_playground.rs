@@ -26,5 +26,7 @@ pub fn run(staging_dir: &str) -> Result<()> {
 
     fs::File::create(index_path)?.write(output.as_bytes())?;
 
+    println!("Playground post-processed");
+
     Ok(())
 }
