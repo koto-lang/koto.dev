@@ -49,7 +49,7 @@ fn convert_lang_guide_docs() -> Result<()> {
             Start(Link(_, url, _)) if in_list_item => {
                 let mut doc_path = guide_dir.clone();
                 doc_path.push(url.as_ref());
-                let converted = convert_doc(&doc_path, false, true)?;
+                let converted = convert_doc(&doc_path, false, true, Some(1))?;
 
                 write!(output_file, "\n\n{converted}")?;
             }
@@ -67,7 +67,7 @@ fn convert_core_lib_docs() -> Result<()> {
 
     for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
         let doc_path = doc?.path();
-        let converted = convert_doc(&doc_path, true, false)?;
+        let converted = convert_doc(&doc_path, true, false, None)?;
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
@@ -89,6 +89,7 @@ fn convert_doc(
     input_path: &Path,
     generate_front_matter: bool,
     indent_headers: bool,
+    weight: Option<usize>,
 ) -> Result<String> {
     use {std::fmt::Write, Event::*, Tag::*};
 
@@ -132,6 +133,10 @@ title = \"{entry_name}\"
 slug = \"{slug}\"
 ",
         )?;
+
+        if let Some(weight) = weight {
+            writeln!(output_buffer, "weight = {weight}")?;
+        }
 
         writeln!(output_buffer, "+++\n")?;
     }
