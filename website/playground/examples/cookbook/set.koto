@@ -31,7 +31,7 @@ make_set = |values|
   # represented by a key.
   data = if values then values.to_map() else {}
   # Return a map containing the provided data, along with the Set metamap
-  {data}.set_meta set_ops
+  {data}.with_meta set_ops
 
 # An iterator consumer that makes a Set from the iterator's output values
 iterator.to_set = || make_set self
