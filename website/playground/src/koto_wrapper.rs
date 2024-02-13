@@ -1,6 +1,6 @@
 use {
     koto::{prelude::*, runtime::Result},
-    std::{cell::RefCell, collections::VecDeque, rc::Rc},
+    std::{cell::RefCell, collections::VecDeque, rc::Rc, time::Duration},
     web_sys::Element,
 };
 
@@ -23,6 +23,7 @@ impl KotoWrapper {
 
         let koto = Koto::with_settings(
             KotoSettings::default()
+                .with_execution_limit(Duration::from_secs(5))
                 .with_stdin(PlaygroundInput {})
                 .with_stdout(OutputCapture {
                     id: "_stdout_".into(),

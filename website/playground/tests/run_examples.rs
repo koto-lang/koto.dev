@@ -10,17 +10,13 @@ fn run_playground_examples() -> Result<()> {
     let output = PtrMut::from(String::new());
 
     let mut koto = Koto::with_settings(
-        KotoSettings {
-            run_tests: true,
-            run_import_tests: true,
-            ..Default::default()
-        }
-        .with_stdout(OutputCapture {
-            output: output.clone(),
-        })
-        .with_stderr(OutputCapture {
-            output: output.clone(),
-        }),
+        KotoSettings::default()
+            .with_stdout(OutputCapture {
+                output: output.clone(),
+            })
+            .with_stderr(OutputCapture {
+                output: output.clone(),
+            }),
     );
 
     for path in glob("**/*.koto").context("failed to scan for scripts")? {
