@@ -73,7 +73,10 @@ export function register_koto_editor_mode() {
             regex: /\b(?:assert|assert_eq|assert_ne|assert_near)\b/
           }, {
             token: "keyword.control.koto",
-            regex: /\b(?:catch|finally|for|in|loop|return|throw|try|until|while|yield)\b/
+            regex: /\b(?:catch|finally|for|in|loop|throw|try|until|while)\b/
+          }, {
+            token: "keyword.control.flow.koto",
+            regex: /\b(?:break|continue|return|yield)\b/
           }, {
             token: "keyword.control.conditional.koto",
             regex: /\b(?:else|if|match|switch|then)\b/
