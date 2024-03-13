@@ -169,6 +169,14 @@ slug = \"{slug}\"
                 let new_level = HeadingLevel::try_from(level as usize + 1).unwrap_or(level);
                 once(Start(Heading(new_level, fragment, classes))).chain(None)
             }
+            End(Link(link_type, url, title)) if url.contains("../core_lib") => {
+                let updated_url = url.replace("../core_lib", "../core");
+                once(End(Link(link_type, updated_url.into(), title))).chain(None)
+            }
+            End(FootnoteDefinition(url)) if url.contains("../core_lib") => {
+                let updated_url = url.replace("../core_lib", "../core");
+                once(End(FootnoteDefinition(updated_url.into()))).chain(None)
+            }
             Text(code) if in_koto_code => {
                 koto_code = code.clone();
                 let display_code = koto_code
