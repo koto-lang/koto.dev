@@ -4,7 +4,7 @@ template = "docs-section.html"
 page_template = "docs-core-lib.html"
 insert_anchor_links = "heading"
 sort_by = "title"
-weight = 2
+weight = 3
 +++
 
 # Core Library
