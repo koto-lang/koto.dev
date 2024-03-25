@@ -33,7 +33,7 @@ docs:
   cargo xtask docs
 
 docs-watch:
-  cargo watch -w ../modules/koto/docs -w xtask -x "xtask docs"
+  cargo watch -w ../modules/koto -w xtask -x "xtask docs"
 
 playground:
   cd playground && trunk build

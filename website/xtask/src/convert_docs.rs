@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::{bail, Context, Result};
 use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag};
 use pulldown_cmark_to_cmark::cmark;
 use std::{
@@ -9,58 +9,108 @@ use std::{
 };
 
 pub fn run() -> Result<()> {
-    convert_lang_guide_docs()?;
-    convert_core_lib_docs()?;
+    convert_single_page_doc(
+        "about.md",
+        "about",
+        r#"+++
+title = "About"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 1
++++
+"#,
+        true,
+        false,
+    )?;
+    convert_single_page_doc(
+        "language_guide.md",
+        "language",
+        r#"+++
+title = "Language Guide"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 2
++++
+
+# The Koto Language Guide
+
+As you're reading this guide, you're encouraged to play around with the examples to get a feel
+for the language.
+
+When you see a <span uk-icon="play"></span> icon below an example,
+clicking it will open the example in the [Koto Playground](https://koto.dev/play),
+where you can run the code and see what happens as you make changes.
+"#,
+        true,
+        true,
+    )?;
+    convert_core_lib()?;
+    convert_single_page_doc(
+        "cli.md",
+        "cli",
+        r#"+++
+title = "Koto CLI"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 4
++++
+"#,
+        false,
+        false,
+    )?;
+    convert_single_page_doc(
+        "api.md",
+        "api",
+        r#"+++
+title = "Rust API"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 5
++++
+"#,
+        true,
+        false,
+    )?;
 
     println!("Docs updated");
 
     Ok(())
 }
 
-fn convert_lang_guide_docs() -> Result<()> {
-    use {std::io::Write, Event::*, Tag::*};
+fn convert_single_page_doc(
+    input_file: &str,
+    output_sub_dir: &str,
+    intro: &str,
+    skip_preamble: bool,
+    skip_title: bool,
+) -> Result<()> {
+    use std::io::Write;
 
-    let guide_dir = PathBuf::from("../modules/koto/docs/language");
-    let output_dir = PathBuf::from("content/docs/next/language");
-
-    // Read through the index and convert each guide doc in order
-    let mut index_path = guide_dir.clone();
-    index_path.push("_index.md");
-    let index_contents = fs::read_to_string(index_path)?;
+    let mut input_path = PathBuf::from("../modules/koto/docs/");
+    input_path.push(input_file);
+    let mut output_dir = PathBuf::from("content/docs/next/");
+    output_dir.push(output_sub_dir);
 
     let mut output_path = output_dir.clone();
     output_path.push("_index.md");
     let mut output_file = fs::File::create(&output_path)
         .with_context(|| format!("Failed to create output file '{output_path:?}'"))?;
-    write!(output_file, include_str!("../../templates/guide-intro.md"))?;
+    write!(output_file, "{intro}")?;
 
-    let mut in_list_item = false;
-    for event in Parser::new(&index_contents) {
-        match event {
-            Start(Item) => in_list_item = true,
-            End(Item) => in_list_item = false,
-            Start(Link(_, url, _)) if in_list_item => {
-                let mut doc_path = guide_dir.clone();
-                doc_path.push(url.as_ref());
-                let converted = convert_doc(&doc_path, false, true, Some(1))?;
-
-                write!(output_file, "\n\n{converted}")?;
-            }
-            _ => {}
-        }
-    }
+    let converted = convert_doc(&input_path, false, skip_preamble, skip_title)?;
+    write!(output_file, "\n\n{converted}")?;
 
     Ok(())
 }
 
-fn convert_core_lib_docs() -> Result<()> {
+fn convert_core_lib() -> Result<()> {
     use std::io::Write;
 
     let output_dir = PathBuf::from("content/docs/next/core");
 
     for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
         let doc_path = doc?.path();
-        let converted = convert_doc(&doc_path, true, false, None)?;
+        let converted = convert_doc(&doc_path, true, false, false)?;
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
@@ -73,18 +123,40 @@ fn convert_core_lib_docs() -> Result<()> {
     Ok(())
 }
 
+fn skip_until<'a>(input: &'a str, token: &str) -> Result<&'a str> {
+    let Some((_, skipped)) = input.split_once(token) else {
+        bail!("Couldn't find token '{token}'");
+    };
+    let Some((_, skipped)) = skipped.split_once('\n') else {
+        bail!("Couldn't find newline after token '{token}'");
+    };
+
+    Ok(skipped)
+}
+
 fn convert_doc(
     input_path: &Path,
     generate_front_matter: bool,
-    indent_headers: bool,
-    weight: Option<usize>,
+    skip_preamble: bool,
+    skip_title: bool,
 ) -> Result<String> {
     use {std::fmt::Write, Event::*, Tag::*};
 
-    let input_contents = fs::read_to_string(&input_path)?;
+    let input_contents = fs::read_to_string(input_path)?;
 
+    let input = if skip_preamble {
+        skip_until(&input_contents, "---")?
+    } else {
+        &input_contents
+    };
+
+    let input = if skip_title {
+        skip_until(input, "# ")?
+    } else {
+        input
+    };
     // Write out the modified markdown with Zola front matter
-    let mut output_buffer = String::with_capacity(input_contents.len());
+    let mut output_buffer = String::with_capacity(input.len());
 
     if generate_front_matter {
         let slug = input_path
@@ -97,7 +169,7 @@ fn convert_doc(
         let entry_name = {
             let mut in_heading = false;
             let mut entry_name = None;
-            for event in Parser::new(&input_contents) {
+            for event in Parser::new(&input) {
                 match event {
                     Start(Heading(HeadingLevel::H1, _, _)) => {
                         in_heading = true;
@@ -122,32 +194,32 @@ slug = \"{slug}\"
 ",
         )?;
 
-        if let Some(weight) = weight {
-            writeln!(output_buffer, "weight = {weight}")?;
-        }
-
         writeln!(output_buffer, "+++\n")?;
     }
 
     // Parse the input markdown and perform some modifications
     // Each event is converted into an iterator providing modified events,
     // with flat_map merging the iterators back into a single event stream.
-    let parser = Parser::new(&input_contents).flat_map({
+    let parser = Parser::new(&input).flat_map({
         // Add a playground link to every koto code block
         let mut in_koto_code = false;
+        let mut in_rust_include = false;
         let mut koto_code = CowStr::from("");
         move |event| match event {
-            Start(CodeBlock(CodeBlockKind::Fenced(ref lang))) => match lang.split(',').next() {
-                Some("koto") => {
-                    in_koto_code = true;
-                    // Split off the language modifier to avoid confusing zola
-                    once(Start(CodeBlock(CodeBlockKind::Fenced("koto".into())))).chain(None)
+            Start(CodeBlock(CodeBlockKind::Fenced(ref lang))) => {
+                match lang.split(',').next() {
+                    Some("koto") => {
+                        in_koto_code = true;
+                        // Split off the language modifier to avoid confusing zola
+                        once(Start(CodeBlock(CodeBlockKind::Fenced("koto".into())))).chain(None)
+                    }
+                    Some("rust_include") => {
+                        in_rust_include = true;
+                        once(Start(CodeBlock(CodeBlockKind::Fenced("rust".into())))).chain(None)
+                    }
+                    _ => once(event).chain(None),
                 }
-                _ => {
-                    in_koto_code = false;
-                    once(event).chain(None)
-                }
-            },
+            }
             End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
                 in_koto_code = false;
                 let playground_code = koto_code
@@ -165,17 +237,15 @@ slug = \"{slug}\"
                 );
                 once(event).chain(Some(Text(shortcode.into())))
             }
-            Start(Heading(level, fragment, classes)) if indent_headers => {
-                let new_level = HeadingLevel::try_from(level as usize + 1).unwrap_or(level);
-                once(Start(Heading(new_level, fragment, classes))).chain(None)
+            End(CodeBlock(CodeBlockKind::Fenced(_))) if in_rust_include => {
+                in_rust_include = false;
+                once(event).chain(None)
             }
-            End(Link(link_type, url, title)) if url.contains("../core_lib") => {
-                let updated_url = url.replace("../core_lib", "../core");
-                once(End(Link(link_type, updated_url.into(), title))).chain(None)
+            End(Link(link_type, url, title)) => {
+                once(End(Link(link_type, fix_url(&url).into(), title))).chain(None)
             }
-            End(FootnoteDefinition(url)) if url.contains("../core_lib") => {
-                let updated_url = url.replace("../core_lib", "../core");
-                once(End(FootnoteDefinition(updated_url.into()))).chain(None)
+            End(FootnoteDefinition(url)) => {
+                once(End(FootnoteDefinition(fix_url(&url).into()))).chain(None)
             }
             Text(code) if in_koto_code => {
                 koto_code = code.clone();
@@ -185,6 +255,14 @@ slug = \"{slug}\"
                     .replace("check! ", "# -> ");
                 once(Text(display_code.into())).chain(None)
             }
+            Text(file_name) if in_rust_include => {
+                let file_name = file_name.trim();
+                let path = format!("../modules/koto/crates/koto/examples/{file_name}");
+                let rust_file_contents = fs::read_to_string(&path)
+                    .map_err(|e| format!("Failed to include rust file from '{path}' ({e})"))
+                    .unwrap();
+                once(Text(rust_file_contents.into())).chain(None)
+            }
             _ => once(event).chain(None),
         }
     });
@@ -192,4 +270,12 @@ slug = \"{slug}\"
     cmark(parser, &mut output_buffer)?;
 
     Ok(output_buffer)
+}
+
+fn fix_url(url: &str) -> String {
+    url
+        // Fix guide->core_lib links
+        .replace("../core_lib", "../core")
+        // Fix core_lib->guide links
+        .replace("../language_guide.md", "../../language/")
 }
