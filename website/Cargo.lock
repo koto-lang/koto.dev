@@ -374,6 +374,7 @@ dependencies = [
 name = "koto_lexer"
 version = "0.13.0"
 dependencies = [
+ "unicode-segmentation",
  "unicode-width",
  "unicode-xid",
 ]
@@ -389,6 +390,7 @@ dependencies = [
  "koto_lexer",
  "koto_memory",
  "thiserror",
+ "unicode-segmentation",
 ]
 
 [[package]]

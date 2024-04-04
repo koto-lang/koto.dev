@@ -1,7 +1,7 @@
 print 'Hello, World!'
 
 world = 'World'
-print 'Hello again, $world!'
+print 'Hello again, {world}!'
 
 dlrow = 'dlroW'
-print '...and again, ${dlrow.reversed().to_string()}!'
+print '...and again, {dlrow.reversed().to_string()}!'

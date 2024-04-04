@@ -9,4 +9,4 @@ fibonacci = ||
     a, b = b, c
 
 for i, n in fibonacci().take(20).enumerate()
-  print '${i + 1}: $n'
+  print '{i + 1}: {n}'
