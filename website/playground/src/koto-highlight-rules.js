@@ -210,10 +210,7 @@ export function register_koto_editor_mode() {
           }],
           "#string-template": [{
             token: "variable.parameter.koto",
-            regex: "\\$" + identifier
-          }, {
-            token: "variable.parameter.koto",
-            regex: /\${/,
+            regex: /{/,
             push: [{
               token: "variable.parameter.koto",
               regex: /}/,
