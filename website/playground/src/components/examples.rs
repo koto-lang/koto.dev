@@ -6,7 +6,7 @@ use {
 
 struct Script {
     name: &'static str,
-    url: &'static str,
+    contents: &'static str,
 }
 
 struct ScriptGroup {
@@ -28,15 +28,15 @@ pub fn examples_dialog(props: &Props) -> Html {
                 scripts: &[
                     Script {
                         name: "Hello World",
-                        url: "/play/examples/intro/hello_world.koto",
+                        contents: include_str!("../../examples/intro/hello_world.koto"),
                     },
                     Script {
                         name: "Fizz Buzz",
-                        url: "/play/examples/intro/fizz_buzz.koto",
+                        contents: include_str!("../../examples/intro/fizz_buzz.koto"),
                     },
                     Script {
                         name: "Fibonacci",
-                        url: "/play/examples/intro/fibonacci.koto",
+                        contents: include_str!("../../examples/intro/fibonacci.koto"),
                     },
                 ],
             },
@@ -45,11 +45,11 @@ pub fn examples_dialog(props: &Props) -> Html {
                 scripts: &[
                     Script {
                         name: "Enums",
-                        url: "/play/examples/cookbook/enum.koto",
+                        contents: include_str!("../../examples/cookbook/enum.koto"),
                     },
                     Script {
                         name: "Sets",
-                        url: "/play/examples/cookbook/set.koto",
+                        contents: include_str!("../../examples/cookbook/set.koto"),
                     },
                 ],
             },
@@ -65,7 +65,7 @@ pub fn examples_dialog(props: &Props) -> Html {
                     .flat_map(|script_group| script_group.scripts.iter())
                     .nth(index as usize)
                     .unwrap()
-                    .url;
+                    .contents;
                 on_script_selected.emit(script_url);
             }
         });
