@@ -1,9 +1,11 @@
+{% if version %}
+  {% set play_path = "play-" ~ version %}
+{% else %}
+  {% set play_path = "play-" %}
+{% endif %}
+
 <div class="uk-text-right playground-link">
-  <a
-    class="uk-link-muted"
-    href="/play/?script={{body | urlencode_strict}}"
-    target="_blank"
-  >
+  <a class="uk-link-muted" href="/{{play_path}}/?script={{body | urlencode_strict}}" target="_blank">
     <span uk-icon="play"></span>
   </a>
 </div>
