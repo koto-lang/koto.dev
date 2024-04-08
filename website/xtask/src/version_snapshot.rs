@@ -45,6 +45,10 @@ pub fn run(version: &str) -> Result<()> {
             continue;
         }
 
+        if path.file_name() == Some(OsStr::new(".gitignore")) {
+            fs::remove_file(path)?;
+        }
+
         if path.parent() == Some(&docs_target_path)
             && path.file_name() == Some(OsStr::new("_index.md"))
         {
