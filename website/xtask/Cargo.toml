@@ -5,5 +5,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = { workspace = true }
+fs_extra = { workspace = true }
 pulldown-cmark = { workspace = true }
 pulldown-cmark-to-cmark = { workspace = true }
+walkdir = { workspace = true }

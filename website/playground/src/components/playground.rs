@@ -11,7 +11,7 @@ use {
     serde::Deserialize,
     std::collections::HashMap,
     wasm_bindgen::{closure::Closure, JsCast},
-    web_sys::{Element, MutationObserver, MutationObserverInit, RequestCache, UrlSearchParams},
+    web_sys::{Element, MutationObserver, MutationObserverInit, UrlSearchParams},
     yew::prelude::*,
 };
 
@@ -25,7 +25,7 @@ pub enum Msg {
     EditorChanged,
     ScriptLoaded { contents: String },
     PostScriptLoaded,
-    ScriptMenuChanged { url: &'static str },
+    ScriptMenuChanged { contents: &'static str },
     RunButtonClicked,
     AutoRunButtonClicked,
     ShareButtonClicked,
@@ -229,22 +229,10 @@ impl Component for Playground {
                 ctx.link().send_message(Msg::EditorChanged);
                 false
             }
-            Msg::ScriptMenuChanged { url } => {
-                ctx.link().send_future({
-                    async {
-                        match Request::get(url).cache(RequestCache::NoCache).send().await {
-                            Ok(response) => match response.text().await {
-                                Ok(contents) => Msg::ScriptLoaded { contents },
-                                Err(_) => Msg::ShowError {
-                                    error: "Failed to load example script".to_string(),
-                                },
-                            },
-                            Err(_) => Msg::ShowError {
-                                error: "Failed to load example".to_string(),
-                            },
-                        }
-                    }
-                });
+            Msg::ScriptMenuChanged { contents } => {
+                self.ignore_editor_changed = true;
+                self.set_editor_contents(contents);
+                ctx.link().send_message(Msg::PostScriptLoaded);
                 false
             }
             Msg::RunButtonClicked => {
@@ -316,7 +304,7 @@ impl Component for Playground {
                     on_auto_run_clicked={ctx.link().callback(|_| Msg::AutoRunButtonClicked)}
                     on_share_clicked={ctx.link().callback(|_| Msg::ShareButtonClicked)}
                     on_script_selected={
-                        ctx.link().callback(|url| Msg::ScriptMenuChanged {url})
+                        ctx.link().callback(|contents| Msg::ScriptMenuChanged {contents})
                     }
                 />
 

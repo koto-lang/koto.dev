@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Koto Playground</title>
+
+    <link rel="mask-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.svg">
+
+    
+<script type="module">
+import init, * as bindings from '/play-0.13/playground-5eb1edd8e0c2392c.js';
+init('/play-0.13/playground-5eb1edd8e0c2392c_bg.wasm');
+window.wasmBindings = bindings;
+
+</script>
+
+    <link rel="stylesheet" href="/play-0.13/index-79dbfc6184c2c022.css" integrity="sha384-EmTtaOHafTmgazGFg9pMj9HPAMkQUcbSwxROU4RTv8V5wcaEKZqCGk-PDPpz_6iF">
+    <link rel="stylesheet" href="/play-0.13/uikit-d77b0cce77f1e987.css" integrity="sha384-sTgjRGo4iDLckX_XDl0zGLVU_2RBRBEUN9lmyitzPH3MwPqDZDiSoMkhddymZd9m">
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/color-scheme.js"></script>
+  
+<link rel="preload" href="/play-0.13/playground-5eb1edd8e0c2392c_bg.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" integrity="sha384-vGTkdduVEOp8dDU2ODU9zgoYdowMW4lDJagM_d0lVydNxENfx1wo8yNs2b9du_xQ">
+<link rel="modulepreload" href="/play-0.13/playground-5eb1edd8e0c2392c.js" crossorigin="anonymous" integrity="sha384-70_lQ1bZsPB10dLxyQLqUf_93w9Wp8kyZ-Pbvl9RPIxlfo1rJBGkPA74orANfAJ6">
+<link rel="modulepreload" href="/play-0.13/snippets/playground-8bcf2bfbc564d5be/inline1.js" crossorigin="anonymous" integrity="sha384-vCfHOohayJFZKwGy_yfey9L98YFOLVWNN0KChdIjEazNtGhxR0cUfHsqwRHFfWcf">
+<link rel="modulepreload" href="/play-0.13/snippets/playground-8bcf2bfbc564d5be/src/copy_text_to_clipboard.js" crossorigin="anonymous" integrity="sha384-OgsM6_99NlLWMDuVWEfRR2qTSQflbbwFF9zz9heFy6ua3Nmx3zslBMxQOFUSI9wn">
+<link rel="modulepreload" href="/play-0.13/snippets/playground-8bcf2bfbc564d5be/src/show_notification.js" crossorigin="anonymous" integrity="sha384-2SQgi6vtGbDI985j7z0OaU2ctGWMVjDYrGib2mdm8lr5lDFAZIh5U9jhG1JrJVeU">
+<link rel="modulepreload" href="/play-0.13/snippets/playground-8bcf2bfbc564d5be/src/koto-highlight-rules.js" crossorigin="anonymous" integrity="sha384-2TXCi82KRMpXF5DA2itBxcsjwDlE9OqOCBzga3BnX2jxA7Rpc1gR13mTOp-QenlK">
+<link rel="modulepreload" href="/play-0.13/snippets/playground-8bcf2bfbc564d5be/inline0.js" crossorigin="anonymous" integrity="sha384-aJ80U-iRbAdH1aba3PDfDwGjv_x-u70j6DjMgas96QJ3wnhpMMZa30JChwfucdIk"></head>
+
+  <body>
+    <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
+  <nav class="navbar uk-navbar-container uk-navbar">
+
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav nav-logo-padding uk-hidden@s">
+        <li>
+          <a class="uk-navbar-item uk-hidden@s"
+            uk-toggle="target: #mobile-nav; animation: uk-animation-slide-left"><span uk-icon="menu"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="uk-navbar-item uk-logo nav-logo-padding" href="/">
+        <img id="nav-logo" src="/koto.svg" />
+      </a>
+    </div>
+
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/docs">Docs</a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/play">Playground</a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item" href="https://discord.gg/JeV8RuK4CT"><span uk-icon="discord"></span>
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item light-switch" onclick="toggleColorScheme();">
+            <img class="light-switch-icon" id="light-switch-icon-navbar" />
+          </a>
+        </li>
+
+        <div class="navbar-extra-padding-right"></div>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+    <div id="playground-wrapper"></div>
+
+    <script src="uikit.min.js"></script>
+    <script src="uikit-icons.min.js"></script>
+
+    <script src="/play-0.13/ace.js"></script>
+    <script src="/play-0.13/keybinding-vim.js"></script>
+    <script src="/play-0.13/theme-solarized_dark.js"></script>
+    <script src="/play-0.13/theme-solarized_light.js"></script>
+
+    <div id="mobile-nav" uk-offcanvas="overlay: true">
+  <div class="uk-offcanvas-bar" id="mobile-nav-contents">
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/docs/next">Docs</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/play">Playground</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
+      <a class="uk-icon-link" uk-icon="discord" href="https://discord.gg/JeV8RuK4CT"></a>
+      <a class="uk-icon-link" uk-icon="github" href="https://github.com/koto-lang/koto"></a>
+
+      <a class="uk-icon-link light-switch" uk-icon="" onclick="toggleColorScheme();">
+        <img class="light-switch-icon" id="light-switch-icon-mobile-nav"/>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+  
+
+</body></html>
