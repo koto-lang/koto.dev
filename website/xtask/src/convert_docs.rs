@@ -278,6 +278,6 @@ fn fix_url(url: &str) -> String {
         .replace("../core_lib", "../core")
         // Fix core_lib->guide links
         .replace("../language_guide.md", "../../language/")
-        // Fix core_lib->guide links
+        // Fix top level docs -> guide links
         .replace("./language_guide.md", "../language/")
 }
