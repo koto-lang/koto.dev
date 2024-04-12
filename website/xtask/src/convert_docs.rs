@@ -44,7 +44,8 @@ where you can run the code and see what happens as you make changes.
         true,
         true,
     )?;
-    convert_core_lib()?;
+    convert_doc_folder("../modules/koto/docs/core_lib", "content/docs/next/core", true)?;
+    convert_doc_folder("../modules/koto/docs/libs", "content/docs/next/libs", false)?;
     convert_single_page_doc(
         "cli.md",
         "cli",
@@ -52,7 +53,7 @@ where you can run the code and see what happens as you make changes.
 title = "Koto CLI"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
-weight = 4
+weight = 5
 +++
 "#,
         false,
@@ -65,7 +66,7 @@ weight = 4
 title = "Rust API"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
-weight = 5
+weight = 6
 +++
 "#,
         true,
@@ -97,20 +98,20 @@ fn convert_single_page_doc(
         .with_context(|| format!("Failed to create output file '{output_path:?}'"))?;
     write!(output_file, "{intro}")?;
 
-    let converted = convert_doc(&input_path, false, skip_preamble, skip_title)?;
+    let converted = convert_doc(&input_path, false, skip_preamble, skip_title, true)?;
     write!(output_file, "\n\n{converted}")?;
 
     Ok(())
 }
 
-fn convert_core_lib() -> Result<()> {
+fn convert_doc_folder(input: &str, output: &str, add_playground_links: bool) -> Result<()> {
     use std::io::Write;
 
-    let output_dir = PathBuf::from("content/docs/next/core");
+    let output_dir = PathBuf::from(output);
 
-    for doc in fs::read_dir("../modules/koto/docs/core_lib")? {
+    for doc in fs::read_dir(input)? {
         let doc_path = doc?.path();
-        let converted = convert_doc(&doc_path, true, false, false)?;
+        let converted = convert_doc(&doc_path, true, false, false, add_playground_links)?;
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
@@ -139,6 +140,7 @@ fn convert_doc(
     generate_front_matter: bool,
     skip_preamble: bool,
     skip_title: bool,
+    add_playgound_links: bool,
 ) -> Result<String> {
     use {std::fmt::Write, Event::*, Tag::*};
 
@@ -222,20 +224,24 @@ slug = \"{slug}\"
             }
             End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
                 in_koto_code = false;
-                let playground_code = koto_code
-                    .deref()
-                    .replace("print! ", "print ")
-                    .replace("check! ", "# -> ")
-                    .replace("skip_check!\n", "")
-                    .replace("skip_run!\n", "");
-                let shortcode = format!(
-                    "\
+                if add_playgound_links {
+                    let playground_code = koto_code
+                        .deref()
+                        .replace("print! ", "print ")
+                        .replace("check! ", "# -> ")
+                        .replace("skip_check!\n", "")
+                        .replace("skip_run!\n", "");
+                    let shortcode = format!(
+                        "\
 {{% example_playground_link() %}}
 {playground_code}
 {{% end %}}
 "
-                );
-                once(event).chain(Some(Text(shortcode.into())))
+                    );
+                    once(event).chain(Some(Text(shortcode.into())))
+                } else {
+                    once(event).chain(None)
+                }
             }
             End(CodeBlock(CodeBlockKind::Fenced(_))) if in_rust_include => {
                 in_rust_include = false;
