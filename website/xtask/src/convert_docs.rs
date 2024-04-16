@@ -44,7 +44,11 @@ where you can run the code and see what happens as you make changes.
         true,
         true,
     )?;
-    convert_doc_folder("../modules/koto/docs/core_lib", "content/docs/next/core", true)?;
+    convert_doc_folder(
+        "../modules/koto/docs/core_lib",
+        "content/docs/next/core",
+        true,
+    )?;
     convert_doc_folder("../modules/koto/docs/libs", "content/docs/next/libs", false)?;
     convert_single_page_doc(
         "cli.md",
@@ -279,11 +283,22 @@ slug = \"{slug}\"
 }
 
 fn fix_url(url: &str) -> String {
-    url
+    let result = url
         // Fix guide->core_lib links
-        .replace("../core_lib", "../core")
+        .replace("./core_lib", "../core")
         // Fix core_lib->guide links
         .replace("../language_guide.md", "../../language/")
         // Fix top level docs -> guide links
-        .replace("./language_guide.md", "../language/")
+        .replace("./language_guide.md", "../language/");
+
+    let result = if result.starts_with("#") || result.contains(".md#") {
+        // Replace underscores with hyphens in local anchor links
+        result.replace("_", "-")
+    } else {
+        result
+    };
+
+    result
+        // Strip out .md suffixes
+        .replace(".md", "")
 }
