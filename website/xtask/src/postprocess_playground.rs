@@ -22,7 +22,7 @@ pub fn run(staging_dir: &str) -> Result<()> {
 
     let output = index
         .replace("<!-- header-placeholder -->", header)
-        .replace("<!-- mobile-nav-placeholder -->", &mobile_nav);
+        .replace("<!-- mobile-nav-placeholder -->", mobile_nav);
 
     fs::File::create(index_path)
         .context("Failed to create output file")?

@@ -115,7 +115,7 @@ impl Component for Share {
                 true
             }
             Msg::GistRequestError { .. } => {
-                self.gist_state = GistState::Error(format!("Error while requesting gist"));
+                self.gist_state = GistState::Error("Error while requesting gist".to_string());
                 true
             }
             Msg::GistResponseError { error } => {
@@ -251,7 +251,7 @@ impl Component for Share {
 }
 
 fn copy_link_to_clipboard(link: &str) {
-    copy_text_to_clipboard(&link);
+    copy_text_to_clipboard(link);
     show_notification("Link copied to clipboard", "link");
 }
 

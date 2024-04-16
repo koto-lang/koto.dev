@@ -50,7 +50,7 @@ impl KotoWrapper {
         self.koto.exports().data_mut().clear();
         self.koto.clear_module_cache();
 
-        if let Err(error) = self.koto.compile(&script) {
+        if let Err(error) = self.koto.compile(script) {
             self.error(&format!("Error while compiling script: {error}"));
         } else {
             if let Err(e) = self.koto.run() {

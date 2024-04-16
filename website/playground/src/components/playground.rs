@@ -106,7 +106,7 @@ impl Playground {
                 });
                 "".into()
             } else if let Some(script) = url_params.get("script") {
-                script.into()
+                script
             } else {
                 self.script.as_ref().clone()
             }
@@ -139,7 +139,7 @@ impl Playground {
 
     fn compile_and_run_script(&mut self) {
         let koto = self.koto.as_mut().expect("Missing koto wrapper");
-        koto.compile_and_run_script(&self.script.as_ref());
+        koto.compile_and_run_script(self.script.as_ref());
     }
 }
 
@@ -148,14 +148,11 @@ impl Component for Playground {
     type Properties = ();
 
     fn create(ctx: &Context<Self>) -> Self {
-        let dark_mode = match document()
+        let color_scheme_attr = document()
             .document_element()
             .expect("Missing document element")
-            .get_attribute("color-scheme")
-        {
-            Some(scheme) if scheme == "dark" => true,
-            _ => false,
-        };
+            .get_attribute("color-scheme");
+        let dark_mode = matches!(color_scheme_attr, Some(scheme) if scheme == "dark" );
 
         let document_attributes_callback = Closure::wrap({
             let link = ctx.link().clone();
@@ -209,7 +206,7 @@ impl Component for Playground {
                     false
                 } else {
                     let script = self.get_editor_contents();
-                    self.script.set(script.into());
+                    self.script.set(script);
                     if self.auto_run_enabled {
                         self.compile_and_run_script();
                     }
@@ -265,10 +262,9 @@ impl Component for Playground {
                     .document_element()
                     .expect("Missing document element");
 
-                let dark_mode = match document_element.get_attribute("color-scheme") {
-                    Some(scheme) if scheme == "dark" => true,
-                    _ => false,
-                };
+                let dark_mode = matches!(
+                    document_element.get_attribute("color-scheme"),
+                    Some(scheme) if scheme == "dark");
 
                 let dark_mode_changed = self.playground_context.dark_mode != dark_mode;
                 if dark_mode_changed {
@@ -276,10 +272,9 @@ impl Component for Playground {
                     self.update_editor_theme();
                 }
 
-                let vim_bindings_enabled = match document_element.get_attribute("editor-bindings") {
-                    Some(scheme) if scheme == "vim" => true,
-                    _ => false,
-                };
+                let vim_bindings_enabled = matches!(
+                    document_element.get_attribute("editor-bindings"),
+                    Some(scheme) if scheme == "vim");
                 let vim_bindings_enabled_changed =
                     self.vim_bindings_enabled.get() != vim_bindings_enabled;
                 if vim_bindings_enabled_changed {

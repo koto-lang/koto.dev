@@ -6,7 +6,7 @@ use {
 };
 
 // This should be made unique if multiple editors per page are needed
-static EDITOR_ID: &'static str = "koto-playground-editor";
+static EDITOR_ID: &str = "koto-playground-editor";
 
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct Props {

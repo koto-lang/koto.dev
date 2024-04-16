@@ -175,7 +175,7 @@ fn convert_doc(
         let entry_name = {
             let mut in_heading = false;
             let mut entry_name = None;
-            for event in Parser::new(&input) {
+            for event in Parser::new(input) {
                 match event {
                     Start(Heading(HeadingLevel::H1, _, _)) => {
                         in_heading = true;
@@ -206,7 +206,7 @@ slug = \"{slug}\"
     // Parse the input markdown and perform some modifications
     // Each event is converted into an iterator providing modified events,
     // with flat_map merging the iterators back into a single event stream.
-    let parser = Parser::new(&input).flat_map({
+    let parser = Parser::new(input).flat_map({
         // Add a playground link to every koto code block
         let mut in_koto_code = false;
         let mut in_rust_include = false;
@@ -291,9 +291,9 @@ fn fix_url(url: &str) -> String {
         // Fix top level docs -> guide links
         .replace("./language_guide.md", "../language/");
 
-    let result = if result.starts_with("#") || result.contains(".md#") {
+    let result = if result.starts_with('#') || result.contains(".md#") {
         // Replace underscores with hyphens in local anchor links
-        result.replace("_", "-")
+        result.replace('_', "-")
     } else {
         result
     };

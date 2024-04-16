@@ -52,7 +52,7 @@ fn get_local_storage_value(id: &str) -> Option<String> {
     window()
         .local_storage()
         .expect("Couldn't access local storage")
-        .map_or(None, |storage| {
+        .and_then(|storage| {
             storage
                 .get(id)
                 .expect("Couldn't get item from local storage")
@@ -64,6 +64,6 @@ fn set_local_storage_value(id: &str, value: &str) {
         .local_storage()
         .expect("Couldn't access local storage")
         .expect("Missing local storage")
-        .set(id, &value)
+        .set(id, value)
         .ok();
 }
