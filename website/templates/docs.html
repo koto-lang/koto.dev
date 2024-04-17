@@ -4,7 +4,9 @@
 
 <div class="uk-section">
   <div class="uk-container">
-    <div uk-grid class="uk-child-width-expand@m uk-grid-match uk-text-center">
+    <div uk-grid class="uk-child-width-1-3@s
+                        uk-child-width-1-4@l
+                        uk-grid-match uk-text-center uk-flex-center">
       {% set index = get_section(path=section.relative_path) %}
 
       {% for s in index.subsections %}
@@ -12,7 +14,8 @@
 
         <div>
           <a
-            class="uk-button uk-button-default uk-button-large uk-text-capitalize"
+            class="uk-button uk-button-default uk-button-large
+                   uk-text-capitalize uk-padding-small"
             href="{{ subsection.permalink }}"
           >
             {{ subsection.title }}
