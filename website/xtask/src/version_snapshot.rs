@@ -12,20 +12,38 @@ use std::{
 use anyhow::{bail, Context, Result};
 use walkdir::WalkDir;
 
-pub fn run(version: &str) -> Result<()> {
-    let docs_target = format!("content/docs/{version}");
-    let docs_target_path = PathBuf::from(&docs_target);
-    let playground_target = format!("static/play-{version}");
+pub fn run(new_version: &str, old_version: &str) -> Result<()> {
+    let old_docs_target = format!("content/docs/{old_version}");
+    let old_docs_target_path = PathBuf::from(&old_docs_target);
+    let new_docs_target = format!("content/docs/latest");
+    let new_docs_target_path = PathBuf::from(&new_docs_target);
+    let playground_target = format!("static/play-{new_version}");
     let playground_target_path = PathBuf::from(&playground_target);
     let copy_options = fs_extra::dir::CopyOptions::new().copy_inside(true);
 
-    if docs_target_path.exists() {
-        fs::remove_dir_all(&docs_target_path)
-            .with_context(|| format!("failed to remove '{docs_target}'"))?;
+    if old_docs_target_path.exists() {
+        fs::remove_dir_all(&old_docs_target_path)
+            .with_context(|| format!("failed to remove '{old_docs_target}'"))?;
     }
-    fs_extra::copy_items(&["content/docs/next"], &docs_target_path, &copy_options)
-        .with_context(|| format!("failed to copy docs to '{docs_target}'"))?;
-    println!("Docs copied to '{docs_target}'");
+    fs_extra::copy_items(
+        &["content/docs/latest"],
+        &old_docs_target_path,
+        &copy_options,
+    )
+    .with_context(|| format!("failed to copy docs to '{old_docs_target}'"))?;
+    println!("Latest docs copied to '{old_docs_target}'");
+
+    if new_docs_target_path.exists() {
+        fs::remove_dir_all(&new_docs_target_path)
+            .with_context(|| format!("failed to remove '{new_docs_target}'"))?;
+    }
+    fs_extra::copy_items(
+        &["content/docs/latest"],
+        &new_docs_target_path,
+        &copy_options,
+    )
+    .with_context(|| format!("failed to copy docs to '{new_docs_target}'"))?;
+    println!("New docs copied to '{new_docs_target}'");
 
     if playground_target_path.exists() {
         fs::remove_dir_all(&playground_target_path)
@@ -37,9 +55,10 @@ pub fn run(version: &str) -> Result<()> {
 
     // Post-process the copied docs
     let playground_link_search = "example_playground_link()";
-    let playground_link_replacement = format!("example_playground_link(version = \"{version}\")");
-    for f in WalkDir::new(&docs_target_path) {
-        let f = f.with_context(|| format!("error while traversing {docs_target}",))?;
+    let playground_link_replacement =
+        format!("example_playground_link(version = \"{new_version}\")");
+    for f in WalkDir::new(&new_docs_target_path) {
+        let f = f.with_context(|| format!("error while traversing {new_docs_target}",))?;
         let path = f.path();
         if !path.is_file() {
             continue;
@@ -49,10 +68,10 @@ pub fn run(version: &str) -> Result<()> {
             fs::remove_file(path)?;
         }
 
-        if path.parent() == Some(&docs_target_path)
+        if path.parent() == Some(&new_docs_target_path)
             && path.file_name() == Some(OsStr::new("_index.md"))
         {
-            update_index_title(path, version)?;
+            update_index_title(path, new_version)?;
             continue;
         }
 
@@ -64,7 +83,11 @@ pub fn run(version: &str) -> Result<()> {
 
     // Post-process the copied playground
     let playground_index = PathBuf::from(&format!("{playground_target}/index.html"));
-    search_and_replace_in_file(&playground_index, "/play/", &format!("/play-{version}/"))?;
+    search_and_replace_in_file(
+        &playground_index,
+        "/play/",
+        &format!("/play-{new_version}/"),
+    )?;
     println!(
         "Updated playground references in '{}'",
         playground_index.to_string_lossy()
