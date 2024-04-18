@@ -8,6 +8,15 @@ html
 body
   min-height: 100vh
 
+h1, h2, h3, h4, h5, h6
+  a
+    text-decoration: none
+
+h2
+  border-top: 1px solid
+  border-color: lightgrey
+  padding-top: 15px
+
 .main-logo
   height: 8em
 
@@ -34,6 +43,30 @@ body
 .background-light
   background: $global-background !important
 
+.docs-sidebar
+  position: fixed
+  top: $topbar-height
+  bottom: 0
+  overflow: auto
+  width: 200px
+  padding: $nav-logo-padding
+
+@media (min-width: 640px)
+  .docs-section
+    padding-left: 260px
+    padding-right: 50px
+
+@media (min-width: 960px)
+  .docs-section
+    padding-right: 155px
+
+@media (min-width: 1200px)
+  .docs-section
+    padding-right: 260px
+
+.playground-link
+  margin-top: -$base-margin-vertical
+
 [color-scheme="light"]
   @import 'code-light.scss'
 
@@ -42,6 +75,9 @@ body
 
   pre
     border: 0px
+
+  :not(pre) > code
+    background-color: #f4f4f4
 
   .navbar
     background-color: $global-background !important

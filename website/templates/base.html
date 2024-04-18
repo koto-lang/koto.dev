@@ -11,6 +11,10 @@
     <link rel="mask-icon" href="/favicon.svg" />
     <link rel="icon" href="/favicon.svg" />
 
+    {% block rss %}
+      <link rel="alternate" type="application/atom+xml" title="Feed" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+    {% endblock %}
+
     <script src="/uikit.min.js"></script>
     <script src="/uikit-icons.min.js"></script>
 
