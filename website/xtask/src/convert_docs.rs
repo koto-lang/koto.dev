@@ -11,25 +11,24 @@ use std::{
 pub fn run() -> Result<()> {
     convert_single_page_doc(
         "about.md",
-        "about",
+        "content/about",
         r#"+++
 title = "About"
-template = "docs-guide.html"
 insert_anchor_links = "heading"
-weight = 1
 +++
 "#,
         true,
         false,
+        FixUrlMode::TopLevelToLatest,
     )?;
     convert_single_page_doc(
         "language_guide.md",
-        "language",
+        "content/docs/next/language",
         r#"+++
 title = "Language Guide"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
-weight = 2
+weight = 1
 +++
 
 # The Koto Language Guide
@@ -43,6 +42,7 @@ where you can run the code and see what happens as you make changes.
 "#,
         true,
         true,
+        FixUrlMode::TopLevel,
     )?;
     convert_doc_folder(
         "../modules/koto/docs/core_lib",
@@ -52,29 +52,31 @@ where you can run the code and see what happens as you make changes.
     convert_doc_folder("../modules/koto/docs/libs", "content/docs/next/libs", false)?;
     convert_single_page_doc(
         "cli.md",
-        "cli",
+        "content/docs/next/cli",
         r#"+++
 title = "Koto CLI"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 4
++++
+"#,
+        false,
+        false,
+        FixUrlMode::TopLevel,
+    )?;
+    convert_single_page_doc(
+        "api.md",
+        "content/docs/next/api",
+        r#"+++
+title = "Rust API"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
 weight = 5
 +++
 "#,
-        false,
-        false,
-    )?;
-    convert_single_page_doc(
-        "api.md",
-        "api",
-        r#"+++
-title = "Rust API"
-template = "docs-guide.html"
-insert_anchor_links = "heading"
-weight = 6
-+++
-"#,
         true,
         false,
+        FixUrlMode::TopLevel,
     )?;
 
     println!("Docs updated");
@@ -84,25 +86,33 @@ weight = 6
 
 fn convert_single_page_doc(
     input_file: &str,
-    output_sub_dir: &str,
+    output_dir: &str,
     intro: &str,
     skip_preamble: bool,
     skip_title: bool,
+    fix_url_mode: FixUrlMode,
 ) -> Result<()> {
     use std::io::Write;
 
     let mut input_path = PathBuf::from("../modules/koto/docs/");
     input_path.push(input_file);
-    let mut output_dir = PathBuf::from("content/docs/next/");
-    output_dir.push(output_sub_dir);
 
-    let mut output_path = output_dir.clone();
+    let mut output_path = PathBuf::from(output_dir);
     output_path.push("_index.md");
     let mut output_file = fs::File::create(&output_path)
         .with_context(|| format!("Failed to create output file '{output_path:?}'"))?;
     write!(output_file, "{intro}")?;
 
-    let converted = convert_doc(&input_path, false, skip_preamble, skip_title, true)?;
+    let converted = convert_doc(
+        &input_path,
+        ConvertDocFlags {
+            generate_front_matter: false,
+            skip_preamble,
+            skip_title,
+            add_playground_links: true,
+            fix_url_mode,
+        },
+    )?;
     write!(output_file, "\n\n{converted}")?;
 
     Ok(())
@@ -115,7 +125,16 @@ fn convert_doc_folder(input: &str, output: &str, add_playground_links: bool) -> 
 
     for doc in fs::read_dir(input)? {
         let doc_path = doc?.path();
-        let converted = convert_doc(&doc_path, true, false, false, add_playground_links)?;
+        let converted = convert_doc(
+            &doc_path,
+            ConvertDocFlags {
+                generate_front_matter: true,
+                skip_preamble: false,
+                skip_title: false,
+                add_playground_links,
+                fix_url_mode: FixUrlMode::SubFolder,
+            },
+        )?;
 
         let mut output_path = output_dir.clone();
         output_path.push(doc_path.file_name().unwrap());
@@ -139,24 +158,36 @@ fn skip_until<'a>(input: &'a str, token: &str) -> Result<&'a str> {
     Ok(skipped)
 }
 
-fn convert_doc(
-    input_path: &Path,
+struct ConvertDocFlags {
     generate_front_matter: bool,
     skip_preamble: bool,
     skip_title: bool,
-    add_playgound_links: bool,
-) -> Result<String> {
+    add_playground_links: bool,
+    fix_url_mode: FixUrlMode,
+}
+
+#[derive(Copy, Clone)]
+enum FixUrlMode {
+    // Adjust doc links to docs/latest
+    TopLevelToLatest,
+    // Adjust doc links to neighbouring docs version
+    TopLevel,
+    // Adjust doc links to neighbouring docs version from docs subfolder
+    SubFolder,
+}
+
+fn convert_doc(input_path: &Path, flags: ConvertDocFlags) -> Result<String> {
     use {std::fmt::Write, Event::*, Tag::*};
 
     let input_contents = fs::read_to_string(input_path)?;
 
-    let input = if skip_preamble {
+    let input = if flags.skip_preamble {
         skip_until(&input_contents, "---")?
     } else {
         &input_contents
     };
 
-    let input = if skip_title {
+    let input = if flags.skip_title {
         skip_until(input, "# ")?
     } else {
         input
@@ -164,7 +195,7 @@ fn convert_doc(
     // Write out the modified markdown with Zola front matter
     let mut output_buffer = String::with_capacity(input.len());
 
-    if generate_front_matter {
+    if flags.generate_front_matter {
         let slug = input_path
             .file_stem()
             .unwrap()
@@ -228,7 +259,7 @@ slug = \"{slug}\"
             }
             End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
                 in_koto_code = false;
-                if add_playgound_links {
+                if flags.add_playground_links {
                     let playground_code = koto_code
                         .deref()
                         .replace("print! ", "print ")
@@ -252,10 +283,12 @@ slug = \"{slug}\"
                 once(event).chain(None)
             }
             End(Link(link_type, url, title)) => {
-                once(End(Link(link_type, fix_url(&url).into(), title))).chain(None)
+                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).into();
+                once(End(Link(link_type, fixed_url, title))).chain(None)
             }
             End(FootnoteDefinition(url)) => {
-                once(End(FootnoteDefinition(fix_url(&url).into()))).chain(None)
+                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).into();
+                once(End(FootnoteDefinition(fixed_url))).chain(None)
             }
             Text(code) if in_koto_code => {
                 koto_code = code.clone();
@@ -282,14 +315,16 @@ slug = \"{slug}\"
     Ok(output_buffer)
 }
 
-fn fix_url(url: &str) -> String {
-    let result = url
-        // Fix guide->core_lib links
-        .replace("./core_lib", "../core")
-        // Fix core_lib->guide links
-        .replace("../language_guide.md", "../../language/")
-        // Fix top level docs -> guide links
-        .replace("./language_guide.md", "../language/");
+fn fix_doc_urls(url: &str, mode: FixUrlMode) -> String {
+    use FixUrlMode::*;
+
+    let result = match mode {
+        TopLevelToLatest => url.replace("./language_guide.md", "/docs/latest/language/"),
+        TopLevel => url
+            .replace("./core_lib", "../core")
+            .replace("./language_guide.md", "../language/"),
+        SubFolder => url.replace("../language_guide.md", "../../language/"),
+    };
 
     let result = if result.starts_with('#') || result.contains(".md#") {
         // Replace underscores with hyphens in local anchor links
