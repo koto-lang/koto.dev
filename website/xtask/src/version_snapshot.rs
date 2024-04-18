@@ -21,24 +21,26 @@ pub fn run(new_version: &str, old_version: &str) -> Result<()> {
     let playground_target_path = PathBuf::from(&playground_target);
     let copy_options = fs_extra::dir::CopyOptions::new().copy_inside(true);
 
+    // Copy latest -> old
     if old_docs_target_path.exists() {
         fs::remove_dir_all(&old_docs_target_path)
             .with_context(|| format!("failed to remove '{old_docs_target}'"))?;
     }
     fs_extra::copy_items(
-        &["content/docs/latest"],
+        &[new_docs_target.clone()],
         &old_docs_target_path,
         &copy_options,
     )
     .with_context(|| format!("failed to copy docs to '{old_docs_target}'"))?;
     println!("Latest docs copied to '{old_docs_target}'");
 
+    // Copy next -> latest
     if new_docs_target_path.exists() {
         fs::remove_dir_all(&new_docs_target_path)
             .with_context(|| format!("failed to remove '{new_docs_target}'"))?;
     }
     fs_extra::copy_items(
-        &["content/docs/latest"],
+        &["content/docs/next"],
         &new_docs_target_path,
         &copy_options,
     )
