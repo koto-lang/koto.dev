@@ -23,12 +23,12 @@ As an example, this simple script prints a friendly greeting.
 
 ````koto
 name = 'World'
-print 'Hello, $name!'
+print 'Hello, {name}!'
 ````
 
 {% example_playground_link(version = "0.14") %}
 name = 'World'
-print 'Hello, $name!'
+print 'Hello, {name}!'
 
 {% end %}
 ### Comments
@@ -1444,10 +1444,10 @@ with `...` available for capturing the rest of the sequence.
 match ['a', 'b', 'c'].extend [1, 2, 3]
   ('a', 'b') then "A list containing 'a' and 'b'"
   (1, ...) then "Starts with '1'"
-  (..., 'y', last) then "Ends with 'y' followed by '$last'"
+  (..., 'y', last) then "Ends with 'y' followed by '{last}'"
   ('a', x, others...) then
     "Starts with 'a', followed by '{x}', then {size others} others"
-  unmatched then "other: $unmatched"
+  unmatched then "other: {unmatched}"
 # -> Starts with 'a', followed by 'b', then 4 others
 ````
 
@@ -1455,10 +1455,10 @@ match ['a', 'b', 'c'].extend [1, 2, 3]
 print match ['a', 'b', 'c'].extend [1, 2, 3]
   ('a', 'b') then "A list containing 'a' and 'b'"
   (1, ...) then "Starts with '1'"
-  (..., 'y', last) then "Ends with 'y' followed by '$last'"
+  (..., 'y', last) then "Ends with 'y' followed by '{last}'"
   ('a', x, others...) then
     "Starts with 'a', followed by '{x}', then {size others} others"
-  unmatched then "other: $unmatched"
+  unmatched then "other: {unmatched}"
 # -> Starts with 'a', followed by 'b', then 4 others
 
 {% end %}
@@ -1777,7 +1777,7 @@ for x in i
 {% end %}
 ### Iterator Consumers
 
-Iterators can be also be *consumed* using functions like
+Iterators can also be *consumed* using functions like
 [`.to_list()`](../core/iterator#to-list) and [`.to_tuple()`](../core/iterator#to-tuple), 
 allowing the output of an iterator to be easily captured in a container.
 
@@ -2081,7 +2081,7 @@ r.start()
 r.end()
 # -> null
  
-# Create an unbounded range up to and including 10
+# Create an unbounded range up to and including 100
 r = ..=100
 r.start()
 # -> null
@@ -3493,7 +3493,7 @@ Single values can be assigned to and exported at the same time:
 # my_module.koto #
 ##################
 
-export say_hello = |name| 'Hello, $name!'
+export say_hello = |name| 'Hello, {name}!'
 
 ##################
 ##################
@@ -3509,7 +3509,7 @@ say_hello 'Koto'
 # my_module.koto #
 ##################
 
-export say_hello = |name| 'Hello, $name!'
+export say_hello = |name| 'Hello, {name}!'
 
 ##################
 ##################
@@ -3573,7 +3573,7 @@ the use of `export` is optional when adding entries to the module's metamap.
 # my_module.koto #
 ##################
 
-export say_hello = |name| 'Hello, $name!'
+export say_hello = |name| 'Hello, {name}!'
 
 @main = || # Equivalent to export @main =
   print '`my_module` initialized'
@@ -3599,7 +3599,7 @@ say_hello 'Koto'
 # my_module.koto #
 ##################
 
-export say_hello = |name| 'Hello, $name!'
+export say_hello = |name| 'Hello, {name}!'
 
 @main = || # Equivalent to export @main =
   print '`my_module` initialized'
