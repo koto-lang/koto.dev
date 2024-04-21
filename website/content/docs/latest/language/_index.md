@@ -2756,28 +2756,6 @@ print x.data
 # -> -100
 
 {% end %}
-#### `@not`
-
-The `@not` metakey overrides the `not` operator.
-
-````koto
-foo = |n|
-  data: n
-  @not: || self.data == 0
-
-not (foo 10)
-# -> false
-````
-
-{% example_playground_link(version = "0.14") %}
-foo = |n|
-  data: n
-  @not: || self.data == 0
-
-print not (foo 10)
-# -> false
-
-{% end %}
 #### `@size` and `@[]`
 
 The `@size` metakey defines how the object should report its size,
