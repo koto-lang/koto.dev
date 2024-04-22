@@ -20,11 +20,9 @@ fn try_main() -> Result<()> {
             Some(staging_dir) => postprocess_playground::run(staging_dir),
             None => bail!("Missing argument: staging dir"),
         },
-        Some("version-snapshot") => match (args().nth(2).as_ref(), args().nth(3).as_ref()) {
-            (Some(new_version), Some(old_version)) => {
-                version_snapshot::run(new_version, old_version)
-            }
-            _ => bail!("Missing arguments: new_version old_version"),
+        Some("version-snapshot") => match args().nth(2).as_ref() {
+            Some(version) => version_snapshot::run(version),
+            _ => bail!("Missing argument: version"),
         },
         Some("help" | "--help") => {
             println!("{HELP}");
