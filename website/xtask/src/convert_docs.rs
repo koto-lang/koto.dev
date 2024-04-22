@@ -8,6 +8,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::docs_info::DocsInfo;
+
 pub fn run() -> Result<()> {
     convert_single_page_doc(
         "about.md",
@@ -283,11 +285,11 @@ slug = \"{slug}\"
                 once(event).chain(None)
             }
             End(Link(link_type, url, title)) => {
-                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).into();
+                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).unwrap().into();
                 once(End(Link(link_type, fixed_url, title))).chain(None)
             }
             End(FootnoteDefinition(url)) => {
-                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).into();
+                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).unwrap().into();
                 once(End(FootnoteDefinition(fixed_url))).chain(None)
             }
             Text(code) if in_koto_code => {
@@ -315,11 +317,17 @@ slug = \"{slug}\"
     Ok(output_buffer)
 }
 
-fn fix_doc_urls(url: &str, mode: FixUrlMode) -> String {
+fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
     use FixUrlMode::*;
 
     let result = match mode {
-        TopLevelToLatest => url.replace("./language_guide.md", "/docs/latest/language/"),
+        TopLevelToLatest => {
+            let docs_info = DocsInfo::get_info()?;
+            url.replace(
+                "./language_guide.md",
+                &format!("/docs/{}/language/", docs_info.latest,),
+            )
+        }
         TopLevel => url
             .replace("./core_lib", "../core")
             .replace("./language_guide.md", "../language/"),
@@ -333,7 +341,10 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> String {
         result
     };
 
-    result
+    let result = result
         // Strip out .md suffixes
-        .replace(".md", "")
+        .replace(".md", "");
+
+    Ok(result)
 }
+

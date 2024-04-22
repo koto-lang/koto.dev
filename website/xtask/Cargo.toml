@@ -8,4 +8,6 @@ anyhow = { workspace = true }
 fs_extra = { workspace = true }
 pulldown-cmark = { workspace = true }
 pulldown-cmark-to-cmark = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }
 walkdir = { workspace = true }

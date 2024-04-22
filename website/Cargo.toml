@@ -34,7 +34,9 @@ pulldown-cmark = "0.9.1"
 # Convert pulldown-cmark Events back to the string they were parsed from
 pulldown-cmark-to-cmark = "10.0.1"
 # A generic serialization/deserialization framework
-serde = "1.0.136"
+serde = { version = "1.0.136", features = ["derive"] }
+# A native Rust encoder and decoder of TOML-formatted files and streams.
+toml = "0.8.12"
 # Recursively walk a directory.
 walkdir = "2.5.0"
 # Easy support for interacting between JS and Rust.
