@@ -59,12 +59,12 @@ update-koto:
   git add ../modules/koto
   git commit -m "Update to the latest version of Koto"
 
-version-snapshot new old: docs playground-release
-  cargo xtask version-snapshot {{new}} {{old}}
-  git add content/docs/latest
-  git add content/docs/{{old}}
-  git add static/play-{{new}}
-  git commit -m "Snapshot of version {{new}}"
+version-snapshot version: docs playground-release
+  cargo xtask version-snapshot {{version}}
+  git add content/docs/{{version}}
+  git add static/play-{{version}}
+  git add content/docs/info.toml
+  git commit -m "Snapshot of version {{version}}"
 
 watch command:
   cargo watch -s "just {{command}}"

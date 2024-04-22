@@ -1,3 +1,5 @@
+{% set docs_info = load_data(path="content/docs/info.toml") %}
+
 <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
   <nav class="navbar uk-navbar-container uk-navbar">
 
@@ -22,7 +24,9 @@
         </li>
 
         <li>
-          <a class="uk-navbar-item uk-text-capitalize" href="/docs">Docs</a>
+          <a class="uk-navbar-item uk-text-capitalize" href="/docs/{{docs_info["latest"]}}">
+            Docs
+          </a>
         </li>
 
         <li>
