@@ -322,7 +322,7 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
 
     let result = match mode {
         TopLevelToLatest => {
-            let docs_info = DocsInfo::get_info()?;
+            let docs_info = DocsInfo::get_info();
             url.replace(
                 "./language_guide.md",
                 &format!("/docs/{}/language/", docs_info.latest,),

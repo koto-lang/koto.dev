@@ -1,6 +1,4 @@
-use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
-use std::fs;
 
 #[derive(Serialize, Deserialize)]
 pub struct DocsInfo {
@@ -8,8 +6,11 @@ pub struct DocsInfo {
 }
 
 impl DocsInfo {
-    pub fn get_info() -> Result<Self> {
-        toml::from_str(&fs::read_to_string("content/docs/info.toml")?)
-            .context("failed to read docs info")
+    pub fn get_info() -> Self {
+        let info = include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../content/docs/info.toml"
+        ));
+        toml::from_str(info).unwrap()
     }
 }
