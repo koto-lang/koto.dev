@@ -325,8 +325,9 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
             let docs_info = DocsInfo::get_info();
             url.replace(
                 "./language_guide.md",
-                &format!("/docs/{}/language/", docs_info.latest,),
+                &format!("/docs/{}/language/", docs_info.latest),
             )
+            .replace("./core_lib", &format!("/docs/{}/core/", docs_info.latest))
         }
         TopLevel => url
             .replace("./core_lib", "../core")
@@ -347,4 +348,3 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
 
     Ok(result)
 }
-
