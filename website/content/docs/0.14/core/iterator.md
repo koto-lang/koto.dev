@@ -1293,13 +1293,13 @@ Consumes all values coming from the iterator and places them in a tuple.
 ### Example
 
 ````koto
-('a', 42, (-1, -2)).to_list()
-# -> ['a', 42, (-1, -2)]
+['a', 42, (-1, -2)].to_tuple()
+# -> ('a', 42, (-1, -2))
 ````
 
 {% example_playground_link(version = "0.14") %}
-print ('a', 42, (-1, -2)).to_list()
-# -> ['a', 42, (-1, -2)]
+print ['a', 42, (-1, -2)].to_tuple()
+# -> ('a', 42, (-1, -2))
 
 {% end %}
 ### See also
