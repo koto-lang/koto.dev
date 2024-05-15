@@ -1,6 +1,12 @@
 use {
     koto::{prelude::*, runtime::Result},
-    std::{cell::RefCell, collections::VecDeque, rc::Rc, time::Duration},
+    std::{
+        cell::RefCell,
+        collections::VecDeque,
+        panic::{catch_unwind, AssertUnwindSafe},
+        rc::Rc,
+        time::Duration,
+    },
     web_sys::Element,
 };
 
@@ -50,16 +56,29 @@ impl KotoWrapper {
         self.koto.exports().data_mut().clear();
         self.koto.clear_module_cache();
 
-        if let Err(error) = self.koto.compile(script) {
-            self.error(&format!("Error while compiling script: {error}"));
-        } else {
-            if let Err(e) = self.koto.run() {
-                self.process_koto_messages();
-                return self.error(&e.to_string());
-            }
+        if let Err(error) = catch_unwind(AssertUnwindSafe(|| {
+            if let Err(error) = self.koto.compile(script) {
+                self.error(&format!("Error while compiling script: {error}"));
+            } else {
+                if let Err(e) = self.koto.run() {
+                    self.process_koto_messages();
+                    return self.error(&e.to_string());
+                }
 
-            self.script_output.set_inner_html("");
-            self.process_koto_messages();
+                self.script_output.set_inner_html("");
+                self.process_koto_messages();
+            }
+        })) {
+            let panic_info = match error.downcast::<String>() {
+                Ok(v) => *v,
+                Err(error) => match error.downcast::<&str>() {
+                    Ok(v) => v.to_string(),
+                    _ => "Unknown Source of Error".to_owned(),
+                },
+            };
+            self.error(&format!(
+                "Koto panicked while running the script: {panic_info}"
+            ));
         }
     }
 
