@@ -6,7 +6,7 @@ use {
     gloo_net::http::Request,
     gloo_utils::window,
     js_sys::encode_uri_component,
-    serde::{Deserialize, Serialize},
+    serde::Deserialize,
     wasm_bindgen::prelude::*,
     web_sys::Element,
     yew::{context::ContextHandle, prelude::*},
@@ -63,7 +63,11 @@ impl Component for Share {
         ctx.link().send_future({
             let script = ctx.props().script.clone();
             async move {
-                match Request::post("/play/create-gist").body(&script).send().await {
+                match Request::post("/play/create-gist")
+                    .body(&script)
+                    .send()
+                    .await
+                {
                     Ok(response) => match response.json::<CreateGistResponse>().await {
                         Ok(gist) => Msg::GistCreated(gist),
                         Err(error) => Msg::GistResponseError {
@@ -258,11 +262,6 @@ fn copy_link_to_clipboard(link: &str) {
 #[wasm_bindgen(inline_js = "export function show_modal(element) { UIkit.modal(element).show() }")]
 extern "C" {
     pub fn show_modal(element: Element);
-}
-
-#[derive(Serialize)]
-struct CreateGistRequest {
-    script: String,
 }
 
 #[derive(Deserialize)]
