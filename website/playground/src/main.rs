@@ -5,15 +5,16 @@ mod stored_value;
 
 use {
     components::playground::Playground,
-    console_error_panic_hook::set_once as set_panic_hook,
-    gloo_utils::{document, window},
+    gloo_utils::{body, document, window},
+    js_sys::encode_uri_component,
     wasm_bindgen::prelude::*,
+    web_sys::console,
     yew::prelude::*,
 };
 
 fn main() {
     wasm_logger::init(wasm_logger::Config::default());
-    set_panic_hook();
+    yew::set_custom_panic_hook(Box::new(custom_panic_hook));
 
     register_koto_editor_mode();
 
@@ -66,4 +67,50 @@ fn set_local_storage_value(id: &str, value: &str) {
         .expect("Missing local storage")
         .set(id, value)
         .ok();
+}
+
+fn custom_panic_hook(info: &std::panic::PanicInfo) {
+    let message = info.to_string(); // Get the panic message
+    let backtrace = info
+        .location()
+        .unwrap_or_else(|| panic!("Failed to get location")); // Get the backtrace location
+
+    let error_message = format!("{message}\n{backtrace:?}");
+
+    // Create a GitHub issue link
+    let issue_body = format!(
+        ">> Please describe what you were doing when this error occurred <<
+
+**Error:**
+```
+{error_message}
+```"
+    );
+    let issue_url = format!(
+        "https://github.com/koto-lang/koto.dev/issues/new?title=Playground+Crash&body={}",
+        encode_uri_component(&issue_body)
+    );
+
+    // Log the error in the console
+    console::log_1(&error_message.into());
+
+    // Update the HTML body
+    let html = format!(
+        "
+<div class='uk-container uk-padding'>
+    <div class='uk-card uk-card-default uk-margin'>
+        <div class='uk-card-body uk-alert-primary uk-text-lead uk-text-danger uk-text-center'>
+            An unexpected error occurred. 
+            <br/>
+            Please <a class='uk-link-text' href='{issue_url}' target='_blank'>click here</a> to report this issue.
+        </div>
+    </div>
+</div>
+",
+    );
+    if let Some(wrapper) = document().get_element_by_id("playground-wrapper") {
+        wrapper.set_inner_html(&html);
+    } else {
+        body().set_inner_html(&html);
+    }
 }
