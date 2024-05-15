@@ -40,7 +40,7 @@ toml = "0.8.12"
 # Recursively walk a directory.
 walkdir = "2.5.0"
 # Easy support for interacting between JS and Rust.
-wasm-bindgen = "0.2.79"
+wasm-bindgen = "0.2.92"
 # A logger for the browser console
 wasm-logger = "0.2.0"
 # Bindings for all Web APIs, a procedurally generated crate from WebIDL
