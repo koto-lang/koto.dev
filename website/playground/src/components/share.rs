@@ -118,8 +118,9 @@ impl Component for Share {
                 };
                 true
             }
-            Msg::GistRequestError { .. } => {
-                self.gist_state = GistState::Error("Error while requesting gist".to_string());
+            Msg::GistRequestError { error } => {
+                self.gist_state =
+                    GistState::Error(format!("Error while requesting gist: '{error}'"));
                 true
             }
             Msg::GistResponseError { error } => {
