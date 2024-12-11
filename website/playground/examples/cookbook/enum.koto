@@ -25,21 +25,20 @@ make_bidirectional_enum = |entries...|
     fruit.orange then print 'Orange!'
     else print '???'
 
-@tests =
-  @test make_enum: ||
-    color = make_enum 'red', 'green', 'blue'
-    assert_eq color.red, 0
-    assert_eq color.green, 1
-    assert_eq color.blue, 2
-    assert_eq color.get_index(0)[0], 'red'
-    assert_eq color.get_index(1)[0], 'green'
-    assert_eq color.get_index(2)[0], 'blue'
+@test make_enum = ||
+  color = make_enum 'red', 'green', 'blue'
+  assert_eq color.red, 0
+  assert_eq color.green, 1
+  assert_eq color.blue, 2
+  assert_eq color.get_index(0)[0], 'red'
+  assert_eq color.get_index(1)[0], 'green'
+  assert_eq color.get_index(2)[0], 'blue'
 
-  @test make_bidirectional_enum: ||
-    cutlery = make_bidirectional_enum 'fork', 'knife', 'spoon'
-    assert_eq cutlery.fork, 0
-    assert_eq cutlery.knife, 1
-    assert_eq cutlery.spoon, 2
-    assert_eq cutlery.get(0), 'fork'
-    assert_eq cutlery.get(1), 'knife'
-    assert_eq cutlery.get(2), 'spoon'
+@test make_bidirectional_enum = ||
+  cutlery = make_bidirectional_enum 'fork', 'knife', 'spoon'
+  assert_eq cutlery.fork, 0
+  assert_eq cutlery.knife, 1
+  assert_eq cutlery.spoon, 2
+  assert_eq cutlery.get(0), 'fork'
+  assert_eq cutlery.get(1), 'knife'
+  assert_eq cutlery.get(2), 'spoon'

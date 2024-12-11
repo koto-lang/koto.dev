@@ -43,9 +43,8 @@ iterator.to_set = || make_set self
   s.extend (99, 42, 99, -1)
   print s.to_tuple()
 
-@tests =
-  @test chars_to_set: ||
-    s = 'abccbadeffed'.to_set()
-    assert_eq s.keys().to_string(), 'abcdef'
-    assert s.contains 'c'
-    assert not s.contains 'x'
+@test chars_to_set = ||
+  s = 'abccbadeffed'.to_set()
+  assert_eq s.keys().to_string(), 'abcdef'
+  assert s.contains 'c'
+  assert not s.contains 'x'

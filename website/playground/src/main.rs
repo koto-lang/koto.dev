@@ -69,7 +69,7 @@ fn set_local_storage_value(id: &str, value: &str) {
         .ok();
 }
 
-fn custom_panic_hook(info: &std::panic::PanicInfo) {
+fn custom_panic_hook(info: &std::panic::PanicHookInfo) {
     let message = info.to_string(); // Get the panic message
     let backtrace = info
         .location()
