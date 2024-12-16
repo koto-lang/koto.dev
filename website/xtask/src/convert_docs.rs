@@ -8,8 +8,6 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::docs_info::DocsInfo;
-
 pub fn run() -> Result<()> {
     convert_single_page_doc(
         "about.md",
@@ -21,7 +19,7 @@ insert_anchor_links = "heading"
 "#,
         true,
         false,
-        FixUrlMode::TopLevelToLatest,
+        FixUrlMode::TopLevelToNext,
     )?;
     convert_single_page_doc(
         "language_guide.md",
@@ -172,8 +170,8 @@ struct ConvertDocFlags {
 
 #[derive(Copy, Clone)]
 enum FixUrlMode {
-    // Adjust doc links to docs/latest
-    TopLevelToLatest,
+    // Adjust doc links to docs/next
+    TopLevelToNext,
     // Adjust doc links to neighboring docs version
     TopLevel,
     // Adjust doc links to neighboring docs version from docs subfolder
@@ -323,14 +321,11 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
     use FixUrlMode::*;
 
     let result = match mode {
-        TopLevelToLatest => {
-            let docs_info = DocsInfo::get_info();
-            let latest = &docs_info.latest;
-            url.replace("./language_guide.md", &format!("/docs/{latest}/language/"))
-                .replace("./cli.md", &format!("/docs/{latest}/cli/"))
-                .replace("./api.md", &format!("/docs/{latest}/api/"))
-                .replace("./core_lib", &format!("/docs/{latest}/core/"))
-        }
+        TopLevelToNext => url
+            .replace("./language_guide.md", &format!("/docs/next/language/"))
+            .replace("./cli.md", &format!("/docs/next/cli/"))
+            .replace("./api.md", &format!("/docs/next/api/"))
+            .replace("./core_lib", &format!("/docs/next/core/")),
         TopLevel => url
             .replace("./core_lib", "../core")
             .replace("./language_guide.md", "../language/"),
