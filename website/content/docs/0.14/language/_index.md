@@ -11,9 +11,10 @@ As you're reading this guide, you're encouraged to play around with the examples
 for the language.
 
 When you see a <span uk-icon="play"></span> icon below an example,
-clicking it will open the example in the [Koto Playground](https://koto.dev/play),
+clicking it will open the example in the [Koto Playground](/play-0.14),
 where you can run the code and see what happens as you make changes.
 
+You can also try out the examples using the [Koto CLI](../cli).
 
 ## Language Basics
 
