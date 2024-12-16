@@ -172,9 +172,9 @@ struct ConvertDocFlags {
 enum FixUrlMode {
     // Adjust doc links to docs/latest
     TopLevelToLatest,
-    // Adjust doc links to neighbouring docs version
+    // Adjust doc links to neighboring docs version
     TopLevel,
-    // Adjust doc links to neighbouring docs version from docs subfolder
+    // Adjust doc links to neighboring docs version from docs subfolder
     SubFolder,
 }
 
@@ -323,11 +323,11 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
     let result = match mode {
         TopLevelToLatest => {
             let docs_info = DocsInfo::get_info();
-            url.replace(
-                "./language_guide.md",
-                &format!("/docs/{}/language/", docs_info.latest),
-            )
-            .replace("./core_lib", &format!("/docs/{}/core/", docs_info.latest))
+            let latest = &docs_info.latest;
+            url.replace("./language_guide.md", &format!("/docs/{latest}/language/"))
+                .replace("./cli.md", &format!("/docs/{latest}/cli/"))
+                .replace("./api.md", &format!("/docs/{latest}/api/"))
+                .replace("./core_lib", &format!("/docs/{latest}/core/"))
         }
         TopLevel => url
             .replace("./core_lib", "../core")
