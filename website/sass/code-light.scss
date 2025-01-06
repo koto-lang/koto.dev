@@ -40,6 +40,10 @@
   color: #d33682;
 }
 
+.z-variable.z-parameter {
+  color: #268bd2;
+}
+
 .z-keyword {
   color: #859900;
 }
@@ -51,12 +55,6 @@
 .z-keyword.z-control.z-at-rule.z-include,
 .z-keyword.z-control.z-at-rule.z-import {
   color: #cb4b16;
-}
-
-.z-keyword.z-operator.z-comparison,
-.z-keyword.z-operator.z-assignment,
-.z-keyword.z-operator.z-arithmetic {
-  color: #657b83;
 }
 
 .z-storage {
@@ -89,7 +87,7 @@
 }
 
 .z-entity.z-name.z-function {
-  color: #b58900;
+  color: #268bd2;
 }
 
 .z-punctuation.z-definition.z-variable {
@@ -135,7 +133,7 @@
 }
 
 .z-storage.z-type {
-  color: #268bd2;
+  color: #b58900;
 }
 
 .z-support.z-type.z-exception {
@@ -170,7 +168,7 @@
 .z-punctuation.z-section.z-block,
 .z-punctuation.z-definition.z-parameters,
 .z-punctuation.z-section.z-group {
-  color: #657b83;
+  color: #268bd2;
 }
 
 .z-support.z-constant.z-color,
