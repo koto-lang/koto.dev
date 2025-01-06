@@ -9,27 +9,51 @@ name: Kototype
 scope: source.kototype
 
 variables:
-  ident: '([[:alpha:]_][[:alnum:]_]*)'
+  ident: '[[:alpha:]_][[:alnum:]_]*(?:\.\.\.)?'
+  type: '{{ident}}\??'
 
 contexts:
   main:
+    - include: function
     - include: keywords
-    - include: names
-    - include: symbols
+    - include: type
+
+  type:
+    - match: '{{type}}'
+      scope: storage.type.kototype
 
   keywords:
     - match: '\b(or)\b'
       scope: keyword.operator.word.kototype
 
-  names:
-    - match: '\b{{ident}}(?=\:)'
-      scope: constant.character.escape.koto
-    - match: '\b[[:upper:]]\w*\b'
-      scope: entity.name.type.kototype
+  comma:
+    - match: ','
+      scope: punctuation.separator.kototype
 
-  symbols:
-    - match: '->'
-      scope: keyword.operator.word.kototype
-    - match: \|
-      scope: variable.other.kototype
+  function:
+    - match: '\|'
+      scope: keyword.other.function-definition.kototype
+      push: function_args
+
+  function_args:
+    - match: '(\|)\s*((->)\s*({{type}}))?'
+      captures:
+        1: keyword.other.function-definition.kototype
+        3: keyword.operator.type.kototype
+        4: storage.type.kototype
+      pop: true
+    - match: '({{ident}})(:)\s*({{type}})'
+      captures: 
+        1: variable.parameter.kototype
+        2: punctuation.separator.kototype
+        3: storage.type.kototype
+    - match: '({{ident}})(:)\s*(\|)'
+      captures: 
+        1: variable.parameter.kototype
+        2: punctuation.separator.kototype
+        3: keyword.other.function-definition.kototype
+      push: function_args
+    - match: '{{ident}}'
+      scope: storage.type.kototype
+    - include: comma
 
