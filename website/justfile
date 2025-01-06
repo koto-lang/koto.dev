@@ -4,8 +4,8 @@ build: docs playground-release
 build-debug: docs playground
   zola build
 
-serve: docs playground
-  zola serve --open --fast
+serve $args: docs playground
+  zola serve --open --fast $args
 
 serve-release: docs playground-release
   zola serve --open --fast
