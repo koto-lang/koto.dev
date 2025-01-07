@@ -83,7 +83,7 @@ pub fn run(version: &str) -> Result<()> {
     let docs_info = DocsInfo {
         latest: version.to_string(),
     };
-    writeln!(info_file, "latest = \"{}\"", toml::to_string(&docs_info)?)?;
+    write!(info_file, "{}", toml::to_string(&docs_info)?)?;
     println!("docs/info.toml updated");
 
     Ok(())
