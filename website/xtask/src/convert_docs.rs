@@ -53,30 +53,30 @@ You can also try out the examples using the [Koto CLI](../cli).
     )?;
     convert_doc_folder("../modules/koto/docs/libs", "content/docs/next/libs", false)?;
     convert_single_page_doc(
-        "cli.md",
-        "content/docs/next/cli",
-        r#"+++
-title = "Koto CLI"
-template = "docs-guide.html"
-insert_anchor_links = "heading"
-weight = 4
-+++
-"#,
-        false,
-        false,
-        FixUrlMode::TopLevel,
-    )?;
-    convert_single_page_doc(
         "api.md",
         "content/docs/next/api",
         r#"+++
 title = "Rust API"
 template = "docs-guide.html"
 insert_anchor_links = "heading"
-weight = 5
+weight = 4
 +++
 "#,
         true,
+        false,
+        FixUrlMode::TopLevel,
+    )?;
+    convert_single_page_doc(
+        "cli.md",
+        "content/docs/next/cli",
+        r#"+++
+title = "Koto CLI"
+template = "docs-guide.html"
+insert_anchor_links = "heading"
+weight = 5
++++
+"#,
+        false,
         false,
         FixUrlMode::TopLevel,
     )?;
