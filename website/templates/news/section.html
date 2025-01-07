@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 
+{% import "news/article_meta.html" as macros %}
+
 {% block content %}
 
 <div class="uk-section">
   <div class="uk-container">
-    <div class="uk-padding-bottom">
-      <div class="uk-text-lead">
-        News
-      </div>
-    </div>
+    <h1>
+      News
+    </h1>
 
     {% for page in section.pages %}
-      <div class="uk-section">
-        <h1>
-          <a href="{{page.permalink}}">
-              {{ page.title }}
-          </a>
-        </h1>
-        <div class="uk-text-meta">
-          <a href="{{page.permalink}}">
-            {{ page.date }}
-          </a>
-        </div>
+    <article class="uk-article">
+      <h2 class="uk-article-title">
+        <a href="{{page.permalink}}">
+          {{ page.title }}
+        </a>
+      </h2>
 
-        {{ page.content | safe }}
+      {{ macros::article_meta(page=page) }}
 
-      </div>
+      <p class="uk-text-lead">
+        {{ page.summary | safe }}
+      </p>
+
+      <a class="uk-link-muted uk-article-meta" href="{{page.permalink}}">
+        Read
+      </a>
+    </article>
     {% endfor %}
 
   </div>

@@ -1,0 +1,7 @@
+{% macro article_meta(page) %}
+
+<div class="uk-text-meta">
+  {{ page.date | date(format="%B %e, %Y" ) }}
+</div>
+
+{% endmacro article_meta %}
