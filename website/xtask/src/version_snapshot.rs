@@ -12,6 +12,8 @@ use std::{
 use anyhow::{bail, Context, Result};
 use walkdir::WalkDir;
 
+use crate::docs_info::DocsInfo;
+
 pub fn run(version: &str) -> Result<()> {
     let docs_target = format!("content/docs/{version}");
     let docs_target_path = PathBuf::from(&docs_target);
@@ -73,6 +75,16 @@ pub fn run(version: &str) -> Result<()> {
         "Updated playground references in '{}'",
         playground_index.to_string_lossy()
     );
+
+    // Write the latest version in docs/info.toml
+    let info_path = "content/docs/info.toml";
+    let mut info_file =
+        File::create(info_path).with_context(|| format!("failed to create file at {info_path}"))?;
+    let docs_info = DocsInfo {
+        latest: version.to_string(),
+    };
+    write!(info_file, "{}", toml::to_string(&docs_info)?)?;
+    println!("docs/info.toml updated");
 
     Ok(())
 }
