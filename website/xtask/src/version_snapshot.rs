@@ -12,7 +12,7 @@ use std::{
 use anyhow::{bail, Context, Result};
 use walkdir::WalkDir;
 
-use crate::docs_info::DocsInfo;
+use crate::data::Data;
 
 pub fn run(version: &str) -> Result<()> {
     let docs_target = format!("content/docs/{version}");
@@ -80,7 +80,7 @@ pub fn run(version: &str) -> Result<()> {
     let data_path = "templates/data.toml";
     let mut info_file =
         File::create(data_path).with_context(|| format!("failed to create file at {data_path}"))?;
-    let docs_info = DocsInfo {
+    let docs_info = Data {
         latest: version.to_string(),
     };
     write!(info_file, "{}", toml::to_string(&docs_info)?)?;
