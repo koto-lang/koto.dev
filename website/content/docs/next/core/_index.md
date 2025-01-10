@@ -9,5 +9,6 @@ weight = 3
 
 # Core Library
 
-Koto's Core Library is a collection of modules containing useful utilities for
-fundamental data types in Koto, and is available in every Koto script.
+Koto's Core Library is a collection of modules containing supporting functions for Koto's fundamental data types, along with other useful utilities.
+
+The core library is included by default in the [prelude](../language/#prelude).

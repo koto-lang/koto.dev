@@ -1,28 +1,45 @@
+{% import "components.html" as components %}
+
 {% extends "base.html" %}
 
 {% block content %}
 
 <div class="uk-section">
-  <div class="uk-container">
-    <div uk-grid class="uk-child-width-1-3@s
-                        uk-child-width-1-4@l
-                        uk-grid-match uk-text-center uk-flex-center">
-      {% set index = get_section(path=section.relative_path) %}
-
-      {% for s in index.subsections %}
-        {% set subsection = get_section(path=s) %}
-
-        <div>
-          <a
-            class="uk-button uk-button-default uk-button-large
-                   uk-text-capitalize uk-padding-small"
-            href="{{ subsection.permalink }}"
-          >
-            {{ subsection.title }}
-          </a>
-        </div>
-      {% endfor %}
+  <div class="uk-container uk-text-center uk-padding-large">
+    <div class="uk-text-lead uk-margin-xsmall-bottom">
+      Koto Docs
     </div>
+
+    {% set index = get_section(path=section.relative_path) %}
+    {% set versions = get_section(path = index.ancestors | last) %}
+
+    <!-- The grid ensures that the version selector has a minimized width, -->
+    <!-- which gets the dropdown to show in the right position. -->
+    <div uk-grid class="uk-flex-center">
+      <div>
+        <div class="uk-text-small uk-margin-bottom">
+          Version: {{section.title}}<span uk-drop-parent-icon></span>
+        </div>
+        <div uk-dropdown>
+          <ul class="uk-nav uk-dropdown-nav">
+            {% for x in versions.subsections | reverse %}
+            {% set subsection = get_section(path=x) %}
+            <li class="{% if subsection == index %} uk-active {% endif %}">
+              <a href="{{subsection.permalink}}">{{subsection.title}}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    {% for s in index.subsections %}
+    {% set subsection = get_section(path=s) %}
+
+    {{ components::button(label=subsection.title, href=subsection.permalink) }}
+
+    {% endfor %}
   </div>
 </div>
 

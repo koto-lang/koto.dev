@@ -1,3 +1,5 @@
+{% import "components.html" as components %}
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -11,10 +13,10 @@
     </div>
 
     <div class="uk-padding">
-      <a class="uk-button uk-button-default uk-button-large
-               uk-text-capitalize" href="/about/">About</a>
-      <a class="uk-button uk-button-default uk-button-large
-               uk-text-capitalize" href="/docs/next/language/">Guide</a>
+      {{ components::button(label="About", href="/about") }}
+      {{ components::button(label="Docs", href="/docs/next") }}
+      {{ components::button(label="Install", href="/docs/next/cli") }}
+      {{ components::button(label="Playground", href="/play") }}
     </div>
 
     <div class="uk-container uk-width-1-2">
