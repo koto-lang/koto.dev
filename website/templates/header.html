@@ -1,7 +1,3 @@
-{% set docs_info = load_data(path="content/docs/info.toml") %}
-{% set docs_url = "/docs/" ~ docs_info.latest %}
-{% set play_url = "/play-" ~ docs_info.latest %}
-
 <div uk-sticky="sel-target: .uk-navbar-container cls-active: uk-navbar-sticky">
   <nav class="navbar uk-navbar-container uk-navbar">
 
@@ -21,10 +17,23 @@
     <div class="uk-navbar-right">
 
       <ul class="uk-navbar-nav uk-visible@s">
-        {{ components::header_link(label="About", href="/about") }}
-        {{ components::header_link(label="Docs", href=docs_url) }}
-        {{ components::header_link(label="News", href="/news") }}
-        {{ components::header_link(label="Playground", href=play_url) }}
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/about">About</a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/docs/next">
+            Docs
+          </a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/news">News</a>
+        </li>
+
+        <li>
+          <a class="uk-navbar-item uk-text-capitalize" href="/play">Playground</a>
+        </li>
 
         <li>
           <a class="uk-navbar-item" href="https://github.com/koto-lang/koto"><span uk-icon="github"></span>
