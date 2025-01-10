@@ -1,10 +1,9 @@
-{% import "components.html" as components %}
-
 {% extends "base.html" %}
 
 {% block content %}
 
 {% set docs_info = load_data(path="content/docs/info.toml") %}
+{% set docs_url = "/docs/" ~ docs_info.latest %}
 
 <section class="uk-section">
   <div class="uk-container uk-text-center uk-padding-large">
@@ -16,8 +15,8 @@
 
     <div class="uk-padding">
       {{ components::button(label="About", href="/about") }}
-      {{ components::button(label="Docs", href="/docs/next") }}
-      {{ components::button(label="Install", href="/docs/next/cli") }}
+      {{ components::button(label="Docs", href=docs_url) }}
+      {{ components::button(label="Install", href=docs_url ~ "/cli") }}
       {{ components::button(label="Playground", href="/play") }}
     </div>
 

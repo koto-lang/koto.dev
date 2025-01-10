@@ -9,4 +9,10 @@
 </div>
 {% endmacro button %}
 
-{}
+{% macro header_link(label, href) %}
+<li>
+  <a class="uk-navbar-item uk-text-capitalize" href={{href}}>
+    {{label}}
+  </a>
+</li>
+{% endmacro header_link %}
