@@ -1,0 +1,18 @@
+{% macro button(label, href) %}
+<div>
+  <a class="uk-button uk-button-default uk-button-large
+            uk-width-medium
+            uk-margin-small
+            uk-text-capitalize" href={{href}}>
+    {{label}}
+  </a>
+</div>
+{% endmacro button %}
+
+{% macro header_link(label, href) %}
+<li>
+  <a class="uk-navbar-item uk-text-capitalize" href={{href}}>
+    {{label}}
+  </a>
+</li>
+{% endmacro header_link %}

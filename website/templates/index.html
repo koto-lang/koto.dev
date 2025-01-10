@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% set docs_info = load_data(path="content/docs/info.toml") %}
+{% set docs_url = "/docs/" ~ docs_info.latest %}
+
 <section class="uk-section">
   <div class="uk-container uk-text-center uk-padding-large">
     <img class="uk-img main-logo" src="/koto.svg" />
@@ -11,10 +14,10 @@
     </div>
 
     <div class="uk-padding">
-      <a class="uk-button uk-button-default uk-button-large
-               uk-text-capitalize" href="/about/">About</a>
-      <a class="uk-button uk-button-default uk-button-large
-               uk-text-capitalize" href="/docs/next/language/">Guide</a>
+      {{ components::button(label="About", href="/about") }}
+      {{ components::button(label="Docs", href=docs_url) }}
+      {{ components::button(label="Install", href=docs_url ~ "/cli") }}
+      {{ components::button(label="Playground", href="/play") }}
     </div>
 
     <div class="uk-container uk-width-1-2">
