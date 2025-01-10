@@ -3,7 +3,7 @@ use std::env::args;
 use anyhow::{bail, Result};
 
 mod convert_docs;
-mod docs_info;
+mod data;
 mod postprocess_playground;
 mod version_snapshot;
 

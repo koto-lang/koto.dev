@@ -76,15 +76,15 @@ pub fn run(version: &str) -> Result<()> {
         playground_index.to_string_lossy()
     );
 
-    // Write the latest version in docs/info.toml
-    let info_path = "content/docs/info.toml";
+    // Write the latest version in templates/data.toml
+    let data_path = "templates/data.toml";
     let mut info_file =
-        File::create(info_path).with_context(|| format!("failed to create file at {info_path}"))?;
+        File::create(data_path).with_context(|| format!("failed to create file at {data_path}"))?;
     let docs_info = DocsInfo {
         latest: version.to_string(),
     };
     write!(info_file, "{}", toml::to_string(&docs_info)?)?;
-    println!("docs/info.toml updated");
+    println!("templates/data.toml updated");
 
     Ok(())
 }
