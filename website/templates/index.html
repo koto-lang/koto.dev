@@ -17,7 +17,7 @@
       {{ components::button(label="About", href="/about") }}
       {{ components::button(label="Docs", href=docs_url) }}
       {{ components::button(label="Install", href=docs_url ~ "/cli") }}
-      {{ components::button(label="Playground", href="/play") }}
+      {{ components::button(label="Playground", href="/play-" ~ docs_info.latest) }}
     </div>
 
     <div class="uk-container uk-width-1-2">
