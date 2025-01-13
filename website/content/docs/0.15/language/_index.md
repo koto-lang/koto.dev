@@ -19,7 +19,8 @@ You can also try out the examples using the [Koto CLI](../cli).
 
 ## Language Basics
 
-Koto programs contain a series of expressions that are evaluated by Koto's runtime.
+Koto programs contain a series of expressions that are evaluated in
+top-to-bottom order by Koto's runtime.
 
 As an example, this simple script prints a friendly greeting.
 
@@ -251,6 +252,28 @@ print x
 x = true
 print x
 # -> true
+
+{% end %}
+The result of an assignment is the value that's being assigned, so chained assignments are possible.
+
+````koto
+x = 1
+# -> 1
+
+a = b = 100
+# -> 100
+a + b
+# -> 200
+````
+
+{% example_playground_link(version = "0.15") %}
+print x = 1
+# -> 1
+
+print a = b = 100
+# -> 100
+print a + b
+# -> 200
 
 {% end %}
 [Compound assignment](https://en.wikipedia.org/wiki/Augmented_assignment) operators are also available.
@@ -638,6 +661,29 @@ print '2 plus 3 is {2 + 3}.'
 # -> 2 plus 3 is 5.
 
 {% end %}
+### String Indexing
+
+Individual *bytes* of a string can be accessed via indexing with `[]` braces.
+
+````koto
+'abcdef'[3]
+# -> d
+'xyz'[1..]
+# -> yz
+````
+
+{% example_playground_link(version = "0.15") %}
+print 'abcdef'[3]
+# -> d
+print 'xyz'[1..]
+# -> yz
+
+{% end %}
+Care must be taken when using indexing with strings that could contain
+non-[ASCII](https://en.wikipedia.org/wiki/ASCII) data.
+If the indexed bytes would produce invalid UTF-8 data then an
+error will be thrown. To access Unicode characters see [`string.chars`](../core/string#chars).
+
 ### String Escape Codes
 
 Strings can contain the following escape codes to define special characters,
@@ -694,7 +740,7 @@ print foo
 ### Single or Double Quotes
 
 Both single `'` and double `"` quotes are valid for defining strings in Koto
-and can be used interchangeably.
+and have the same meaning.
 
 A practical reason to choose one over the other is that the alternate
 quote type can be used in a string without needing to use escape characters.
@@ -715,29 +761,6 @@ print "This string contains unescaped 'single quotes'."
 # -> This string contains unescaped 'single quotes'.
 
 {% end %}
-### String Indexing
-
-Individual *bytes* of a string can be accessed via indexing with `[]` braces.
-
-````koto
-'abcdef'[3]
-# -> d
-'xyz'[1..]
-# -> yz
-````
-
-{% example_playground_link(version = "0.15") %}
-print 'abcdef'[3]
-# -> d
-print 'xyz'[1..]
-# -> yz
-
-{% end %}
-Care must be taken when using indexing with strings that could contain
-non-[ASCII](https://en.wikipedia.org/wiki/ASCII) data.
-If the indexed bytes would produce invalid UTF-8 data then an
-error will be thrown. To access Unicode characters see [`string.chars`](../core/string#chars).
-
 ### Raw Strings
 
 When a string contains a lot of special characters, it can be preferable to use
@@ -971,8 +994,8 @@ print x = add 1, 3
 {% end %}
 ## Maps
 
-*Maps* in Koto are containers that contain a series of
-*entries* with *keys* that correspond to [associated](https://en.wikipedia.org/wiki/Associative_array) *values*.
+*Maps* in Koto are [associative containers](https://en.wikipedia.org/wiki/Associative_array) that contain a series of
+*entries* with *keys* that correspond to associated *values*.
 
 The `.` dot operator returns the value associated with a particular key.
 
@@ -1086,8 +1109,10 @@ print m
 {% end %}
 ### Shorthand Values
 
-Koto supports a shorthand notation when creating maps with inline syntax.
-If a value isn't provided for a key, then Koto will look for a value in scope
+When creating maps with inline syntax, Koto supports a shorthand notation that
+simplifies adding existing values to the map.
+
+If a value isn't provided for a key, then Koto will look for a value
 that matches the key's name, and if one is found then it will be used as that
 entry's value.
 
@@ -1288,7 +1313,7 @@ available in the `help` command of the [Koto CLI](..).
 ### Prelude
 
 Koto's *prelude* is a collection of core library items that are automatically
-made available in a Koto script without the need for first calling `import`.
+made available in a Koto script without the need for first calling [`import`](#import).
 
 The modules that make up the core library are all included by default in the
 prelude. The following functions are also added to the prelude by default:
@@ -1485,9 +1510,12 @@ with `...` available for capturing the rest of the sequence.
 
 ````koto
 match ['a', 'b', 'c'].extend [1, 2, 3]
-  ('a', 'b') then "A list containing 'a' and 'b'"
-  (1, ...) then "Starts with '1'"
-  (..., 'y', last) then "Ends with 'y' followed by '{last}'"
+  ('a', 'b') then
+    "A list containing 'a' and 'b'"
+  (1, ...) then
+    "Starts with '1'"
+  (..., 'y', last) then
+    "Ends with 'y' followed by '{last}'"
   ('a', x, others...) then
     "Starts with 'a', followed by '{x}', then {size others} others"
   unmatched then "other: {unmatched}"
@@ -1496,9 +1524,12 @@ match ['a', 'b', 'c'].extend [1, 2, 3]
 
 {% example_playground_link(version = "0.15") %}
 print match ['a', 'b', 'c'].extend [1, 2, 3]
-  ('a', 'b') then "A list containing 'a' and 'b'"
-  (1, ...) then "Starts with '1'"
-  (..., 'y', last) then "Ends with 'y' followed by '{last}'"
+  ('a', 'b') then
+    "A list containing 'a' and 'b'"
+  (1, ...) then
+    "Starts with '1'"
+  (..., 'y', last) then
+    "Ends with 'y' followed by '{last}'"
   ('a', x, others...) then
     "Starts with 'a', followed by '{x}', then {size others} others"
   unmatched then "other: {unmatched}"
@@ -1771,7 +1802,7 @@ print i.next()
 {% end %}
 ### Iterator Generators
 
-The [`iterator` module](../core/iterator) contains iterator *generators* like
+The [`iterator`](../core/iterator) module contains iterator *generators* like
 [`once`](../core/iterator#once) and [`repeat`](../core/iterator#repeat) that generate output values
 [*lazily*](https://en.wikipedia.org/wiki/Lazy_evaluation) during iteration.
 
@@ -1800,7 +1831,7 @@ print i.next()
 ### Iterator Adaptors
 
 The output of an iterator can be modified using *adaptors* from the
-[`iterator` module](../core/iterator).
+[`iterator`](../core/iterator) module.
 
 ````koto
 # Create an iterator that keeps any value above 3
@@ -1848,8 +1879,8 @@ for x in 'abacad'.keep |c| c != 'a'
 {% end %}
 ### Iterator Chains
 
-Iterator adaptors can be passed into other adaptors, creating *iterator chains*
-that act as data processing pipelines.
+Any iterator can be passed into an adaptor, including other adaptors,
+creating *iterator chains* that act as data processing pipelines.
 
 ````koto
 i = (1, 2, 3, 4, 5)
@@ -1915,6 +1946,10 @@ print (1, 2, 3, 4)
 # -> [22, 44]
 
 {% end %}
+Iterator consumers are also available for creating [strings](../core/iterator#to-string) and [maps](../core/iterator#to-map),
+as well as operations like [counting the number of values](../core/iterator#count) yielded from an
+iterator, or getting the [total sum](../core/iterator#sum) of an iterator's output.
+
 ## Value Unpacking
 
 Multiple assignments can be performed in a single expression by separating the
@@ -2013,6 +2048,35 @@ for key, value in my_map
 # -> ('bar', 99)
 
 {% end %}
+#### Ignoring Unpacked Values
+
+`_` can be used as a placeholder for unpacked values that aren't needed elsewhere
+in the code and can be ignored.
+
+If you would like to add a name to the ignored value as a reminder,
+then the name can be appended to `_`. Ignored values (any variables starting with
+`_`) can be written to, but can't be accessed.
+
+````koto
+a, _, c = 10..20
+a, c
+# -> (10, 12)
+
+_first, second = 'xyz'
+second
+# -> y
+````
+
+{% example_playground_link(version = "0.15") %}
+a, _, c = 10..20
+print a, c
+# -> (10, 12)
+
+_first, second = 'xyz'
+print second
+# -> y
+
+{% end %}
 ## Generators
 
 Generators are iterators that are made by calling *generator functions*,
@@ -2092,19 +2156,25 @@ in any iterator chain.
 ````koto
 # Make an iterator adaptor that yields every
 # other value from the adapted iterator
-iterator.every_other = ||
+iterator.every_other = |iter|
   n = 0
-  # When the generator is created, self is initialized with the previous
-  # iterator in the chain, allowing its output to be adapted.
-  for output in self
+  # If the iterator to be adapted is provided as an argument then use it,
+  # otherwise defer to `self`, which is set by the runtime when the
+  # generator is used in an iterator chain.
+  for output in iter or self
     # If n is even, then yield a value
     if n % 2 == 0
       yield output
     n += 1
 
+# The adaptor can be called directly...
+iterator.every_other('abcdef').to_string()
+# -> ace
+
+# ...or anywhere in an iterator chain
 (1, 2, 3, 4, 5)
   .each |n| n * 10
-  .every_other() # Skip over every other value in the iterator chain
+  .every_other()
   .to_list()
 # -> [10, 30, 50]
 ````
@@ -2112,19 +2182,25 @@ iterator.every_other = ||
 {% example_playground_link(version = "0.15") %}
 # Make an iterator adaptor that yields every
 # other value from the adapted iterator
-iterator.every_other = ||
+iterator.every_other = |iter|
   n = 0
-  # When the generator is created, self is initialized with the previous
-  # iterator in the chain, allowing its output to be adapted.
-  for output in self
+  # If the iterator to be adapted is provided as an argument then use it,
+  # otherwise defer to `self`, which is set by the runtime when the
+  # generator is used in an iterator chain.
+  for output in iter or self
     # If n is even, then yield a value
     if n % 2 == 0
       yield output
     n += 1
 
+# The adaptor can be called directly...
+print iterator.every_other('abcdef').to_string()
+# -> ace
+
+# ...or anywhere in an iterator chain
 print (1, 2, 3, 4, 5)
   .each |n| n * 10
-  .every_other() # Skip over every other value in the iterator chain
+  .every_other()
   .to_list()
 # -> [10, 30, 50]
 
@@ -2315,7 +2391,7 @@ print z[2..]
 ## Type Checks
 
 Koto is a primarily a dynamically typed language, however in more complex programs
-you might find it beneficial to add type checks.
+you might find it beneficial to add *type checks*.
 
 These checks can help in catching errors earlier, and can also act as
 documentation for the reader.
@@ -2477,7 +2553,7 @@ print let bar: String? = m.get('bar')?.to_uppercase()
 
 #### `Any`
 
-The `Any` type will result in a successful check with any value.
+The `Any` type hint will result in a successful check with any value.
 
 ````koto
 let x: Any = 'hello'
@@ -2524,7 +2600,7 @@ print add_first_two (100, 99, -1)
 {% end %}
 #### `Iterable`
 
-The `Iterable` type is useful when any iterable value can be accepted.
+The `Iterable` type hint is useful when any iterable value can be accepted.
 
 ````koto
 let a: Iterable, b: Iterable = [1, 2], 3..=5
@@ -2942,7 +3018,7 @@ print f x
 {% end %}
 ### Ignoring Arguments
 
-The wildcard `_` can be used to ignore function arguments.
+As with [assignments](#ignoring-unpacked-values), `_` can be used to ignore function arguments.
 
 ````koto
 # A function that sums the first and third elements of a container
@@ -2960,24 +3036,23 @@ print f [100, 10, 1]
 # -> 101
 
 {% end %}
-If you would like to keep the name of the ignored value as a reminder,
-then `_` can be used as a prefix for an identifier. Identifiers starting with
-`_` can be written to, but can't be accessed.
 
 ````koto
-my_map = {foo_a: 1, bar_a: 2, foo_b: 3, bar_b: 4}
+my_map = {foo1: 1, bar1: 2, foo2: 3, bar2: 4}
+
 my_map
   .keep |(key, _value)| key.starts_with 'foo'
   .to_tuple()
-# -> (('foo_a', 1), ('foo_b', 3))
+# -> (('foo1', 1), ('foo2', 3))
 ````
 
 {% example_playground_link(version = "0.15") %}
-my_map = {foo_a: 1, bar_a: 2, foo_b: 3, bar_b: 4}
+my_map = {foo1: 1, bar1: 2, foo2: 3, bar2: 4}
+
 print my_map
   .keep |(key, _value)| key.starts_with 'foo'
   .to_tuple()
-# -> (('foo_a', 1), ('foo_b', 3))
+# -> (('foo1', 1), ('foo2', 3))
 
 {% end %}
 ## Objects and Metamaps
@@ -3090,9 +3165,9 @@ print x.data
 {% end %}
 #### `@size` and `@index`
 
-The `@size` metakey defines how the object should report its size,
-while the `@index` metakey defines what values should be returned when indexing is
-performed on the object.
+The `@size` metakey defines how an object should report its size,
+while the `@index` metakey defines which values should be returned
+when indexing is performed.
 
 If `@size` is implemented, then `@index` should also be implemented.
 
@@ -3168,9 +3243,10 @@ print match x
 {% end %}
 #### `@index_mut`
 
-The `@index_mut` metakey defines how the object should behave when index-assignment is used.
+The `@index_mut` metakey defines how an object should behave when index-assignment is used.
 
-The given value should be a function that takes an index as the first argument, and the value to be assigned as the second argument.
+The given value should be a function that takes an index as the first argument,
+with the second argument being the value to be assigned.
 
 ````koto
 foo = |data|
@@ -3198,7 +3274,7 @@ print x[1]
 {% end %}
 #### `@call`
 
-The `@call` metakey defines how the object should behave when its called as a
+The `@call` metakey defines how an object should behave when its called as a
 function.
 
 ````koto
@@ -3231,8 +3307,9 @@ print x()
 {% end %}
 #### `@iterator`
 
-The `@iterator` metakey defines how iterators should be created when the object
+The `@iterator` metakey defines how iterators should be created when an object
 is used in an iterable context.
+
 When called, `@iterator` should return an iterable value that will then be used
 for iterator operations.
 
@@ -3244,10 +3321,10 @@ foo = |n|
     yield n + 2
     yield n + 3
 
-(foo 0).to_tuple()
+foo(0).to_tuple()
 # -> (1, 2, 3)
 
-(foo 100).to_list()
+foo(100).to_list()
 # -> [101, 102, 103]
 ````
 
@@ -3259,10 +3336,10 @@ foo = |n|
     yield n + 2
     yield n + 3
 
-print (foo 0).to_tuple()
+print foo(0).to_tuple()
 # -> (1, 2, 3)
 
-print (foo 100).to_list()
+print foo(100).to_list()
 # -> [101, 102, 103]
 
 {% end %}
@@ -3274,8 +3351,7 @@ which implies that the object is *already* an iterator.
 The `@next` metakey allows for objects to behave as iterators.
 
 Whenever the runtime needs to produce an iterator from an object, it will first
-check the metamap for an implementation of `@next`, before looking for
-`@iterator`.
+check the metamap for an implementation of `@next`, before looking for `@iterator`.
 
 The `@next` function will be called repeatedly during iteration,
 with the returned value being used as the iterator's output.
@@ -3315,9 +3391,8 @@ print foo(10, 15).to_tuple()
 {% end %}
 #### `@next_back`
 
-The `@next_back` metakey is used by
-[`iterator.reversed`](../core/iterator#reversed) when producing a reversed
-iterator.
+The `@next_back` metakey is used by [`iterator.reversed`](../core/iterator#reversed)
+when producing a reversed iterator.
 
 The runtime will only look for `@next_back` if `@next` is implemented.
 
@@ -3351,7 +3426,7 @@ print foo
 {% end %}
 #### `@display`
 
-The `@display` metakey defines how the object should be represented when
+The `@display` metakey defines how an object should be represented when
 displaying the object as a string.
 
 ````koto
@@ -3382,15 +3457,16 @@ print "The value of x is '{x}'"
 {% end %}
 #### `@type`
 
-The `@type` metakey takes a string as a value which is used when checking the
-value's type, e.g. with [`koto.type`](../core/koto#type)
+The `@type` metakey takes a string which is used when checking a
+value's type, e.g. with [type checks](#type-checks) or [`koto.type`](../core/koto#type).
 
 ````koto
 foo = |n|
   data: n
   @type: "Foo"
 
-koto.type (foo 42)
+let x: Foo = foo 42
+koto.type x
 # -> Foo
 ````
 
@@ -3399,7 +3475,8 @@ foo = |n|
   data: n
   @type: "Foo"
 
-print koto.type (foo 42)
+let x: Foo = foo 42
+print koto.type x
 # -> Foo
 
 {% end %}
@@ -3656,150 +3733,6 @@ catch other
 # -> Throwing a String
 
 {% end %}
-## Testing
-
-Koto includes a simple testing framework that help you to check that your code
-is behaving as you expect through automated checks.
-
-### Assertions
-
-The core library includes a collection of *assertion* functions in the
-[`test` module](../core/test),
-which are included by default in the [prelude](#prelude).
-
-````koto
-try
-  assert 1 + 1 == 3
-catch error
-  print 'An assertion failed'
-# -> An assertion failed
-
-try
-  assert_eq 'hello', 'goodbye'
-catch error
-  print 'An assertion failed'
-# -> An assertion failed
-````
-
-{% example_playground_link(version = "0.15") %}
-try
-  assert 1 + 1 == 3
-catch error
-  print 'An assertion failed'
-# -> An assertion failed
-
-try
-  assert_eq 'hello', 'goodbye'
-catch error
-  print 'An assertion failed'
-# -> An assertion failed
-
-{% end %}
-### Organizing Tests
-
-Tests can be organized by collecting `@test` functions in a map.
-
-The tests can then be run manually with [`test.run_tests`](../core/test#run-tests).
-
-For automatic testing, see the description of exporting `@test` functions in the
-[following section](#modules).
-
-````koto
-basic_tests =
-  @test add: || assert_eq 1 + 1, 2
-  @test subtract: || assert_eq 1 - 1, 0
-
-test.run_tests basic_tests
-````
-
-{% example_playground_link(version = "0.15") %}
-basic_tests =
-  @test add: || assert_eq 1 + 1, 2
-  @test subtract: || assert_eq 1 - 1, 0
-
-test.run_tests basic_tests
-
-{% end %}
-For setup and cleanup operations shared across tests,
-`@pre_test` and `@post_test` metakeys can be implemented.
-`@pre_test` will be run before each `@test`, and `@post_test` will be run after.
-
-````koto
-make_x = |n|
-  data: n
-  @+: |other| make_x self.data + other.data
-  @-: |other| make_x self.data - other.data
-
-x_tests =
-  @pre_test: ||
-    self.x1 = make_x 100
-    self.x2 = make_x 200
-
-  @post_test: ||
-    print 'Test complete'
-
-  @test addition: ||
-    print 'Testing addition'
-    assert_eq self.x1 + self.x2, make_x 300
-
-  @test subtraction: ||
-    print 'Testing subtraction'
-    assert_eq self.x1 - self.x2, make_x -100
-
-  @test failing_test: ||
-    print 'About to fail'
-    assert false
-
-try
-  test.run_tests x_tests
-catch _
-  print 'A test failed'
-# -> Testing addition
-# -> Test complete
-# -> Testing subtraction
-# -> Test complete
-# -> About to fail
-# -> A test failed
-````
-
-{% example_playground_link(version = "0.15") %}
-make_x = |n|
-  data: n
-  @+: |other| make_x self.data + other.data
-  @-: |other| make_x self.data - other.data
-
-x_tests =
-  @pre_test: ||
-    self.x1 = make_x 100
-    self.x2 = make_x 200
-
-  @post_test: ||
-    print 'Test complete'
-
-  @test addition: ||
-    print 'Testing addition'
-    assert_eq self.x1 + self.x2, make_x 300
-
-  @test subtraction: ||
-    print 'Testing subtraction'
-    assert_eq self.x1 - self.x2, make_x -100
-
-  @test failing_test: ||
-    print 'About to fail'
-    assert false
-
-try
-  test.run_tests x_tests
-catch _
-  print 'A test failed'
-# -> Testing addition
-# -> Test complete
-# -> Testing subtraction
-# -> Test complete
-# -> About to fail
-# -> A test failed
-
-{% end %}
 ## Modules
 
 Koto includes a module system that helps you to organize and re-use your code
@@ -3974,7 +3907,7 @@ export
   baz: 'baz'
 
 {% end %}
-Exported values are available anywhere in the module that exported them.
+Once a value has been exported, it becomes available anywhere in the module.
 
 ````koto
 get_x = ||
@@ -3986,6 +3919,22 @@ export x = 123
 
 get_x()
 # -> 123
+
+# A function that exports `y` with the given value
+export_y = |value|
+  export y = value
+
+# y hasn't been exported yet, so attempting to access it now throws an error.
+try
+  y
+catch _
+  'y not found'
+# -> y not found
+
+# Calling export_y adds y to the exports map
+export_y 42
+y
+# -> 42
 ````
 
 {% example_playground_link(version = "0.15") %}
@@ -3998,6 +3947,22 @@ export x = 123
 
 print get_x()
 # -> 123
+
+# A function that exports `y` with the given value
+export_y = |value|
+  export y = value
+
+# y hasn't been exported yet, so attempting to access it now throws an error.
+print try
+  y
+catch _
+  'y not found'
+# -> y not found
+
+# Calling export_y adds y to the exports map
+export_y 42
+print y
+# -> 42
 
 {% end %}
 The exports map can be accessed and modified directly via [`koto.exports`](../core/koto#exports).
@@ -4054,19 +4019,11 @@ print koto.exports().x
 # -> 99
 
 {% end %}
-### `@test` functions and `@main`
+### `@main`
 
-A module can export `@test` functions, which by default will be automatically run
-after the module has been compiled and initialized.
+A module can export a `@main` function, which will be called after the module has been compiled and successfully initialized.
 
-The runtime can be configured to skip running tests, so scripts shouldn't rely on
-tests being run.
-
-Additionally, a module can export a `@main` function.
-The `@main` function will be called after the module has been compiled and
-initialized, and after any exported `@test` functions have been successfully run.
-
-The use of `export` is optional when assigning to metakeys like `@main` and `@test`.
+The use of `export` is optional when assigning to module metakeys like `@main`.
 
 ````koto
 ##################
@@ -4076,20 +4033,14 @@ The use of `export` is optional when assigning to metakeys like `@main` and `@te
 export say_hello = |name| 'Hello, {name}!'
 
 # Equivalent to `export @main = ...`
-@main = ||
-  print '`my_module` initialized'
-
-@test hello_world = ||
-  print 'Testing...'
-  assert_eq (say_hello 'World'), 'Hello, World!'
+@main = || print '`my_module` initialized'
 
 ##################
 #   other.koto   #
 ##################
 
 from my_module import say_hello
-# -> Testing...
-# -> Successfully initialized `my_module`
+# -> `my_module` initialized
 
 say_hello 'Koto'
 # -> 'Hello, Koto!'
@@ -4103,20 +4054,14 @@ say_hello 'Koto'
 export say_hello = |name| 'Hello, {name}!'
 
 # Equivalent to `export @main = ...`
-@main = ||
-  print '`my_module` initialized'
-
-@test hello_world = ||
-  print 'Testing...'
-  assert_eq (say_hello 'World'), 'Hello, World!'
+@main = || print '`my_module` initialized'
 
 ##################
 #   other.koto   #
 ##################
 
 from my_module import say_hello
-# -> Testing...
-# -> Successfully initialized `my_module`
+# -> `my_module` initialized
 
 say_hello 'Koto'
 # -> 'Hello, Koto!'
@@ -4131,4 +4076,193 @@ E.g. When an `import foo` expression is run, then a `foo.koto` file will be
 looked for in the same location as the current script,
 and if `foo.koto` isn't found then the runtime will look for `foo/main.koto`.
 
+## Testing
+
+Koto includes a simple testing framework that allows you to automatically check that your code is behaving as you would expect.
+
+### Assertions
+
+The core library includes a collection of *assertion* functions which
+throw errors if a given condition isn't met.
+
+The assertion functions are found in the [`test` module](../core/test),
+and are included by default in the [prelude](#prelude).
+
+````koto
+try
+  assert 1 + 1 == 3
+catch error
+  print 'An assertion failed'
+# -> An assertion failed
+
+try
+  assert_eq 'hello', 'goodbye'
+catch error
+  print 'An assertion failed'
+# -> An assertion failed
+````
+
+{% example_playground_link(version = "0.15") %}
+try
+  assert 1 + 1 == 3
+catch error
+  print 'An assertion failed'
+# -> An assertion failed
+
+try
+  assert_eq 'hello', 'goodbye'
+catch error
+  print 'An assertion failed'
+# -> An assertion failed
+
+{% end %}
+### Module Tests
+
+Tests can be added to a module by exporting `@test` functions. A test function is considered to have failed if it throws an error (e.g. from an assertion).
+
+By default, tests will be run after a module has been successfully initialized. If the module also exports `@main` then it will be called after all tests have run successfully.
+
+````koto
+##################
+# my_module.koto #
+##################
+
+export say_hello = |name| 'Hello, {name}!'
+
+@main = || print '`my_module` initialized'
+
+@test say_hello = ||
+  print 'Running @test say_hello'
+  assert_eq say_hello('Test'), 'Hello, Test!'
+
+##################
+#   other.koto   #
+##################
+
+from my_module import say_hello
+# -> Running @test say_hello
+# -> `my_module` initialized
+````
+
+{% example_playground_link(version = "0.15") %}
+##################
+# my_module.koto #
+##################
+
+export say_hello = |name| 'Hello, {name}!'
+
+@main = || print '`my_module` initialized'
+
+@test say_hello = ||
+  print 'Running @test say_hello'
+  assert_eq say_hello('Test'), 'Hello, Test!'
+
+##################
+#   other.koto   #
+##################
+
+from my_module import say_hello
+# -> Running @test say_hello
+# -> `my_module` initialized
+
+{% end %}
+`@pre_test` and `@post_test` functions can be implemented alongside tests
+for setup and cleanup operations.
+`@pre_test` will be run before each `@test`, and `@post_test` will be run after.
+
+````koto
+##################
+# my_module.koto #
+##################
+
+export say_hello = |name| 'Hello, {name}!'
+
+@main = || print '`my_module` initialized'
+
+@pre_test = ||
+  print 'In @pre_test'
+
+@post_test = ||
+  print 'In @post_test'
+
+@test say_hello_1 = ||
+  print 'Running @test say_hello_1'
+  assert_eq say_hello('One'), 'Hello, One!'
+
+@test say_hello_2 = ||
+  print 'Running @test say_hello_2'
+  assert_eq say_hello('Two'), 'Hello, Two!'
+
+##################
+#   other.koto   #
+##################
+
+from my_module import say_hello
+# -> In @pre_test
+# -> Running @test say_hello_1
+# -> In @post_test
+# -> In @pre_test
+# -> Running @test say_hello_2
+# -> In @post_test
+# -> `my_module` initialized
+````
+
+{% example_playground_link(version = "0.15") %}
+##################
+# my_module.koto #
+##################
+
+export say_hello = |name| 'Hello, {name}!'
+
+@main = || print '`my_module` initialized'
+
+@pre_test = ||
+  print 'In @pre_test'
+
+@post_test = ||
+  print 'In @post_test'
+
+@test say_hello_1 = ||
+  print 'Running @test say_hello_1'
+  assert_eq say_hello('One'), 'Hello, One!'
+
+@test say_hello_2 = ||
+  print 'Running @test say_hello_2'
+  assert_eq say_hello('Two'), 'Hello, Two!'
+
+##################
+#   other.koto   #
+##################
+
+from my_module import say_hello
+# -> In @pre_test
+# -> Running @test say_hello_1
+# -> In @post_test
+# -> In @pre_test
+# -> Running @test say_hello_2
+# -> In @post_test
+# -> `my_module` initialized
+
+{% end %}
+### Running Tests Manually
+
+Tests can be run manually by calling [`test.run_tests`](../core/test#run-tests)
+with a map that contains `@test` functions.
+
+````koto
+my_tests =
+  @test add: || assert_eq 1 + 1, 2
+  @test subtract: || assert_eq 1 - 1, 0
+
+test.run_tests my_tests
+````
+
+{% example_playground_link(version = "0.15") %}
+my_tests =
+  @test add: || assert_eq 1 + 1, 2
+  @test subtract: || assert_eq 1 - 1, 0
+
+test.run_tests my_tests
+
+{% end %}
 ---
