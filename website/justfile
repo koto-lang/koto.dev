@@ -63,7 +63,7 @@ version-snapshot version: docs playground-release
   cargo xtask version-snapshot {{version}}
   git add content/docs/{{version}}
   git add static/play-{{version}}
-  git add content/docs/info.toml
+  git add templates/data.toml
   git commit -m "Snapshot of version {{version}}"
 
 watch command:
