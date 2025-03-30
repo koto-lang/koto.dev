@@ -2,6 +2,8 @@ base_url = "https://koto.dev"
 compile_sass = true
 build_search_index = false
 generate_feeds = true
+title = "Koto"
+description = "A simple, expressive, embeddable programming language"
 
 [markdown]
 highlight_code = true
