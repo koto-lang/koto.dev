@@ -1,6 +1,5 @@
-# Print out the first 20 fibonacci numbers
+# Make a generator that yields the Fibonacci sequence
 # https://en.wikipedia.org/wiki/Fibonacci_sequence
-
 fibonacci = ||
   a, b, c = 1, 1, 1
   loop
@@ -8,5 +7,6 @@ fibonacci = ||
     c = a + b
     a, b = b, c
 
+# Take the first 20 Fibonacci numbers and print them out
 for i, n in fibonacci().take(20).enumerate()
   print '{i + 1}: {n}'

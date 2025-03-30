@@ -1,29 +1,32 @@
 # An example of how to make enum-like maps in Koto
 
-# Makes an enum by inserting a key/value pair into a map for each entry
+# Make an enum by inserting a name/index entry into a map for each enum variant
 make_enum = |entries...|
   entries
     .enumerate()
-    .each |(index, id)| id, index
+    # Swap the index and name
+    .each |(index, name)| name, index
+    # The to_map iterator consumer builds a map out of the name/index tuples
     .to_map()
 
-# Makes a bidirectional enum by inserting a key/value pair into a map for each entry,
-# along with a corresponding reverse entry
+# Make a bidirectional enum by inserting:
+#   1. a name/index entry into a map for each enum variant
+#   2. a corresponding index/name entry
 make_bidirectional_enum = |entries...|
-  entries
-    .enumerate()
-    .fold {}, |enum, (index, id)|
-      enum.insert id, index
-      enum.insert index, id
-      enum
+  enum = {}
+  for index, name in entries.enumerate()
+    enum.insert name, index
+    enum.insert index, name
+  enum
 
 @main = ||
   fruit = make_enum 'apple', 'banana', 'orange'
-  match 1
-    fruit.apple then print 'Apple!'
-    fruit.banana then print 'Banana!'
-    fruit.orange then print 'Orange!'
-    else print '???'
+  for i in 0..4
+    match i
+      fruit.apple then print 'Apple!'
+      fruit.banana then print 'Banana!'
+      fruit.orange then print 'Orange!'
+      else print '???'
 
 @test make_enum = ||
   color = make_enum 'red', 'green', 'blue'

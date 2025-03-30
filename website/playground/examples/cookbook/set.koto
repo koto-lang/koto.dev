@@ -26,10 +26,10 @@ set_ops =
   @meta size: || self.data.size()
 
 # A Set initializer, inserting the given values into the Set
-make_set = |values = null|
+make_set = |values: Iterable = null|
   # Calling .to_map() on an iterator of single values produces a map with each unique value
   # represented by a key.
-  data = if values then values.to_map() else {}
+  data = values?.to_map() or {}
   # Return a map containing the provided data, along with the Set metamap
   {data}.with_meta set_ops
 
