@@ -1,5 +1,3 @@
-var wordPattern = /[a-zA-Z_\xa1-\uffff][a-zA-Z0-9_\xa1-\uffff]*/.source;
-
 export function register_koto_editor_mode() {
   ace.define(
     "ace/mode/koto",
@@ -63,8 +61,16 @@ export function register_koto_editor_mode() {
             token: "variable.other.member.koto",
             regex: "\\b" + identifier + "(?=\\:)\\b"
           }, {
-            token: "identifier.koto",
+            token: "text.koto",
             regex: identifier
+          }],
+          "#id_with_type": [{
+            token: [
+              "text.koto",
+              "punctuation.koto",
+              "storage.type.koto"
+            ],
+            regex: `(${identifier})(?:(\\s*:\\s*)(${identifier}\\??))?`,
           }],
           "#keyword": [{
             token: "constant.language.koto",
@@ -222,14 +228,6 @@ export function register_koto_editor_mode() {
               defaultToken: "variable.parameter.koto"
             }]
           }],
-          "#id_with_type": [{
-            token: [
-              "variable.other.koto",
-              "text",
-              "storage.type.koto"
-            ],
-            regex: /([[:alpha:]_][[:alnum:]_]*)(?:(:\s*)([[:alpha:]_][[:alnum:]_]*))?/
-          }],
           "#let": [{
             token: "keyword.control.koto",
             regex: /\blet\b/,
@@ -245,7 +243,7 @@ export function register_koto_editor_mode() {
             token: "keyword.other.function-definition.koto",
             regex: /\|/,
             push: [{
-              token: "punctuation.definition.arguments.end.koto",
+              token: "keyword.other.function-definition.koto",
               regex: /\|/,
               next: "pop"
             }, {
@@ -254,22 +252,28 @@ export function register_koto_editor_mode() {
               include: "#return_type"
             }]
           }],
-          "#function_arguments": [{
-            token: "punctuation.definition.arguments.begin.koto",
-            regex: /\(/,
-            push: [{
-              token: "punctuation.definition.arguments.end.koto",
-              regex: /\)/,
-              next: "pop"
-            }, {
-              include: "#function_arguments"
-            }]
-          }, {
-            token: "punctuation.separator.parameters.koto",
-            regex: /,/
-          }, {
-            include: "#id_with_type"
-          }],
+          "#function_arguments": [
+            {
+              token: "punctuation.definition.arguments.begin.koto",
+              regex: /\(/,
+              push: [
+                {
+                  token: "punctuation.definition.arguments.end.koto",
+                  regex: /\)/,
+                  next: "pop"
+                }, {
+                  include: "#function_arguments"
+                },
+              ]
+            },
+            {
+              token: "punctuation.separator.parameters.koto",
+              regex: /,/
+            },
+            {
+              include: "#id_with_type"
+            }
+          ],
           "#return_type": [{
             token: ["text", "storage.type.koto"],
             regex: /(->\s*)([[:alpha:]_][[:alnum:]_]*)/
