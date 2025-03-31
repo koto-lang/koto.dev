@@ -1232,7 +1232,7 @@ print {apples: 42, pears: 99}.contains_key 'apples'
 # -> true
 
 {% end %}
-The [documentation](../core) for the Core library (along with this guide) are
+The [documentation](../core) for the Core library (along with this guide) is
 available in the `help` command of the [Koto CLI](../cli).
 
 ### Prelude
