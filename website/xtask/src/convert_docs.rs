@@ -322,17 +322,19 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
 
     let result = match mode {
         TopLevelToNext => url
-            .replace("./language_guide.md", &format!("/docs/next/language/"))
-            .replace("./cli.md", &format!("/docs/next/cli/"))
-            .replace("./api.md", &format!("/docs/next/api/"))
-            .replace("./core_lib", &format!("/docs/next/core/")),
+            .replace("./language_guide.md", "/docs/next/language/")
+            .replace("./cli.md", "/docs/next/cli/")
+            .replace("./api.md", "/docs/next/api/")
+            .replace("./core_lib", "/docs/next/core/"),
         TopLevel => url
             .replace("./core_lib", "../core")
+            .replace("./cli.md", "../cli")
+            .replace("./api.md", "../api")
             .replace("./language_guide.md", "../language/"),
         SubFolder => url.replace("../language_guide.md", "../../language/"),
     };
 
-    let result = if result.starts_with('#') || result.contains(".md#") {
+    let result = if result.starts_with('#') || url.contains(".md#") {
         // Replace underscores with hyphens in local anchor links
         result.replace('_', "-")
     } else {
