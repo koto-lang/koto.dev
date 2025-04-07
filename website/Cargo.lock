@@ -562,7 +562,7 @@ dependencies = [
  "koto_bytecode",
  "koto_parser",
  "koto_runtime",
- "thiserror 1.0.44",
+ "thiserror 2.0.10",
 ]
 
 [[package]]
@@ -576,7 +576,7 @@ dependencies = [
  "koto_parser",
  "rustc-hash",
  "smallvec",
- "thiserror 1.0.44",
+ "thiserror 2.0.10",
 ]
 
 [[package]]
@@ -609,7 +609,7 @@ dependencies = [
  "koto_lexer",
  "koto_memory",
  "smallvec",
- "thiserror 1.0.44",
+ "thiserror 2.0.10",
  "unicode-segmentation",
 ]
 
@@ -629,7 +629,7 @@ dependencies = [
  "rustc-hash",
  "saturating_cast",
  "smallvec",
- "thiserror 1.0.44",
+ "thiserror 2.0.10",
  "unicode-segmentation",
 ]
 
@@ -939,9 +939,9 @@ checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
 
 [[package]]
 name = "rustc-hash"
-version = "1.1.0"
+version = "2.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+checksum = "357703d41365b4b27c590e3ed91eabb1b663f07c4c084095e60cbed4362dff0d"
 
 [[package]]
 name = "ryu"
