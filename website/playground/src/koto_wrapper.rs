@@ -50,16 +50,19 @@ impl KotoWrapper {
         self.koto.exports().data_mut().clear();
         self.koto.clear_module_cache();
 
-        if let Err(error) = self.koto.compile(script) {
-            self.error(&format!("Error while compiling script: {error}"));
-        } else {
-            if let Err(e) = self.koto.run() {
-                self.process_koto_messages();
-                return self.error(&e.to_string());
-            }
+        match self.koto.compile(script) {
+            Ok(chunk) => {
+                if let Err(e) = self.koto.run(chunk) {
+                    self.process_koto_messages();
+                    return self.error(&e.to_string());
+                }
 
-            self.script_output.set_inner_html("");
-            self.process_koto_messages();
+                self.script_output.set_inner_html("");
+                self.process_koto_messages();
+            }
+            Err(error) => {
+                self.error(&format!("Error while compiling script: {error}"));
+            }
         }
     }
 
