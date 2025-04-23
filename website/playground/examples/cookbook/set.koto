@@ -1,26 +1,28 @@
 # An example of how to build a Set in Koto
 
 # The meta map shared by all Set objects
-set_ops =
+set_meta =
   @type: 'Set'
 
-  # Allow Sets to be used directly as iterables
-  @iterator: || self.keys()
-
-  @meta contains: |value|
-    self.data.contains_key value
-
-  @meta keys: ||
+  # The Set's entries
+  @meta elements: ||
+    # The Set uses a map internally, with the map's keys representing the entries in the Set
     self.data.keys()
 
-  @meta extend: |values|
-    for value in values
-      self.data.insert value
-    self
+  # Allows Sets to be used in iterable contexts, deferring to `self.elements()`
+  @iterator: || self.elements()
 
+  # Returns true if the Set contains a matching entry
+  @meta contains: |value: Any| -> Bool
+    self.data.contains_key value
+
+  # Accept any number of values to insert into the set
+  @meta extend: |values...|
+    self.data.extend values
+
+  # Add a single value to the set
   @meta insert: |value|
     self.data.insert value
-    self
 
   @meta is_empty: || self.size() == 0
   @meta size: || self.data.size()
@@ -31,7 +33,7 @@ make_set = |values: Iterable? = null|
   # represented by a key.
   data = values?.to_map() or {}
   # Return a map containing the provided data, along with the Set metamap
-  {data}.with_meta set_ops
+  {data}.with_meta set_meta
 
 # An iterator consumer that makes a Set from the iterator's output values
 iterator.to_set = || make_set self
@@ -40,11 +42,13 @@ iterator.to_set = || make_set self
 @main = ||
   s = make_set()
   s.insert 42
-  s.extend (99, 42, 99, -1)
+  s.extend 99, 42, 99, -1
+  # Set implements @iterator, so `iterator` functions like `.to_tuple` are available.
   print s.to_tuple()
 
+# Check basic behavior before running `@main`
 @test chars_to_set = ||
   s = 'abccbadeffed'.to_set()
-  assert_eq s.keys().to_string(), 'abcdef'
+  assert_eq s.elements().to_string(), 'abcdef'
   assert s.contains 'c'
   assert not s.contains 'x'
