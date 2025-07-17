@@ -29,11 +29,11 @@ deploy:
   git commit --amend --no-edit
   git push -f origin deploy
 
-docs:
+docs: search-index
   cargo xtask docs
 
 docs-watch:
-  cargo watch -w ../modules/koto -w xtask -x "xtask docs"
+  cargo watch -w ../modules/koto -w xtask -x "xtask docs && xtask search-index"
 
 playground:
   cd playground && trunk build
@@ -46,6 +46,12 @@ playground-serve:
 
 playground-serve-release:
   cd playground && trunk serve --ignore ../static --release --open
+
+search-index:
+  cargo xtask search-index
+
+search-index-watch:
+  cargo watch -w ../modules/koto -w xtask -x "xtask search-index"
 
 submodules:
   git submodule update --init --recursive

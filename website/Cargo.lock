@@ -1049,6 +1049,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sluggify"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f87ca5434e5d26d91f393b7e6b4db8ea1f1a5f463fe92e39e31b73a3be3f989d"
+dependencies = [
+ "regex",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1500,6 +1509,7 @@ dependencies = [
  "pulldown-cmark-to-cmark",
  "serde",
  "serde_json",
+ "sluggify",
  "tera",
  "toml",
  "walkdir",

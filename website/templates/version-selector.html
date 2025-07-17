@@ -1,27 +1,44 @@
 {% if page %}
   {% set version_path = page.ancestors | reverse | nth(n = 1) %}
+  {% set version = page.components | reverse | nth(n = 1) %}
   {% set page = page.components | last %}
   {% set parent = page.components | reverse | nth(n = 1) %}
   {% set leaf = parent ~ "/" ~ page %}
 {% endif %}
 {% if section %}
   {% set version_path = section.ancestors | last %}
+  {% set version = section.components | reverse | nth(n = 1) %}
   {% set leaf = section.components | last %}
 {% endif %}
 
-{% set index = get_section(path = version_path) %}
-{% set versions = get_section(path = index.ancestors | last) %}
+{% set version_index = get_section(path = version_path) %}
+{% set versions = get_section(path = version_index.ancestors | last) %}
+{% set version_id = version_index.components | reverse | nth(n = 0) %}
+
+<meta name="docs-version" content="{{ version_id }}">
 
 <nav uk-dropnav>
-  <div>Version: {{index.title}}<span uk-drop-parent-icon></span></div>
-  <div class="uk-dropdown">
+  <div>Version: {{version_index.title}}<span uk-drop-parent-icon></span></div>
+  <div uk-dropdown="mode: click">
     <ul class="uk-nav uk-dropdown-nav">
       {% for x in versions.subsections | reverse %}
         {% set subsection = get_section(path=x) %}
-        <li class="{% if subsection == index %} uk-active {% endif %}">
+        <li class="{% if subsection == version_index %} uk-active {% endif %}">
           <a href="{{subsection.permalink}}{{leaf}}">{{subsection.title}}</a>
         </li>
       {% endfor %}
     </ul>
   </div>
 </nav>
+
+{% if version_id == "next" or version_id | float(default = 0) >= 0.15 %}
+
+<li class="uk-padding-small uk-padding-remove-horizontal">
+  <form class="uk-search uk-search-default" onsubmit="return false;">
+    <span uk-search-icon></span>
+    <input id="docs-search-input" class="uk-search-input" type="search" placeholder="Search docs…" aria-label="Search"
+      autocomplete="false">
+  </form>
+</li>
+
+{% endif %}

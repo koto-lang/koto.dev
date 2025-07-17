@@ -18,10 +18,12 @@
       <link rel="alternate" type="application/atom+xml" title="Feed" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
     {% endblock %}
 
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
     <script src="/uikit.min.js"></script>
     <script src="/uikit-icons.min.js"></script>
 
     <script src="/color-scheme.js"></script>
+    <script defer src="/search.js"></script>
 
     {% block head %} {% endblock head %}
   </head>
@@ -34,5 +36,6 @@
     {% include "mobile-nav-start.html" %}
     {% block mobile_nav %} {% endblock %}
     {% include "mobile-nav-end.html" %}
+
   </body>
 </html>

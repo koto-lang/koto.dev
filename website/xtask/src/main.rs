@@ -2,6 +2,7 @@ use std::env::args;
 
 use anyhow::{bail, Result};
 
+mod build_search_index;
 mod convert_docs;
 mod data;
 mod postprocess_playground;
@@ -21,6 +22,7 @@ fn try_main() -> Result<()> {
             Some(staging_dir) => postprocess_playground::run(staging_dir),
             None => bail!("Missing argument: staging dir"),
         },
+        Some("search-index") => build_search_index::run(),
         Some("version-snapshot") => match args().nth(2).as_ref() {
             Some(version) => version_snapshot::run(version),
             _ => bail!("Missing argument: version"),
@@ -36,6 +38,7 @@ fn try_main() -> Result<()> {
 const HELP: &str = "\
 Tasks:
 docs                Converts Koto's docs for Zola
-version-snapshot    Takes a versioned snapshot of the docs and playground
 playground          Postprocesses the Koto playground for integration in the main website
+search-index        Builds a search index for the docs in content/docs/next
+version-snapshot    Takes a versioned snapshot of the docs and playground
 ";

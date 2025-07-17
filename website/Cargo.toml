@@ -37,6 +37,8 @@ pulldown-cmark-to-cmark = "21"
 serde = { version = "1.0.136", features = ["derive"] }
 # A JSON serialization file format
 serde_json = "1.0.135"
+# Simple slug or clean url generator for rust.
+sluggify = "0.1.0"    
 # Template engine based on Jinja2/Django templates
 tera = "1.20.0"                  
 # A native Rust encoder and decoder of TOML-formatted files and streams.
