@@ -30,9 +30,9 @@ js-sys = "0.3.56"
 # A lightweight logging facade for Rust
 log = "0.4.20"
 # Markdown parsing
-pulldown-cmark = "0.9.1"
+pulldown-cmark = "0.13"
 # Convert pulldown-cmark Events back to the string they were parsed from
-pulldown-cmark-to-cmark = "10.0.1"
+pulldown-cmark-to-cmark = "21"
 # A generic serialization/deserialization framework
 serde = { version = "1.0.136", features = ["derive"] }
 # A JSON serialization file format
