@@ -99,20 +99,21 @@ if (docsVersionMeta) {
     }
   }
 
-  // If the user clicks on a search result that's on the current page,
-  // then scroll to the anchor instead of leaving the page
-  resultsList.addEventListener('click', event => {
-    const link = event.target.closest('a');
-    if (!link) {
-      return;
-    }
+  // If the user clicks on a link or search result that's on the current page, then hide the
+  // search results if necessary, and scroll to the anchor instead of leaving the page.
+  function jumpToCurrentPageAnchorOnClick(element) {
+    element.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (!link) {
+        return;
+      }
 
-    const url = new URL(link.href, location.href);
-    if (url.pathname === location.pathname && url.search === location.search) {
-      event.preventDefault();
-      jumpToAnchor(url.hash);
-    }
-  });
+      const url = new URL(link.href, location.href);
+      if (url.pathname === location.pathname && url.search === location.search) {
+        jumpToAnchor(url.hash)
+      }
+    });
+  }
 
   function jumpToAnchor(hash) {
     if (!hash) {
@@ -124,15 +125,15 @@ if (docsVersionMeta) {
     requestAnimationFrame(() => {
       const id = hash.slice(1);
       const target = document.getElementById(id);
-      if (!target) return;
-
-      if (!target.hasAttribute('tabindex')) {
-        target.setAttribute('tabindex', '-1');
+      if (target) {
+        target.scrollIntoView();
       }
-
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      target.focus({ preventScroll: true });
     });
   }
+
+  jumpToCurrentPageAnchorOnClick(resultsList);
+  document.querySelectorAll('#docs-navbar').forEach((navbar) => {
+    jumpToCurrentPageAnchorOnClick(navbar)
+  });
 }
 
