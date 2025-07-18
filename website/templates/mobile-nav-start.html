@@ -1,6 +1,11 @@
 <div id="mobile-nav" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar" id="mobile-nav-contents">
     <div uk-grid class="uk-grid-small">
+      <a class="uk-link-muted uk-text-capitalize" href="/about">About</a>
+      <a class="uk-link-muted uk-text-capitalize" href="/news">News</a>
+    </div>
+
+    <div uk-grid class="uk-grid-small">
       <a class="uk-link-muted uk-text-capitalize" href={{ "/docs/" ~ data.latest }}>Docs</a>
       <a class="uk-link-muted uk-text-capitalize" href={{ "/play-" ~ data.latest }}>Playground</a>
     </div>
