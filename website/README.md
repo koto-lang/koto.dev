@@ -11,6 +11,8 @@ playground.
 
 The main site is built with [Zola](https://getzola.org), installation instructions [here](https://www.getzola.org/documentation/getting-started/installation/).
 
+[NPM](https://www.npmjs.com) is used for tracking Javascript dependencies, with [Vite](https://vite.dev) used for bundling. Vite expects a recent version of [Node](https://nodejs.org) to be available.  
+
 ### Playground
 
 The playground is built with [Trunk](https://trunkrs.dev), installation instructions [here](https://trunkrs.dev/#install).

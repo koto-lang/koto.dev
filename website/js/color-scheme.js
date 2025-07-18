@@ -1,6 +1,6 @@
 const colorSchemeKey = "color-scheme";
 
-setColorScheme = function(colorScheme) {
+function setColorScheme(colorScheme) {
   document.documentElement.setAttribute(colorSchemeKey, colorScheme);
 
   const body = document.body;
@@ -13,7 +13,7 @@ setColorScheme = function(colorScheme) {
       body.classList.add("uk-light");
       body.classList.remove("uk-dark");
 
-      for (let i=0; i < lightSwitches.length; i++) {
+      for (let i = 0; i < lightSwitches.length; i++) {
         lightSwitches[i].src = "/sun.svg";
       }
 
@@ -23,7 +23,7 @@ setColorScheme = function(colorScheme) {
       body.classList.add("uk-dark");
       body.classList.remove("uk-light");
 
-      for (let i=0; i < lightSwitches.length; i++) {
+      for (let i = 0; i < lightSwitches.length; i++) {
         lightSwitches[i].src = "/moon.svg";
       }
 
@@ -33,44 +33,57 @@ setColorScheme = function(colorScheme) {
   }
 }
 
-setColorSchemeFromSystemPreference = function(e) {
-  const colorScheme = e.matches ? "dark" : "light";
-  setColorScheme(colorScheme);
+const localStorage = window.localStorage;
+
+function getStoredColorScheme() {
   if (localStorage) {
-    localStorage.setItem(colorSchemeKey, "system");
+    return localStorage.getItem(colorSchemeKey);
   }
 }
 
-const systemPreference = window.matchMedia("(prefers-color-scheme: dark)");
-systemPreference.addEventListener("change", setColorSchemeFromSystemPreference);
+function setStoredColorScheme(colorScheme) {
+  if (localStorage) {
+    localStorage.setItem(colorSchemeKey, colorScheme);
+  }
+}
 
-const localStorage = window.localStorage;
-const storedPreference = localStorage.getItem(colorSchemeKey);
+function setColorSchemeFromPreferenceForDark(event) {
+  const colorScheme = event.matches ? "dark" : "light";
+  setColorScheme(colorScheme);
+  setStoredColorScheme("system");
+}
+
+const preferenceForDark = window.matchMedia("(prefers-color-scheme: dark)");
+preferenceForDark.addEventListener("change", setColorSchemeFromPreferenceForDark);
+const storedPreference = getStoredColorScheme();
+
 if (storedPreference && storedPreference !== "system") {
   // Apply immediately to set the color-scheme attribute, avoids bg flashes on refresh
   setColorScheme(storedPreference);
 
   // Re-apply on window load to modify body elements
-  window.onload = function() {
+  window.onload = () => {
     setColorScheme(storedPreference);
   }
 } else {
-  setColorSchemeFromSystemPreference(systemPreference);
+  setColorSchemeFromPreferenceForDark(preferenceForDark);
 
-  window.onload = function() {
-    setColorSchemeFromSystemPreference(systemPreference);
+  window.onload = () => {
+    setColorSchemeFromPreferenceForDark(preferenceForDark);
   }
 }
 
-toggleColorScheme = function() {
-  if (localStorage) {
-    const storedColorScheme = localStorage.getItem(colorSchemeKey);
+// This file needs to be executed immediately in the head tag,
+// so it isn't loaded as a module, and exports can't be used here.
 
+window.toggleColorScheme = () => {
+  const storedColorScheme = getStoredColorScheme();
+  if (storedColorScheme) {
     const colorScheme = (storedColorScheme === "system")
-      ? systemPreference.matches ? "light" : "dark"
+      ? preferenceForDark.matches ? "light" : "dark"
       : storedColorScheme === "dark" ? "light" : "dark";
 
     setColorScheme(colorScheme);
-    localStorage.setItem(colorSchemeKey, colorScheme);
+    setStoredColorScheme(colorScheme)
   }
 }

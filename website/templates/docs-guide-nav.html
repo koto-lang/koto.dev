@@ -3,28 +3,28 @@
   {% set versions = get_section(path = index.ancestors | last) %}
 
   {% for s in index.subsections %}
-  {% set subsection = get_section(path=s) %}
+    {% set subsection = get_section(path=s) %}
 
-  <li class="uk-nav-header{% if current_path == subsection.path %} uk-active {% endif %}">
-    <a href="{{ subsection.permalink }}">
-      {{ subsection.title }}
-    </a>
-  </li>
-
-  {% if current_path == subsection.path %}
-  {% set first_header = subsection.toc | first %}
-
-  {% if first_header.children | length > 0 %}
-  <ul class="uk-nav-sub uk-nav-default">
-    {% for h1 in subsection.toc %}
-    {% for h2 in h1.children %}
-    <li>
-      <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+    <li class="uk-nav-header{% if current_path == subsection.path %} uk-active {% endif %}">
+      <a href="{{ subsection.permalink }}">
+        {{ subsection.title }}
+      </a>
     </li>
-    {% endfor %}
-    {% endfor %}
-  </ul>
-  {% endif %}
-  {% endif %}
+
+    {% if current_path == subsection.path %}
+      {% set first_header = subsection.toc | first %}
+
+      {% if first_header.children | length > 0 %}
+        <ul class="uk-nav-sub uk-nav-default">
+          {% for h1 in subsection.toc %}
+            {% for h2 in h1.children %}
+            <li>
+              <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+            </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endif %}
   {% endfor %}
 </ul>

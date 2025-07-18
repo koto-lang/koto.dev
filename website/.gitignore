@@ -1,2 +1,6 @@
+.vite/
+node_modules/
 public/
 target/
+
+package-lock.json
