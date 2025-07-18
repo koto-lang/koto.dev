@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "sass-embedded": "^1.89.2",
     "vite": "^7.0.5"
   }
 }
