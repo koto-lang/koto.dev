@@ -1,17 +1,20 @@
-build: docs playground-release
+build $BUILD_MODE="production": npm docs playground-release
+  npx vite build
   zola build
 
-build-debug: docs playground
+build-debug: npm docs playground
+  npx vite build
   zola build
 
 serve *args: docs playground
-  zola serve --open --fast {{args}}
+  zola serve --open --fast {{args}} & npx vite serve & wait
 
-serve-release: docs playground-release
-  zola serve --open --fast
+serve-release $BUILD_MODE="production": docs playground-release
+  zola serve --open --fast & npx vite serve & wait
 
 clean:
   cargo clean
+  rm -rf node_modules
   rm -rf public
 
 deploy:
@@ -29,11 +32,14 @@ deploy:
   git commit --amend --no-edit
   git push -f origin deploy
 
-docs:
+docs: search-index
   cargo xtask docs
 
 docs-watch:
-  cargo watch -w ../modules/koto -w xtask -x "xtask docs"
+  cargo watch -w ../modules/koto -w xtask -x "xtask docs && xtask search-index"
+
+npm:
+  npm install
 
 playground:
   cd playground && trunk build
@@ -46,6 +52,12 @@ playground-serve:
 
 playground-serve-release:
   cd playground && trunk serve --ignore ../static --release --open
+
+search-index:
+  cargo xtask search-index
+
+search-index-watch:
+  cargo watch -w ../modules/koto -w xtask -x "xtask search-index"
 
 submodules:
   git submodule update --init --recursive
@@ -65,6 +77,9 @@ version-snapshot version: docs playground-release
   git add static/play-{{version}}
   git add templates/data.toml
   git commit -m "Snapshot of version {{version}}"
+
+vite *args:
+  npx vite build {{args}}
 
 watch command:
   cargo watch -s "just {{command}}"

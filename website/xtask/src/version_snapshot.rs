@@ -17,11 +17,12 @@ use crate::data::Data;
 pub fn run(version: &str) -> Result<()> {
     let docs_target = format!("content/docs/{version}");
     let docs_target_path = PathBuf::from(&docs_target);
+    let search_index_target = PathBuf::from(format!("static/search-index-{version}"));
     let playground_target = format!("static/play-{version}");
     let playground_target_path = PathBuf::from(&playground_target);
     let copy_options = fs_extra::dir::CopyOptions::new().content_only(true);
 
-    // Copy next -> version
+    // Copy docs/next -> version
     if docs_target_path.exists() {
         fs::remove_dir_all(&docs_target_path)
             .with_context(|| format!("failed to remove '{docs_target}'"))?;
@@ -31,6 +32,18 @@ pub fn run(version: &str) -> Result<()> {
     fs_extra::dir::copy("content/docs/next", &docs_target, &copy_options)
         .with_context(|| format!("failed to copy docs to '{docs_target}'"))?;
     println!("Docs copied from docs/next to '{docs_target}'");
+
+    // Copy the search index
+    fs_extra::file::copy(
+        "static/search-index-next.json",
+        &search_index_target,
+        &fs_extra::file::CopyOptions::default().overwrite(true),
+    )?;
+    search_and_replace_in_file(
+        &search_index_target,
+        "/docs/next",
+        &format!("/docs/{version}"),
+    )?;
 
     // Copy the playground
     if playground_target_path.exists() {

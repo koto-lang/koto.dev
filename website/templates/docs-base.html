@@ -2,22 +2,33 @@
 
 {% block content %}
 
-<nav class="docs-sidebar uk-visible@s" role="navigation">
-  {% block docsnav %}{% endblock docsnav %}
-</nav>
+<div class="docs-sidebar uk-visible@s">
+  <ul class="uk-nav uk-nav-default">
+    {% include "version-selector.html" %}
+  </ul>
+
+  <nav class="docs-sidebar-scroll-area" role="navigation">
+    {% block docsnav %}{% endblock docsnav %}
+  </nav>
+</div>
 
 <div class="docs-section uk-section">
   <div class="uk-container uk-container-small uk-width-expand">
-    <div class="uk-align-left uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
       {% block docscontent %} {% endblock %}
-    </div>
+    </article>
+
+    <section id="docs-search-results" hidden role="region" aria-live="polite" aria-label="Search results">
+      <h2 id="docs-search-results-heading" tabindex="-1" class="uk-h4 uk-margin-small-top">Search Results</h2>
+      <ul class="uk-list uk-list-divider uk-margin-remove" id="docs-results-list"></ul>
+    </section>
   </div>
 </div>
 
 {% endblock content %}
 
 {% block mobile_nav %}
-  <hr>
+<hr>
 
-  {% block docsnav_mobile %}{% endblock docsnav_mobile %}
+{% block docsnav_mobile %}{% endblock docsnav_mobile %}
 {% endblock mobile_nav %}

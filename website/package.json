@@ -1,0 +1,14 @@
+{
+  "name": "koto.dev",
+  "version": "1.0.0",
+  "description": "## Dependencies",
+  "main": "index.js",
+  "dependencies": {
+    "fuse.js": "^7.1.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^7.0.5"
+  }
+}

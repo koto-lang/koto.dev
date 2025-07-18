@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag};
+use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Parser, Tag, TagEnd};
 use pulldown_cmark_to_cmark::cmark;
 use std::{
     fs,
@@ -179,7 +179,8 @@ enum FixUrlMode {
 }
 
 fn convert_doc(input_path: &Path, flags: ConvertDocFlags) -> Result<String> {
-    use {std::fmt::Write, Event::*, Tag::*};
+    use std::fmt::Write;
+    use Event::*;
 
     let input_contents = fs::read_to_string(input_path)?;
 
@@ -210,7 +211,10 @@ fn convert_doc(input_path: &Path, flags: ConvertDocFlags) -> Result<String> {
             let mut entry_name = None;
             for event in Parser::new(input) {
                 match event {
-                    Start(Heading(HeadingLevel::H1, _, _)) => {
+                    Start(Tag::Heading {
+                        level: HeadingLevel::H1,
+                        ..
+                    }) => {
                         in_heading = true;
                     }
                     Text(text) if in_heading => {
@@ -245,21 +249,38 @@ slug = \"{slug}\"
         let mut in_rust_include = false;
         let mut koto_code = CowStr::from("");
         move |event| match event {
-            Start(CodeBlock(CodeBlockKind::Fenced(ref lang))) => {
+            Start(Tag::CodeBlock(CodeBlockKind::Fenced(ref lang))) => {
                 match lang.split(',').next() {
                     Some("koto") => {
                         in_koto_code = true;
                         // Split off the language modifier to avoid confusing zola
-                        once(Start(CodeBlock(CodeBlockKind::Fenced("koto".into())))).chain(None)
+                        once(Start(Tag::CodeBlock(CodeBlockKind::Fenced("koto".into()))))
+                            .chain(None)
                     }
                     Some("rust_include") => {
                         in_rust_include = true;
-                        once(Start(CodeBlock(CodeBlockKind::Fenced("rust".into())))).chain(None)
+                        once(Start(Tag::CodeBlock(CodeBlockKind::Fenced("rust".into()))))
+                            .chain(None)
                     }
                     _ => once(event).chain(None),
                 }
             }
-            End(CodeBlock(CodeBlockKind::Fenced(_))) if in_koto_code => {
+            Start(Tag::Link {
+                link_type,
+                dest_url,
+                title,
+                id,
+            }) => {
+                let fixed_url = fix_doc_urls(&dest_url, flags.fix_url_mode).unwrap().into();
+                once(Start(Tag::Link {
+                    link_type,
+                    dest_url: fixed_url,
+                    title,
+                    id,
+                }))
+                .chain(None)
+            }
+            End(TagEnd::CodeBlock) if in_koto_code => {
                 in_koto_code = false;
                 if flags.add_playground_links {
                     let playground_code = koto_code
@@ -280,17 +301,9 @@ slug = \"{slug}\"
                     once(event).chain(None)
                 }
             }
-            End(CodeBlock(CodeBlockKind::Fenced(_))) if in_rust_include => {
+            End(TagEnd::CodeBlock) if in_rust_include => {
                 in_rust_include = false;
                 once(event).chain(None)
-            }
-            End(Link(link_type, url, title)) => {
-                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).unwrap().into();
-                once(End(Link(link_type, fixed_url, title))).chain(None)
-            }
-            End(FootnoteDefinition(url)) => {
-                let fixed_url = fix_doc_urls(&url, flags.fix_url_mode).unwrap().into();
-                once(End(FootnoteDefinition(fixed_url))).chain(None)
             }
             Text(code) if in_koto_code => {
                 koto_code = code.clone();

@@ -2,8 +2,6 @@
   {% set index = get_section(path = section.ancestors | last) %}
   {% set versions = get_section(path = index.ancestors | last) %}
 
-  {% include "version-selector.html" %}
-
   {% for s in index.subsections %}
     {% set subsection = get_section(path=s) %}
 

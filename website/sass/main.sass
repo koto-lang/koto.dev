@@ -46,10 +46,16 @@ h2
 .docs-sidebar
   position: fixed
   top: $topbar-height
-  bottom: 0
-  overflow: auto
   width: 200px
   padding: $nav-logo-padding
+
+.docs-sidebar-scroll-area
+  position: fixed
+  top: $topbar-height + 120px
+  overflow: auto
+  width: 200px
+  padding-bottom: 50px
+  bottom: 0
 
 :not(pre) > code
   font-size: 0.95em

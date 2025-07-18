@@ -1,4 +1,10 @@
 {% import "components.html" as components %}
+
+{% set build_mode = get_env(name="BUILD_MODE", default="development") %}
+{% if build_mode == "production" %}
+  {% set manifest = load_data(path="/bundle/.vite/manifest.json") %}
+{% endif %}
+
 {% set data = load_data(path="templates/data.toml") %}
 
 <!DOCTYPE html>
@@ -21,7 +27,12 @@
     <script src="/uikit.min.js"></script>
     <script src="/uikit-icons.min.js"></script>
 
-    <script src="/color-scheme.js"></script>
+    {% if build_mode == "production" %}
+      <script src="/bundle/{{ manifest["js/color-scheme.js"]["file"] }}"></script>
+    {% else %}
+      <script type="module" src="http://localhost:5173/@vite/client"></script>
+      <script src="http://localhost:5173/js/color-scheme.js"></script>
+    {% endif %}
 
     {% block head %} {% endblock head %}
   </head>
@@ -34,5 +45,11 @@
     {% include "mobile-nav-start.html" %}
     {% block mobile_nav %} {% endblock %}
     {% include "mobile-nav-end.html" %}
+
+    {% if build_mode == "production" %}
+      <script type="module" src="/bundle/{{ manifest["js/main.js"]["file"] }}"></script>
+    {% else %}
+      <script type="module" src="http://localhost:5173/js/main.js"></script>
+    {% endif %}
   </body>
 </html>
