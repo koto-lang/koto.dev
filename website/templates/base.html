@@ -15,8 +15,6 @@
 
     <title>Koto Programming Language</title>
 
-    <link rel="stylesheet" href="/main.css" />
-
     <link rel="mask-icon" href="/favicon.svg" />
     <link rel="icon" href="/favicon.svg" />
 
@@ -28,9 +26,12 @@
     <script src="/uikit-icons.min.js"></script>
 
     {% if build_mode == "production" %}
+      <link rel="stylesheet" href="/bundle/{{ manifest["js/main.js"]["css"][0] }}" />
       <script src="/bundle/{{ manifest["js/color-scheme.js"]["file"] }}"></script>
     {% else %}
       <script type="module" src="http://localhost:5173/@vite/client"></script>
+
+      <link rel="stylesheet" href="http://localhost:5173/sass/main.scss" />
       <script src="http://localhost:5173/js/color-scheme.js"></script>
     {% endif %}
 
