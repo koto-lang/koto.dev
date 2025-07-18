@@ -6,7 +6,6 @@ if (docsVersionMeta) {
 
   const indexUrl = `/search-index-${docsVersion}.json`;
   let searchIndex = null;
-  let displayStore = [];
 
   // DOM elements
   const article = document.getElementById('docs-article');
@@ -100,21 +99,25 @@ if (docsVersionMeta) {
     }
   }
 
-  /* delegate one listener for the whole list */
-  resultsList.addEventListener('click', e => {
-    const link = e.target.closest('a');
-    if (!link) return;                           // not a click on a link
+  // If the user clicks on a search result that's on the current page,
+  // then scroll to the anchor instead of leaving the page
+  resultsList.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link) {
+      return;
+    }
 
     const url = new URL(link.href, location.href);
-
     if (url.pathname === location.pathname && url.search === location.search) {
-      e.preventDefault();                        // stop default “do nothing”
-      jumpToAnchor(url.hash);                    // "#section-name"
+      event.preventDefault();
+      jumpToAnchor(url.hash);
     }
   });
 
   function jumpToAnchor(hash) {
-    if (!hash) return;
+    if (!hash) {
+      return;
+    }
 
     hideSearchResults();
 
@@ -128,11 +131,8 @@ if (docsVersionMeta) {
       }
 
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      target.focus({ preventScroll: true });         // announce destination
+      target.focus({ preventScroll: true });
     });
-
-    /* 3. update the address bar so users can copy/send the link */
-    history.replaceState(null, '', hash);
   }
 }
 
