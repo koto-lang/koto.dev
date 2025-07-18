@@ -10,21 +10,22 @@ if (docsVersionMeta) {
 
   // DOM elements
   const article = document.getElementById('docs-article');
-  const searchInput = document.getElementById('docs-search-input');
   const searchResults = document.getElementById('docs-search-results');
   const searchResultsHeading = document.getElementById('docs-search-results-heading');
   const resultsList = document.getElementById('docs-results-list');
   let articleScrollY = 0;
 
   // Initialize the search index when the search box gets focus
-  searchInput.addEventListener('focus', async () => {
-    await initSearch();
-    await search(searchInput.value);
-  });
+  document.querySelectorAll('#docs-search-input').forEach((input) => {
+    input.addEventListener('focus', async () => {
+      await initSearch();
+      await search(input.value);
+    });
 
-  searchInput.addEventListener('input', async (event) => {
-    search(event.target.value.trim());
-  });
+    input.addEventListener('input', async (event) => {
+      search(event.target.value.trim());
+    });
+  })
 
   // Lazily load and build the index
   async function initSearch() {

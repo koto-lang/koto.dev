@@ -1,4 +1,8 @@
 <ul class="uk-nav uk-nav-default">
+  <div class="uk-hidden@s">
+    {% include "version-selector.html" %}
+  </div>
+
   {% if page %}
     {% set version_section = page.ancestors | reverse | nth(n = 1) %}
   {% endif %}

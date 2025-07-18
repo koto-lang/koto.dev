@@ -1,4 +1,8 @@
 <ul class="uk-nav uk-nav-default">
+  <div class="uk-hidden@s">
+    {% include "version-selector.html" %}
+  </div>
+
   {% set index = get_section(path = section.ancestors | last) %}
   {% set versions = get_section(path = index.ancestors | last) %}
 
