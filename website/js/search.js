@@ -127,7 +127,7 @@ if (docsVersionMeta) {
       const id = hash.slice(1);
       const target = document.getElementById(id);
       if (target) {
-        scrollIntoViewIfNeeded(target);
+        target.scrollIntoView();
       }
     });
   }
