@@ -18,11 +18,11 @@ if (docsVersionMeta) {
   document.querySelectorAll('#docs-search-input').forEach((input) => {
     input.addEventListener('focus', async () => {
       await initSearch();
-      await search(input.value);
+      await search(input, input.value);
     });
 
     input.addEventListener('input', async (event) => {
-      search(event.target.value.trim());
+      search(input, event.target.value.trim());
     });
   })
 
@@ -48,7 +48,7 @@ if (docsVersionMeta) {
     return searchIndex;
   }
 
-  async function search(query) {
+  async function search(input, query) {
     if (!query) {
       hideSearchResults();
       return;
@@ -85,6 +85,7 @@ if (docsVersionMeta) {
 
     requestAnimationFrame(() => {
       searchResultsHeading.scrollIntoView();
+      scrollIntoViewIfNeeded(input);
     });
   }
 
@@ -126,7 +127,7 @@ if (docsVersionMeta) {
       const id = hash.slice(1);
       const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView();
+        scrollIntoViewIfNeeded(target);
       }
     });
   }
@@ -137,3 +138,22 @@ if (docsVersionMeta) {
   });
 }
 
+function scrollIntoViewIfNeeded(element) {
+  const parent = element.parentNode;
+
+  if (!parent) {
+    return;
+  }
+
+  const parentRect = parent.getBoundingClientRect();
+  const elelementRect = element.getBoundingClientRect();
+
+  const isAbove = elelementRect.top < parentRect.top;
+  const isBelow = elelementRect.bottom > parentRect.bottom;
+  const isLeft = elelementRect.left < parentRect.left;
+  const isRight = elelementRect.right > parentRect.right;
+
+  if (isAbove || isBelow || isLeft || isRight) {
+    element.scrollIntoView();
+  }
+}
