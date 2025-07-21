@@ -36,7 +36,7 @@ docs: search-index
   cargo xtask docs
 
 docs-watch:
-  cargo watch -w ../modules/koto -w xtask -x "xtask docs && xtask search-index"
+  cargo watch -w ../modules/koto -w xtask -x "xtask docs && cargo xtask search-index"
 
 npm:
   npm install

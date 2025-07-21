@@ -286,7 +286,7 @@ slug = \"{slug}\"
                     let playground_code = koto_code
                         .deref()
                         .replace("print! ", "print ")
-                        .replace("check! ", "# -> ")
+                        .replace("check! ", "#: ")
                         .replace("skip_check!\n", "")
                         .replace("skip_run!\n", "");
                     let shortcode = format!(
@@ -310,7 +310,7 @@ slug = \"{slug}\"
                 let display_code = koto_code
                     .deref()
                     .replace("print! ", "")
-                    .replace("check! ", "# -> ");
+                    .replace("check! ", "#: ");
                 once(Text(display_code.into())).chain(None)
             }
             Text(file_name) if in_rust_include => {
