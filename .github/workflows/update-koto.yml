@@ -19,7 +19,7 @@ jobs:
       - uses: jetli/trunk-action@v0.4.0
       - uses: taiki-e/install-action@v2
         with:
-          tool: just@1.34.0,zola@0.19.2
+          tool: just@1.34.0,zola@0.21.0
 
       - name: Configure Git
         run: |

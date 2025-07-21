@@ -4,10 +4,10 @@ build $BUILD_MODE="production": npm docs playground-release
 
 build-debug: npm docs playground
   npx vite build
-  zola build
+  zola build --drafts
 
 serve *args: docs playground
-  zola serve --open --fast {{args}} & npx vite serve & wait
+  zola serve --open --fast --drafts {{args}} & npx vite serve & wait
 
 serve-release $BUILD_MODE="production": docs playground-release
   zola serve --open --fast & npx vite serve & wait
