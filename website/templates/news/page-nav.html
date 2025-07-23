@@ -7,6 +7,8 @@
   {% set toc = page.toc  %}
   {% if toc %}
     {% for h1 in toc %}
+      {% if h1.title == "Koto?" or h1.title == "...and more!" %}
+      {% else %}
         <li class="uk-nav-parent">
           <a href="{{ h1.permalink }}">
             {{ h1.title }}
@@ -20,6 +22,7 @@
             </li>
           </ul>
         {% endfor %}
+      {% endif %}
     {% endfor %}
   {% endif %}
 </ul>
