@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="docs-sidebar uk-visible@s">
+  <nav role="navigation">
+    {% include "about-nav.html" %}
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
+  <div class="uk-container uk-container-small uk-width-expand">
+    <article id="docs-article" class="uk-align-left uk-width-expand">
+      {{ section.content | safe }}
+    </article>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block mobile_nav %}
+<hr>
+
+{% include "about-nav.html" %}
+{% endblock mobile_nav %}

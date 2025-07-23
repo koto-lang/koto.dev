@@ -4,7 +4,13 @@
 
 {% block content %}
 
-<div class="uk-section">
+<div class="docs-sidebar uk-visible@s">
+  <nav role="navigation">
+    {% include "news/page-nav.html" %}
+  </nav>
+</div>
+
+<div class="docs-section uk-section">
   <div class="uk-container">
     <article class="uk-article">
       <h1 class="uk-article-title">
@@ -19,3 +25,9 @@
 </div>
 
 {% endblock content %}
+
+{% block mobile_nav %}
+<hr>
+
+{% include "news/page-nav.html" %}
+{% endblock mobile_nav %}

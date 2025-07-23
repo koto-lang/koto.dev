@@ -1,0 +1,17 @@
+{% set toc = section.toc | first %}
+
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="{{ toc.permalink }}">
+      {{ toc.title }}
+    </a>
+  </li>
+
+  <ul>
+    {% for header in toc.children %}
+      <li class="uk-nav-sub">
+        <a href="{{ header.permalink | safe }}">{{ header.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</ul>

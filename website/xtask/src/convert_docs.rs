@@ -14,6 +14,7 @@ pub fn run() -> Result<()> {
         "content/about",
         r#"+++
 title = "About"
+template = "single-page.html"
 insert_anchor_links = "heading"
 +++
 "#,

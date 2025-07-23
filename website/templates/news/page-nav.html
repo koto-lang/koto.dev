@@ -1,0 +1,25 @@
+<ul class="uk-nav uk-nav-default" id="docs-navbar">
+  <li class="uk-nav-header">
+    <a href="{{ page.permalink }}">
+      {{ page.title }}
+    </a>
+  </li>
+  {% set toc = page.toc  %}
+  {% if toc %}
+    {% for h1 in toc %}
+        <li class="uk-nav-parent">
+          <a href="{{ h1.permalink }}">
+            {{ h1.title }}
+          </a>
+        </li>
+
+        {% for h2 in h1.children %}
+          <ul class="uk-nav-sub">
+            <li>
+              <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+            </li>
+          </ul>
+        {% endfor %}
+    {% endfor %}
+  {% endif %}
+</ul>
