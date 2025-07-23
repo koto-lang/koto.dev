@@ -1,6 +1,6 @@
 +++
-title = "0.17 (Unreleased)"
+title = "0.16"
 template = "docs.html"
 sort_by = "weight"
-weight = 17
+weight = 16
 +++
