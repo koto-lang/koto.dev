@@ -17,7 +17,7 @@ use crate::data::Data;
 pub fn run(version: &str) -> Result<()> {
     let docs_target = format!("content/docs/{version}");
     let docs_target_path = PathBuf::from(&docs_target);
-    let search_index_target = PathBuf::from(format!("static/search-index-{version}"));
+    let search_index_target = PathBuf::from(format!("static/search-index-{version}.json"));
     let playground_target = format!("static/play-{version}");
     let playground_target_path = PathBuf::from(&playground_target);
     let copy_options = fs_extra::dir::CopyOptions::new().content_only(true);
