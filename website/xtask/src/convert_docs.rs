@@ -338,9 +338,11 @@ fn fix_doc_urls(url: &str, mode: FixUrlMode) -> Result<String> {
             .replace("./language_guide.md", "/docs/next/language/")
             .replace("./cli.md", "/docs/next/cli/")
             .replace("./api.md", "/docs/next/api/")
-            .replace("./core_lib", "/docs/next/core/"),
+            .replace("./core_lib", "/docs/next/core/")
+            .replace("./libs", "/docs/next/libs/"),
         TopLevel => url
             .replace("./core_lib", "../core")
+            .replace("./libs", "../libs")
             .replace("./cli.md", "../cli")
             .replace("./api.md", "../api")
             .replace("./language_guide.md", "../language/"),
